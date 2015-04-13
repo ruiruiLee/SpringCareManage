@@ -9,6 +9,8 @@
 #import "HomePageVC.h"
 #import "UIImageView+WebCache.h"
 #import "MainTableCell.h"
+#import "MyOrderListVC.h"
+#import "MyEvaluateListVC.h"
 
 @interface HomePageVC ()
 
@@ -298,4 +300,18 @@
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.row == 0){
+        MyOrderListVC *vc = [[MyOrderListVC alloc] initWithNibName:nil bundle:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.NavigationBar.Title = @"我的订单";
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 1){
+        MyEvaluateListVC *vc = [[MyEvaluateListVC alloc] initWithNibName:nil bundle:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 @end
