@@ -11,6 +11,9 @@
 #import "MainTableCell.h"
 #import "MyOrderListVC.h"
 #import "MyEvaluateListVC.h"
+#import "MyEscortObjectVC.h"
+
+#import "PublishInfoVC.h"
 
 @interface HomePageVC ()
 
@@ -28,6 +31,11 @@
     self.NavigationBar.btnLeft.hidden = YES;
     
     [self initSubViews];
+    
+    PublishInfoVC *login = [[PublishInfoVC alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController presentViewController:login animated:YES completion:^{
+        
+    }];
 }
 
 - (UILabel*) createLabel:(UIFont*) font txtColor:(UIColor*)txtColor rootView:(UIView*)rootView
@@ -310,6 +318,10 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 1){
         MyEvaluateListVC *vc = [[MyEvaluateListVC alloc] initWithNibName:nil bundle:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 2){
+        MyEscortObjectVC *vc = [[MyEscortObjectVC alloc] initWithNibName:nil bundle:nil];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

@@ -30,13 +30,13 @@
     
     summaryVC = [[WorkSummaryVC alloc] initWithNibName:nil bundle:nil];
     summaryVC.tabBarItem.title=@"护理日志";
-    summaryVC.tabBarItem.image=[UIImage imageNamed:@"tab-lovetime"];
+    summaryVC.tabBarItem.image=[UIImage imageNamed:@"tab-message"];
     [summaryVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:summaryVC];
     
     messageListVC = [[EscortTimeVC alloc] initWithNibName:nil bundle:nil];
     messageListVC.tabBarItem.title=@"陪护时光";
-    [messageListVC.tabBarItem setImage:[UIImage imageNamed:@"tab-message"]];
+    [messageListVC.tabBarItem setImage:[UIImage imageNamed:@"tab-lovetime"]];
     [messageListVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:messageListVC];
     
