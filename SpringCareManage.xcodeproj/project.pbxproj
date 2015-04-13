@@ -96,6 +96,14 @@
 		86B96A7B1ADB8B7600441168 /* paytypenoselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A791ADB8B7600441168 /* paytypenoselect@2x.png */; };
 		86B96A7C1ADB8B7600441168 /* paytypeselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A7A1ADB8B7600441168 /* paytypeselected@2x.png */; };
 		86B96A7E1ADB8CF900441168 /* recording@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A7D1ADB8CF900441168 /* recording@2x.png */; };
+		86B96A801ADB8DA700441168 /* submit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A7F1ADB8DA700441168 /* submit@2x.png */; };
+		86B96A8C1ADB920000441168 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B96A8B1ADB920000441168 /* AssetsLibrary.framework */; };
+		86B96A931ADB92DE00441168 /* MessagePhotoMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B96A8E1ADB92DE00441168 /* MessagePhotoMenuItem.m */; };
+		86B96A941ADB92DE00441168 /* MessagePhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B96A901ADB92DE00441168 /* MessagePhotoView.m */; };
+		86B96A951ADB92DE00441168 /* ShowBigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B96A921ADB92DE00441168 /* ShowBigViewController.m */; };
+		86B96A991ADB933500441168 /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A961ADB933500441168 /* ZYQAssetPicker.Bundle */; };
+		86B96A9A1ADB933500441168 /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B96A981ADB933500441168 /* ZYQAssetPickerController.m */; };
+		86B96A9C1ADB957C00441168 /* addImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A9B1ADB957C00441168 /* addImage@2x.png */; };
 		CFEBF87B1ACE357300BC4EC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEBF87A1ACE357300BC4EC5 /* main.m */; };
 		CFEBF87E1ACE357300BC4EC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEBF87D1ACE357300BC4EC5 /* AppDelegate.m */; };
 		CFEBF8861ACE357300BC4EC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEBF8851ACE357300BC4EC5 /* Images.xcassets */; };
@@ -255,6 +263,18 @@
 		86B96A791ADB8B7600441168 /* paytypenoselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paytypenoselect@2x.png"; sourceTree = "<group>"; };
 		86B96A7A1ADB8B7600441168 /* paytypeselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paytypeselected@2x.png"; sourceTree = "<group>"; };
 		86B96A7D1ADB8CF900441168 /* recording@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recording@2x.png"; sourceTree = "<group>"; };
+		86B96A7F1ADB8DA700441168 /* submit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "submit@2x.png"; sourceTree = "<group>"; };
+		86B96A8B1ADB920000441168 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		86B96A8D1ADB92DE00441168 /* MessagePhotoMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePhotoMenuItem.h; sourceTree = "<group>"; };
+		86B96A8E1ADB92DE00441168 /* MessagePhotoMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePhotoMenuItem.m; sourceTree = "<group>"; };
+		86B96A8F1ADB92DE00441168 /* MessagePhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePhotoView.h; sourceTree = "<group>"; };
+		86B96A901ADB92DE00441168 /* MessagePhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePhotoView.m; sourceTree = "<group>"; };
+		86B96A911ADB92DE00441168 /* ShowBigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowBigViewController.h; sourceTree = "<group>"; };
+		86B96A921ADB92DE00441168 /* ShowBigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowBigViewController.m; sourceTree = "<group>"; };
+		86B96A961ADB933500441168 /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
+		86B96A971ADB933500441168 /* ZYQAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQAssetPickerController.h; sourceTree = "<group>"; };
+		86B96A981ADB933500441168 /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
+		86B96A9B1ADB957C00441168 /* addImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addImage@2x.png"; sourceTree = "<group>"; };
 		CFEBF8751ACE357300BC4EC5 /* SpringCareManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringCareManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEBF8791ACE357300BC4EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFEBF87A1ACE357300BC4EC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -271,6 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86B96A8C1ADB920000441168 /* AssetsLibrary.framework in Frameworks */,
 				1A0DE605A065EF1D9FD20743 /* libPods-SpringCareManage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +309,7 @@
 		230AFE39722ACA5BE26533A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86B96A8B1ADB920000441168 /* AssetsLibrary.framework */,
 				7E8A4418B996CB40DA865D52 /* libPods-SpringCareManage.a */,
 			);
 			name = Frameworks;
@@ -344,6 +366,8 @@
 		86B8E6141ADA36FC00A5139E /* PNG */ = {
 			isa = PBXGroup;
 			children = (
+				86B96A9B1ADB957C00441168 /* addImage@2x.png */,
+				86B96A7F1ADB8DA700441168 /* submit@2x.png */,
 				86B96A7D1ADB8CF900441168 /* recording@2x.png */,
 				86B96A791ADB8B7600441168 /* paytypenoselect@2x.png */,
 				86B96A7A1ADB8B7600441168 /* paytypeselected@2x.png */,
@@ -366,6 +390,7 @@
 		86B8E6151ADA36FC00A5139E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86B96A811ADB912F00441168 /* messagePhotoView */,
 				86B96A761ADB834400441168 /* PlaceholderTextView.h */,
 				86B96A771ADB834400441168 /* PlaceholderTextView.m */,
 				86B96A601ADB5FCD00441168 /* GradeInfoView.h */,
@@ -657,6 +682,22 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		86B96A811ADB912F00441168 /* messagePhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				86B96A961ADB933500441168 /* ZYQAssetPicker.Bundle */,
+				86B96A971ADB933500441168 /* ZYQAssetPickerController.h */,
+				86B96A981ADB933500441168 /* ZYQAssetPickerController.m */,
+				86B96A8D1ADB92DE00441168 /* MessagePhotoMenuItem.h */,
+				86B96A8E1ADB92DE00441168 /* MessagePhotoMenuItem.m */,
+				86B96A8F1ADB92DE00441168 /* MessagePhotoView.h */,
+				86B96A901ADB92DE00441168 /* MessagePhotoView.m */,
+				86B96A911ADB92DE00441168 /* ShowBigViewController.h */,
+				86B96A921ADB92DE00441168 /* ShowBigViewController.m */,
+			);
+			path = messagePhotoView;
+			sourceTree = "<group>";
+		};
 		CFEBF86C1ACE357300BC4EC5 = {
 			isa = PBXGroup;
 			children = (
@@ -806,6 +847,7 @@
 			files = (
 				86B8E6A51ADA6C4600A5139E /* evaluate@2x.png in Resources */,
 				86B8E69F1ADA6BC600A5139E /* newOrder@2x.png in Resources */,
+				86B96A9C1ADB957C00441168 /* addImage@2x.png in Resources */,
 				86B8E6941ADA425600A5139E /* tab-home-selected@2x.png in Resources */,
 				865523791ADA9AFC00E803FD /* whiteArrow.png in Resources */,
 				86B8E6A11ADA6C0000A5139E /* subscribeOrder@2x.png in Resources */,
@@ -821,6 +863,7 @@
 				865523551ADA877600E803FD /* usercentershutgray@2x.png in Resources */,
 				865523741ADA9AFC00E803FD /* blackArrow@2x.png in Resources */,
 				86B8E6961ADA425B00A5139E /* tab-lovetime@2x.png in Resources */,
+				86B96A991ADB933500441168 /* ZYQAssetPicker.Bundle in Resources */,
 				86B8E6921ADA422500A5139E /* tab-message@2x.png in Resources */,
 				86B8E6B51ADA6F0D00A5139E /* placeordered@2x.png in Resources */,
 				86B96A651ADB644700441168 /* b27_icon_star_gray@2x.png in Resources */,
@@ -833,6 +876,7 @@
 				86B8E6A31ADA6C3200A5139E /* treatPay@2x.png in Resources */,
 				86B8E6AB1ADA6D5500A5139E /* telephone@2x.png in Resources */,
 				865523781ADA9AFC00E803FD /* grayArrow@2x.png in Resources */,
+				86B96A801ADB8DA700441168 /* submit@2x.png in Resources */,
 				CFEBF8861ACE357300BC4EC5 /* Images.xcassets in Resources */,
 				86B8E6B11ADA6DFC00A5139E /* nurselistfemale@2x.png in Resources */,
 				865523731ADA9AFC00E803FD /* blackArrow.png in Resources */,
@@ -911,9 +955,12 @@
 				86B8E6541ADA383F00A5139E /* LCNavigationbar.m in Sources */,
 				86B96A621ADB5FCD00441168 /* GradeInfoView.m in Sources */,
 				8655236F1ADA9AFC00E803FD /* EGORefreshTableHeaderView.m in Sources */,
+				86B96A9A1ADB933500441168 /* ZYQAssetPickerController.m in Sources */,
 				86B8E6851ADA389700A5139E /* UIImageView+WebCache.m in Sources */,
 				86B8E68F1ADA3B9E00A5139E /* WorkSummaryVC.m in Sources */,
+				86B96A941ADB92DE00441168 /* MessagePhotoView.m in Sources */,
 				8655235B1ADA8AA800E803FD /* OrderListCell.m in Sources */,
+				86B96A931ADB92DE00441168 /* MessagePhotoMenuItem.m in Sources */,
 				86B96A6C1ADB668400441168 /* EscortObjectCell.m in Sources */,
 				86B8E6891ADA39CD00A5139E /* RootViewController.m in Sources */,
 				86B8E64C1ADA381C00A5139E /* HBImageViewList.m in Sources */,
@@ -944,6 +991,7 @@
 				86B8E68C1ADA3B5500A5139E /* HomePageVC.m in Sources */,
 				86B8E6811ADA389700A5139E /* UIImage+GIF.m in Sources */,
 				86B8E6791ADA389700A5139E /* SDImageCache.m in Sources */,
+				86B96A951ADB92DE00441168 /* ShowBigViewController.m in Sources */,
 				86B96A781ADB834400441168 /* PlaceholderTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

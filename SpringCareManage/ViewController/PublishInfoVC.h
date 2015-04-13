@@ -8,13 +8,14 @@
 
 #import "LCBaseVC.h"
 #import "PlaceholderTextView.h"
+#import "MessagePhotoView.h"
 
 typedef enum : NSUInteger {
     EnumWorkSummary,
     EnumEscortTime,
 } PublishContentType;
 
-@interface PublishInfoVC : LCBaseVC
+@interface PublishInfoVC : LCBaseVC<MessagePhotoViewDelegate>
 {
     UIView *_bgView;
     PlaceholderTextView *_tvContent;
@@ -22,6 +23,8 @@ typedef enum : NSUInteger {
     UIButton *_btnTargetSelect;
     UILabel *_line;
 }
+
+@property (nonatomic,strong) MessagePhotoView *photoView;
 
 @property (nonatomic, assign) PublishContentType contentType;
 
