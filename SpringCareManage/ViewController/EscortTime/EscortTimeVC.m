@@ -35,7 +35,7 @@
     [headerView addSubview:_photoImgView];
     _photoImgView.translatesAutoresizingMaskIntoConstraints = NO;
     [_photoImgView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"nurselistfemale"]];
-    
+    // [_photoImgView setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"nurselistfemale"]];
     _lbName = [[UILabel alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_lbName];
     _lbName.translatesAutoresizingMaskIntoConstraints = NO;

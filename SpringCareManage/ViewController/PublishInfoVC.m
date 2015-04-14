@@ -14,13 +14,13 @@
 @end
 
 @implementation PublishInfoVC
-@synthesize photoView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.NavigationBar.btnRight setImage:[UIImage imageNamed:@"submit"] forState:UIControlStateNormal];
     [self initSubviews];
+     [_tvContent becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,7 +37,7 @@
     _tvContent = [[PlaceholderTextView alloc] initWithFrame:CGRectZero];
     [_bgView addSubview:_tvContent];
     _tvContent.translatesAutoresizingMaskIntoConstraints = NO;
-    _tvContent.placeholder = @"记下你的记录......";
+    _tvContent.placeholder = @"写下你的记录......";
     
     _btnRecord = [[UIButton alloc] initWithFrame:CGRectZero];
     [_bgView addSubview:_btnRecord];
@@ -59,17 +59,18 @@
     _line.translatesAutoresizingMaskIntoConstraints = NO;
     _line.backgroundColor = SeparatorLineColor;
     
-    photoView = [[MessagePhotoView alloc]initWithFrame:CGRectMake(0.0f,
-                                                                       CGRectGetHeight(self.view.frame),
-                                                                       CGRectGetWidth(self.view.frame), 216)];
-    [self.ContentView addSubview:photoView];
-    photoView.delegate = self;
-    photoView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _tvContent, _btnTargetSelect, _btnRecord, _line, photoView);
+  imageScrollView = [[PickImgScrollView alloc]initWithFrame:CGRectMake(0.0f,
+                                                                       CGRectGetHeight(_tvContent.frame),
+                                                                       CGRectGetWidth(self.view.frame), 50)];
+    [self.ContentView addSubview:imageScrollView];
+    imageScrollView.parentController=self;
+    imageScrollView.delegate=(id)self;
+    imageScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+//
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _tvContent, _btnTargetSelect, _btnRecord, _line, imageScrollView);
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_bgView]-0-|" options:0 metrics:nil views:views]];
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-0-[photoView]-0-|" options:0 metrics:nil views:views]];
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[photoView]-0-|" options:0 metrics:nil views:views]];
+    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-0-[imageScrollView]-0-|" options:0 metrics:nil views:views]];
+    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[imageScrollView]-0-|" options:0 metrics:nil views:views]];
     
     
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_tvContent]-10-|" options:0 metrics:nil views:views]];
@@ -84,24 +85,15 @@
     sender.selected = !sender.selected;
 }
 
-//- (void)sharePhotoview
-//{
-//    if (!self.photoView)
-//    {
-//        self.photoView = [[MessagePhotoView alloc]initWithFrame:CGRectMake(0.0f,
-//                                                                           CGRectGetHeight(self.view.frame),
-//                                                                           CGRectGetWidth(self.view.frame), 216)];
-//        [self.view addSubview:self.photoView];
-//        self.photoView.delegate = self;
-//        
-//        
-//    }
-//}
-
-//实现代理方法
--(void)addPicker:(UIImagePickerController *)picker{
-    
-    [self presentViewController:picker animated:YES completion:nil];
+#pragma mark -
+#pragma mark PickImgEndDelegate
+- (void) imagePickerControllerDissMethod{
+    [_tvContent becomeFirstResponder];
 }
+//实现代理方法
+//-(void)addPicker:(UIImagePickerController *)picker{
+//    
+//    [self presentViewController:picker animated:YES completion:nil];
+//}
 
 @end
