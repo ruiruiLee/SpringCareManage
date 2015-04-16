@@ -33,9 +33,9 @@
     [self initSubViews];
     
     PublishInfoVC *login = [[PublishInfoVC alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController presentViewController:login animated:YES completion:^{
-        
-    }];
+//    [self.navigationController presentViewController:login animated:YES completion:^{
+//        
+//    }];
 }
 
 - (UILabel*) createLabel:(UIFont*) font txtColor:(UIColor*)txtColor rootView:(UIView*)rootView
