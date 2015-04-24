@@ -9,6 +9,9 @@
 #import "UserLoginVC.h"
 #import "define.h"
 #import "IQKeyboardReturnKeyHandler.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudSNS/AVOSCloudSNS.h>
+#import "UserModel.h"
 
 @interface UserLoginVC ()
 
@@ -58,7 +61,7 @@
     _tfPwd = [[UITextField alloc] initWithFrame:CGRectZero];
     [_scrollview addSubview:_tfPwd];
     _tfPwd.translatesAutoresizingMaskIntoConstraints = NO;
-    _tfPwd.placeholder = @"密码";
+    _tfPwd.placeholder = @"请输入6-14位密码";
     _tfPwd.font = _FONT(16);
     _tfPwd.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     _tfPwd.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4, 0)];
@@ -75,6 +78,7 @@
     _btnSubmit.backgroundColor = Abled_Color;
     _btnSubmit.layer.cornerRadius = 5;
     [_btnSubmit setTitle:@"登录" forState:UIControlStateNormal];
+    [_btnSubmit addTarget:self action:@selector(ActionToLogin:) forControlEvents:UIControlEventTouchUpInside];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_tfPwd, _tfPhoneNum, _btnSubmit, _scrollview);
     
@@ -96,6 +100,41 @@
             _scrollview.contentOffset = CGPointMake(0, 20);
         }];
     }
+}
+
+//ACTION
+- (void) ActionToLogin:(UIButton *) sender
+{
+    NSString *userName = _tfPhoneNum.text;
+    if(![NSStrUtil isMobileNumber:userName]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号码有误！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    NSString *pwd = _tfPwd.text;
+    if([pwd length] < 6 || [pwd length] > 14){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"密码错误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    [AVUser logInWithMobilePhoneNumberInBackground:userName password:pwd block:^(AVUser *user, NSError *error) {
+        if(error == nil){
+            UserModel *model = [UserModel sharedUserInfo];
+            
+            model.userId = user.objectId;
+            model.userName = user.username;
+            model.phone = user.mobilePhoneNumber;
+            model.chineseName = [user objectForKey:@"chinese_name"];
+            model.isNew = user.isNew;
+            
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }];
 }
 
 @end

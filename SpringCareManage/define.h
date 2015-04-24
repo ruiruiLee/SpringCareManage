@@ -11,9 +11,12 @@
 
 #import "LCNetWorkBase.h"
 #import "NSStrUtil.h"
+#import "Util.h"
 
 #define LCNetWorkBase [LCNetWorkBase sharedLCNetWorkBase]
 
+
+#define User_DetailInfo_Get @"User_DetailInfo_Get"
 
 #define SERVER_ADDRESS @"http://baidu.com"
 //#define SERVER_ADDRESS @"http://baidu.com"

@@ -7,12 +7,85 @@
 //
 
 #import "UserModel.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudSNS/AVOSCloudSNS.h>
 
 @implementation UserModel
 
-+ (void) LoginWithUser:(NSString *) user pwd:(NSString *) pwd block:(block) block
++ (UserModel *) sharedUserInfo
 {
+    static dispatch_once_t onceToken;
+    static UserModel *user = nil;
+    dispatch_once(&onceToken, ^{
+        user = [[UserModel alloc] init];
+    });
+    return user;
+}
+
+- (id)init
+{
+    if (self = [super init]) {
+        if ( ![[AVUser currentUser]isEqual: nil]) {
+            AVUser *user = [AVUser currentUser];
+            self.userId = user.objectId;
+            self.userName = user.username;
+            self.phone = user.mobilePhoneNumber;
+            self.chineseName = [user objectForKey:@"chinese_name"];
+            self.isNew = user.isNew;
+        }
+        
+        self.age = @"";
+        self.careAge = @"";
+        self.birthAddr = @" ";
+    }
     
+    return self;
+}
+
+- (BOOL) isLogin
+{
+    if ( [AVUser currentUser]==nil) {
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+- (void) setUserId:(NSString *)userId
+{
+    _userId = userId;
+    
+    [self LoadDetailUserInfo:nil];
+}
+
+- (void) LoadDetailUserInfo:(block) block
+{
+    NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+    
+    [parmas setObject:self.userId forKey:@"careId"];
+    
+    [LCNetWorkBase postWithMethod:@"api/care/BaseInfo" Params:parmas Completion:^(int code, id content) {
+        if(code){
+            if([content objectForKey:@"code"] == nil){
+                self.birthAddr = [content objectForKey:@"birthPlace"];
+                self.age = [content objectForKey:@"age"];
+                self.careAge = [content objectForKey:@"careAge"];
+                self.intro = [content objectForKey:@"intro"];
+                self.sex = [content objectForKey:@"sex"];
+                self.headerImage = [content objectForKey:@"headerImage"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:User_DetailInfo_Get object:nil];
+                
+                if(block)
+                    block(1);
+            }
+        }
+        
+        if(block){
+            block(0);
+        }
+    }];
 }
 
 @end
