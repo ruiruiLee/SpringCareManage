@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseOrderListModel.h"
 
-@interface ConfirmedOrderListModel : NSObject
+@interface ConfirmedOrderListModel : BaseOrderListModel
 
 @end

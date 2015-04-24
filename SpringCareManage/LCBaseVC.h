@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIView *ContentView;
 @property (nonatomic, strong) LCNavigationbar *NavigationBar;
+@property (nonatomic, strong) NSString *NavTitle;
 
 //监控键盘事件
 - (void) keyboardWillShow:(NSNotification *) notify;

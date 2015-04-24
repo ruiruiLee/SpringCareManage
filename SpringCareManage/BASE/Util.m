@@ -262,6 +262,16 @@
     return headerImage;
 }
 
++ (NSString *) SexImagePathWith:(UserSex ) sex
+{
+    NSString *sexPath = nil;
+    if(sex == EnumMale)
+        sexPath = @"mail";
+    else if (sex == EnumFemale)
+        sexPath = @"femail";
+    return sexPath;
+}
+
 + (NSInteger) GetAgeByBirthday:(NSString *) day
 {
     NSDate *date = [Util convertDateFromDateString:day];

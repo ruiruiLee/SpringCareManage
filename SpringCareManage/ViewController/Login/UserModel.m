@@ -48,6 +48,16 @@
         return false;
     }
     else{
+        AVUser *user = [AVUser currentUser];
+        self.userId = user.objectId;
+        self.userName = user.username;
+        self.phone = user.mobilePhoneNumber;
+        self.chineseName = [user objectForKey:@"chinese_name"];
+        self.isNew = user.isNew;
+        
+        self.age = @"";
+        self.careAge = @"";
+        self.birthAddr = @" ";
         return true;
     }
 }
@@ -78,12 +88,12 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:User_DetailInfo_Get object:nil];
                 
                 if(block)
-                    block(1);
+                    block(1, nil);
             }
         }
         
         if(block){
-            block(0);
+            block(0, nil);
         }
     }];
 }

@@ -108,6 +108,8 @@ typedef enum : NSUInteger {
 
 + (NSString *) headerImagePathWith:(UserSex ) sex;
 
++ (NSString *) SexImagePathWith:(UserSex ) sex;
+
 + (BOOL) isOneDay:(NSDate *) begin end:(NSDate *) end;
 
 + (DateType) getDateType:(NSInteger) typeId;

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseOrderListModel.h"
 
-@interface WaitCommentOrderListModel : NSObject
+@interface WaitCommentOrderListModel : BaseOrderListModel
 
 @end

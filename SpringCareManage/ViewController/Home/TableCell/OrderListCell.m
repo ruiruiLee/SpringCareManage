@@ -45,42 +45,35 @@
 - (void) initSubviews
 {
     _lbOrderNum = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbOrderNum.text = @"订单号:";
     
     _lbPublishTime = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbPublishTime.text = @"2015-03-19 12:46";
     
     _lbOrderStatus = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
-    _lbOrderStatus.text = @"服务中";
     
     _line1 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line1.backgroundColor = SeparatorLineColor;
     
     _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbServiceContent.text = @"医院陪护：";
     
     _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
-    _lbTotalValue.text = @"¥180.00";
     
     _imgvDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvDay];
     _imgvDay.translatesAutoresizingMaskIntoConstraints = NO;
-    _imgvDay.image = [UIImage imageNamed:@"daytime"];
     
     _imgvNight = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvNight];
     _imgvNight.translatesAutoresizingMaskIntoConstraints = NO;
-    _imgvNight.image = [UIImage imageNamed:@"night"];
     
     _lbDetailServiceTime = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbDetailServiceTime.text = @"我感到十分大公司的风格的是非观";
     
     _lbLinkman = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbLinkman.text = @"联系人:";
     
     _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnRing];
     _btnRing.translatesAutoresizingMaskIntoConstraints = NO;
+//    _btnRing.imageView = ThemeImage(@"userattentionring");
+    [_btnRing setImage:ThemeImage(@"userattentionring") forState:UIControlStateNormal];
     
     _line2 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line2.backgroundColor = SeparatorLineColor;
@@ -89,22 +82,17 @@
     _photoImg = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_photoImg];
     _photoImg.translatesAutoresizingMaskIntoConstraints = NO;
-    _photoImg.image = [UIImage imageNamed:@"placeholderimage"];
     
     _lbName = [self createLabel:_FONT(18) txtColor:_COLOR(0x22, 0x22, 0x22)];
-    _lbName.text = @"张发财";
     
     _lbRelationship = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbRelationship.text = @"父亲";
     
     _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbAge.text = @"72岁";
     
     _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnMobile];
     _btnMobile.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnMobile setImage:[UIImage imageNamed:@"orderdetailtel"] forState:UIControlStateNormal];
-    [_btnMobile setTitle:@"13980092751" forState:UIControlStateNormal];
     [_btnMobile setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnMobile.titleLabel.font = _FONT(15);
     
@@ -112,14 +100,12 @@
     [self.contentView addSubview:_btnAddress];
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnAddress setImage:[UIImage imageNamed:@"nurselistlocation"] forState:UIControlStateNormal];
-    [_btnAddress setTitle:@"四川省成都市三槐树街" forState:UIControlStateNormal];
     [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnAddress.titleLabel.font = _FONT(15);
     
     _sexLogo = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_sexLogo];
     _sexLogo.translatesAutoresizingMaskIntoConstraints = NO;
-    _sexLogo.image = [UIImage imageNamed:@"mail"];
     
     _statusImgv = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_statusImgv];
@@ -199,6 +185,43 @@
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_sexLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
+}
+
+- (void) SetContentWithModel:(OrderInfoModel *)model
+{
+    _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
+    _lbPublishTime.text = model.createdDate;//@"2015-03-19 12:46";//下单时间
+    _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@", model.registerInfo.chineseName];//@"联系人:";
+    [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
+    [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
+    
+    _lbAge.text = [NSString stringWithFormat:@"%@岁", model.loverinfo.age];//@"72岁";
+    
+    _lbName.text = model.loverinfo.name;//@"张发财";
+    _lbRelationship.text = model.loverinfo.nickname;//@"父亲";
+    
+    _sexLogo.image = [UIImage imageNamed:[Util SexImagePathWith:[Util GetSexByName:model.loverinfo.sex]]];
+    
+    [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
+    
+    ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
+    if(type == EnumServiceTimeNight){
+        _imgvNight.image = ThemeImage(@"night");
+        _imgvDay.image = nil;
+    }
+    else if (type == EnumServiceTimeDay){
+        _imgvNight.image = nil;
+        _imgvDay.image = ThemeImage(@"daytime");
+    }
+    else{
+        _imgvNight.image = ThemeImage(@"night");
+        _imgvDay.image = ThemeImage(@"daytime");
+    }
+    
+    _lbDetailServiceTime.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:model.beginDate] enddate:[Util convertDateFromDateString:model.endDate] datetype:model.dateType];
+    _lbTotalValue.text = [NSString stringWithFormat:@"¥%.2f", model.totalPrice];//@"¥180.00";
+    _lbServiceContent.text = @"医院陪护：";
+    _lbOrderStatus.text = @"服务中";
 }
 
 @end

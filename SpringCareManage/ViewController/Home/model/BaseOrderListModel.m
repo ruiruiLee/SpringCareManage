@@ -7,18 +7,54 @@
 //
 
 #import "BaseOrderListModel.h"
+#import "UserModel.h"
+#import "AllOrderListModel.h"
+#import "NewOrderListModel.h"
+#import "ConfirmedOrderListModel.h"
+#import "WaitCommentOrderListModel.h"
+#import "WaitPayOrderListModel.h"
 
 @implementation BaseOrderListModel
 
 static NSMutableArray *orderList = nil;
 
-+ (NSArray *) GetOrderList
+- (NSArray *) GetOrderList
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         orderList = [[NSMutableArray alloc] init];
     });
     return orderList;
+}
+
+- (id) initWithOrderListType:(OrderListType) type
+{
+    switch (type) {
+        case EnumOrderAll:
+            self = [[AllOrderListModel alloc] init];
+            break;
+        case EnumOrderNew:
+            self = [[NewOrderListModel alloc] init];
+            break;
+        case EnumOrderSubscribe:
+            self = [[ConfirmedOrderListModel alloc] init];
+            break;
+        case EnumOrderTreatPay:
+            self = [[WaitPayOrderListModel alloc] init];
+            break;
+        case EnumOrderEvaluate:
+            self = [[WaitCommentOrderListModel alloc] init];
+            break;
+        default:
+            break;
+    }
+    
+    if(self){
+        self.totals = INT_MAX;
+        self.pages = 0;
+    }
+    
+    return self;
 }
 
 - (void) setPages:(NSInteger)pages
@@ -30,10 +66,10 @@ static NSMutableArray *orderList = nil;
 
 - (void) setCareId:(NSString *)careId
 {
-    if(self.careId != nil && ![self.careId isEqualToString:careId]){
+    if(careId != nil && ![careId isEqualToString:self.careId]){
         _careId = careId;
         self.pages = 0;
-        self.totals = INT16_MAX;
+        self.totals = INT_MAX;
         
         [self cleanDataList];
     }
@@ -51,6 +87,8 @@ static NSMutableArray *orderList = nil;
 
 - (void) RequestOrderListWithType:(OrderListType) type block:(block)block
 {
+    self.careId = [UserModel sharedUserInfo].userId;
+    
     if(self.pages >= self.totals){
         if(block){
             block(1000, nil);

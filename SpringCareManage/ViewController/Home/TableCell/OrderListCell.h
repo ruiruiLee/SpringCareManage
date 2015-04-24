@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderInfoModel.h"
 
 @interface OrderListCell : UITableViewCell
 {
@@ -42,5 +43,7 @@
     
     UIView *FootView;
 }
+
+- (void) SetContentWithModel:(OrderInfoModel *)model;
 
 @end

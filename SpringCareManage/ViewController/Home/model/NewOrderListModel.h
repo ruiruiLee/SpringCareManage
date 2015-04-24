@@ -7,7 +7,8 @@
 //
 //新订单
 #import <Foundation/Foundation.h>
+#import "BaseOrderListModel.h"
 
-@interface NewOrderListModel : NSObject
+@interface NewOrderListModel : BaseOrderListModel
 
 @end

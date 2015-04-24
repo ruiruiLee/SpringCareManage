@@ -123,6 +123,7 @@
     [_btnNew setImage:[UIImage imageNamed:@"newOrder"] forState:UIControlStateNormal];
     _lbNew = [self createLabel:_FONT(13) txtColor:_COLOR(0x66, 0x66, 0x66) rootView:headerView];
     _lbNew.text = @"新订单";
+    [_btnNew addTarget:self action:@selector(btnClickedToLoadOrders:) forControlEvents:UIControlEventTouchUpInside];
     
     _btnSubscribe = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_btnSubscribe];
@@ -130,6 +131,7 @@
     [_btnSubscribe setImage:[UIImage imageNamed:@"subscribeOrder"] forState:UIControlStateNormal];
     _lbSubscribe = [self createLabel:_FONT(13) txtColor:_COLOR(0x66, 0x66, 0x66) rootView:headerView];
     _lbSubscribe.text = @"已预约";
+    [_btnSubscribe addTarget:self action:@selector(btnClickedToLoadOrders:) forControlEvents:UIControlEventTouchUpInside];
     
     _btnTreatPay = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_btnTreatPay];
@@ -137,6 +139,7 @@
     [_btnTreatPay setImage:[UIImage imageNamed:@"treatPay"] forState:UIControlStateNormal];
     _lbTreatPay = [self createLabel:_FONT(13) txtColor:_COLOR(0x66, 0x66, 0x66) rootView:headerView];
     _lbTreatPay.text = @"待付款";
+    [_btnTreatPay addTarget:self action:@selector(btnClickedToLoadOrders:) forControlEvents:UIControlEventTouchUpInside];
     
     _btnEvaluate = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_btnEvaluate];
@@ -144,6 +147,7 @@
     [_btnEvaluate setImage:[UIImage imageNamed:@"evaluate"] forState:UIControlStateNormal];
     _lbEvaluate = [self createLabel:_FONT(13) txtColor:_COLOR(0x66, 0x66, 0x66) rootView:headerView];
     _lbEvaluate.text = @"待评价";
+    [_btnEvaluate addTarget:self action:@selector(btnClickedToLoadOrders:) forControlEvents:UIControlEventTouchUpInside];
     
     _line1 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:headerView];
     _line1.backgroundColor = SeparatorLineColor;
@@ -354,9 +358,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 0){
-        MyOrderListVC *vc = [[MyOrderListVC alloc] initWithNibName:nil bundle:nil];
+        MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:EnumOrderAll];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.NavigationBar.Title = @"我的订单";
+        vc.NavTitle = @"我的订单";
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 1){
         MyEvaluateListVC *vc = [[MyEvaluateListVC alloc] initWithNibName:nil bundle:nil];
@@ -368,4 +372,32 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+#pragma ACTIONS
+
+- (void) btnClickedToLoadOrders:(UIButton*) sender
+{
+    OrderListType type = EnumOrderAll;
+    if(sender == _btnNew)
+        type = EnumOrderNew;
+    else if (sender == _btnSubscribe)
+        type = EnumOrderSubscribe;
+    else if (sender == _btnTreatPay)
+        type = EnumOrderTreatPay;
+    else
+        type = EnumOrderEvaluate;
+    MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:type];
+    vc.hidesBottomBarWhenPushed = YES;
+    if(sender == _btnNew)
+        vc.NavTitle = @"新订单";
+    else if (sender == _btnSubscribe)
+        vc.NavTitle = @"已预约订单";
+    else if (sender == _btnTreatPay)
+        vc.NavTitle = @"待付款订单";
+    else
+        vc.NavTitle = @"待评价订单";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 @end

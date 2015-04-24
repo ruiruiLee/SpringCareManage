@@ -12,13 +12,24 @@
 
 static NSMutableArray *orderList = nil;
 
-+ (NSArray *) GetOrderList
+- (NSArray *) GetOrderList
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         orderList = [[NSMutableArray alloc] init];
     });
     return orderList;
+}
+
+- (id) init
+{
+    self = [super init];
+    if(self){
+        if(orderList == nil)
+            orderList = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
 }
 
 - (void) cleanDataList

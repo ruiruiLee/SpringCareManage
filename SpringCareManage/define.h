@@ -23,7 +23,7 @@
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
-
+#define ThemeImage(imageName)  [UIImage imageNamed:imageName]
 #define _COLOR(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 //#define _FONT(s) [UIFont fontWithName:@"STHeitiSC-Medium" size:(s)]//[UIFont fontWithName:@"Helvetica Neue" size:(s)]
 #define _FONT(s) [UIFont fontWithName:@"Helvetica Neue" size:(s)]

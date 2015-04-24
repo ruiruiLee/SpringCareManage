@@ -8,7 +8,8 @@
 
 //待支付订单
 #import <Foundation/Foundation.h>
+#import "BaseOrderListModel.h"
 
-@interface WaitPayOrderListModel : NSObject
+@interface WaitPayOrderListModel : BaseOrderListModel
 
 @end

@@ -9,6 +9,7 @@
 #import "LCBaseVC.h"
 
 @implementation LCBaseVC
+@synthesize NavTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,7 +48,8 @@
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_NavigationBar(64)]-0-[_ContentView]-0-|" options:0 metrics:nil views:views]];
     }
     
-    _NavigationBar.Title = @"对方很高";
+    if(NavTitle != nil)
+        _NavigationBar.Title = NavTitle;
 }
 
 - (void) dealloc
