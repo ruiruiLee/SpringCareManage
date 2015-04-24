@@ -110,4 +110,12 @@ typedef enum : NSUInteger {
 
 + (BOOL) isOneDay:(NSDate *) begin end:(NSDate *) end;
 
++ (DateType) getDateType:(NSInteger) typeId;
+
++ (OrderStatus) GetOrderStatus:(NSInteger) statusId;
+
++ (CommentStatus) GetCommentStatus:(NSInteger) statusId;
+
++ (PayStatus) GetPayStatus:(NSInteger) statusId;
+
 @end

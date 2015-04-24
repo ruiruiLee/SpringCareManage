@@ -292,4 +292,49 @@
         return NO;
 }
 
++ (DateType) getDateType:(NSInteger) typeId
+{
+    DateType type = (typeId == 1) ? EnumTypeHalfDay : EnumTypeOneDay;
+    return type;
+}
+
++ (OrderStatus) GetOrderStatus:(NSInteger) statusId
+{
+    OrderStatus status = EnumOrderStatusTypeUnknown;
+    if(statusId == 1)
+        status = EnumOrderStatusTypeNew;
+    else if (statusId == 2)
+        status = EnumOrderStatusTypeConfirm;
+    else if (statusId == 3)
+        status = EnumOrderStatusTypeServing;
+    else if (statusId == 4)
+        status = EnumOrderStatusTypeFinish;
+    else if (statusId == 99)
+        status = EnumOrderStatusTypeCancel;
+    else
+        status = EnumOrderStatusTypeUnknown;
+    
+    return status;
+}
+
++ (CommentStatus) GetCommentStatus:(NSInteger) statusId
+{
+    CommentStatus status = EnumTypeNoComment;
+    if(status > 0)
+        status = EnumTypeNoComment;
+    else
+        status = EnumTypeCommented;
+    
+    return status;
+}
+
++ (PayStatus) GetPayStatus:(NSInteger) statusId
+{
+    PayStatus status = EnumTypeNopay;
+    if(statusId == 1)
+        status = EnumTypePayed;
+    
+    return status;
+}
+
 @end
