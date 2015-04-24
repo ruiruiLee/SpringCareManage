@@ -13,7 +13,7 @@
 #import "MyEvaluateListVC.h"
 #import "MyEscortObjectVC.h"
 
-#import "PublishInfoVC.h"
+#import "UserLoginVC.h"
 
 @interface HomePageVC ()
 
@@ -32,10 +32,10 @@
     
     [self initSubViews];
     
-    PublishInfoVC *login = [[PublishInfoVC alloc] initWithNibName:nil bundle:nil];
-//    [self.navigationController presentViewController:login animated:YES completion:^{
-//        
-//    }];
+    UserLoginVC *login = [[UserLoginVC alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController presentViewController:login animated:YES completion:^{
+        
+    }];
 }
 
 - (UILabel*) createLabel:(UIFont*) font txtColor:(UIColor*)txtColor rootView:(UIView*)rootView

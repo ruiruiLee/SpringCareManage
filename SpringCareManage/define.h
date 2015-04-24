@@ -9,6 +9,11 @@
 #ifndef LovelyCare_define_h
 #define LovelyCare_define_h
 
+#import "LCNetWorkBase.h"
+#import "NSStrUtil.h"
+
+#define LCNetWorkBase [LCNetWorkBase sharedLCNetWorkBase]
+
 
 #define SERVER_ADDRESS @"http://baidu.com"
 //#define SERVER_ADDRESS @"http://baidu.com"
@@ -43,5 +48,7 @@
 #define TableSectionBackgroundColor _COLOR(0xf3, 0xf5, 0xf7)
 
 #define TIME_LIMIT 5
+
+typedef void(^block)(int code);
 
 #endif

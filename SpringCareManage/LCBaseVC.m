@@ -23,6 +23,9 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     self.navigationController.navigationBarHidden=YES;
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -47,6 +50,11 @@
     _NavigationBar.Title = @"对方很高";
 }
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
 }
@@ -63,6 +71,16 @@
 }
 
 - (void) NavRightButtonClickEvent:(UIButton *)sender
+{
+    
+}
+
+- (void) keyboardWillShow:(NSNotification *) notify
+{
+    
+}
+
+- (void) keyboardWillHide:(NSNotification *)notify
 {
     
 }
