@@ -82,6 +82,8 @@
     _photoImg = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_photoImg];
     _photoImg.translatesAutoresizingMaskIntoConstraints = NO;
+    _photoImg.layer.cornerRadius = 26;
+    _photoImg.clipsToBounds = YES;
     
     _lbName = [self createLabel:_FONT(18) txtColor:_COLOR(0x22, 0x22, 0x22)];
     
@@ -153,14 +155,16 @@
     UIView *root = self.contentView;
     NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _lbRelationship, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=20-[_lbOrderStatus]-29-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=20-[_lbOrderStatus]-29-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=20-[_lbOrderStatus]-19-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=20-[_lbOrderStatus]-19-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=20-[_lbTotalValue]-22-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-22-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views]];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+    [root addConstraints:constraintsArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line2]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views]];
+    constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views];
+    [root addConstraints:constraintsAcctionArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_btnMobile]->=20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_btnAddress]->=20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
@@ -190,38 +194,61 @@
 - (void) SetContentWithModel:(OrderInfoModel *)model
 {
     _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
-    _lbPublishTime.text = model.createdDate;//@"2015-03-19 12:46";//下单时间
+    _lbPublishTime.text = [NSString stringWithFormat:@"下单时间:%@", model.createdDate];//@"2015-03-19 12:46";//下单时间
     _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@", model.registerInfo.chineseName];//@"联系人:";
     [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
     [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
     
-    _lbAge.text = [NSString stringWithFormat:@"%@岁", model.loverinfo.age];//@"72岁";
+    _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%@岁", model.loverinfo.age]];//;//@"72岁";
     
     _lbName.text = model.loverinfo.name;//@"张发财";
+    if(model.loverinfo.name == nil || [model.loverinfo.name length] == 0)
+        _lbName.text = @"姓名";
     _lbRelationship.text = model.loverinfo.nickname;//@"父亲";
-    
-    _sexLogo.image = [UIImage imageNamed:[Util SexImagePathWith:[Util GetSexByName:model.loverinfo.sex]]];
     
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _lbRelationship, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
+    UIView *root = self.contentView;
+    [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
     if(type == EnumServiceTimeNight){
         _imgvNight.image = ThemeImage(@"night");
         _imgvDay.image = nil;
+        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
     }
     else if (type == EnumServiceTimeDay){
         _imgvNight.image = nil;
         _imgvDay.image = ThemeImage(@"daytime");
+        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
     }
     else{
         _imgvNight.image = ThemeImage(@"night");
         _imgvDay.image = ThemeImage(@"daytime");
     }
     
+    [root addConstraints:constraintsArray];
+    
+    [root removeConstraints:constraintsAcctionArray];
+    NSString *sex = [Util SexImagePathWith:[Util GetSexByName:model.loverinfo.sex]];
+    if(sex == nil){
+        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views];
+    }
+    else{
+        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views];
+    }
+    [root addConstraints:constraintsAcctionArray];
+    
     _lbDetailServiceTime.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:model.beginDate] enddate:[Util convertDateFromDateString:model.endDate] datetype:model.dateType];
     _lbTotalValue.text = [NSString stringWithFormat:@"¥%.2f", model.totalPrice];//@"¥180.00";
     _lbServiceContent.text = @"医院陪护：";
     _lbOrderStatus.text = @"服务中";
+}
+
+- (NSString *) stringByReplaceString:(NSString *)oldString
+{
+    return [oldString stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
 }
 
 @end

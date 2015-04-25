@@ -42,6 +42,9 @@
     UIView *intervalV7;
     
     UIView *FootView;
+    
+    NSArray *constraintsArray;
+    NSArray *constraintsAcctionArray;
 }
 
 - (void) SetContentWithModel:(OrderInfoModel *)model;

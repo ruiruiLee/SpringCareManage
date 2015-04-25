@@ -14,48 +14,99 @@
 #import "WaitCommentOrderListModel.h"
 #import "WaitPayOrderListModel.h"
 
+
+static BaseOrderListModel *allorderModel = nil;
+static BaseOrderListModel *neworderModel = nil;
+static BaseOrderListModel *confirmedorderModel = nil;
+static BaseOrderListModel *waitPayorderModel = nil;
+static BaseOrderListModel *waitCommentorderModel = nil;
+
 @implementation BaseOrderListModel
 
-static NSMutableArray *orderList = nil;
-
-- (NSArray *) GetOrderList
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        orderList = [[NSMutableArray alloc] init];
-    });
-    return orderList;
-}
-
-- (id) initWithOrderListType:(OrderListType) type
++ (BaseOrderListModel *) ShareOrderListModelWithType:(OrderListType) type
 {
     switch (type) {
-        case EnumOrderAll:
-            self = [[AllOrderListModel alloc] init];
+        case EnumOrderAll:{
+            if(!allorderModel)
+                allorderModel = [[AllOrderListModel alloc] init];
+            return allorderModel;
+        }
             break;
         case EnumOrderNew:
-            self = [[NewOrderListModel alloc] init];
+            if(!neworderModel)
+                neworderModel = [[NewOrderListModel alloc] init];
+            return neworderModel;
             break;
         case EnumOrderSubscribe:
-            self = [[ConfirmedOrderListModel alloc] init];
+            if(!confirmedorderModel)
+                confirmedorderModel = [[ConfirmedOrderListModel alloc] init];
+            return confirmedorderModel;
             break;
         case EnumOrderTreatPay:
-            self = [[WaitPayOrderListModel alloc] init];
+            if(!waitPayorderModel)
+                waitPayorderModel = [[WaitPayOrderListModel alloc] init];
+            return waitPayorderModel;
             break;
         case EnumOrderEvaluate:
-            self = [[WaitCommentOrderListModel alloc] init];
+            if(!waitCommentorderModel)
+                waitCommentorderModel = [[WaitCommentOrderListModel alloc] init];
+            return waitCommentorderModel;
             break;
         default:
             break;
     }
     
+    return nil;
+}
+
+- (id) init
+{
+    self = [super init];
+    
     if(self){
+        
         self.totals = INT_MAX;
         self.pages = 0;
+        self.dataList = [[NSMutableArray alloc] init];
     }
     
     return self;
 }
+
+- (NSArray *) GetOrderList
+{
+    return self.dataList;
+}
+
+//- (id) initWithOrderListType:(OrderListType) type
+//{
+//    switch (type) {
+//        case EnumOrderAll:
+//            self = [[AllOrderListModel alloc] init];
+//            break;
+//        case EnumOrderNew:
+//            self = [[NewOrderListModel alloc] init];
+//            break;
+//        case EnumOrderSubscribe:
+//            self = [[ConfirmedOrderListModel alloc] init];
+//            break;
+//        case EnumOrderTreatPay:
+//            self = [[WaitPayOrderListModel alloc] init];
+//            break;
+//        case EnumOrderEvaluate:
+//            self = [[WaitCommentOrderListModel alloc] init];
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    if(self){
+//        self.totals = INT_MAX;
+//        self.pages = 0;
+//    }
+//    
+//    return self;
+//}
 
 - (void) setPages:(NSInteger)pages
 {
@@ -77,7 +128,7 @@ static NSMutableArray *orderList = nil;
 
 - (void) cleanDataList
 {
-    [orderList removeAllObjects];
+    [self.dataList removeAllObjects];
 }
 
 - (void) RequestOrderListWithBlock:(block) block
@@ -105,21 +156,18 @@ static NSMutableArray *orderList = nil;
     [LCNetWorkBase postWithMethod:Method Params:parmas Completion:^(int code, id content) {
         if(code){
             if([content isKindOfClass:[NSDictionary class]]){
-                if([content objectForKey:@"code"] == nil){
-                    NSMutableArray *result = [[NSMutableArray alloc] init];
-                    NSArray *rows = [content objectForKey:@"rows"];
-                    for (int i = 0; i < [rows count]; i++) {
-                        OrderInfoModel *model = (OrderInfoModel *)[OrderInfoModel modelFromDictionary:[rows objectAtIndex:i]];
-                        [result addObject:model];
-                    }
-                    
-                    if(block){
-                        block(1, result);
-                    }
-                }else
-                {
-                    if(block)
-                        block(0, nil);
+                NSMutableArray *result = [[NSMutableArray alloc] init];
+                NSArray *rows = [content objectForKey:@"rows"];
+                self.totals = [[content objectForKey:@"total"] integerValue];
+                for (int i = 0; i < [rows count]; i++) {
+                    OrderInfoModel *model = (OrderInfoModel *)[OrderInfoModel modelFromDictionary:[rows objectAtIndex:i]];
+                    [result addObject:model];
+                }
+                
+                [self.dataList addObjectsFromArray:result];
+                
+                if(block){
+                    block(1, result);
                 }
             }
             else

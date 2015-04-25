@@ -9,6 +9,7 @@
 #import "MyOrderListVC.h"
 #import "OrderListCell.h"
 #import "BaseOrderListModel.h"
+#import "AllOrderListModel.h"
 
 @interface MyOrderListVC ()
 {
@@ -34,7 +35,8 @@
         self.DataList = [[NSMutableArray alloc] init];
         
         if(_orderModel == nil){
-            _orderModel = [[BaseOrderListModel alloc] initWithOrderListType:type];
+//            _orderModel = [[BaseOrderListModel alloc] initWithOrderListType:type];
+            _orderModel = [BaseOrderListModel ShareOrderListModelWithType:type];
         }
     }
     return self;
@@ -54,7 +56,7 @@
         [_orderModel RequestOrderListWithBlock:^(int code, id content) {
             if(code == 1){
                 [weakSelf.DataList addObjectsFromArray:content];
-                
+                [weakSelf.tableview reloadData];
             }
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
         }];
@@ -176,7 +178,7 @@
         if(code == 1){
             [weakSelf.DataList removeAllObjects];
             [weakSelf.DataList addObjectsFromArray:content];
-            
+            [weakSelf.tableview reloadData];
         }
         [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
     }];
@@ -192,9 +194,9 @@
     [_orderModel RequestOrderListWithBlock:^(int code, id content) {
         if(code == 1){
             [weakSelf.DataList addObjectsFromArray:content];
-            
+            [weakSelf.tableview reloadData];
         }
-        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+        [weakSelf performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:0.1];
     }];
 }
 

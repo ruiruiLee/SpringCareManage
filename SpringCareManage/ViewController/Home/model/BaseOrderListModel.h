@@ -18,11 +18,14 @@
 @property (nonatomic, assign) NSInteger totals;//总页数
 @property (nonatomic, strong) NSString *careId;//护工id
 
+@property (nonatomic, strong) NSMutableArray *dataList;
+
 - (NSArray *) GetOrderList;
 
 - (void) cleanDataList;
 
-- (id) initWithOrderListType:(OrderListType) type;
+//- (id) initWithOrderListType:(OrderListType) type;
++ (BaseOrderListModel *) ShareOrderListModelWithType:(OrderListType) type;
 
 /******
  **  如果pages超过totals，返回状态码1000
