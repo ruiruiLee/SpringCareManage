@@ -79,6 +79,12 @@
 		86B74A371AEB39C3000BA6DB /* MyEscort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A351AEB39C3000BA6DB /* MyEscort@2x.png */; };
 		86B74A3A1AEB3DDC000BA6DB /* UserDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B74A391AEB3DDC000BA6DB /* UserDetailModel.m */; };
 		86B74A3D1AEBB07F000BA6DB /* EscortObjectListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B74A3C1AEBB07F000BA6DB /* EscortObjectListModel.m */; };
+		86B74A401AEBDD5E000BA6DB /* OrderDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B74A3F1AEBDD5E000BA6DB /* OrderDetailsVC.m */; };
+		86B74A431AEBDD8D000BA6DB /* OrderStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B74A421AEBDD8D000BA6DB /* OrderStepView.m */; };
+		86B74A461AEBE32E000BA6DB /* stepnormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A441AEBE32E000BA6DB /* stepnormal@2x.png */; };
+		86B74A471AEBE32E000BA6DB /* stepselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A451AEBE32E000BA6DB /* stepselected@2x.png */; };
+		86B74A4A1AEBE33E000BA6DB /* stepselectlinenormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A481AEBE33E000BA6DB /* stepselectlinenormal@2x.png */; };
+		86B74A4B1AEBE33E000BA6DB /* stepselectlineselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A491AEBE33E000BA6DB /* stepselectlineselect@2x.png */; };
 		86B8E61B1ADA375700A5139E /* LCBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B8E61A1ADA375700A5139E /* LCBaseVC.m */; };
 		86B8E6451ADA381C00A5139E /* PageLoadFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B8E6211ADA381C00A5139E /* PageLoadFootView.m */; };
 		86B8E6461ADA381C00A5139E /* EscortTimeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B8E6241ADA381C00A5139E /* EscortTimeDataModel.m */; };
@@ -317,6 +323,14 @@
 		86B74A391AEB3DDC000BA6DB /* UserDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailModel.m; sourceTree = "<group>"; };
 		86B74A3B1AEBB07F000BA6DB /* EscortObjectListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscortObjectListModel.h; sourceTree = "<group>"; };
 		86B74A3C1AEBB07F000BA6DB /* EscortObjectListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscortObjectListModel.m; sourceTree = "<group>"; };
+		86B74A3E1AEBDD5E000BA6DB /* OrderDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailsVC.h; sourceTree = "<group>"; };
+		86B74A3F1AEBDD5E000BA6DB /* OrderDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailsVC.m; sourceTree = "<group>"; };
+		86B74A411AEBDD8D000BA6DB /* OrderStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStepView.h; sourceTree = "<group>"; };
+		86B74A421AEBDD8D000BA6DB /* OrderStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStepView.m; sourceTree = "<group>"; };
+		86B74A441AEBE32E000BA6DB /* stepnormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stepnormal@2x.png"; sourceTree = "<group>"; };
+		86B74A451AEBE32E000BA6DB /* stepselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stepselected@2x.png"; sourceTree = "<group>"; };
+		86B74A481AEBE33E000BA6DB /* stepselectlinenormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stepselectlinenormal@2x.png"; sourceTree = "<group>"; };
+		86B74A491AEBE33E000BA6DB /* stepselectlineselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stepselectlineselect@2x.png"; sourceTree = "<group>"; };
 		86B8E6131ADA36C300A5139E /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		86B8E6191ADA375700A5139E /* LCBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBaseVC.h; path = ../LCBaseVC.h; sourceTree = "<group>"; };
 		86B8E61A1ADA375700A5139E /* LCBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBaseVC.m; path = ../LCBaseVC.m; sourceTree = "<group>"; };
@@ -723,6 +737,10 @@
 		86B8E6141ADA36FC00A5139E /* PNG */ = {
 			isa = PBXGroup;
 			children = (
+				86B74A481AEBE33E000BA6DB /* stepselectlinenormal@2x.png */,
+				86B74A491AEBE33E000BA6DB /* stepselectlineselect@2x.png */,
+				86B74A441AEBE32E000BA6DB /* stepnormal@2x.png */,
+				86B74A451AEBE32E000BA6DB /* stepselected@2x.png */,
 				86B74A341AEB39C3000BA6DB /* Msg@2x.png */,
 				86B74A351AEB39C3000BA6DB /* MyEscort@2x.png */,
 				86B749DD1AEA197E000BA6DB /* nurselistmale@2x.png */,
@@ -750,6 +768,8 @@
 		86B8E6151ADA36FC00A5139E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86B74A411AEBDD8D000BA6DB /* OrderStepView.h */,
+				86B74A421AEBDD8D000BA6DB /* OrderStepView.m */,
 				86B749841AE9E9F0000BA6DB /* TextAndEmojiView.h */,
 				86B749851AE9E9F0000BA6DB /* TextAndEmojiView.m */,
 				86B96A811ADB912F00441168 /* messagePhotoView */,
@@ -850,6 +870,8 @@
 				8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */,
 				86B96A671ADB662E00441168 /* MyEscortObjectVC.h */,
 				86B96A681ADB662E00441168 /* MyEscortObjectVC.m */,
+				86B74A3E1AEBDD5E000BA6DB /* OrderDetailsVC.h */,
+				86B74A3F1AEBDD5E000BA6DB /* OrderDetailsVC.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1341,6 +1363,7 @@
 				865523861ADAA2BD00E803FD /* nurselistlocation@2x.png in Resources */,
 				86B74A361AEB39C3000BA6DB /* Msg@2x.png in Resources */,
 				86B749D91AE9ECA1000BA6DB /* IQKeyboardManager.bundle in Resources */,
+				86B74A4B1AEBE33E000BA6DB /* stepselectlineselect@2x.png in Resources */,
 				8655237C1ADA9DD000E803FD /* back@2x.png in Resources */,
 				865523811ADAA23B00E803FD /* femail@2x.png in Resources */,
 				86B96A661ADB644700441168 /* b27_icon_star_yellow@2x.png in Resources */,
@@ -1351,8 +1374,11 @@
 				CFEBF8861ACE357300BC4EC5 /* Images.xcassets in Resources */,
 				86B8E6B11ADA6DFC00A5139E /* nurselistfemale@2x.png in Resources */,
 				865523731ADA9AFC00E803FD /* blackArrow.png in Resources */,
+				86B74A4A1AEBE33E000BA6DB /* stepselectlinenormal@2x.png in Resources */,
 				86B8E6AF1ADA6DB500A5139E /* daytime@2x.png in Resources */,
+				86B74A471AEBE32E000BA6DB /* stepselected@2x.png in Resources */,
 				86B96A7C1ADB8B7600441168 /* paytypeselected@2x.png in Resources */,
+				86B74A461AEBE32E000BA6DB /* stepnormal@2x.png in Resources */,
 				86B96A7E1ADB8CF900441168 /* recording@2x.png in Resources */,
 				CFBC52771ADD385D004FB8F3 /* Overlay@2x.png in Resources */,
 				8655237E1ADAA19F00E803FD /* placeholderimage@2x.png in Resources */,
@@ -1448,6 +1474,7 @@
 				86B749A71AE9EA1B000BA6DB /* SBJsonStreamWriter.m in Sources */,
 				CFBC532C1ADD4C4C004FB8F3 /* SDWebImageDecoder.m in Sources */,
 				86B749EB1AEA27A4000BA6DB /* RegisterInfoModel.m in Sources */,
+				86B74A431AEBDD8D000BA6DB /* OrderStepView.m in Sources */,
 				8655236F1ADA9AFC00E803FD /* EGORefreshTableHeaderView.m in Sources */,
 				86B96A9A1ADB933500441168 /* ZYQAssetPickerController.m in Sources */,
 				CFBC53291ADD4C4C004FB8F3 /* NSData+ImageContentType.m in Sources */,
@@ -1502,6 +1529,7 @@
 				86B749A41AE9EA1B000BA6DB /* SBJsonStreamParserAccumulator.m in Sources */,
 				86B74A301AEA8450000BA6DB /* EvaluateInfoModel.m in Sources */,
 				CFBC524E1ADD37E9004FB8F3 /* MWTapDetectingView.m in Sources */,
+				86B74A401AEBDD5E000BA6DB /* OrderDetailsVC.m in Sources */,
 				86B8E64B1ADA381C00A5139E /* HBImageScroller.m in Sources */,
 				86B96A721ADB6F4B00441168 /* UserLoginVC.m in Sources */,
 				CFBC52711ADD385D004FB8F3 /* ELCAsset.m in Sources */,

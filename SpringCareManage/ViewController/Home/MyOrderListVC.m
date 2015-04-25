@@ -10,6 +10,7 @@
 #import "OrderListCell.h"
 #import "BaseOrderListModel.h"
 #import "AllOrderListModel.h"
+#import "OrderDetailsVC.h"
 
 @interface MyOrderListVC ()
 {
@@ -163,6 +164,10 @@
 //    [self.navigationController pushViewController:vc animated:YES];
 //    
 //    [model addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    
+    OrderInfoModel *model = [self.DataList objectAtIndex:indexPath.row];
+    OrderDetailsVC *vc = [[OrderDetailsVC alloc] initWithOrderModel:model];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - PullTableViewDelegate

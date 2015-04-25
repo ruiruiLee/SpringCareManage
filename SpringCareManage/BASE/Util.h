@@ -121,4 +121,6 @@ typedef enum : NSUInteger {
 
 + (PayStatus) GetPayStatus:(NSInteger) statusId;
 
++ (NSString*) convertShotStrFromDate:(NSDate*) date;
+
 @end

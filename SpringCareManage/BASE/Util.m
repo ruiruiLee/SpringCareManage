@@ -357,4 +357,12 @@
     return status;
 }
 
++ (NSString*) convertShotStrFromDate:(NSDate*) date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    [formatter setDateFormat:@"M月d日 HH"];
+    NSString *string = [formatter stringFromDate:date];
+    return string;
+}
+
 @end
