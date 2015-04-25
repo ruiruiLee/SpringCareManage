@@ -63,7 +63,7 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_lbName, _lbServiceTime, _lbContent, _line, _gradeInfo);
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-19-[_lbName]-6-[_gradeInfo]->=10-[_lbServiceTime]-10-|" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-19-[_lbName]-3-[_gradeInfo]->=10-[_lbServiceTime]-10-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-19-[_lbContent]-10-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-19-[_line]-0-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-19-[_lbName]-16-[_lbContent]-15-[_line(1)]-0-|" options:0 metrics:nil views:views]];
@@ -76,7 +76,7 @@
 {
     _lbName.text = model.commentUserName;//@"王宏恩";
     _lbContent.text = model.content;
-    _lbServiceTime.text = [NSString stringWithFormat:@"服务时间：%@4", model.createAt];//@"服务时间：2015-03-24";
+    _lbServiceTime.text = [NSString stringWithFormat:@"服务时间:%@", [Util convertStringFromDateOnlyOnDay:[Util convertDateFromDateString:model.createAt]]];//@"服务时间：2015-03-24";
     [_gradeInfo setScore:model.score];
 }
 

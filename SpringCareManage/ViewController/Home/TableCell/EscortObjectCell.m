@@ -35,14 +35,12 @@
     _photoImgV = [[UIImageView alloc] initWithFrame:CGRectZero];
     _photoImgV.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_photoImgV];
-    _photoImgV.image = [UIImage imageNamed:@"placeholderimage"];
     
     _lbNickName = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_lbNickName];
     _lbNickName.translatesAutoresizingMaskIntoConstraints = NO;
     _lbNickName.textColor = _COLOR(0x22, 0x22, 0x22);
     _lbNickName.font = _FONT(15);
-    _lbNickName.text = @"父亲";
     
     
     _lbNameAge = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -50,14 +48,12 @@
     _lbNameAge.translatesAutoresizingMaskIntoConstraints = NO;
     _lbNameAge.textColor = _COLOR(0x66, 0x66, 0x66);
     _lbNameAge.font = _FONT(16);
-    _lbNameAge.text = @"张大川  68岁";
     
     _lbAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_lbAddress];
     _lbAddress.translatesAutoresizingMaskIntoConstraints = NO;
     _lbAddress.textColor = _COLOR(0x99, 0x99, 0x99);
     _lbAddress.font = _FONT(12);
-    _lbAddress.text = @"四川成都新都区访亲姐51号";
     
     _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnRing];
@@ -89,6 +85,14 @@
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_photoImgV attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:intervalV2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+}
+
+- (void) SetContentDataWithModel:(LoverInfoModel *) model
+{
+    _lbAddress.text = model.addr;
+    _lbNickName.text = model.nickname;
+    _lbNameAge.text = [NSString stringWithFormat:@"%@   %ld岁", model.name, (long)model.age];//@"张大川  68岁";
+    [_photoImgV sd_setImageWithURL:[NSURL URLWithString:model.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
 }
 
 @end

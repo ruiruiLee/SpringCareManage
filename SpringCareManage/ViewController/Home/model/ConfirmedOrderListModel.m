@@ -12,7 +12,7 @@
 
 - (void) RequestOrderListWithBlock:(block) block
 {
-    [self RequestOrderListWithType:EnumOrderAll block:^(int code, id content) {
+    [self RequestOrderListWithType:EnumOrderSubscribe block:^(int code, id content) {
         if(code == 1){
             if(block){
                 block(1, content);

@@ -78,6 +78,7 @@
 		86B74A361AEB39C3000BA6DB /* Msg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A341AEB39C3000BA6DB /* Msg@2x.png */; };
 		86B74A371AEB39C3000BA6DB /* MyEscort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B74A351AEB39C3000BA6DB /* MyEscort@2x.png */; };
 		86B74A3A1AEB3DDC000BA6DB /* UserDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B74A391AEB3DDC000BA6DB /* UserDetailModel.m */; };
+		86B74A3D1AEBB07F000BA6DB /* EscortObjectListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B74A3C1AEBB07F000BA6DB /* EscortObjectListModel.m */; };
 		86B8E61B1ADA375700A5139E /* LCBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B8E61A1ADA375700A5139E /* LCBaseVC.m */; };
 		86B8E6451ADA381C00A5139E /* PageLoadFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B8E6211ADA381C00A5139E /* PageLoadFootView.m */; };
 		86B8E6461ADA381C00A5139E /* EscortTimeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B8E6241ADA381C00A5139E /* EscortTimeDataModel.m */; };
@@ -314,6 +315,8 @@
 		86B74A351AEB39C3000BA6DB /* MyEscort@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MyEscort@2x.png"; sourceTree = "<group>"; };
 		86B74A381AEB3DDC000BA6DB /* UserDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailModel.h; sourceTree = "<group>"; };
 		86B74A391AEB3DDC000BA6DB /* UserDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailModel.m; sourceTree = "<group>"; };
+		86B74A3B1AEBB07F000BA6DB /* EscortObjectListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscortObjectListModel.h; sourceTree = "<group>"; };
+		86B74A3C1AEBB07F000BA6DB /* EscortObjectListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscortObjectListModel.m; sourceTree = "<group>"; };
 		86B8E6131ADA36C300A5139E /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		86B8E6191ADA375700A5139E /* LCBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBaseVC.h; path = ../LCBaseVC.h; sourceTree = "<group>"; };
 		86B8E61A1ADA375700A5139E /* LCBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBaseVC.m; path = ../LCBaseVC.m; sourceTree = "<group>"; };
@@ -711,6 +714,8 @@
 				86B74A321AEA855B000BA6DB /* EvaluateListModel.m */,
 				86B74A381AEB3DDC000BA6DB /* UserDetailModel.h */,
 				86B74A391AEB3DDC000BA6DB /* UserDetailModel.m */,
+				86B74A3B1AEBB07F000BA6DB /* EscortObjectListModel.h */,
+				86B74A3C1AEBB07F000BA6DB /* EscortObjectListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1492,6 +1497,7 @@
 				CFBC53371ADD4C4C004FB8F3 /* UIView+WebCacheOperation.m in Sources */,
 				CFBC52511ADD37E9004FB8F3 /* MBProgressHUD.m in Sources */,
 				86B8E6471ADA381C00A5139E /* EscortTimeReplyCell.m in Sources */,
+				86B74A3D1AEBB07F000BA6DB /* EscortObjectListModel.m in Sources */,
 				86B749FA1AEA33C7000BA6DB /* WaitPayOrderListModel.m in Sources */,
 				86B749A41AE9EA1B000BA6DB /* SBJsonStreamParserAccumulator.m in Sources */,
 				86B74A301AEA8450000BA6DB /* EvaluateInfoModel.m in Sources */,

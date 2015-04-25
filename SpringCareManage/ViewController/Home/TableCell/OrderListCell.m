@@ -55,7 +55,7 @@
     
     _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
+    _lbTotalValue = [self createLabel:_FONT(18) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
     
     _imgvDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvDay];
@@ -158,8 +158,8 @@
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=20-[_lbOrderStatus]-19-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=20-[_lbOrderStatus]-19-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views]];
-    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbTotalValue]-19-|" options:0 metrics:nil views:views]];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line2]-0-|" options:0 metrics:nil views:views]];
@@ -199,7 +199,7 @@
     [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
     [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
     
-    _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%@岁", model.loverinfo.age]];//;//@"72岁";
+    _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%ld岁", (long)model.loverinfo.age]];//;//@"72岁";
     
     _lbName.text = model.loverinfo.name;//@"张发财";
     if(model.loverinfo.name == nil || [model.loverinfo.name length] == 0)
@@ -212,16 +212,16 @@
     UIView *root = self.contentView;
     [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
-    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
     if(type == EnumServiceTimeNight){
         _imgvNight.image = ThemeImage(@"night");
         _imgvDay.image = nil;
-        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
     }
     else if (type == EnumServiceTimeDay){
         _imgvNight.image = nil;
         _imgvDay.image = ThemeImage(@"daytime");
-        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_lbDetailServiceTime]->=20-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
     }
     else{
         _imgvNight.image = ThemeImage(@"night");
@@ -241,9 +241,56 @@
     [root addConstraints:constraintsAcctionArray];
     
     _lbDetailServiceTime.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:model.beginDate] enddate:[Util convertDateFromDateString:model.endDate] datetype:model.dateType];
-    _lbTotalValue.text = [NSString stringWithFormat:@"¥%.2f", model.totalPrice];//@"¥180.00";
-    _lbServiceContent.text = @"医院陪护：";
-    _lbOrderStatus.text = @"服务中";
+    _lbTotalValue.text = [NSString stringWithFormat:@"¥%.0f", model.totalPrice];//@"¥180.00";
+    NSString *dayString = @"";
+    NSString *hourString = @"";
+    DateType dateType = model.dateType;
+    if(dateType == EnumTypeHalfDay){
+        dayString = @"天";
+        hourString = @"12";
+    }else if (dateType == EnumTypeOneDay){
+        dayString = @"天";
+        hourString = @"24";
+    }
+    else if (dateType == EnumTypeOneWeek){
+        dayString = @"周";
+        hourString = @"24";
+    }
+    else if (dateType == EnumTypeOneMounth){
+        dayString = @"月";
+        hourString = @"24";
+    }
+    _lbServiceContent.text = [NSString stringWithFormat:@"%@：¥%.0f/%@h x %ld%@", model.productInfo.name, model.unitPrice, hourString, (long)model.orderCount, dayString];
+    NSString *status = @"";
+    _statusImgv.hidden = YES;
+    switch (model.orderStatus) {
+        case EnumOrderStatusTypeNew:
+            status = @"确认中";
+            break;
+        case EnumOrderStatusTypeConfirm:
+            status = @"已预约";
+            break;
+        case EnumOrderStatusTypeServing:
+            status = @"服务中";
+            break;
+        case EnumOrderStatusTypeFinish:{
+            if(model.payStatus == EnumTypeNopay){
+                status = @"待付款";
+            }else if (model.commentStatus == EnumTypeNoComment){
+                status = @"待评价";
+            }else{
+                status = @"服务完成";
+                _statusImgv.hidden = NO;
+            }
+        }
+            break;
+        case EnumOrderStatusTypeCancel:
+            status = @"已取消";
+            break;
+        default:
+            break;
+    }
+    _lbOrderStatus.text = status;
 }
 
 - (NSString *) stringByReplaceString:(NSString *)oldString

@@ -8,48 +8,50 @@
 
 #import "EvaluateListModel.h"
 #import "UserModel.h"
+#import "define.h"
 
 @implementation EvaluateListModel
 
-static NSMutableArray *evaluateList = nil;
+static EvaluateListModel *model = nil;
 
-- (NSArray *) GetEvaluatesList
++ (EvaluateListModel *) GetEvaluatesListModel
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        evaluateList = [[NSMutableArray alloc] init];
+        model = [[EvaluateListModel alloc] init];
     });
-    return evaluateList;
+    return model;
 }
 
-- (void) setCareId:(NSString *)careId
+- (id) init
 {
-    if(careId != nil && ![careId isEqualToString:self.careId]){
-        _careId = careId;
-        self.pages = 0;
-        self.totals = INT_MAX;
-        
-        [self cleanDataList];
+    self = [super init];
+    if(self){
+        self.evaluateList = [[NSMutableArray alloc] init];
     }
+    
+    return self;
 }
 
 - (void) setPages:(NSInteger)pages
 {
-    if(pages == 0)
+    if(pages == 0){
         [self cleanDataList];
+        self.totals = INT_MAX;
+    }
     _pages = pages;
 }
 
 - (void) cleanDataList
 {
-    [evaluateList removeAllObjects];
+    [self.evaluateList removeAllObjects];
 }
 
 - (void) RequestEvaluatesWithBlock:(block) block
 {
     self.careId = [UserModel sharedUserInfo].userId;
     
-    if(self.pages >= self.totals){
+    if(self.pages*LIMIT_COUNT >= self.totals){
         if(block){
             block(1000, nil);
         }
@@ -64,6 +66,9 @@ static NSMutableArray *evaluateList = nil;
         [parmas setObject:@"true" forKey:@"isOnlySplit"];
     else
         [parmas setObject:@"false" forKey:@"isOnlySplit"];
+    
+    [parmas setObject:[NSNumber numberWithInteger:self.pages * LIMIT_COUNT] forKey:@"offset"];
+    [parmas setObject:[NSNumber numberWithInteger:LIMIT_COUNT] forKey:@"limit"];
     
     __weak EvaluateListModel *weakSelf = self;
     [LCNetWorkBase postWithMethod:@"api/order/care/comment/List" Params:parmas Completion:^(int code, id content) {
@@ -82,7 +87,7 @@ static NSMutableArray *evaluateList = nil;
                     [result addObject:model];
                 }
                 
-                [evaluateList addObjectsFromArray:result];
+                [self.evaluateList addObjectsFromArray:result];
                 
                 if(block)
                     block (1, result);

@@ -186,10 +186,9 @@
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-//    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
     _orderModel.pages = _orderModel.pages + 1 ;
     __weak MyOrderListVC *weakSelf = self;
-    self.tableview.pullTableIsRefreshing = YES;
+    self.tableview.pullTableIsLoadingMore = YES;
     
     [_orderModel RequestOrderListWithBlock:^(int code, id content) {
         if(code == 1){

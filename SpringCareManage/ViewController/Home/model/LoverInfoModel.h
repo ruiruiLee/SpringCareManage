@@ -17,6 +17,6 @@
 @property (nonatomic, strong) NSString *nickname;
 @property (nonatomic, strong) NSString *sex;
 @property (nonatomic, strong) NSString *addr;
-@property (nonatomic, strong) NSString *age;
+@property (nonatomic, assign) NSInteger age;
 
 @end

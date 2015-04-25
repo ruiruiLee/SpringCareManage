@@ -42,10 +42,18 @@
     return date;
 }
 
-+ (NSString*) convertStringFromString:(NSDate*) date
++ (NSString*) convertStringFromDate:(NSDate*) date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     [formatter setDateFormat:@"yyyy-MM-dd HH"];
+    NSString *string = [formatter stringFromDate:date];
+    return string;
+}
+
++ (NSString*) convertStringFromDateOnlyOnDay:(NSDate*) date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *string = [formatter stringFromDate:date];
     return string;
 }
@@ -274,6 +282,8 @@
 
 + (NSInteger) GetAgeByBirthday:(NSString *) day
 {
+    if(day == nil)
+        return 0;
     NSDate *date = [Util convertDateFromDateString:day];
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];

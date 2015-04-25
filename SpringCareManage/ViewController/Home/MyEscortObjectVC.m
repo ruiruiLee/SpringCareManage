@@ -8,8 +8,12 @@
 
 #import "MyEscortObjectVC.h"
 #import "EscortObjectCell.h"
+#import "EscortObjectListModel.h"
 
 @interface MyEscortObjectVC ()
+{
+    EscortObjectListModel *_escortModel;
+}
 
 @property (nonatomic, strong) EscortObjectCell *prototypeCell;
 
@@ -24,7 +28,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.NavigationBar.Title = @"我的陪护";
+    
+    _escortModel = [[EscortObjectListModel alloc] init];
+    self.DataList = [[NSMutableArray alloc] init];
+    
     [self initSubviews];
+    
+    [self.DataList addObjectsFromArray:[EscortObjectListModel GetEscortObjectList]];
+    if([self.DataList count] == 0){
+        self.tableview.pullTableIsRefreshing = YES;
+        __weak MyEscortObjectVC *weakSelf = self;
+        [_escortModel RequsetEscortDataWithBlock:^(int code, id content) {
+            if(code == 1){
+                [weakSelf.DataList addObjectsFromArray:content];
+                [weakSelf.tableview reloadData];
+            }
+            
+            [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +72,7 @@
 #pragma UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;//[DataList count];
+    return [DataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,9 +82,8 @@
         cell = [[EscortObjectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    //    cell.textLabel.text = ((NurseListInfoModel*)[DataList objectAtIndex:indexPath.row]).name;
-    //    NurseListInfoModel *model = [DataList objectAtIndex:indexPath.row];
-    //    [cell SetContentData:model];
+    LoverInfoModel *data = [DataList objectAtIndex:indexPath.row];
+    [cell SetContentDataWithModel:data];
     
     return cell;
 }
@@ -79,9 +100,9 @@
         prototypeCell = [[EscortObjectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    //    NurseListInfoModel *data = [DataList objectAtIndex:indexPath.row];
+    LoverInfoModel *data = [DataList objectAtIndex:indexPath.row];
     EscortObjectCell *cell = (EscortObjectCell *)self.prototypeCell;
-    //    [cell SetContentData:data];
+    [cell SetContentDataWithModel:data];
     
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
@@ -106,12 +127,33 @@
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
-    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+    _escortModel.pages = 0;
+    self.tableview.pullTableIsRefreshing = YES;
+    __weak MyEscortObjectVC *weakSelf = self;
+    [_escortModel RequsetEscortDataWithBlock:^(int code, id content) {
+        if(code == 1){
+            [weakSelf.DataList removeAllObjects];
+            [weakSelf.DataList addObjectsFromArray:content];
+            [weakSelf.tableview reloadData];
+        }
+        
+        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+    }];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+     _escortModel.pages = _escortModel.pages + 1;
+    self.tableview.pullTableIsLoadingMore = YES;
+    __weak MyEscortObjectVC *weakSelf = self;
+    [_escortModel RequsetEscortDataWithBlock:^(int code, id content) {
+        if(code == 1){
+            [weakSelf.DataList addObjectsFromArray:content];
+            [weakSelf.tableview reloadData];
+        }
+        
+        [weakSelf performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:0.1];
+    }];
 }
 
 #pragma mark - Refresh and load more methods

@@ -17,9 +17,10 @@
 @property (nonatomic, assign) NSInteger totals;
 
 @property (nonatomic, assign) NSInteger pages;
+@property (nonatomic, strong) NSMutableArray *evaluateList;
 
 
-- (NSArray *) GetEvaluatesList;
++ (EvaluateListModel *) GetEvaluatesListModel;
 
 - (void) RequestEvaluatesWithBlock:(block) block;
 

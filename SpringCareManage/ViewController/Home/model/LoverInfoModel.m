@@ -7,6 +7,7 @@
 //
 
 #import "LoverInfoModel.h"
+#import "define.h"
 
 @implementation LoverInfoModel
 
@@ -21,6 +22,7 @@
     model.nickname = [dic objectForKey:@"nickname"];
     model.sex = [dic objectForKey:@"sex"];
     model.addr = [dic objectForKey:@"addr"];
+    model.age = [Util GetAgeByBirthday:[dic objectForKey:@"birthDay"]];
     
     return model;
 }

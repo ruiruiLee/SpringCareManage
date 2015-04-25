@@ -27,13 +27,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _evaluateModel = [[EvaluateListModel alloc] init];
+    _evaluateModel = [EvaluateListModel GetEvaluatesListModel];
     
     // Do any additional setup after loading the view.
     self.NavigationBar.Title = @"我的评价";
     [self initSubviews];
     
-    self.DataList = [[NSMutableArray alloc] initWithArray:[_evaluateModel GetEvaluatesList]];
+    self.DataList = [[NSMutableArray alloc] initWithArray:_evaluateModel.evaluateList];
     if([self.DataList count] == 0){
         __weak MyEvaluateListVC *weakSelf = self;
         self.tableview.pullTableIsRefreshing = YES;
@@ -47,6 +47,9 @@
             
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
         }];
+    }
+    else{
+        [self ValuationForTableHeader];
     }
 }
 
