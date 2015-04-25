@@ -165,19 +165,15 @@
     _line2.backgroundColor = SeparatorLineColor;
     
     _lbCareType = [self createLabel:_FONT(13) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:headerView];
-    _lbCareType.text = @"医院陪护：¥180/12h";
     
     _imgDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_imgDay];
     _imgDay.translatesAutoresizingMaskIntoConstraints = NO;
-    _imgDay.image = [UIImage imageNamed:@"daytime"];
     
     _imgNight = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_imgNight];
     _imgNight.translatesAutoresizingMaskIntoConstraints = NO;
-    _imgNight.image = [UIImage imageNamed:@"night"];
     _lbDetailText = [self createLabel:_FONT(13) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:headerView];
-    _lbDetailText.text = @"我感到十分大公司的风格的是非观";
     
     _line3 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:headerView];
     _line3.backgroundColor = SeparatorLineColor;
@@ -197,7 +193,6 @@
     [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnAddress.titleLabel.font = _FONT(14);
     [_btnAddress setImage:[UIImage imageNamed:@"locator"] forState:UIControlStateNormal];
-    [_btnAddress setTitle:@"金牛区茶店子东街" forState:UIControlStateNormal];
     
     intervalV1 = [[UIView alloc] initWithFrame:CGRectZero];
     intervalV1.translatesAutoresizingMaskIntoConstraints = NO;
@@ -289,6 +284,44 @@
         placeholderImage = @"nurselistmale";
     [_photoImage sd_setImageWithURL:[NSURL URLWithString:userInfo.headerImage] placeholderImage:[UIImage imageNamed:placeholderImage]];
     
+    NSString *dayString = @"";
+    NSString *hourString = @"";
+    DateType dateType = userInfo.userOrderInfo.orderModel.dateType;
+    if(dateType == EnumTypeHalfDay){
+        dayString = @"天";
+        hourString = @"12";
+    }else if (dateType == EnumTypeOneDay){
+        dayString = @"天";
+        hourString = @"24";
+    }
+    else if (dateType == EnumTypeOneWeek){
+        dayString = @"周";
+        hourString = @"24";
+    }
+    else if (dateType == EnumTypeOneMounth){
+        dayString = @"月";
+        hourString = @"24";
+    }
+    
+    _lbCareType.text = [NSString stringWithFormat:@"%@：¥%.2f/%@h x %ld%@ = ¥%.2f", userInfo.userOrderInfo.orderModel.productInfo.name, userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount,dayString, userInfo.userOrderInfo.orderModel.totalPrice];//@"医院陪护：¥180/12h";
+    
+    [_btnAddress setTitle:userInfo.userOrderInfo.orderModel.loverinfo.addr forState:UIControlStateNormal];
+    NSString *phone = [NSString stringWithFormat:@"%@ %@", userInfo.userOrderInfo.orderModel.loverinfo.name, userInfo.userOrderInfo.orderModel.loverinfo.phone];
+    [_btnCustomerMobile setTitle:phone forState:UIControlStateNormal];
+    
+    _lbDetailText.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.beginDate] enddate:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.endDate] datetype:userInfo.userOrderInfo.orderModel.dateType];
+    
+    _imgDay.image = [UIImage imageNamed:@"daytime"];
+    _imgNight.image = [UIImage imageNamed:@"night"];
+    if(userInfo.userOrderInfo.orderModel.dateType == EnumTypeHalfDay){
+        ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.beginDate]];
+        if(type == EnumServiceTimeDay){
+            _imgNight.image = nil;
+        }
+        else if (type == EnumServiceTimeNight){
+            _imgDay.image = nil;
+        }
+    }
     
     UIView *headerView = _tableview.tableHeaderView;
     [headerView setNeedsLayout];
@@ -313,7 +346,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -344,9 +377,15 @@
         case 2:
         {
             cell.lbTitle.text = @"我的陪护";
+            cell.photoImgV.image = [UIImage imageNamed:@"MyEscort"];
         }
             break;
-            
+        case 3:
+        {
+            cell.lbTitle.text = @"我的消息";
+            cell.photoImgV.image = [UIImage imageNamed:@"Msg"];
+        }
+            break;
         default:
             break;
     }

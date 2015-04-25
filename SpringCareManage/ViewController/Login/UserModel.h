@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "define.h"
+#import "UserDetailModel.h"
 
 @interface UserModel : NSObject
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSString *chineseName;
 @property (nonatomic, strong) NSString *headerImage;
 @property (nonatomic, strong) NSString *sex;
+@property (nonatomic, strong) UserDetailModel *userOrderInfo;
 
 //detail
 + (UserModel *) sharedUserInfo;
@@ -29,5 +31,8 @@
 - (void) LoadDetailUserInfo:(block) block;
 
 - (BOOL) isLogin;
+
+//获取订单信息
+- (void) LoadOrderInfo:(block) block;
 
 @end

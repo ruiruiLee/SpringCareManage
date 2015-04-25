@@ -37,21 +37,18 @@
     [self.contentView addSubview:_lbName];
     _lbName.font = _FONT(13);
     _lbName.textColor = _COLOR(0x99, 0x99, 0x99);
-    _lbName.text = @"王宏恩";
     
     _lbServiceTime = [[UILabel alloc] initWithFrame:CGRectZero];
     _lbServiceTime.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_lbServiceTime];
     _lbServiceTime.font = _FONT(12);
     _lbServiceTime.textColor = _COLOR(0x99, 0x99, 0x99);
-    _lbServiceTime.text = @"服务时间：2015-03-24";
     
     _lbContent = [[UILabel alloc] initWithFrame:CGRectZero];
     _lbContent.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_lbContent];
     _lbContent.font = _FONT(15);
     _lbContent.textColor = _COLOR(0x66, 0x66, 0x66);
-    _lbContent.text = @"阿哥浪费难得噶蛋糕上的风格受到各方的风格的沙发后的风格和地方干活";
     _lbContent.numberOfLines = 0;
     _lbContent.preferredMaxLayoutWidth = ScreenWidth - 29;
     
@@ -73,6 +70,14 @@
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_gradeInfo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_lbServiceTime attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_gradeInfo(14)]->=0-|" options:0 metrics:nil views:views]];
+}
+
+- (void) SetContentWithModel:(EvaluateInfoModel *) model
+{
+    _lbName.text = model.commentUserName;//@"王宏恩";
+    _lbContent.text = model.content;
+    _lbServiceTime.text = [NSString stringWithFormat:@"服务时间：%@4", model.createAt];//@"服务时间：2015-03-24";
+    [_gradeInfo setScore:model.score];
 }
 
 @end

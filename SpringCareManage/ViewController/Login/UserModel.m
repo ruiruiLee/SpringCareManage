@@ -37,6 +37,8 @@
         self.age = @"";
         self.careAge = @"";
         self.birthAddr = @" ";
+        
+        self.userOrderInfo = [[UserDetailModel alloc] init];
     }
     
     return self;
@@ -67,6 +69,7 @@
     _userId = userId;
     
     [self LoadDetailUserInfo:nil];
+    [self LoadOrderInfo:nil];
 }
 
 - (void) LoadDetailUserInfo:(block) block
@@ -94,6 +97,18 @@
         
         if(block){
             block(0, nil);
+        }
+    }];
+}
+
+- (void) LoadOrderInfo:(block) block
+{
+    [self.userOrderInfo RequestOrderInfo:^(int code, id content) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:User_DetailInfo_Get object:nil];
+        
+        if(block){
+            block(code, content);
         }
     }];
 }
