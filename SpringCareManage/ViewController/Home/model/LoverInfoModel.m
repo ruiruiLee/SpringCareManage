@@ -24,6 +24,9 @@
     model.addr = [dic objectForKey:@"addr"];
     model.age = [Util GetAgeByBirthday:[dic objectForKey:@"birthDay"]];
     
+    model.registerName = [dic objectForKey:@"registerName"];
+    model.registerPhone = [dic objectForKey:@"registerPhone"];
+    
     return model;
 }
 

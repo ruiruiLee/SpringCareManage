@@ -13,6 +13,7 @@
 @synthesize _lbToday;
 @synthesize _model = _model;
 @synthesize _lbTimeLine = _lbTimeLine;
+@synthesize _btnReply = _btnReply;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

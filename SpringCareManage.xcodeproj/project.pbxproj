@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1A0DE605A065EF1D9FD20743 /* libPods-SpringCareManage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8A4418B996CB40DA865D52 /* libPods-SpringCareManage.a */; };
+		861C181F1AECFDBE00BC5091 /* DefaultLoverSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 861C181E1AECFDBE00BC5091 /* DefaultLoverSelectVC.m */; };
+		861C18221AECFEDD00BC5091 /* LoverSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 861C18211AECFEDD00BC5091 /* LoverSelectCell.m */; };
 		865523531ADA872D00E803FD /* myEvaluate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523521ADA872D00E803FD /* myEvaluate@2x.png */; };
 		865523551ADA877600E803FD /* usercentershutgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523541ADA877600E803FD /* usercentershutgray@2x.png */; };
 		865523581ADA88E700E803FD /* MyOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 865523571ADA88E700E803FD /* MyOrderListVC.m */; };
@@ -203,6 +205,10 @@
 		0CA61C330B3C62ADFE901F88 /* Pods-SpringCareManage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpringCareManage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpringCareManage/Pods-SpringCareManage.debug.xcconfig"; sourceTree = "<group>"; };
 		7AB8D25CE6C31FB086462A70 /* Pods-SpringCareManage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpringCareManage.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpringCareManage/Pods-SpringCareManage.release.xcconfig"; sourceTree = "<group>"; };
 		7E8A4418B996CB40DA865D52 /* libPods-SpringCareManage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpringCareManage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		861C181D1AECFDBE00BC5091 /* DefaultLoverSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoverSelectVC.h; sourceTree = "<group>"; };
+		861C181E1AECFDBE00BC5091 /* DefaultLoverSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultLoverSelectVC.m; sourceTree = "<group>"; };
+		861C18201AECFEDD00BC5091 /* LoverSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoverSelectCell.h; sourceTree = "<group>"; };
+		861C18211AECFEDD00BC5091 /* LoverSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoverSelectCell.m; sourceTree = "<group>"; };
 		865523521ADA872D00E803FD /* myEvaluate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myEvaluate@2x.png"; sourceTree = "<group>"; };
 		865523541ADA877600E803FD /* usercentershutgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usercentershutgray@2x.png"; sourceTree = "<group>"; };
 		865523561ADA88E700E803FD /* MyOrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListVC.h; sourceTree = "<group>"; };
@@ -785,6 +791,10 @@
 				86B8E61E1ADA37DD00A5139E /* WorkSummary */,
 				86B96A731ADB829B00441168 /* PublishInfoVC.h */,
 				86B96A741ADB829B00441168 /* PublishInfoVC.m */,
+				861C181D1AECFDBE00BC5091 /* DefaultLoverSelectVC.h */,
+				861C181E1AECFDBE00BC5091 /* DefaultLoverSelectVC.m */,
+				861C18201AECFEDD00BC5091 /* LoverSelectCell.h */,
+				861C18211AECFEDD00BC5091 /* LoverSelectCell.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1463,6 +1473,7 @@
 				CFBC524C1ADD37E9004FB8F3 /* MWPhotoBrowser.m in Sources */,
 				86B749AC1AE9EA1B000BA6DB /* SBJsonWriter.m in Sources */,
 				CFBC52131ADD3602004FB8F3 /* PickImgScrollView.m in Sources */,
+				861C181F1AECFDBE00BC5091 /* DefaultLoverSelectVC.m in Sources */,
 				86B8E6501ADA381C00A5139E /* NSStrUtil.m in Sources */,
 				86B749831AE9E8CB000BA6DB /* LCNetWorkBase.m in Sources */,
 				CFBC53321ADD4C4C004FB8F3 /* UIImage+GIF.m in Sources */,
@@ -1538,6 +1549,7 @@
 				CFBC52491ADD37E9004FB8F3 /* MWCaptionView.m in Sources */,
 				86B749A81AE9EA1B000BA6DB /* SBJsonStreamWriterAccumulator.m in Sources */,
 				CFBC52741ADD385D004FB8F3 /* ELCImagePickerController.m in Sources */,
+				861C18221AECFEDD00BC5091 /* LoverSelectCell.m in Sources */,
 				CFBC532B1ADD4C4C004FB8F3 /* SDWebImageCompat.m in Sources */,
 				CFBC524A1ADD37E9004FB8F3 /* MWPhoto.m in Sources */,
 				CFBC532A1ADD4C4C004FB8F3 /* SDImageCache.m in Sources */,

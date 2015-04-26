@@ -65,7 +65,7 @@ static NSMutableArray *escortList = nil;
     [parmas setObject:[NSNumber numberWithInteger:LIMIT_COUNT] forKey:@"limit"];
     [parmas setObject:[NSNumber numberWithInteger:LIMIT_COUNT * self.pages] forKey:@"offset"];
     
-    [LCNetWorkBase postWithMethod:@"api/care/lover/list" Params:parmas Completion:^(int code, id content) {
+    [LCNetWorkBase postWithMethod:@"api/lover/care/list" Params:parmas Completion:^(int code, id content) {
         if(code){
             self.totals = [[content objectForKey:@"total"] integerValue];
             NSArray *rows = [content objectForKey:@"rows"];

@@ -13,7 +13,9 @@
 #import "EscortPublishCell.h"
 #import "PublishInfoVC.h"
 
-@interface EscortTimeVC ()<EscortPublishCellDelegate>
+#import "DefaultLoverSelectVC.h"
+
+@interface EscortTimeVC ()<EscortPublishCellDelegate, DefaultLoverSelectDelegate>
 {
     
 }
@@ -34,7 +36,7 @@
     OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
     if(orderModel != nil){
         
-        _currentSelectAttention = orderModel.loverinfo.loverId;
+        _defaultLover = orderModel.loverinfo;
         
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         RegisterInfoModel *registerInfo = orderModel.registerInfo;
@@ -45,9 +47,40 @@
         _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:loverInfo.sex]]);
         _lbMobile.text = registerInfo.phone;
         _relationName.text = [NSString stringWithFormat:@"联系人:%@", registerInfo.chineseName];
+        
+        [headerbg removeConstraints:AttentionArray];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _relationName, _lbMobile, _btnRing);
+        if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
+            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
+        }
+        else
+            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
+        [headerbg addConstraints:AttentionArray];
     }
 
     [self loadDataList];
+}
+
+- (void) setContent
+{
+    _lbName.text = _defaultLover.name;
+    [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
+    [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
+    _lbAge.text = [NSString stringWithFormat:@"%d岁", _defaultLover.age];
+    _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]]);
+    _lbMobile.text = _defaultLover.registerPhone;
+    _relationName.text = [NSString stringWithFormat:@"联系人:%@", _defaultLover.registerName];
+    
+    [headerbg removeConstraints:AttentionArray];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _relationName, _lbMobile, _btnRing);
+    if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
+        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
+    }
+    else
+        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
+    [headerbg addConstraints:AttentionArray];
 }
 
 - (void)viewDidLoad {
@@ -59,6 +92,9 @@
     self.NavigationBar.Title = @"陪护时光";
     self.NavigationBar.btnLeft.hidden = YES;
     self.NavigationBar.alpha = 0.8;
+    
+    self.NavigationBar.btnRight.hidden = NO;
+    self.NavigationBar.btnRight.backgroundColor = [UIColor redColor];
 
     tableView = [[PullTableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
@@ -75,15 +111,7 @@
     [self creatHeadView];
     tableView.tableHeaderView = headerView;
     tableView.tableFooterView = [[UIView alloc] init];
-    
-    UserModel *model = [UserModel sharedUserInfo];
-    OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
-    if(orderModel != nil){
-        _currentSelectAttention = orderModel.loverinfo.loverId;
-    }
-    [self loadDataList];
 }
-
 
 -(void)loadDataList{
 
@@ -92,7 +120,7 @@
     if(orderModel != nil){
         __weak EscortTimeVC *weakSelf = self;
         self.tableView.pullTableIsRefreshing = YES;
-        [EscortTimeDataModel LoadCareTimeListWithLoverId:_currentSelectAttention Pages:pages block:^(int code, id content) {
+        [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId Pages:pages block:^(int code, id content) {
             if([(NSArray*)content count]>0)
             {
                 [weakSelf.dataList removeAllObjects];
@@ -106,7 +134,7 @@
 
 -(void)creatHeadView{
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 180)];
-    UIImageView *headerbg = [[UIImageView alloc] initWithFrame:CGRectZero];
+    headerbg = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:headerbg];
     headerbg.image = [UIImage imageNamed:@"relationheaderbg"];
     headerbg.translatesAutoresizingMaskIntoConstraints = NO;
@@ -167,7 +195,8 @@
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[headerbg]-0-|" options:0 metrics:nil views:views]];
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[headerbg(182)]->=0-|" options:0 metrics:nil views:views]];
     
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views]];
+    AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
+    [headerbg addConstraints:AttentionArray];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_btnAddr]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_relationName]->=10-[_lbMobile]-4-[_btnRing]-20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_photoImgView(72)]-30-|" options:0 metrics:nil views:views]];
@@ -183,10 +212,17 @@
     [self SetHeaderInfoWithModel];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) NavRightButtonClickEvent:(UIButton *)sender
+{
+    DefaultLoverSelectVC *vc = [[DefaultLoverSelectVC alloc] initWithSelectLoverId:_defaultLover.loverId];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -196,16 +232,6 @@
 
 - (NSInteger) tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_dataList.count==0) {
-        UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
-       [_tableView setBackgroundView:imageView];
-        tableView.tableHeaderView.hidden=YES;
-    
-         }
-    else{
-        [_tableView setBackgroundView:nil];
-         tableView.tableHeaderView.hidden=NO;
-         }
     if(section == 0)
         return 1;
     return [_dataList count];
@@ -354,15 +380,13 @@
 {
     pages = 0;
     [self loadDataList];
-
-     [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)_pullTableView
 {
     pages ++;
     __weak EscortTimeVC *weakSelf = self;
-    [EscortTimeDataModel LoadCareTimeListWithLoverId:_currentSelectAttention Pages:pages block:^(int code, id content) {
+    [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId Pages:pages block:^(int code, id content) {
         if([(NSArray*)content count]>0)
         {
             [weakSelf.dataList addObjectsFromArray:content];
@@ -395,6 +419,15 @@
     vc.hidesBottomBarWhenPushed = YES;
     vc.NavTitle = @"发布陪护时光";
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void) NotifyCurrentSelectLoverModel:(LoverInfoModel *) model
+{
+    _defaultLover = model;
+    
+    [self setContent];
+    
+    [self pullTableViewDidTriggerRefresh:self.tableView];
 }
 
 @end

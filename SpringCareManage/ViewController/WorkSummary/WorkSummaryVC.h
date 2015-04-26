@@ -12,6 +12,7 @@
 #import "feedbackView.h"
 #import "PullTableView.h"
 #import "LCBaseVC.h"
+#import "LoverInfoModel.h"
 
 @interface WorkSummaryVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EscortTimeTableCellDelegate, PullTableViewDelegate>
 {
@@ -34,7 +35,7 @@
     NSString *_reReplyName;//被回复人名字
     //UIImageView *_defaultImgView;
     
-    NSString *_currentSelectAttention;//当前选择的服务对象
+    LoverInfoModel *_defaultLover;
     
     NSInteger pages;
     NSInteger totalPages;
@@ -42,9 +43,13 @@
     NSMutableArray *_dataList;
     NSArray *AttentionArray;
     UIView *headerView;
+    
+    UIImageView *headerbg;
 }
 
 @property (nonatomic, strong) PullTableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataList;
+
+- (void) RequestRecordList:(block) block;
 
 @end
