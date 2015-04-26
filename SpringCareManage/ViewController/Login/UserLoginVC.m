@@ -8,14 +8,12 @@
 
 #import "UserLoginVC.h"
 #import "define.h"
-#import "IQKeyboardReturnKeyHandler.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import "UserModel.h"
 
 @interface UserLoginVC ()
 
-@property (nonatomic, strong) IQKeyboardReturnKeyHandler    *returnKeyHandler;
 
 @end
 
@@ -27,10 +25,6 @@
     self.NavigationBar.Title = @"登录";
     self.NavigationBar.btnLeft.hidden = YES;
     [self initSubviews];
-    
-//    self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
-//    self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyNext;
-//    self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
 }
 
 - (void)didReceiveMemoryWarning {
