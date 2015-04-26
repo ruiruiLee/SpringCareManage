@@ -11,8 +11,9 @@
 //#import "MessagePhotoView.h"
 #import "PickImgScrollView.h"
 typedef enum : NSUInteger {
-    EnumWorkSummary,
+    EnumWorkSummary = 1,
     EnumEscortTime,
+    EnumPublishContentTypeUnown,
 } PublishContentType;
 
 @interface PublishInfoVC : LCBaseVC  //<MessagePhotoViewDelegate>

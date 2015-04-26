@@ -12,18 +12,19 @@
 #import "ObjImageDataInfo.h"
 #import "HBImageViewList.h"
 #import "NSImageUtil.h"
+#import "define.h"
 
 #define imageMaxWidth 200
 #define imageMaxHeight 120
 #define imageSpace 6
-#define imageSize 76
+#define imageSize (ScreenWidth - 112)/3
 
 @interface ImageLayoutView ()
 {
 
 }
 
-- (void) ReLayoutSubviews;
+//- (void) ReLayoutSubviews;
 
 @end
 
@@ -34,7 +35,7 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        
+     
         self.clipsToBounds = NO;
 //        self.backgroundColor = [UIColor greenColor];
     }
@@ -43,22 +44,20 @@
 
 - (void) AddImages:(NSArray*) images
 {
+    for (id obj in self.subviews) {
+        [obj removeFromSuperview];
+    }
     _imgurls = images;
     _bigUrls = [[NSMutableArray alloc]init];
     _images = [[NSMutableArray alloc]init];
     _imageViews = [[NSMutableArray alloc]init];
     
     [self layoutImages];
-    
-//    if([images isKindOfClass:[NSArray class]])
-//    {
-//        
-//    }
 }
 
 -(void)layoutImages
 {
-    int count=[_imgurls count];
+    NSUInteger count=[_imgurls count];
     if(count==1) {
 //        if (bFirstSmall) {
 //            [self drawLessThree];
@@ -248,8 +247,6 @@
 -(void)dismissImageAction:(UIImageView*)sender
 {
     NSLog(@"dismissImageAction");
-//    NSInteger index = [_imageList.imageViews indexOfObject:sender.superview];
-//    UIImageView * view = [_imageViews objectAtIndex:index];
     [_imageList removeFromSuperview];
 }
 

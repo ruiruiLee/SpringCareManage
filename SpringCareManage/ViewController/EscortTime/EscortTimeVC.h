@@ -9,19 +9,43 @@
 #import <UIKit/UIKit.h>
 #import "EscortTimeDataModel.h"
 #import "EscortTimeTableCell.h"
+#import "feedbackView.h"
+#import "PullTableView.h"
 #import "LCBaseVC.h"
 
-@interface EscortTimeVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EscortTimeTableCellDelegate>
+@interface EscortTimeVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EscortTimeTableCellDelegate, PullTableViewDelegate>
 {
-    UITableView *tableView;
-    EscortTimeDataModel *model;
+    PullTableView *tableView;
+    EscortTimeDataModel *_model;
     
-    
+    feedbackView  *_feedbackView;
     UIImageView  *_photoImgView;//头像
     UILabel *_lbName;//姓名
-    UIButton *_btnInfo;//信息
+    UIButton *_btnAddr;//信息
     
-    NSString *_currentAttentionId;//用来处理当前的陪护时光是谁的
+    UIImageView *_sex;
+    UILabel *_lbAge;
+    UILabel *_relationName;
+    UILabel *_lbMobile;
+    UIButton *_btnRing;
+    
+    //
+    EscortTimeDataModel *_replyContentModel;//
+    NSString *_reReplyPId;//被回复人id
+    NSString *_reReplyName;//被回复人名字
+    //UIImageView *_defaultImgView;
+    
+    NSString *_currentSelectAttention;//当前选择的服务对象
+    
+    NSInteger pages;
+    NSInteger totalPages;
+    
+    NSMutableArray *_dataList;
+    NSArray *AttentionArray;
+    UIView *headerView;
 }
+
+@property (nonatomic, strong) PullTableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataList;
 
 @end
