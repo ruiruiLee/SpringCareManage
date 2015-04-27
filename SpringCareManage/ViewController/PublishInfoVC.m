@@ -8,7 +8,8 @@
 
 #import "PublishInfoVC.h"
 #import "define.h"
-
+#define kMaxVoiceImageWidth 160.0
+#define kMinVoiceImageWidth 40.0
 @interface PublishInfoVC ()
 
 @end
@@ -43,9 +44,16 @@
     [_bgView addSubview:_btnRecord];
     _btnRecord.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnRecord setImage:[UIImage imageNamed:@"recording"] forState:UIControlStateNormal];
+    //添加长按手势
+    UILongPressGestureRecognizer *longPrees = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(recordBtnLongPressed:)];
+    longPrees.delegate = (id)self;
+    [_btnRecord addGestureRecognizer:longPrees];
+    
+    
+    
     
     _btnTargetSelect = [[UIButton alloc] initWithFrame:CGRectZero];
-    [_bgView addSubview:_btnTargetSelect];
+     [_bgView addSubview:_btnTargetSelect];
     _btnTargetSelect.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnTargetSelect setTitle:@"同时发布到我的护理日志" forState:UIControlStateNormal];
     [_btnTargetSelect setImage:[UIImage imageNamed:@"paytypenoselect"] forState:UIControlStateNormal];
@@ -83,6 +91,86 @@
 - (void) doBtnSelected:(UIButton*)sender
 {
     sender.selected = !sender.selected;
+}
+
+
+/**
+ @Brief 根据语音时间长度计算控件长度
+ **/
+- (CGFloat) VoiceButtonWithVoiceTimeLength:(float)timeLength {
+    CGFloat ratioLegth = kMaxVoiceImageWidth * (timeLength / 30);
+    return kMinVoiceImageWidth + ratioLegth;
+}
+
+#pragma mark - 长按录音
+- (void)recordBtnLongPressed:(UILongPressGestureRecognizer*) longPressedRecognizer{
+    //长按开始
+    if(longPressedRecognizer.state == UIGestureRecognizerStateBegan) {
+        [_tvContent resignFirstResponder];
+        _recoderAndPlayer = [RecoderAndPlayer sharedRecoderAndPlayer];
+        _recoderAndPlayer.delegate=(id)self;
+        [_recoderAndPlayer startRecording];
+        _voiceHud = [[LCVoiceHud alloc] init];
+        [_voiceHud show];
+
+        
+    }//长按结束
+    else if(longPressedRecognizer.state == UIGestureRecognizerStateEnded || longPressedRecognizer.state == UIGestureRecognizerStateCancelled){
+         [_recoderAndPlayer stopRecording];
+    }
+}
+
+- (void) VoicePlayClicked:(UIButton*)sender{
+    [_recoderAndPlayer startPlaying:voiceName];
+    
+}
+
+#pragma mark -
+#pragma mark  RecoderAndPlayerDelegate
+
+-(void)recordAndSendAudioFile:(NSData *)fileData duration:(int)timelength fileName:(NSString*)fileName{
+
+    if ( timelength<2) {
+        [_voiceHud setDisplaytext:@"说话时间太短"];
+        [_voiceHud performSelector:@selector(hide) withObject:nil afterDelay:1.5f];
+        return;
+     }
+     else if (timelength>=SpeechMaxTime) {
+            [_voiceHud setDisplaytext:@"说话时间太长，最多2分钟"];
+            [_voiceHud performSelector:@selector(hide) withObject:nil afterDelay:1.5f];
+        }
+     else{
+            [_voiceHud hide];
+        }
+    //显示语音
+    voiceName=fileName;
+    _btnVoice = [[UIButton alloc] initWithFrame:CGRectZero];
+    
+    //_btnVoice.translatesAutoresizingMaskIntoConstraints = NO;
+    [_bgView addSubview:_btnVoice];
+    
+    _btnVoice.frame = CGRectMake(0, 100,[self VoiceButtonWithVoiceTimeLength:timelength],
+                                 20);
+    _btnVoice.userInteractionEnabled=true;
+    [_btnVoice setBackgroundImage:[[UIImage imageNamed:@"escorttimevolice"] stretchableImageWithLeftCapWidth:40 topCapHeight:5] forState:UIControlStateNormal];
+    [_btnVoice addTarget:self action:@selector(VoicePlayClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+
+}
+
+//录制中
+-(void)TimePromptAction:(float)sencond peakPower:(double)peakPower {
+    // NSLog(@"录音记时%f",sencond);
+    if (_voiceHud)
+    {
+        [_voiceHud setDisplaytext:[NSString stringWithFormat:@"正在录音( %d\" )",(int)sencond]];
+        [_voiceHud setProgress:peakPower];
+    }
+}
+
+//播放完成回调
+-(void)playingFinishWithVoice:(BOOL)isFinish {
+    
 }
 
 #pragma mark -

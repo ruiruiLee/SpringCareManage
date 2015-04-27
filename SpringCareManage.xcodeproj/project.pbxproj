@@ -126,6 +126,19 @@
 		CFBC53351ADD4C4C004FB8F3 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBC53231ADD4C4C004FB8F3 /* UIImageView+HighlightedWebCache.m */; };
 		CFBC53361ADD4C4C004FB8F3 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBC53251ADD4C4C004FB8F3 /* UIImageView+WebCache.m */; };
 		CFBC53371ADD4C4C004FB8F3 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBC53271ADD4C4C004FB8F3 /* UIView+WebCacheOperation.m */; };
+		CFBC534E1ADE3171004FB8F3 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBC533A1ADE3171004FB8F3 /* UIView+Animation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CFBC534F1ADE3171004FB8F3 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFBC533E1ADE3171004FB8F3 /* amrFileCodec.mm */; };
+		CFBC53501ADE3171004FB8F3 /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFBC53401ADE3171004FB8F3 /* wav.mm */; };
+		CFBC53511ADE3171004FB8F3 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBC53421ADE3171004FB8F3 /* libopencore-amrnb.a */; };
+		CFBC53521ADE3171004FB8F3 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBC53431ADE3171004FB8F3 /* libopencore-amrwb.a */; };
+		CFBC53531ADE3171004FB8F3 /* RecoderAndPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBC534B1ADE3171004FB8F3 /* RecoderAndPlayer.m */; };
+		CFBC53541ADE3171004FB8F3 /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = CFBC534D1ADE3171004FB8F3 /* VoiceConverter.mm */; };
+		CFBC535B1ADE495B004FB8F3 /* LCVoiceHud.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBC53571ADE495B004FB8F3 /* LCVoiceHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CFBC535C1ADE495B004FB8F3 /* mic_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBC53581ADE495B004FB8F3 /* mic_normal.png */; };
+		CFBC535D1ADE495B004FB8F3 /* mic_talk.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBC53591ADE495B004FB8F3 /* mic_talk.png */; };
+		CFBC535E1ADE495B004FB8F3 /* wavemeter.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBC535A1ADE495B004FB8F3 /* wavemeter.png */; };
+		CFBC53601ADE4A32004FB8F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBC535F1ADE4A32004FB8F3 /* QuartzCore.framework */; };
+		CFBC53621ADE5995004FB8F3 /* escorttimevolice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBC53611ADE5995004FB8F3 /* escorttimevolice@2x.png */; };
 		CFEBF87B1ACE357300BC4EC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEBF87A1ACE357300BC4EC5 /* main.m */; };
 		CFEBF87E1ACE357300BC4EC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEBF87D1ACE357300BC4EC5 /* AppDelegate.m */; };
 		CFEBF8861ACE357300BC4EC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFEBF8851ACE357300BC4EC5 /* Images.xcassets */; };
@@ -338,6 +351,29 @@
 		CFBC53251ADD4C4C004FB8F3 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		CFBC53261ADD4C4C004FB8F3 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		CFBC53271ADD4C4C004FB8F3 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		CFBC53391ADE3171004FB8F3 /* UIView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animation.h"; sourceTree = "<group>"; };
+		CFBC533A1ADE3171004FB8F3 /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animation.m"; sourceTree = "<group>"; };
+		CFBC533D1ADE3171004FB8F3 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		CFBC533E1ADE3171004FB8F3 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		CFBC533F1ADE3171004FB8F3 /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
+		CFBC53401ADE3171004FB8F3 /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
+		CFBC53421ADE3171004FB8F3 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		CFBC53431ADE3171004FB8F3 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		CFBC53451ADE3171004FB8F3 /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		CFBC53461ADE3171004FB8F3 /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		CFBC53481ADE3171004FB8F3 /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		CFBC53491ADE3171004FB8F3 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		CFBC534A1ADE3171004FB8F3 /* RecoderAndPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecoderAndPlayer.h; sourceTree = "<group>"; };
+		CFBC534B1ADE3171004FB8F3 /* RecoderAndPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoderAndPlayer.m; sourceTree = "<group>"; };
+		CFBC534C1ADE3171004FB8F3 /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		CFBC534D1ADE3171004FB8F3 /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		CFBC53561ADE495B004FB8F3 /* LCVoiceHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVoiceHud.h; sourceTree = "<group>"; };
+		CFBC53571ADE495B004FB8F3 /* LCVoiceHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCVoiceHud.m; sourceTree = "<group>"; };
+		CFBC53581ADE495B004FB8F3 /* mic_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_normal.png; sourceTree = "<group>"; };
+		CFBC53591ADE495B004FB8F3 /* mic_talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_talk.png; sourceTree = "<group>"; };
+		CFBC535A1ADE495B004FB8F3 /* wavemeter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wavemeter.png; sourceTree = "<group>"; };
+		CFBC535F1ADE4A32004FB8F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CFBC53611ADE5995004FB8F3 /* escorttimevolice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "escorttimevolice@2x.png"; sourceTree = "<group>"; };
 		CFEBF8751ACE357300BC4EC5 /* SpringCareManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringCareManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEBF8791ACE357300BC4EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFEBF87A1ACE357300BC4EC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -354,10 +390,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFBC53601ADE4A32004FB8F3 /* QuartzCore.framework in Frameworks */,
 				CFBC527F1ADD39DA004FB8F3 /* Foundation.framework in Frameworks */,
 				CFBC527D1ADD39BC004FB8F3 /* UIKit.framework in Frameworks */,
+				CFBC53521ADE3171004FB8F3 /* libopencore-amrwb.a in Frameworks */,
 				CFBC527B1ADD39A0004FB8F3 /* ImageIO.framework in Frameworks */,
 				CFBC52791ADD398E004FB8F3 /* MobileCoreServices.framework in Frameworks */,
+				CFBC53511ADE3171004FB8F3 /* libopencore-amrnb.a in Frameworks */,
 				86B96A8C1ADB920000441168 /* AssetsLibrary.framework in Frameworks */,
 				1A0DE605A065EF1D9FD20743 /* libPods-SpringCareManage.a in Frameworks */,
 			);
@@ -376,6 +415,7 @@
 		230AFE39722ACA5BE26533A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFBC535F1ADE4A32004FB8F3 /* QuartzCore.framework */,
 				CFBC527E1ADD39DA004FB8F3 /* Foundation.framework */,
 				CFBC527C1ADD39BC004FB8F3 /* UIKit.framework */,
 				CFBC527A1ADD39A0004FB8F3 /* ImageIO.framework */,
@@ -437,6 +477,7 @@
 		86B8E6141ADA36FC00A5139E /* PNG */ = {
 			isa = PBXGroup;
 			children = (
+				CFBC53611ADE5995004FB8F3 /* escorttimevolice@2x.png */,
 				86B96A9B1ADB957C00441168 /* addImage@2x.png */,
 				86B96A7F1ADB8DA700441168 /* submit@2x.png */,
 				86B96A7D1ADB8CF900441168 /* recording@2x.png */,
@@ -488,6 +529,9 @@
 		86B8E6171ADA371F00A5139E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				CFBC53551ADE495B004FB8F3 /* LCVoiceHud */,
+				CFBC53381ADE3171004FB8F3 /* UIViewAnimation */,
+				CFBC533B1ADE3171004FB8F3 /* VoiceConvert */,
 				CFBC53061ADD4C4C004FB8F3 /* SDWebImage */,
 				CFBC525F1ADD385D004FB8F3 /* ELCImagePicker */,
 				CFBC52141ADD37E9004FB8F3 /* MWPhotoBrowser */,
@@ -862,6 +906,80 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		CFBC53381ADE3171004FB8F3 /* UIViewAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC53391ADE3171004FB8F3 /* UIView+Animation.h */,
+				CFBC533A1ADE3171004FB8F3 /* UIView+Animation.m */,
+			);
+			path = UIViewAnimation;
+			sourceTree = "<group>";
+		};
+		CFBC533B1ADE3171004FB8F3 /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC533C1ADE3171004FB8F3 /* amrwapper */,
+				CFBC53411ADE3171004FB8F3 /* lib */,
+				CFBC53441ADE3171004FB8F3 /* opencore-amrnb */,
+				CFBC53471ADE3171004FB8F3 /* opencore-amrwb */,
+				CFBC534A1ADE3171004FB8F3 /* RecoderAndPlayer.h */,
+				CFBC534B1ADE3171004FB8F3 /* RecoderAndPlayer.m */,
+				CFBC534C1ADE3171004FB8F3 /* VoiceConverter.h */,
+				CFBC534D1ADE3171004FB8F3 /* VoiceConverter.mm */,
+			);
+			path = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		CFBC533C1ADE3171004FB8F3 /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC533D1ADE3171004FB8F3 /* amrFileCodec.h */,
+				CFBC533E1ADE3171004FB8F3 /* amrFileCodec.mm */,
+				CFBC533F1ADE3171004FB8F3 /* wav.h */,
+				CFBC53401ADE3171004FB8F3 /* wav.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		CFBC53411ADE3171004FB8F3 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC53421ADE3171004FB8F3 /* libopencore-amrnb.a */,
+				CFBC53431ADE3171004FB8F3 /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		CFBC53441ADE3171004FB8F3 /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC53451ADE3171004FB8F3 /* interf_dec.h */,
+				CFBC53461ADE3171004FB8F3 /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		CFBC53471ADE3171004FB8F3 /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC53481ADE3171004FB8F3 /* dec_if.h */,
+				CFBC53491ADE3171004FB8F3 /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
+			sourceTree = "<group>";
+		};
+		CFBC53551ADE495B004FB8F3 /* LCVoiceHud */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC53561ADE495B004FB8F3 /* LCVoiceHud.h */,
+				CFBC53571ADE495B004FB8F3 /* LCVoiceHud.m */,
+				CFBC53581ADE495B004FB8F3 /* mic_normal.png */,
+				CFBC53591ADE495B004FB8F3 /* mic_talk.png */,
+				CFBC535A1ADE495B004FB8F3 /* wavemeter.png */,
+			);
+			path = LCVoiceHud;
+			sourceTree = "<group>";
+		};
 		CFEBF86C1ACE357300BC4EC5 = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1130,7 @@
 				86B8E6A51ADA6C4600A5139E /* evaluate@2x.png in Resources */,
 				86B8E69F1ADA6BC600A5139E /* newOrder@2x.png in Resources */,
 				86B96A9C1ADB957C00441168 /* addImage@2x.png in Resources */,
+				CFBC535D1ADE495B004FB8F3 /* mic_talk.png in Resources */,
 				86B8E6941ADA425600A5139E /* tab-home-selected@2x.png in Resources */,
 				865523791ADA9AFC00E803FD /* whiteArrow.png in Resources */,
 				86B8E6A11ADA6C0000A5139E /* subscribeOrder@2x.png in Resources */,
@@ -1023,6 +1142,7 @@
 				865523531ADA872D00E803FD /* myEvaluate@2x.png in Resources */,
 				865523771ADA9AFC00E803FD /* grayArrow.png in Resources */,
 				86B8E6AD1ADA6D6200A5139E /* night@2x.png in Resources */,
+				CFBC53621ADE5995004FB8F3 /* escorttimevolice@2x.png in Resources */,
 				86B96A7B1ADB8B7600441168 /* paytypenoselect@2x.png in Resources */,
 				865523751ADA9AFC00E803FD /* blueArrow.png in Resources */,
 				865523551ADA877600E803FD /* usercentershutgray@2x.png in Resources */,
@@ -1034,6 +1154,7 @@
 				86B96A651ADB644700441168 /* b27_icon_star_gray@2x.png in Resources */,
 				86B8E6B31ADA6E4A00A5139E /* nurselistcert@2x.png in Resources */,
 				86B8E6AA1ADA6D5500A5139E /* locator@2x.png in Resources */,
+				CFBC535C1ADE495B004FB8F3 /* mic_normal.png in Resources */,
 				865523861ADAA2BD00E803FD /* nurselistlocation@2x.png in Resources */,
 				8655237C1ADA9DD000E803FD /* back@2x.png in Resources */,
 				865523811ADAA23B00E803FD /* femail@2x.png in Resources */,
@@ -1042,6 +1163,7 @@
 				86B8E6AB1ADA6D5500A5139E /* telephone@2x.png in Resources */,
 				865523781ADA9AFC00E803FD /* grayArrow@2x.png in Resources */,
 				86B96A801ADB8DA700441168 /* submit@2x.png in Resources */,
+				CFBC535E1ADE495B004FB8F3 /* wavemeter.png in Resources */,
 				CFEBF8861ACE357300BC4EC5 /* Images.xcassets in Resources */,
 				86B8E6B11ADA6DFC00A5139E /* nurselistfemale@2x.png in Resources */,
 				865523731ADA9AFC00E803FD /* blackArrow.png in Resources */,
@@ -1108,6 +1230,7 @@
 				86B96A691ADB662E00441168 /* MyEscortObjectVC.m in Sources */,
 				86B8E64D1ADA381C00A5139E /* ImageLayoutView.m in Sources */,
 				8655238E1ADAA4C600E803FD /* MyEvaluateListVC.m in Sources */,
+				CFBC534E1ADE3171004FB8F3 /* UIView+Animation.m in Sources */,
 				86B8E6511ADA381C00A5139E /* ObjImageDataInfo.m in Sources */,
 				CFBC532D1ADD4C4C004FB8F3 /* SDWebImageDownloader.m in Sources */,
 				865523721ADA9AFC00E803FD /* PullTableView.m in Sources */,
@@ -1131,6 +1254,7 @@
 				86B8E68F1ADA3B9E00A5139E /* WorkSummaryVC.m in Sources */,
 				86B96A941ADB92DE00441168 /* MessagePhotoView.m in Sources */,
 				8655235B1ADA8AA800E803FD /* OrderListCell.m in Sources */,
+				CFBC53531ADE3171004FB8F3 /* RecoderAndPlayer.m in Sources */,
 				86B96A931ADB92DE00441168 /* MessagePhotoMenuItem.m in Sources */,
 				86B96A6C1ADB668400441168 /* EscortObjectCell.m in Sources */,
 				CFBC53281ADD4C4C004FB8F3 /* MKAnnotationView+WebCache.m in Sources */,
@@ -1140,6 +1264,7 @@
 				8655238B1ADAA4A700E803FD /* EvaluateListCell.m in Sources */,
 				CFEBF87E1ACE357300BC4EC5 /* AppDelegate.m in Sources */,
 				CFBC53351ADD4C4C004FB8F3 /* UIImageView+HighlightedWebCache.m in Sources */,
+				CFBC535B1ADE495B004FB8F3 /* LCVoiceHud.m in Sources */,
 				CFEBF87B1ACE357300BC4EC5 /* main.m in Sources */,
 				CFBC532F1ADD4C4C004FB8F3 /* SDWebImageManager.m in Sources */,
 				86B8E6481ADA381C00A5139E /* EscortTimeTableCell.m in Sources */,
@@ -1152,6 +1277,7 @@
 				CFBC53361ADD4C4C004FB8F3 /* UIImageView+WebCache.m in Sources */,
 				86B8E64F1ADA381C00A5139E /* NSImageUtil.m in Sources */,
 				CFBC53341ADD4C4C004FB8F3 /* UIImage+WebP.m in Sources */,
+				CFBC53501ADE3171004FB8F3 /* wav.mm in Sources */,
 				CFBC52501ADD37E9004FB8F3 /* DACircularProgressView.m in Sources */,
 				865523711ADA9AFC00E803FD /* MessageInterceptor.m in Sources */,
 				CFBC52751ADD385D004FB8F3 /* ELCPickerHelper.m in Sources */,
@@ -1162,6 +1288,7 @@
 				86B8E6471ADA381C00A5139E /* EscortTimeReplyCell.m in Sources */,
 				CFBC524E1ADD37E9004FB8F3 /* MWTapDetectingView.m in Sources */,
 				86B8E64B1ADA381C00A5139E /* HBImageScroller.m in Sources */,
+				CFBC53541ADE3171004FB8F3 /* VoiceConverter.mm in Sources */,
 				86B96A721ADB6F4B00441168 /* UserLoginVC.m in Sources */,
 				CFBC52711ADD385D004FB8F3 /* ELCAsset.m in Sources */,
 				86B96A751ADB829B00441168 /* PublishInfoVC.m in Sources */,
@@ -1173,6 +1300,7 @@
 				CFBC532E1ADD4C4C004FB8F3 /* SDWebImageDownloaderOperation.m in Sources */,
 				86B8E68C1ADA3B5500A5139E /* HomePageVC.m in Sources */,
 				CFBC52701ADD385D004FB8F3 /* ELCAlbumPickerController.m in Sources */,
+				CFBC534F1ADE3171004FB8F3 /* amrFileCodec.mm in Sources */,
 				86B96A951ADB92DE00441168 /* ShowBigViewController.m in Sources */,
 				86B96A781ADB834400441168 /* PlaceholderTextView.m in Sources */,
 			);
@@ -1281,6 +1409,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = SpringCareManage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1293,6 +1425,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = SpringCareManage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
