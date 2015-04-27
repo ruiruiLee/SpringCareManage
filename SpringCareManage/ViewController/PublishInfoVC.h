@@ -10,26 +10,20 @@
 #import "PlaceholderTextView.h"
 //#import "MessagePhotoView.h"
 #import "PickImgScrollView.h"
-#import "LCVoiceHud.h"
-#import "RecoderAndPlayer.h"
 typedef enum : NSUInteger {
     EnumWorkSummary = 1,
     EnumEscortTime,
     EnumPublishContentTypeUnown,
 } PublishContentType;
 
-@interface PublishInfoVC : LCBaseVC <RecoderAndPlayerDelegate> //<MessagePhotoViewDelegate>
+@interface PublishInfoVC : LCBaseVC  //<MessagePhotoViewDelegate>
 {
     UIView *_bgView;
     PlaceholderTextView *_tvContent;
     PickImgScrollView *imageScrollView;
     UIButton *_btnRecord;
-    UIButton *_btnVoice;
     UIButton *_btnTargetSelect;
     UILabel *_line;
-     LCVoiceHud  * _voiceHud;
-     RecoderAndPlayer *_recoderAndPlayer;
-    NSString * voiceName;
 }
 
 //@property (nonatomic,strong) MessagePhotoView *photoView;

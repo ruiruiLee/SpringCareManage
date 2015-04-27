@@ -11,8 +11,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import <AudioToolbox/AudioToolbox.h>
-#import "define.h"
-
 
 
 @protocol RecoderAndPlayerDelegate <NSObject>

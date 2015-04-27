@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-SpringCareManage-AFNetworking.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Pods-SpringCareManage-AVOSCloud.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Pods-SpringCareManage-AVOSCloudSNS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Pods-SpringCareManage-FMDB.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Pods-SpringCareManage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0FA93F4A499C676B7ECBCE7F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29A63976DE0D84DDF4C5042D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3409B466417033B03F8824B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>60FE6516CC41794AA5A2A98C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>67E89F2919A6CEC5B637F11A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

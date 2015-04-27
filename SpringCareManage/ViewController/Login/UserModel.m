@@ -67,9 +67,10 @@
 - (void) setUserId:(NSString *)userId
 {
     _userId = userId;
-    
-    [self LoadDetailUserInfo:nil];
-    [self LoadOrderInfo:nil];
+    if(userId != nil){
+        [self LoadDetailUserInfo:nil];
+        [self LoadOrderInfo:nil];
+    }
 }
 
 - (void) LoadDetailUserInfo:(block) block
