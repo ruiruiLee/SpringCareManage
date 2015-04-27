@@ -95,7 +95,7 @@
 -(void)setImage:(UIImage *)image
 {
     int offset=0;
-    int count= [_images count];
+    NSUInteger count= [_images count];
     for(int i=0;i<count;i++)
         if([_images objectAtIndex:i]==image)
         {
@@ -147,7 +147,7 @@
 
 -(void) pageChangeAction
 {
-    int page=_pageControl.currentPage;
+    NSUInteger page=_pageControl.currentPage;
     [self scrollRectToVisible:CGRectMake(page*self.frame.size.width, 0, self.frame.size.width, self.frame.size.height) animated:YES];
 }
 

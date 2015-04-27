@@ -15,6 +15,16 @@
 @end
 
 @implementation PublishInfoVC
+@synthesize contentType;
+
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        contentType = EnumPublishContentTypeUnown;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -86,6 +96,11 @@
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_line]-0-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_tvContent(120)]-5-[_btnRecord]-10-[_line(1)]-0-|" options:0 metrics:nil views:views]];
     [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:_btnTargetSelect attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_btnRecord attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+    
+    if(contentType == EnumWorkSummary)
+        _btnTargetSelect.hidden = YES;
+    else
+        _btnTargetSelect.hidden = NO;
 }
 
 - (void) doBtnSelected:(UIButton*)sender
@@ -183,5 +198,34 @@
 //    
 //    [self presentViewController:picker animated:YES completion:nil];
 //}
+
+- (void) setContentType:(PublishContentType)type
+{
+    contentType = type;
+    if(type == EnumEscortTime){
+        _btnTargetSelect.hidden = NO;
+    }
+    else{
+        _btnTargetSelect.hidden = YES;
+    }
+}
+
+- (void) NavRightButtonClickEvent:(UIButton *)sender
+{
+    if(contentType == EnumEscortTime)
+        [self PublishEscortTime];
+    else
+        [self PublishWorkSummary];
+}
+
+- (void)PublishEscortTime
+{
+    
+}
+
+- (void)PublishWorkSummary
+{
+    
+}
 
 @end

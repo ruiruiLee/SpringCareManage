@@ -8,8 +8,14 @@
 
 #import "MyOrderListVC.h"
 #import "OrderListCell.h"
+#import "BaseOrderListModel.h"
+#import "AllOrderListModel.h"
+#import "OrderDetailsVC.h"
 
 @interface MyOrderListVC ()
+{
+    BaseOrderListModel *_orderModel;
+}
 
 @property (nonatomic, strong) OrderListCell *prototypeCell;
 
@@ -21,10 +27,41 @@
 @synthesize DataList;
 @synthesize prototypeCell;
 
+- (id) initWithOrderType:(OrderListType) type
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if(self){
+        self.orderType = type;
+        
+        self.DataList = [[NSMutableArray alloc] init];
+        
+        if(_orderModel == nil){
+//            _orderModel = [[BaseOrderListModel alloc] initWithOrderListType:type];
+            _orderModel = [BaseOrderListModel ShareOrderListModelWithType:type];
+        }
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self initSubviews];
+    
+    [self.DataList addObjectsFromArray:[_orderModel GetOrderList]];
+    
+    if([self.DataList count] == 0){
+        __weak MyOrderListVC *weakSelf = self;
+        self.tableview.pullTableIsRefreshing = YES;
+        [_orderModel RequestOrderListWithBlock:^(int code, id content) {
+            if(code == 1){
+                [weakSelf.DataList addObjectsFromArray:content];
+                [weakSelf.tableview reloadData];
+            }
+            [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +115,7 @@
 #pragma UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;//[DataList count];
+    return [DataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,9 +125,8 @@
         cell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    //    cell.textLabel.text = ((NurseListInfoModel*)[DataList objectAtIndex:indexPath.row]).name;
-//    NurseListInfoModel *model = [DataList objectAtIndex:indexPath.row];
-//    [cell SetContentData:model];
+    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
+    [cell SetContentWithModel:data];
     
     return cell;
 }
@@ -107,9 +143,9 @@
         prototypeCell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-//    NurseListInfoModel *data = [DataList objectAtIndex:indexPath.row];
+    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
     OrderListCell *cell = (OrderListCell *)self.prototypeCell;
-//    [cell SetContentData:data];
+    [cell SetContentWithModel:data];
     
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
@@ -128,18 +164,44 @@
 //    [self.navigationController pushViewController:vc animated:YES];
 //    
 //    [model addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    
+    OrderInfoModel *model = [self.DataList objectAtIndex:indexPath.row];
+    OrderDetailsVC *vc = [[OrderDetailsVC alloc] initWithOrderModel:model];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - PullTableViewDelegate
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
-    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+    __weak MyOrderListVC *weakSelf = self;
+    self.tableview.pullTableIsRefreshing = YES;
+    _orderModel.pages = 0;
+    _orderModel.totals = INT_MAX;
+    
+    [_orderModel RequestOrderListWithBlock:^(int code, id content) {
+        if(code == 1){
+            [weakSelf.DataList removeAllObjects];
+            [weakSelf.DataList addObjectsFromArray:content];
+            [weakSelf.tableview reloadData];
+        }
+        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+    }];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+    _orderModel.pages = _orderModel.pages + 1 ;
+    __weak MyOrderListVC *weakSelf = self;
+    self.tableview.pullTableIsLoadingMore = YES;
+    
+    [_orderModel RequestOrderListWithBlock:^(int code, id content) {
+        if(code == 1){
+            [weakSelf.DataList addObjectsFromArray:content];
+            [weakSelf.tableview reloadData];
+        }
+        [weakSelf performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:0.1];
+    }];
 }
 
 #pragma mark - Refresh and load more methods
@@ -192,5 +254,6 @@
     self.tableview.pullTableIsRefreshing = YES;
     //    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
 }
+
 
 @end

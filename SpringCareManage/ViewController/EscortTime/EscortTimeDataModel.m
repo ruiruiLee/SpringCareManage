@@ -8,79 +8,99 @@
 
 #import "EscortTimeDataModel.h"
 #import "ObjImageDataInfo.h"
+#import "Util.h"
+#import "UserModel.h"
 
-@implementation EscortTimeReplyDataModel
-@synthesize publishName;
-@synthesize publishContent;
-@synthesize replyId;
-@synthesize parser;
-@synthesize height;
+static NSMutableArray *escortTimeData = nil;
+static NSInteger totalCount = 0;
 
-- (id) init
+@implementation FileDataModel
+
++ (FileDataModel *) ObjectFromDictionary:(NSDictionary *) dic
 {
-    self = [super init];
-    if(self)
-    {
-        parser = [[MatchParser alloc] init];
-        parser.textColor = _COLOR(0x66, 0x66, 0x66);
-        parser.font = _FONT(14);
-        
-        replyId = @"1234";
-        publishContent = @"豆腐，那是肯定就会感受到很多风格好汾河谷地法国和德国发挥地方";
-        publishName = @"13628050827";
-        
-        [self ParserDataWithContent:publishContent width:Content_Width - 20];
-    }
-    return self;
+    FileDataModel *model = [[FileDataModel alloc] init];
+    
+    model.url = [dic objectForKey:@"url"];
+    model.fileType = [[dic objectForKey:@"fileType"] integerValue];
+    model.seconds = [dic objectForKey:@"seconds"];
+    
+    return model;
 }
 
-- (void)ParserDataWithContent:(NSString*) str width:(float) width
-{
+@end
 
-    parser.keyWorkColor=[UIColor blueColor];
-    parser.width = width;
-//    parser.numberOfLimitLines = 5;
-//    self.numberOfLineLimit = 5;
+
+@implementation EscortTimeReplyDataModel
+@synthesize height;
+
+
++ (EscortTimeReplyDataModel *) ObjectFromDictionary:(NSDictionary *)dic
+{
+    EscortTimeReplyDataModel *model = [[EscortTimeReplyDataModel alloc] init];
+    model.replyUserHeaderImage = [dic objectForKey:@"replyUserHeaderImage"];
+    model.replyUserName = [dic objectForKey:@"replyUserName"];
+    model.replyUserPhone = [dic objectForKey:@"replyUserPhone"];
+    model.guId = [dic objectForKey:@"id"];
+    model.replyDate = [dic objectForKey:@"replyDate"];
+    model.replyUserId = [dic objectForKey:@"replyUserId"];
+    model.orgUserHeaderImage = [dic objectForKey:@"orgUserHeaderImage"];
+    model.orgUserName = [dic objectForKey:@"orgUserName"];
+    model.orgUserPhone = [dic objectForKey:@"orgUserPhone"];
+    model.orgUserId = [dic objectForKey:@"orgUserId"];
     
-    [parser match:str atCallBack:^BOOL(NSString * string) {
-        //        NSString *partInStr;
-        //        if (![tMans isKindOfClass:[NSString class]]) {
-        //            partInStr = [tMans JSONString];
-        //        } else {
-        //            partInStr = (NSString*)tMans;
-        //        }
-        NSLog(@"%@", string);
-        return NO;
-    }];
-    height = parser.height;
+    NSString *content = [dic objectForKey:@"content"];
+    NSMutableString *str = [[NSMutableString alloc] init];
+//    if(model.replyUserName!= nil){
+//        if ([model.replyUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
+//            [str appendString:@"我"];
+//        }
+//        else
+//          [str appendString:model.replyUserName];
+//    }
+//    
+//    if(model.orgUserName != nil){
+//        if ([model.orgUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
+//           [str appendString:[NSString stringWithFormat:@"@%@",@"我"]];
+//        }
+//        else
+//            [str appendString:[NSString stringWithFormat:@"@%@", model.orgUserName]];
+//    }
+    [str appendString:[NSString stringWithFormat:@":%@", content]];
+
+    model.content = str;
+    
+    return model;
+}
+
++ (EscortTimeReplyDataModel *) ReplysFromDictionary:(NSDictionary *)dic{
+     EscortTimeReplyDataModel *model = [[EscortTimeReplyDataModel alloc] init];
+    model.replyUserName = [dic objectForKey:@"replyUserName"];
+    model.replyUserPhone = [dic objectForKey:@"replyUserPhone"];
+     model.replyUserId = [dic objectForKey:@"replyUserId"];
+     return model;
+}
+
++ (NSArray *) ArrayFromDictionaryArray:(NSArray *) array
+{
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [array count]; i++) {
+        NSDictionary *dic = [array objectAtIndex:i];
+        [result addObject:[EscortTimeReplyDataModel ObjectFromDictionary:dic]];
+    }
+    
+    return result;
 }
 
 @end
 
 @implementation EscortTimeDataModel
-@synthesize itemId;
-@synthesize textContent;
-@synthesize voiceContentUrl;
-@synthesize voiceLen;
-@synthesize publishTime;
-@synthesize replyData;
-@synthesize imgPicArray;
-@synthesize isShut;
-@synthesize parser = _parser;
-
 
 + (NSArray*) GetEscortTimeData
 {
-    static NSMutableArray *escortTimeData = nil;
-    
     if (!escortTimeData)
     {
         escortTimeData = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < 10; i++) {
-            EscortTimeDataModel *data = [[EscortTimeDataModel alloc] init];
-            [escortTimeData addObject:data];
-        }
     }
     return escortTimeData;
 }
@@ -91,105 +111,77 @@
     
     if (self)
     {
-        _parser = [self createMatch];
-        _parser.textColor = _COLOR(0x22, 0x22, 0x22);
-        
-        isShut = NO;
-        
-        itemId = @"11111";
-        textContent = @"撒打个比方公司13608083606的风格的损公肥私的风格扶桑岛国个大是大非根深蒂固山东分公司对方感受到分公司的风格的沙发公司的分公司对方感受到分公司山东分公司对方感受到分公司的风格是豆腐干山东分公司对方感受到分公司的风格是豆腐干是豆腐干山东分公司对方感受到分公司的风格山东分公司对方感受到分公司的风格说受到各方山东分公司的风格";
-        publishTime = @"11\"";
-        
-        publishTime = @"20140512";
-        voiceContentUrl = @"http";
-        
-        NSMutableArray *_images = [NSMutableArray array];
-        
-        ObjImageDataInfo *info = [[ObjImageDataInfo alloc] init];
-        info.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-        [_images addObject:info];
-        
-        
-        ObjImageDataInfo *info1 = [[ObjImageDataInfo alloc] init];
-        info1.urlPath = @"http://image.tianjimedia.com/uploadImages/2013/228/KT0X2XI3X9Z9.jpg";
-        [_images addObject:info1];
-        
-        
-        ObjImageDataInfo *info2 = [[ObjImageDataInfo alloc] init];
-        info2.urlPath = @"http://img.photo.163.com/QNaHBfv9UpKOpSV5iT8ihQ==/2538622814953414148.jpg";
-        [_images addObject:info2];
-//
-//        ObjImageDataInfo *info3 = [[ObjImageDataInfo alloc] init];
-//        info3.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info3];
-//         
-//        ObjImageDataInfo *info4 = [[ObjImageDataInfo alloc] init];
-//        info4.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info4];
-//
-//        ObjImageDataInfo *info5 = [[ObjImageDataInfo alloc] init];
-//        info5.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info5];
-//        
-//        ObjImageDataInfo *info6 = [[ObjImageDataInfo alloc] init];
-//        info6.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info6];
-//
-//        ObjImageDataInfo *info7 = [[ObjImageDataInfo alloc] init];
-//        info7.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info7];
-//        
-//        ObjImageDataInfo *info8 = [[ObjImageDataInfo alloc] init];
-//        info8.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info8];
-//        
-//        ObjImageDataInfo *info9 = [[ObjImageDataInfo alloc] init];
-//        info9.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info9];
-//        
-//        ObjImageDataInfo *info10 = [[ObjImageDataInfo alloc] init];
-//        info10.urlPath = @"http://www.tattoo77.com/uploads/allimg/121217/1-12121G43453108.jpg";
-//        [_images addObject:info10];
-        
-        imgPicArray = _images;
-        
-        NSMutableArray *_reply = [[NSMutableArray alloc] init];
-        
-        for (int  i = 0; i < 10; i++) {
-            EscortTimeReplyDataModel *model = [[EscortTimeReplyDataModel alloc] init];
-            [_reply addObject:model];
-        }
-        
-        replyData = _reply;
-        
-        [self ParserDataWithContent:textContent width:Content_Width];
+        self.isShut = NO;
     }
     return self;
 }
 
--(MatchParser*)createMatch
++ (EscortTimeDataModel *) ObjectFromDictionary:(NSDictionary *)dic
 {
-    MatchParser * matchparser=[[MatchParser alloc] init];
-    return matchparser;
+    EscortTimeDataModel *model = [[EscortTimeDataModel alloc] init];
+    
+    model.itemId = [dic objectForKey:@"id"];
+    model.careId = [dic objectForKey:@"careId"];
+    model.content = [dic objectForKey:@"content"];
+    model.createAt = [dic objectForKey:@"createdAt"];
+    model.createTime =  [Util convertTimeFromStringDate:model.createAt];
+    model.createDate = [Util convertTimetoBroadFormat:model.createAt];
+    model.replyInfos = [EscortTimeReplyDataModel ArrayFromDictionaryArray:[dic objectForKey:@"replys"]];
+    
+    NSArray *files = [dic objectForKey:@"files"];
+    NSMutableArray *photoArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [files count]; i++) {
+        FileDataModel *file = [FileDataModel ObjectFromDictionary:[files objectAtIndex:i]];
+        if(file.fileType == 99){
+            ObjImageDataInfo *info = [[ObjImageDataInfo alloc] init];
+            info.urlPath = file.url;
+            [photoArray addObject:info];
+        }else if (file.fileType == 2)
+            model.VoliceDataModel = file;
+            
+    }
+    
+    model.imgPathArray = photoArray;
+    
+    return model;
 }
 
-- (void)ParserDataWithContent:(NSString*) str width:(float) width
+
++ (void) LoadCareTimeListWithLoverId:(NSString *)loverId Pages:(NSInteger) num block:(block) block
 {
-    _parser.keyWorkColor=[UIColor blueColor];
-    _parser.width = width;
-    _parser.numberOfLimitLines = 5;
-    self.numberOfLineLimit = 5;
-    [_parser match:str atCallBack:^BOOL(NSString * string) {
-//        NSString *partInStr;
-//        if (![tMans isKindOfClass:[NSString class]]) {
-//            partInStr = [tMans JSONString];
-//        } else {
-//            partInStr = (NSString*)tMans;
-//        }
-        NSLog(@"%@", string);
-        return NO;
+
+    if(loverId == nil)
+    {
+        if(block)
+            block (1000, nil);
+    }
+    
+    NSMutableDictionary *mdic = [[NSMutableDictionary alloc] init];
+
+    [mdic setObject:[UserModel sharedUserInfo].userId forKey:@"careId"];
+    [mdic setObject:[NSNumber numberWithInteger:LIMIT_COUNT] forKey:@"limit"];
+    [mdic setObject:[NSNumber numberWithInteger:num] forKey:@"offset"];
+    [mdic setObject:loverId forKey:@"loverId"];
+    
+    [LCNetWorkBase postWithMethod:@"api/careTime/list" Params:mdic Completion:^(int code, id content) {
+        if(code){
+            NSMutableArray *result = [[NSMutableArray alloc] init];
+                totalCount = [[content objectForKey:@"total"] integerValue];
+            if (totalCount>0) {
+                NSArray *array = [content objectForKey:@"rows"];
+                NSString* previousDate=[Util StringFromDate:[NSDate date]];
+                for (int i = 0; i < [array count]; i++) {
+                    NSDictionary *dic = [array objectAtIndex:i];
+                    EscortTimeDataModel *model = [EscortTimeDataModel ObjectFromDictionary:dic];
+                    model.showTime = ![previousDate isEqualToString:model.createDate];
+                    previousDate = model.createDate;
+                    [escortTimeData addObject:model];
+                    [result addObject:model];
+                }
+              }
+                block(1, result);
+        }
     }];
-    self.numberOfLinesTotal = _parser.numberOfTotalLines;
 }
 
 @end

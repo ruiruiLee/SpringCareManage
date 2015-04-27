@@ -12,7 +12,6 @@
 @interface MyEscortObjectVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 {
     PullTableView *_tableview;
-    NSString *_SearchConditionStr;
 }
 
 @property (nonatomic, strong) PullTableView *tableview;

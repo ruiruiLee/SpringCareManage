@@ -10,6 +10,7 @@
 
 @interface UserLoginVC : LCBaseVC
 {
+    UIScrollView *_scrollview;
     UITextField *_tfPhoneNum;
     UITextField *_tfPwd;
     UIButton *_btnSubmit;

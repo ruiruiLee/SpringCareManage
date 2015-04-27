@@ -42,10 +42,11 @@
 
 - (NSString*) generatFilename
 {
-        NSDateFormatter *dateformat=[[NSDateFormatter  alloc]init];
-        [dateformat setDateFormat:@"yyyyMMddHHmmss"];
-        return [dateformat stringFromDate:[NSDate date]];
- }
+
+    NSDateFormatter *dateformat=[[NSDateFormatter  alloc]init];
+    [dateformat setDateFormat:@"yyyyMMddHHmmss"];
+    return [dateformat stringFromDate:[NSDate date]];
+}
 
 - (NSString*)getPathByFileName:(NSString *)_fileName ofType:(NSString *)_type
 {
@@ -64,7 +65,9 @@
 	[settings setValue: [NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
 	[settings setValue: [NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
 	[settings setValue: [NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
-    recordName = [self generatFilename];
+
+    
+    recordName=[self generatFilename];
     self.recordWavPath = [self getPathByFileName:recordName ofType:@"wav"];
 	self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:self.recordWavPath] settings:settings error:&error];
 	if (!self.recorder)
@@ -242,7 +245,9 @@
 #pragma mark AVAudioRecorderDelegate
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
+
     NSData *adata =nil;
+
     if (self.aSeconds>=2) {
        // adata = [self encodeToAMR:adata voiceName:recordAmrName];
         self.recordAmrPath = [self getPathByFileName:recordName ofType:@"amr"];
@@ -255,7 +260,6 @@
         if ([delegate respondsToSelector:@selector(recordAndSendAudioFile:duration:fileName:)]) {
             [delegate recordAndSendAudioFile:adata duration:(int)self.aSeconds fileName:recordName];
         }
- 
   
    }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoverInfoModel.h"
 
 @interface EscortObjectCell : UITableViewCell
 {
@@ -20,5 +21,7 @@
     UIView *intervalV1;
     UIView *intervalV2;
 }
+
+- (void) SetContentDataWithModel:(LoverInfoModel *) model;
 
 @end

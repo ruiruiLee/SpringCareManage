@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GradeInfoView.h"
+#import "EvaluateInfoModel.h"
 
 @interface EvaluateListCell : UITableViewCell
 {
@@ -17,5 +18,7 @@
     UILabel *_line;
     GradeInfoView *_gradeInfo;
 }
+
+- (void) SetContentWithModel:(EvaluateInfoModel *) model;
 
 @end

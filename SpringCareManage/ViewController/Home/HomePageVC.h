@@ -34,6 +34,8 @@
     UIView *intervalV2;
     UIView *intervalV3;
     
+    UIView *_OrderInfoView;
+    
     UILabel *_line1;
     UIButton *_btnOrderOnDoing;
     UILabel *_line2;
@@ -49,6 +51,8 @@
     UIView *_SepLine;
     
     UITableView *_tableview;
+    
+    NSArray *constraints;
 }
 
 @end

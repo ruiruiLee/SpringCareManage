@@ -8,8 +8,12 @@
 
 #import "MyEvaluateListVC.h"
 #import "EvaluateListCell.h"
+#import "EvaluateListModel.h"
 
 @interface MyEvaluateListVC ()
+{
+    EvaluateListModel *_evaluateModel;
+}
 
 @property (nonatomic, strong) EvaluateListCell *prototypeCell;
 
@@ -22,14 +26,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _evaluateModel = [EvaluateListModel GetEvaluatesListModel];
+    
     // Do any additional setup after loading the view.
     self.NavigationBar.Title = @"我的评价";
     [self initSubviews];
+    
+    self.DataList = [[NSMutableArray alloc] initWithArray:_evaluateModel.evaluateList];
+    if([self.DataList count] == 0){
+        __weak MyEvaluateListVC *weakSelf = self;
+        self.tableview.pullTableIsRefreshing = YES;
+        _evaluateModel.pages = 0;
+        [_evaluateModel RequestEvaluatesWithBlock:^(int code, id content) {
+            if(code == 1){
+                [weakSelf.DataList addObjectsFromArray:content];
+                [weakSelf ValuationForTableHeader];
+                [weakSelf.tableview reloadData];
+            }
+            
+            [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+        }];
+    }
+    else{
+        [self ValuationForTableHeader];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) ValuationForTableHeader
+{
+    NSString *title = [NSString stringWithFormat:@"累计评价%ld（好评%@%@）", (long)_evaluateModel.totals, _evaluateModel.commentsRate, @"%"];
+    title = [title stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+    lbTitle.text = title;
 }
 
 - (void) initSubviews
@@ -40,7 +73,6 @@
     lbTitle.textColor = _COLOR(0x99, 0x99, 0x99);
     lbTitle.font = _FONT(15);
     [headerView addSubview:lbTitle];
-    lbTitle.text = @"累计评价36（好评80%）";
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[lbTitle]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lbTitle)]];
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-19-[lbTitle]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lbTitle)]];
     
@@ -61,7 +93,7 @@
 #pragma UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;//[DataList count];
+    return [DataList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,9 +103,8 @@
         cell = [[EvaluateListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
-    //    cell.textLabel.text = ((NurseListInfoModel*)[DataList objectAtIndex:indexPath.row]).name;
-    //    NurseListInfoModel *model = [DataList objectAtIndex:indexPath.row];
-    //    [cell SetContentData:model];
+    EvaluateInfoModel *data = [DataList objectAtIndex:indexPath.row];
+    [cell SetContentWithModel:data];
     
     return cell;
 }
@@ -90,9 +121,9 @@
         prototypeCell = [[EvaluateListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    //    NurseListInfoModel *data = [DataList objectAtIndex:indexPath.row];
+    EvaluateInfoModel *data = [DataList objectAtIndex:indexPath.row];
     EvaluateListCell *cell = (EvaluateListCell *)self.prototypeCell;
-    //    [cell SetContentData:data];
+    [cell SetContentWithModel:data];
     
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
@@ -104,25 +135,40 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    //    NurseListInfoModel *model = [DataList objectAtIndex:indexPath.row];
-    //    NurseDetailInfoVC *vc = [[NurseDetailInfoVC alloc] initWithModel:model];
-    //    vc.hidesBottomBarWhenPushed = YES;
-    //    [self.navigationController pushViewController:vc animated:YES];
-    //
-    //    [model addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }
 
 #pragma mark - PullTableViewDelegate
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
-    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+//    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+    __weak MyEvaluateListVC *weakSelf = self;
+    _evaluateModel.pages = 0;
+    [_evaluateModel RequestEvaluatesWithBlock:^(int code, id content) {
+        if(code == 1){
+            [weakSelf.DataList removeAllObjects];
+            [weakSelf.DataList addObjectsFromArray:content];
+            [weakSelf ValuationForTableHeader];
+            [weakSelf.tableview reloadData];
+        }
+        
+        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+    }];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+    __weak MyEvaluateListVC *weakSelf = self;
+    _evaluateModel.pages = _evaluateModel.pages + 1;
+    [_evaluateModel RequestEvaluatesWithBlock:^(int code, id content) {
+        if(code == 1){
+            [weakSelf.DataList addObjectsFromArray:content];
+            [weakSelf ValuationForTableHeader];
+            [weakSelf.tableview reloadData];
+        }
+        
+        [weakSelf performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:0.1];
+    }];
 }
 
 #pragma mark - Refresh and load more methods

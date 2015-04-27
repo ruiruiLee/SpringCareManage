@@ -10,14 +10,13 @@
 #import "EscortTimeDataModel.h"
 #import "ImageLayoutView.h"
 #import "define.h"
-#import "HBCoreLabel.h"
 #import "EscortTimeReplyCell.h"
-
+#import "RecoderAndPlayer.h"
 
 typedef void(^ReplayAction)(int index);
 
 @protocol EscortTimeTableCellDelegate <NSObject>
-
+-(void)commentButtonClick:(id)target ReplyName:(NSString*)ReplyName ReplyID:(NSString*)ReplyID; // 评论陪护时光
 - (void) ReloadTebleView;
 
 @end
@@ -27,7 +26,7 @@ typedef void(^ReplayAction)(int index);
 {
     ImageLayoutView *_imageContent;
     UIView *_replyContent;
-    HBCoreLabel *_lbContent;
+    UILabel *_lbContent;
     UIButton *_btnVolice;
     UILabel *_lbVoliceLimit;
     UIButton *_btnVideo;
@@ -49,21 +48,26 @@ typedef void(^ReplayAction)(int index);
     NSArray *hReplyBgLayoutArry;
     
     EscortTimeDataModel *_model;
-    
+    RecoderAndPlayer  *_recoderAndPlayer;
     
     UILabel *_lbTimeLine;
     UILabel *_lbToday;
-//    UIView *_headDateView;
     
     UILabel *_line;
+    NSString *previousTime;
 }
 
 
 @property (nonatomic, assign) id<EscortTimeTableCellDelegate> cellDelegate;
-@property (nonatomic, strong) EscortTimeReplyCell *replyCell;
+@property (nonatomic, strong) UILabel *_lbToday;
+@property (nonatomic, strong) UILabel *_lbTimeLine;
+@property (nonatomic, strong) UIButton *_btnReply;
+@property (nonatomic, strong) EscortTimeDataModel *_model;
 
 - (id)initWithReuseIdentifier:(NSString*)reuseIdentifier blocks:(ReplayAction)blocks;
 
 - (void) setContentData:(EscortTimeDataModel*)data;
+
+- (CGFloat) getContentHeightWithData:(EscortTimeDataModel *) modelData;
 
 @end

@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "EscortTimeDataModel.h"
-#import "HBCoreLabel.h"
+#import "TextAndEmojiView.h"
 
 @interface EscortTimeReplyCell : UITableViewCell
 {
-    HBCoreLabel *_lbReplyContent;
+    //UILabel *_lbReplyContent;
+    TextAndEmojiView *_lbReplyContent;
 }
 
 - (void) setContentWithData:(EscortTimeReplyDataModel*)data;

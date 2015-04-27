@@ -13,8 +13,9 @@
 #import "LCVoiceHud.h"
 #import "RecoderAndPlayer.h"
 typedef enum : NSUInteger {
-    EnumWorkSummary,
+    EnumWorkSummary = 1,
     EnumEscortTime,
+    EnumPublishContentTypeUnown,
 } PublishContentType;
 
 @interface PublishInfoVC : LCBaseVC <RecoderAndPlayerDelegate> //<MessagePhotoViewDelegate>

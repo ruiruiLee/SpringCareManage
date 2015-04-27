@@ -9,6 +9,7 @@
 #import "LCBaseVC.h"
 
 @implementation LCBaseVC
+@synthesize NavTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     self.navigationController.navigationBarHidden=YES;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -44,7 +48,13 @@
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_NavigationBar(64)]-0-[_ContentView]-0-|" options:0 metrics:nil views:views]];
     }
     
-    _NavigationBar.Title = @"对方很高";
+    if(NavTitle != nil)
+        _NavigationBar.Title = NavTitle;
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -63,6 +73,16 @@
 }
 
 - (void) NavRightButtonClickEvent:(UIButton *)sender
+{
+    
+}
+
+- (void) keyboardWillShow:(NSNotification *) notify
+{
+    
+}
+
+- (void) keyboardWillHide:(NSNotification *)notify
 {
     
 }

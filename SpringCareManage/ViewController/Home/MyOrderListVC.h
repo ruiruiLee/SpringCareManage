@@ -8,14 +8,7 @@
 
 #import "LCBaseVC.h"
 #import "PullTableView.h"
-
-typedef enum : NSUInteger {
-    EnumOrderAll,
-    EnumOrderNew,
-    EnumOrderSubscribe,
-    EnumOrderTreatPay,
-    EnumOrderEvaluate,
-} OrderListType;
+#import "define.h"
 
 @interface MyOrderListVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, PullTableViewDelegate>
 {
@@ -27,5 +20,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) PullTableView *tableview;
 @property (nonatomic, assign) OrderListType orderType;
 @property (nonatomic, strong) NSMutableArray *DataList;
+
+- (id) initWithOrderType:(OrderListType) type;
 
 @end
