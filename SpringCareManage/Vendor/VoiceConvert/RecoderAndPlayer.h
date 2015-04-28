@@ -2,8 +2,8 @@
 //  RecoderAndPlayer.h
 //  shareApp
 //
-//  Created by share02 on 12-9-2.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by forrestlee      on 12-9-2.
+//  Copyright (c) 2013年 . All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -30,7 +30,7 @@
 AVAudioRecorderDelegate,
 AVAudioPlayerDelegate>
 {
-	NSTimer *timer;
+    NSTimer *timer;
     BOOL isPlay;
     NSString *recordName;
 }
@@ -55,4 +55,6 @@ AVAudioPlayerDelegate>
 
 //停止播放
 - (void)stopPlaying;
+
+- (NSString*)getPathByFileName:(NSString *)_fileName ofType:(NSString *)_type;
 @end

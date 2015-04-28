@@ -108,10 +108,10 @@
 }
 
 
-- (void)addImageToUploadArray:(UIImage*)image index:(int)i{
+- (void)addImageToUploadArray:(UIImage*)image index:(NSInteger)i{
    
         [_selectImgArray addObject:image];
-        int arrayCount = _selectImgArray.count;
+        NSInteger arrayCount = _selectImgArray.count;
         UIButton* btn = (UIButton*)[imageScrollView viewWithTag:kImageButtonTag + i];
         if (btn == nil) {
             btn = [[UIButton alloc] initWithFrame:CGRectMake(cameraButton.frame.origin.x ,
@@ -156,17 +156,17 @@
     [_photoBrowser setCurrentPhotoIndex:btn.tag - kImageButtonTag];
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:_photoBrowser];
     navigation.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [_parentController presentModalViewController:navigation animated:YES];
+    [_parentController presentViewController:navigation animated:YES completion:nil];
 }
 
 -(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-        int index =gestureRecognizer.view.tag- kImageButtonTag;
+        NSInteger index =gestureRecognizer.view.tag- kImageButtonTag;
         [self deleteImageButtonAtIndex:index];
     }
 }
-- (void) deleteImageButtonAtIndex: (int)index {
-    int arrayCount = _selectImgArray.count;
+- (void) deleteImageButtonAtIndex: (NSInteger)index {
+    NSInteger arrayCount = _selectImgArray.count;
     UIButton* btn = (UIButton*)[imageScrollView viewWithTag:index+kImageButtonTag];
     [UIView animateWithDuration:0.15f
               delay:0.0f
@@ -255,7 +255,7 @@
     image = [self fitSmallImage:image scaledToSize:imgCompressSize];
     [self addImageToUploadArray:image index:_selectImgArray.count];
      [self dismissViewConttroller];
-    [_parentController dismissModalViewControllerAnimated:YES];
+    [_parentController dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -264,7 +264,7 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
      [self dismissViewConttroller];
-    [_parentController dismissModalViewControllerAnimated:YES];
+    [_parentController dismissViewControllerAnimated:YES completion:nil];
    
 }
 

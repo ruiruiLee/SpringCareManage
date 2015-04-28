@@ -416,6 +416,8 @@
 - (void) NotifyToPublishEscort:(EscortPublishCell *) cell
 {
     PublishInfoVC *vc = [[PublishInfoVC alloc] initWithNibName:nil bundle:nil];
+    vc.loverId = _defaultLover.loverId ;
+    vc.contentType= EnumEscortTime;
     vc.hidesBottomBarWhenPushed = YES;
     vc.NavTitle = @"发布陪护时光";
     [self.navigationController pushViewController:vc animated:YES];

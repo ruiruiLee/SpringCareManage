@@ -56,39 +56,39 @@
 //录音
 -(BOOL)record
 {
-	NSError *error;
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings setValue: [NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-	[settings setValue: [NSNumber numberWithFloat:8000.0] forKey:AVSampleRateKey];
-	[settings setValue: [NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
-	[settings setValue: [NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
-	[settings setValue: [NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
-	[settings setValue: [NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
+    NSError *error;
+    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+    [settings setValue: [NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+    [settings setValue: [NSNumber numberWithFloat:8000.0] forKey:AVSampleRateKey];
+    [settings setValue: [NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+    [settings setValue: [NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+    [settings setValue: [NSNumber numberWithBool:NO] forKey:AVLinearPCMIsBigEndianKey];
+    [settings setValue: [NSNumber numberWithBool:NO] forKey:AVLinearPCMIsFloatKey];
     
     recordName=[self generatFilename];
     self.recordWavPath = [self getPathByFileName:recordName ofType:@"wav"];
-	self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:self.recordWavPath] settings:settings error:&error];
-	if (!self.recorder)
-	{
-		return NO;
-	}
-	self.recorder.delegate = self;
-	if (![self.recorder prepareToRecord])
-	{
-		return NO;
-	}
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:self.recordWavPath] settings:settings error:&error];
+    if (!self.recorder)
+    {
+        return NO;
+    }
+    self.recorder.delegate = self;
+    if (![self.recorder prepareToRecord])
+    {
+        return NO;
+    }
     self.recorder.meteringEnabled = YES; //允许波形
- 
+    
     //开始录音
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayAndRecord error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
-	if (![self.recorder record])
-	{
-		return NO;
-	}
+    if (![self.recorder record])
+    {
+        return NO;
+    }
     [self LoudSpeakerRecorder:YES];
-	return YES;
-  }
+    return YES;
+}
 
 //删除临时文件
 - (void)removeTempfile:(NSString *)_filepath{
@@ -101,8 +101,8 @@
 
 - (void) play
 {
-	if (self.player) [self.player play];
-  
+    if (self.player) [self.player play];
+    
 }
 
 
@@ -110,7 +110,7 @@
 -(void)countTime{
     if (self.aSeconds>=SpeechMaxTime) {
         self.aSeconds = SpeechMaxTime;
-       [self stopRecording];
+        [self stopRecording];
     }else {
         aSeconds+= WAVE_UPDATE_FREQUENCY;
         /*  发送TimePromptAction代理来刷新平均和峰值功率。
@@ -167,21 +167,21 @@
     if (player) {
         [player stop];
     }
-   // NSData *amrData ;
+    // NSData *amrData ;
     amrFile = [amrFile stringByDeletingPathExtension];
     self.recordAmrPath = [self getPathByFileName:amrFile ofType:@"amr"];
-      NSLog(@"%@",self.recordAmrPath);
-     NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSLog(@"%@",self.recordAmrPath);
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath: self.recordAmrPath]) {
-          self.recordWavPath = [self getPathByFileName:amrFile ofType:@"wav"];
-         if (![fileManager fileExistsAtPath:  self.recordWavPath]) {
-          [VoiceConverter amrToWav:self.recordAmrPath wavSavePath:self.recordWavPath];
-           }
-       [self LoudSpeakerPlay:YES];
+        self.recordWavPath = [self getPathByFileName:amrFile ofType:@"wav"];
+        if (![fileManager fileExistsAtPath:  self.recordWavPath]) {
+            [VoiceConverter amrToWav:self.recordAmrPath wavSavePath:self.recordWavPath];
+        }
+        [self LoudSpeakerPlay:YES];
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:self.recordWavPath] error:nil];
         [player stop];
-         player.delegate =self;
-         player.meteringEnabled = YES;
+        player.delegate =self;
+        player.meteringEnabled = YES;
         [player prepareToPlay];
         [player setVolume:1.0];
         [self performSelectorOnMainThread:@selector(play) withObject:nil waitUntilDone:NO];
@@ -201,16 +201,16 @@
 //打开扬声器--录音
 -(bool) LoudSpeakerRecorder:(bool)bOpen
 {
-	//播放的时候设置play ，录音时候设置recorder
-	
-    UInt32 route;   
+    //播放的时候设置play ，录音时候设置recorder
+    
+    UInt32 route;
     UInt32 sessionCategory =  kAudioSessionCategory_PlayAndRecord; // 1
     
     AudioSessionSetProperty (
-                                     kAudioSessionProperty_AudioCategory,                        // 2
-                                     sizeof (sessionCategory),                                   // 3
-                                     &sessionCategory                                            // 4
-                                     );
+                             kAudioSessionProperty_AudioCategory,                        // 2
+                             sizeof (sessionCategory),                                   // 3
+                             &sessionCategory                                            // 4
+                             );
     
     route = bOpen?kAudioSessionOverrideAudioRoute_Speaker:kAudioSessionOverrideAudioRoute_None;
     AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(route), &route);
@@ -220,21 +220,21 @@
 //打开扬声器--播放
 -(bool) LoudSpeakerPlay:(bool)bOpen
 {
-	//播放的时候设置play ，录音时候设置recorder
-	
-	//return false;
+    //播放的时候设置play ，录音时候设置recorder
+    
+    //return false;
     UInt32 route;
-    //OSStatus error;    
+    //OSStatus error;
     UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;// kAudioSessionCategory_PlayAndRecord;//kAudioSessionCategory_RecordAudio;//kAudioSessionCategory_PlayAndRecord;    // 1
     
-     AudioSessionSetProperty (
-                                     kAudioSessionProperty_AudioCategory,                        // 2
-                                     sizeof (sessionCategory),                                   // 3
-                                     &sessionCategory                                            // 4
-                                     );
+    AudioSessionSetProperty (
+                             kAudioSessionProperty_AudioCategory,                        // 2
+                             sizeof (sessionCategory),                                   // 3
+                             &sessionCategory                                            // 4
+                             );
     
     route = bOpen?kAudioSessionOverrideAudioRoute_Speaker:kAudioSessionOverrideAudioRoute_None;
-     AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(route), &route);
+    AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(route), &route);
     return true;
 }
 
@@ -244,19 +244,19 @@
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
     if (self.aSeconds>=2) {
-       // adata = [self encodeToAMR:adata voiceName:recordAmrName];
+        // adata = [self encodeToAMR:adata voiceName:recordAmrName];
         self.recordAmrPath = [self getPathByFileName:recordName ofType:@"amr"];
         //音频转码
         [VoiceConverter wavToAmr:self.recordWavPath amrSavePath:self.recordAmrPath];
         NSData *adata = [NSData dataWithContentsOfFile:self.recordAmrPath];
-          //删除临时wav文件
+        //删除临时wav文件
         //[self removeTempfile:self.recordWavPath];
         if ([delegate respondsToSelector:@selector(recordAndSendAudioFile:duration:fileName:)]) {
             [delegate recordAndSendAudioFile:adata duration:(int)self.aSeconds fileName:recordName];
         }
     }
-  
-   }
+    
+}
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {

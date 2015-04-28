@@ -19,13 +19,15 @@
 #define User_DetailInfo_Get @"User_DetailInfo_Get"
 
 #define SERVER_ADDRESS @"http://baidu.com"
-//#define SERVER_ADDRESS @"http://baidu.com"
+
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
 #define ThemeImage(imageName)  [UIImage imageNamed:imageName]
 #define _COLOR(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
-//#define _FONT(s) [UIFont fontWithName:@"STHeitiSC-Medium" size:(s)]//[UIFont fontWithName:@"Helvetica Neue" size:(s)]
+
+#define _COLORa(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
 #define _FONT(s) [UIFont fontWithName:@"Helvetica Neue" size:(s)]
 #define _FONT_B(s) [UIFont boldSystemFontOfSize:(s)]
 
@@ -40,9 +42,11 @@
 #define Disabled_Color  _COLOR(0x8f, 0x8f, 0x97)
 #define Abled_Color  [UIColor colorWithRed:(0x27)/255.0 green:(0xa6)/255.0 blue:(0x69)/255.0 alpha:1]
 
+#define ThemeImage(imageName)  [UIImage imageNamed:imageName]
+
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-#define Place_Holder_Image  nil//[UIImage imageNamed:@""]
+#define Place_Holder_Image  nil
 
 #define Photo_Place_Holder_Image  nil
 
@@ -59,7 +63,7 @@ typedef void(^block)(int code, id content);
 #define RGBwithHex(hex) _COLOR(((float)((hex & 0xFF0000) >> 16)),((float)((hex & 0xFF00) >> 8)),((float)(hex & 0xFF)))
 
 //语音存放地址
-#define SpeechMaxTime 60.0f
+#define SpeechMaxTime 120.0f
 // 订单列表页面没有数据的时候 加载的图片
 #define orderBackbroundImg ThemeImage(@"orderend")
 // 陪护时光无数据时加载的页面。
