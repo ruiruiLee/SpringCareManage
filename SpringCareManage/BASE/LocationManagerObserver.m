@@ -7,8 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 #import "LocationManagerObserver.h"
+#import <AVOSCloud/AVOSCloud.h>
 #import "define.h"
-
+#import "UserModel.h"
 
 
 @implementation LocationManagerObserver
@@ -31,8 +32,6 @@
     
     if (self = [super init]) {
         geocoder = [[CLGeocoder alloc] init];
-//        _lat = 30.643063;
-//        _lon = 104.058155;
         locationManager = [[CLLocationManager alloc] init];//创建位置管理器
         locationManager.delegate=(id)self;
         locationManager.desiredAccuracy=kCLLocationAccuracyBest;
@@ -64,25 +63,8 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     NSLog(@"didChangeAuthorizationStatus----%@",error);
-    [self saveLocation];
 }
 
--(void)saveLocation{
-    CityDataModel *model ;
-    if (!_currentCity) {
-        model= [CityDataModel modelWithName:CityName];
-        [cfAppDelegate setCurrentCityModel:model] ;
-     }
-    else{
-        model = [CityDataModel modelWithName:_currentCity];
-        if (model==nil) {
-            [cfAppDelegate setCurrentCityModel:[CityDataModel modelWithName:CityName]] ;
-        }
-        [cfAppDelegate setCurrentCityModel:model] ;
-
-     }
-    
-  }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     _lat = newLocation.coordinate.latitude;
@@ -90,20 +72,6 @@
         [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
             if([placemarks count] > 0){
                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//                NSLog(@"name:%@\n country:%@\n postalCode:%@\n ISOcountryCode:%@\n ocean:%@\n inlandWater:%@\n administrativeArea:%@\n subAdministrativeArea:%@\n locality:%@\n subLocality:%@\n thoroughfare:%@\n subThoroughfare:%@\n",
-//                                                 placemark.name,
-//                                                    placemark.country,
-//                                                   placemark.postalCode,
-//                                                  placemark.ISOcountryCode,
-//                                                   placemark.ocean,
-//                                                 placemark.inlandWater,
-//                                                 placemark.administrativeArea,
-//                                                   placemark.subAdministrativeArea,
-//                                                  placemark.locality,
-//                                                 placemark.subLocality,
-//                                                   placemark.thoroughfare,
-//                                                   placemark.subThoroughfare);
-                
                  _currentCity= !placemark.locality?placemark.administrativeArea:placemark.locality;
                  _currentDetailAdrress =[NSString stringWithFormat:@"%@%@%@%@%@%@", placemark.administrativeArea,
                   !placemark.subAdministrativeArea?@"":placemark.subAdministrativeArea,
@@ -112,7 +80,6 @@
                   !placemark.thoroughfare?@"":placemark.thoroughfare,
                   !placemark.subThoroughfare?@"":placemark.subThoroughfare];
                 
-                 [self saveLocation];
                 
             // 更新当前用户坐标到服务器
                 if ([AVUser currentUser]!=nil) {
@@ -120,9 +87,8 @@
                     AVGeoPoint *point = [AVGeoPoint geoPointWithLatitude:_lat longitude:_lon];
                     [user setObject:point forKey:@"locationPoint"];
                     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                        if (succeeded) {
+                    if (succeeded) {
                             [[UserModel sharedUserInfo] modifyLocation:_currentDetailAdrress];
-                            NSLog(@"+++++++++++++++++%@----------------------", _currentDetailAdrress);
                         }
                     }];
                 }

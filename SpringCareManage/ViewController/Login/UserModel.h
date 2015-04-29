@@ -9,27 +9,31 @@
 #import <Foundation/Foundation.h>
 #import "define.h"
 #import "UserDetailModel.h"
-
+ #import <AVOSCloud/AVOSCloud.h>
 @interface UserModel : NSObject
 
-@property (nonatomic, assign) BOOL isNew;
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *birthAddr;
-@property (nonatomic, strong) NSString *age;
-@property (nonatomic, strong) NSString *careAge;
+@property (nonatomic, strong) NSDate *birthDay;
+@property (nonatomic, strong) NSDate *beginCareDate;
 @property (nonatomic, strong) NSString *intro;
 @property (nonatomic, strong) NSString *chineseName;
 @property (nonatomic, strong) NSString *headerImage;
 @property (nonatomic, strong) NSString *sex;
 @property (nonatomic, strong) UserDetailModel *userOrderInfo;
-
+@property (nonatomic, strong) NSString *headerFile;
+@property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) AVGeoPoint *locationPoint;
+@property (nonatomic, strong) NSString *mobilePhoneNumber;
+@property (nonatomic, strong) NSString *currentDetailAdrress;
+@property (nonatomic, strong) NSString *detailIntro;
 //detail
 + (UserModel *) sharedUserInfo;
 
-- (void) LoadDetailUserInfo:(block) block;
-
+//- (void) LoadDetailUserInfo:(block) block;
+-(void)modifyInfo;
+-(void)modifyLocation:(NSString*)detailAddress;
 - (BOOL) isLogin;
 
 //获取订单信息

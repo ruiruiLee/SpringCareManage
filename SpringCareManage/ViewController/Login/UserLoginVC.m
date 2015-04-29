@@ -9,7 +9,6 @@
 #import "UserLoginVC.h"
 #import "define.h"
 #import <AVOSCloud/AVOSCloud.h>
-#import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import "UserModel.h"
 
 @interface UserLoginVC ()
@@ -114,14 +113,7 @@
     
     [AVUser logInWithMobilePhoneNumberInBackground:userName password:pwd block:^(AVUser *user, NSError *error) {
         if(error == nil){
-            UserModel *model = [UserModel sharedUserInfo];
-            
-            model.userId = user.objectId;
-            model.userName = user.username;
-            model.phone = user.mobilePhoneNumber;
-            model.chineseName = [user objectForKey:@"chinese_name"];
-            model.isNew = user.isNew;
-            
+           [[UserModel sharedUserInfo] modifyInfo];
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         }
         else{

@@ -93,7 +93,8 @@
 //删除临时文件
 - (void)removeTempfile:(NSString *)_filepath{
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:_filepath error:nil];
+     if ([fileManager fileExistsAtPath: _filepath])
+         [fileManager removeItemAtPath:_filepath error:nil];
 }
 
 

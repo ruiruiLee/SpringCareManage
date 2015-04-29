@@ -328,11 +328,11 @@
     UserModel *userInfo = [UserModel sharedUserInfo];
     _lbName.text = userInfo.chineseName;
     
-    _lbMobile.text = userInfo.phone;
+    _lbMobile.text = userInfo.mobilePhoneNumber;
     
     _detailInfo.text = userInfo.intro;
     
-    NSString *title = [NSString stringWithFormat:@"%@ %@岁 护龄%@年", userInfo.birthAddr, userInfo.age, userInfo.careAge];
+    NSString *title = [NSString stringWithFormat:@"%@ %d岁 护龄%d年", userInfo.birthAddr, [Util getAgeWithBirthday:userInfo.birthDay], [Util getAgeWithBirthday:userInfo.beginCareDate]];
     [_btnInfo setTitle:title forState:UIControlStateNormal];
     
     UserSex sex = [Util GetSexByName:userInfo.sex];

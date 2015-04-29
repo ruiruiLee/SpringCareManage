@@ -114,10 +114,10 @@
 /**
  @Brief 根据语音时间长度计算控件长度
  **/
-#define kMaxVoiceImageWidth 160.0
+#define kAveVoiceImageWidth 1.2
 #define kMinVoiceImageWidth 40.0
 - (CGFloat) VoiceButtonWithVoiceTimeLength:(float)timeLength {
-    CGFloat ratioLegth = kMaxVoiceImageWidth * (timeLength / 30);
+    CGFloat ratioLegth = kAveVoiceImageWidth * timeLength;
     return kMinVoiceImageWidth + ratioLegth;
 }
 
@@ -220,6 +220,28 @@
         [self PublishWorkSummary];
     
 }
+- (void) NavLeftButtonClickEvent:(UIButton *)sender
+{
+    if (_tvContent.text.length||imageScrollView.selectImgArray.count||voiceName){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"是否确定放弃本次操作?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"取消"
+                                                  otherButtonTitles:@"确定", nil];
+        [alertView show];
+    }
+    else{
+        
+        [super NavLeftButtonClickEvent:sender];
+    }
+
+}
+#pragma mark UIAlert Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [super NavLeftButtonClickEvent:nil];
+    }
+}
 
 
 
@@ -247,15 +269,10 @@
         @autoreleasepool {
             NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
             AVFile *file = [AVFile fileWithName:@"timeImags.jpg" data:imageData];
-             [file.metaData setObject:@"1" forKey:@"fileType"];
+            [file.metaData setObject:@"1" forKey:@"fileType"];
             [file save];
             [fileString appendString:file.objectId];
             [fileString appendString:@","];
-
-//            [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                     [fileString appendString:file.objectId];
-//                     [fileString appendString:@","];
-//                 }];
              }
          }
      }

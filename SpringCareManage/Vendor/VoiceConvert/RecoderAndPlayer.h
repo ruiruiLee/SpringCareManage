@@ -57,4 +57,6 @@ AVAudioPlayerDelegate>
 - (void)stopPlaying;
 
 - (NSString*)getPathByFileName:(NSString *)_fileName ofType:(NSString *)_type;
+
+- (void)removeTempfile:(NSString *)_filepath;
 @end
