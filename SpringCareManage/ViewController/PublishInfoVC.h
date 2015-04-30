@@ -17,6 +17,10 @@ typedef enum : NSUInteger {
     EnumPublishContentTypeUnown,
 } PublishContentType;
 
+@protocol EscortSendDelegate <NSObject>
+@optional
+- (void)delegetSendEnd:(Boolean)sucess;
+@end
 @interface PublishInfoVC : LCBaseVC
 {
     UIView *_bgView;
@@ -36,5 +40,6 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) PublishContentType contentType;
 @property (nonatomic, assign) NSString* loverId;
+@property (assign, nonatomic) id<EscortSendDelegate> delegate;
 
 @end

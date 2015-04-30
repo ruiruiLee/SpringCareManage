@@ -62,7 +62,6 @@
 }
 -(NSString*) displayName{
         if (self.chineseName.length==0) {
-            
             return self.mobilePhoneNumber;
         }
         else{

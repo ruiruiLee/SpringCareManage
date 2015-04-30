@@ -244,18 +244,20 @@
 #pragma mark AVAudioRecorderDelegate
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
+    NSData *adata=nil;
     if (self.aSeconds>=2) {
         // adata = [self encodeToAMR:adata voiceName:recordAmrName];
         self.recordAmrPath = [self getPathByFileName:recordName ofType:@"amr"];
         //音频转码
         [VoiceConverter wavToAmr:self.recordWavPath amrSavePath:self.recordAmrPath];
-        NSData *adata = [NSData dataWithContentsOfFile:self.recordAmrPath];
+         adata = [NSData dataWithContentsOfFile:self.recordAmrPath];
         //删除临时wav文件
         //[self removeTempfile:self.recordWavPath];
-        if ([delegate respondsToSelector:@selector(recordAndSendAudioFile:duration:fileName:)]) {
-            [delegate recordAndSendAudioFile:adata duration:(int)self.aSeconds fileName:recordName];
-        }
+      }
+    if ([delegate respondsToSelector:@selector(recordAndSendAudioFile:duration:fileName:)]) {
+        [delegate recordAndSendAudioFile:adata duration:(int)self.aSeconds fileName:recordName];
     }
+
     
 }
 

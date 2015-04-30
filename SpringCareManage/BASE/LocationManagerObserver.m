@@ -86,6 +86,7 @@
                     AVUser *user = [AVUser currentUser];
                     AVGeoPoint *point = [AVGeoPoint geoPointWithLatitude:_lat longitude:_lon];
                     [user setObject:point forKey:@"locationPoint"];
+                    [user setObject:_currentDetailAdrress forKey:@"career"];
                     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                             [[UserModel sharedUserInfo] modifyLocation:_currentDetailAdrress];

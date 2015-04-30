@@ -411,6 +411,18 @@
     self.tableView.pullTableIsLoadingMore = NO;
 }
 
+#pragma mark -
+#pragma mark EscortSendDelegate
+- (void)delegetSendEnd:(Boolean)sucess
+{
+    if (sucess) {
+        [self pullTableViewDidTriggerRefresh:self.tableView];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发布失败请重新发布" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
 #pragma EscortPublishCellDelegate
 
 - (void) NotifyToPublishEscort:(EscortPublishCell *) cell

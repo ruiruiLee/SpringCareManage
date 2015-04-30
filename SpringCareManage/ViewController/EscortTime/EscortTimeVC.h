@@ -12,10 +12,10 @@
 #import "feedbackView.h"
 #import "PullTableView.h"
 #import "LCBaseVC.h"
-
+#import "PublishInfoVC.h"
 #import "LoverInfoModel.h"
 
-@interface EscortTimeVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EscortTimeTableCellDelegate, PullTableViewDelegate>
+@interface EscortTimeVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EscortTimeTableCellDelegate, PullTableViewDelegate,EscortSendDelegate>
 {
     PullTableView *tableView;
     EscortTimeDataModel *_model;

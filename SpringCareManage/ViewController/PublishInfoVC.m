@@ -218,6 +218,7 @@
         [self PublishEscortTime];
     else
         [self PublishWorkSummary];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 - (void) NavLeftButtonClickEvent:(UIButton *)sender
@@ -256,11 +257,6 @@
        [file save];
        [fileString appendString:file.objectId];
        [fileString appendString:@","];
-
-//    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//       [fileString appendString:file.objectId];
-//       [fileString appendString:@","];
-//    }];
    }
     //图片
     if (imageScrollView.selectImgArray.count){
@@ -282,9 +278,9 @@
 
 - (void)PublishEscortTime
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
     [self fileupMothed];
     NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
-    
     [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
     [parmas setObject:self.loverId forKey:@"loverId"];
     [parmas setObject:_tvContent.text forKey:@"content"];
@@ -293,9 +289,11 @@
     }
     [LCNetWorkBase postWithMethod:@"api/careTime/save" Params:parmas Completion:^(int code, id content) {
         if(code){
-            
+            [_delegate delegetSendEnd:code];
         }
     }];
+        
+    });
 }
 
 - (void)PublishWorkSummary
