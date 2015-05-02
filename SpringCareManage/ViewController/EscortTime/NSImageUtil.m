@@ -15,8 +15,9 @@
     UIImageOrientation  orientation=originaLimage.imageOrientation;
     CGRect rect=CGRectMake((sizeImg.width-sizeview.width)/2,(sizeImg.height-sizeview.height)/2, sizeview.width, sizeview.height);
     CGImageRef imgRef=CGImageCreateWithImageInRect(originaLimage.CGImage, rect);
-    
-    return [UIImage imageWithCGImage:imgRef scale:1 orientation:orientation];
+    UIImage *image = [UIImage imageWithCGImage:imgRef scale:1 orientation:orientation];
+    CGImageRelease(imgRef);
+    return image ;
     
 
 }
@@ -35,14 +36,16 @@
     if(sizev.width>0)
         viewScale=sizev.height/sizev.width;
     
-    float width=size.width,height=size.height;
+    float width=size.width;
+   // float height=size.height;
     if(imgScale<viewScale&&size.width>sizev.width){
         width=sizev.width;
-        height=sizev.width*imgScale;
-    }else if(imgScale>=viewScale&&size.height>sizev.height){
-        height=sizev.height;
+        //height=sizev.width*imgScale;
+    }
+    else if(imgScale>=viewScale&&size.height>sizev.height){
+        //height=sizev.height;
         if(imgScale>0)
-            width=height/imgScale;
+            width=size.height/imgScale;
     }
     return [UIImage imageWithCGImage:originaImage.CGImage scale:(size.width/width) orientation:orientation];
 }
@@ -191,7 +194,7 @@
         _imageView.image=image;
     }
     else{
-        frame=toView.frame;
+       // frame=toView.frame;
         _imageView.image=toView.image;
     }
     

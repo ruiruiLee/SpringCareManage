@@ -111,6 +111,8 @@
     [self creatHeadView];
     tableView.tableHeaderView = headerView;
     tableView.tableFooterView = [[UIView alloc] init];
+    
+    [self SetHeaderInfoWithModel];
 }
 
 -(void)loadDataList{
@@ -118,9 +120,13 @@
     UserModel *model = [UserModel sharedUserInfo];
     OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
     if(orderModel != nil){
+        [tableView setBackgroundView:nil];
+        tableView.tableHeaderView.hidden=NO;
+        isHasDefaultLover = YES;
+        
         __weak EscortTimeVC *weakSelf = self;
         self.tableView.pullTableIsRefreshing = YES;
-        [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId Pages:pages block:^(int code, id content) {
+        [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId pages:pages block:^(int code, id content) {
             if([(NSArray*)content count]>0)
             {
                 [weakSelf.dataList removeAllObjects];
@@ -129,6 +135,14 @@
             }
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
         }];
+    }else{
+        
+        isHasDefaultLover = NO;
+        
+        UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+        [tableView setBackgroundView:imageView];
+        tableView.tableHeaderView.hidden=YES;
+        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
     }
 }
 
@@ -208,8 +222,6 @@
 
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    
-    [self SetHeaderInfoWithModel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -227,6 +239,8 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if(!isHasDefaultLover)
+        return 0;
     return 2;
 }
 
@@ -303,7 +317,7 @@
         [self.view addSubview:_feedbackView.view];
 
     }
- [_feedbackView.feedbackTextField becomeFirstResponder];
+    [_feedbackView.feedbackTextField becomeFirstResponder];
 }
 
 #pragma mark - feedbackViewDelegate
@@ -379,14 +393,53 @@
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)_pullTableView
 {
     pages = 0;
-    [self loadDataList];
+    [self RefreshDataList];
+}
+
+-(void)RefreshDataList{
+    self.tableView.pullTableIsRefreshing = YES;
+    UserModel *model = [UserModel sharedUserInfo];
+    OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
+    if(orderModel.orderId == nil){
+        __weak EscortTimeVC *weakSelf = self;
+        [model LoadOrderInfo:^(int code, id content) {
+            if(code == 1){
+                OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
+                if(orderModel != nil){
+                    [weakSelf.tableView setBackgroundView:nil];
+                    weakSelf.tableView.tableHeaderView.hidden=NO;
+                    isHasDefaultLover = YES;
+                    
+                    [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId pages:pages block:^(int code, id content) {
+                        if([(NSArray*)content count]>0)
+                        {
+                            [weakSelf.dataList removeAllObjects];
+                            [weakSelf.dataList addObjectsFromArray:content];
+                            [weakSelf.tableView reloadData];
+                        }
+                        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
+                    }];
+                }else{
+                    
+                    isHasDefaultLover = NO;
+                    
+                    UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+                    [weakSelf.tableView setBackgroundView:imageView];
+                    weakSelf.tableView.tableHeaderView.hidden=YES;
+                    [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
+                }
+            }
+        }];
+    }else{
+        [self loadDataList];
+    }
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)_pullTableView
 {
     pages ++;
     __weak EscortTimeVC *weakSelf = self;
-    [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId Pages:pages block:^(int code, id content) {
+    [EscortTimeDataModel LoadCareTimeListWithLoverId:_defaultLover.loverId pages:pages block:^(int code, id content) {
         if([(NSArray*)content count]>0)
         {
             [weakSelf.dataList addObjectsFromArray:content];

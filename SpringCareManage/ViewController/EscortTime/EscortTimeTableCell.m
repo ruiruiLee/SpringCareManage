@@ -8,12 +8,15 @@
 
 #import "EscortTimeTableCell.h"
 #import "NSStrUtil.h"
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudSNS/AVOSCloudSNS.h>
+
 @implementation EscortTimeTableCell
 @synthesize cellDelegate;
 @synthesize _lbToday;
 @synthesize _model = _model;
-@synthesize _lbTimeLine = _lbTimeLine;
 @synthesize _btnReply = _btnReply;
+@synthesize _lbTimeLine = _lbTimeLine;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -85,6 +88,8 @@
     _btnVolice.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnVolice setBackgroundImage:[image stretchableImageWithLeftCapWidth:40 topCapHeight:5] forState:UIControlStateNormal];
     [_btnVolice addTarget:self action:@selector(VoicePlayClicked:) forControlEvents:UIControlEventTouchUpInside];
+    _btnVolice.clipsToBounds = YES;
+    _btnVolice.layer.cornerRadius = 5;
     //音频时间
     _lbVoliceLimit = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_lbVoliceLimit];
@@ -116,7 +121,9 @@
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[_lbContent]-20-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[_btnFoldOrUnfold]->=20-|" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[_btnVolice(120)]-5-[_lbVoliceLimit]->=20-|" options:0 metrics:nil views:views]];
+    
+    Constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[_btnVolice(120)]-5-[_lbVoliceLimit]->=20-|" options:0 metrics:nil views:views];
+    [self.contentView addConstraints:Constraints];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[_imageContent]-20-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[_replyContent]-20-|" options:0 metrics:nil views:views]];
     
@@ -247,17 +254,28 @@
     }
 }
 
+
+/**
+ @Brief 根据语音时间长度计算控件长度
+ **/
+#define kAveVoiceImageWidth 1.2
+#define kMinVoiceImageWidth 40.0
+- (CGFloat) VoiceButtonWithVoiceTimeLength:(float)timeLength {
+    CGFloat ratioLegth = kAveVoiceImageWidth * timeLength;
+    return kMinVoiceImageWidth + ratioLegth;
+}
+
 - (void) setContentData:(EscortTimeDataModel*)data
 {
     _model = data;
-    
     NSString *textContent = data.content;//文字内容
     NSString *voiceContentUrl = data.VoliceDataModel.url;//音频内容地址
-//    NSString *voiceLen = data.voiceLen;//音频时长
+    NSString *voiceLen = data.VoliceDataModel.seconds;//音频时长
    _lbPublishTime.text = data.createTime;//发布时间;
     
     if (data.showTime) {
-        _lbToday.text = data.createDate;  //发布日期
+        
+        _lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
         _lbToday.hidden = NO;
       }else{
         _lbToday.hidden = YES;
@@ -298,9 +316,15 @@
     {
         [format appendString:@"[_btnVolice(25)]"];
         [format appendString:@"-10-"];
-        _lbVoliceLimit.text = @"12\"";
+        _lbVoliceLimit.text = [NSString stringWithFormat:@"%@\"", voiceLen];//@"12\"";
         _lbVoliceLimit.hidden = NO;
         _btnVolice.hidden = NO;
+        [self.contentView removeConstraints:Constraints];
+        NSDictionary *views = NSDictionaryOfVariableBindings(_lbContent, _btnFoldOrUnfold, _btnVolice, _lbVoliceLimit, _imageContent, _replyContent, _lbTimeLine, _line);
+        NSString *format = [NSString stringWithFormat:@"H:|-80-[_btnVolice(%f)]-5-[_lbVoliceLimit]->=20-|", [self VoiceButtonWithVoiceTimeLength:[voiceLen floatValue]]];
+        Constraints = [NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:nil views:views];
+        [self.contentView addConstraints:Constraints];
+        
     }else
     {
         _lbVoliceLimit.hidden = YES;
@@ -409,13 +433,13 @@
         cellHeight += 3;
     }
     
-    cellHeight += 37;
+    cellHeight += 39;
     if([replyData count] > 0){
         CGFloat height = 0;
         for (int i = 0; i < [replyData count]; i++) {
             NSIndexPath *indexpath = [NSIndexPath indexPathForRow:i inSection:0];
             EscortTimeReplyDataModel *data = [replyData objectAtIndex:indexpath.row];
-            data.height = [NSStrUtil HeightOfString:data.content fontSize:15.f andWidth:ScreenWidth - 115] + 8;
+            data.height = [NSStrUtil HeightOfString:data.content fontSize:15.f andWidth:ScreenWidth - 115] + 9;
             height += data.height;
         }
         cellHeight += 18;
@@ -426,9 +450,27 @@
 }
 
 - (void) VoicePlayClicked:(UIButton*)sender{
+    
     _recoderAndPlayer = [RecoderAndPlayer sharedRecoderAndPlayer];
     _recoderAndPlayer.delegate=(id)self;
-    [_recoderAndPlayer startPlaying:@"音频文件名.amr"];
+     AVFile *voiceFile =   [AVFile fileWithURL: _model.VoliceDataModel.url];
+     NSArray *array =  [ voiceFile.url componentsSeparatedByString:@"/"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath: array[array.count-1]]) {
+        [_recoderAndPlayer startPlaying:array[array.count-1]];
+    }
+    else{
+    sender.userInteractionEnabled=false;
+    [voiceFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        
+         NSString *recordAmrPath = [_recoderAndPlayer getPathByFileName:array[array.count-1] ofType:nil];
+         [ data writeToFile:recordAmrPath atomically:YES];
+          [_recoderAndPlayer startPlaying:array[array.count-1]];
+          sender.userInteractionEnabled=true;
+        
+    }];
+   
+    }
 
 }
 - (void) FoldOrUnfoldButtonClicked:(UIButton*)sender

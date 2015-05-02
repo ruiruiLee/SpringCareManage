@@ -55,14 +55,16 @@ typedef void(^ReplayAction)(int index);
     
     UILabel *_line;
     NSString *previousTime;
+    
+    NSArray *Constraints;
 }
 
 
 @property (nonatomic, assign) id<EscortTimeTableCellDelegate> cellDelegate;
 @property (nonatomic, strong) UILabel *_lbToday;
+@property (nonatomic, strong) EscortTimeDataModel *_model;
 @property (nonatomic, strong) UILabel *_lbTimeLine;
 @property (nonatomic, strong) UIButton *_btnReply;
-@property (nonatomic, strong) EscortTimeDataModel *_model;
 
 - (id)initWithReuseIdentifier:(NSString*)reuseIdentifier blocks:(ReplayAction)blocks;
 

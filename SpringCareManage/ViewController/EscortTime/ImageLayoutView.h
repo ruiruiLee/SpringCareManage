@@ -12,12 +12,12 @@
 
 @interface ImageLayoutView : UIView
 {
-    NSMutableArray * _imageViews;
-    NSMutableArray * _images;
+    NSMutableArray * _imageSmallViews;
+     NSMutableArray * _imageSmall;
     NSMutableArray * _bigUrls;
     
     NSArray * _files;
-    NSArray * _imgurls;
+    NSArray * _hBImageArrays;
     
     HBImageViewList *_imageList;
 }

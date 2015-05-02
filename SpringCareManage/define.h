@@ -77,4 +77,15 @@ typedef void(^block)(int code, id content);
 #define imgCoverSize CGSizeMake(750, 508)
 #define imgHeaderSize CGSizeMake(200, 200)
 
+//应用里头像处理尺寸
+#define HeadImage(imageUrl) FormatImage(imageUrl,150,150)
+
+#define TimesImage(imageUrl) FormatImage(imageUrl,200,200)
+
+#define FormatImage(imageUrl,imageWidth,imageHeight) [NSString stringWithFormat:@"%@?imageView/2/w/%d/h/%d", imageUrl,imageWidth,imageHeight]
+
+//首页海报以及产品图片压缩比例大小
+#define PostersImage(imageUrl) FormatImage(imageUrl,414,277)
+#define PostersImage4s(imageUrl) FormatImage(imageUrl,320,175)
+
 #endif

@@ -47,23 +47,18 @@
     for (id obj in self.subviews) {
         [obj removeFromSuperview];
     }
-    _imgurls = images;
+    _hBImageArrays = images;
     _bigUrls = [[NSMutableArray alloc]init];
-    _images = [[NSMutableArray alloc]init];
-    _imageViews = [[NSMutableArray alloc]init];
-    
+    _imageSmallViews = [[NSMutableArray alloc]init];
+    _imageSmall=[[NSMutableArray alloc]init];
     [self layoutImages];
 }
 
 -(void)layoutImages
 {
-    NSUInteger count=[_imgurls count];
+    NSUInteger count=[_hBImageArrays count];
     if(count==1) {
-//        if (bFirstSmall) {
-//            [self drawLessThree];
-//        } else {
-            [self drawSingleImage:[_imgurls objectAtIndex:0]];
-//        }
+    [self drawSingleImage:[_hBImageArrays objectAtIndex:0]];
     }
     else if(count<=3)
         [self drawLessThree];
@@ -79,13 +74,13 @@
 {
     if([_files count]>0){
         float y;
-        NSInteger imgCount = [_imgurls count];
+        NSInteger imgCount = [_hBImageArrays count];
         if(imgCount == 0){
             y = 0;
         }else if(imgCount == 1){
             y = imageMaxHeight;
         }else{
-            y = ([_imgurls count]/4+1)*(imageSpace + imageSize);
+            y = ([_hBImageArrays count]/4+1)*(imageSpace + imageSize);
         }
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, y+5, 44, 29)];
         imageView.image=[UIImage imageNamed:@"f_attach"];
@@ -109,16 +104,8 @@
 
 -(void)drawSingleImage:(ObjImageDataInfo*) url
 {
-    NSMutableString * smlStr=[[NSMutableString alloc]init];
-    NSMutableString * bigStr=[[NSMutableString alloc]init];
-    if([NSStrUtil notEmptyOrNull:url.urlPath]){
-        [smlStr appendFormat:@"%@",url.urlPath];
-        [bigStr appendFormat:@"%@",url.urlPath];
-    }
-    [_bigUrls addObject:bigStr];
-    
     UIImageView * imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageMaxWidth, imageMaxHeight)];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:smlStr] placeholderImage:[UIImage imageNamed:@"img_loading_for_talk"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [imageView sd_setImageWithURL:[NSURL URLWithString:url.urlSmallPath] placeholderImage:[UIImage imageNamed:@"defalut_timeimg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if(image == nil)return ;
         CGSize size = image.size;
         float scale = size.height/size.width;
@@ -132,7 +119,7 @@
         if(scale!=1){
             image=[UIImage imageWithCGImage:image.CGImage scale:scale orientation:UIImageOrientationUp];
         }
-        size=image.size;
+        //size=image.size;
         imageView.frame=CGRectMake(0, 0, width, height);
         imageView.image=image;
         UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookImageAction:)];
@@ -140,16 +127,17 @@
         [imageView addGestureRecognizer:tap];
     }];
     [self addSubview:imageView];
-    [ _imageViews addObject:imageView];
+    [ _imageSmallViews addObject:imageView];
+    [_bigUrls addObject:url.urlBigPath];
 }
 
 -(void)drawLessThree
 {
-    NSInteger count = [_imgurls count];
+    NSInteger count = [_hBImageArrays count];
     for(int i=0;i<count;i++)
     {
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake((imageSize+imageSpace)*i, 0, imageSize, imageSize)];
-        ObjImageDataInfo * file = [_imgurls objectAtIndex:i];
+        ObjImageDataInfo * file = [_hBImageArrays objectAtIndex:i];
         [self addSubview:imageView];
         [self drawImage:imageView file:file];
         if(count-1 == i){
@@ -166,11 +154,11 @@
 
 -(void)drawFour
 {
-    NSInteger count = [_imgurls count];
+    NSInteger count = [_hBImageArrays count];
     for(int i=0; i<count; i++)
     {
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake((imageSpace + imageSize) *( i%2),(imageSpace+imageSize)*(i/2), imageSize, imageSize)];
-        ObjImageDataInfo * file = [_imgurls objectAtIndex:i];
+        ObjImageDataInfo * file = [_hBImageArrays objectAtIndex:i];
         [self addSubview:imageView];
         [self drawImage:imageView file:file];
         if(i==count-1)
@@ -180,11 +168,11 @@
 
 -(void)drawMoreFour
 {
-    NSInteger count=[_imgurls count];
+    NSInteger count=[_hBImageArrays count];
     for(int i=0;i<count;i++)
     {
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake((imageSpace+imageSize)*(i%3),(imageSpace+imageSize)*(i/3), imageSize, imageSize)];
-        ObjImageDataInfo * file = [_imgurls objectAtIndex:i];
+        ObjImageDataInfo * file = [_hBImageArrays objectAtIndex:i];
         [self addSubview:imageView];
         [self drawImage:imageView file:file];
         if(i==count-1)
@@ -194,14 +182,14 @@
 
 -(void)drawImage:(UIImageView*)imageView file:(ObjImageDataInfo*)file
 {
-    [_bigUrls addObject:file.urlPath];
-    [ _imageViews addObject:imageView];
+    [_bigUrls addObject:file.urlBigPath];
+    [ _imageSmallViews addObject:imageView];
     
     imageView.contentMode=UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds=YES;
     __block UIImageView * wimageView=imageView;
     
-    [imageView sd_setImageWithURL:[NSURL URLWithString:file.urlPath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [imageView sd_setImageWithURL:[NSURL URLWithString:file.urlSmallPath] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         UITapGestureRecognizer * tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookImageAction:)];
         wimageView.userInteractionEnabled=YES;
         [wimageView addGestureRecognizer:tap];
@@ -224,25 +212,15 @@
 //        [delegate lookImageAction:self];
     _imageList = [[HBImageViewList alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [_imageList addTarget:self tapOnceAction:@selector(dismissImageAction:)];
-    NSInteger index = [_imageViews indexOfObject:sender.view];
-//    UIImageView * view=(UIImageView*)sender.view;
-//    NSString * url=[_bigUrls objectAtIndex:index];
-//    NSImageUtil *_util = [[NSImageUtil alloc]init];
-    NSInteger count = [_imageViews count];
-    for(int i=0;i<count;i++){
-        UIImage * image=((UIImageView*)[_imageViews objectAtIndex:i]).image;
-        if(image){
-            [_images addObject:image];
-        }else{
-            [_images addObject:[UIImage imageNamed:@"img_loading_for_talk"] ];
+    NSInteger index = [_imageSmallViews indexOfObject:sender.view];
+    UIImage * image;
+    for(int i=0;i<_imageSmallViews.count;i++){
+        image=((UIImageView*)[_imageSmallViews objectAtIndex:i]).image;
+            [_imageSmall addObject:image];
         }
-    }
-//    [_util showBigImageWithUrl:url fromView:view complete:^(UIView * backView) {
-//        [backView setHidden:YES];
-        [_imageList addImagesURL:_bigUrls withSmallImage:_images];
+        [_imageList addImagesURL:_bigUrls withSmallImage:_imageSmall];
         [_imageList setIndex:(int)index];
         [self.window addSubview:_imageList];
-//    }];
 }
 -(void)dismissImageAction:(UIImageView*)sender
 {
@@ -259,7 +237,8 @@
     else if(count == 1){
         return  imageMaxHeight + offset;
     }else{
-        return (count/4+1)*(imageSize + imageSpace)+offset;
+//        return (count/4+1)*(imageSize + imageSpace)+offset;
+        return (count/3 + ((count % 3) > 0 ? 1 : 0)) * (imageSize + imageSpace)+offset;
     }
 }
 

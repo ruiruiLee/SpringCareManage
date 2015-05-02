@@ -11,6 +11,6 @@
 
 @interface ObjImageDataInfo : NSObject
 
-@property (nonatomic, strong) NSString *urlPath;
-
+@property (nonatomic, strong) NSString *urlBigPath;
+@property (nonatomic, strong) NSString *urlSmallPath;
 @end

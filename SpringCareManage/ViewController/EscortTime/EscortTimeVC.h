@@ -46,6 +46,8 @@
     UIView *headerView;
     
     UIImageView *headerbg;
+    
+    BOOL isHasDefaultLover;
 }
 
 @property (nonatomic, strong) PullTableView *tableView;

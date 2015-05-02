@@ -59,6 +59,18 @@
             [weakSelf.tableView reloadData];
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
         }];
+        
+        [tableView setBackgroundView:nil];
+        tableView.tableHeaderView.hidden=NO;
+        isHasDefaultLover = YES;
+    }
+    else{
+        
+        isHasDefaultLover = NO;
+        
+        UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+        [tableView setBackgroundView:imageView];
+        tableView.tableHeaderView.hidden=YES;
     }
 }
 
@@ -109,6 +121,8 @@
     [self creatHeadView];
     tableView.tableHeaderView = headerView;
     tableView.tableFooterView = [[UIView alloc] init];
+    
+    [self SetHeaderInfoWithModel];
 }
 
 -(void)creatHeadView{
@@ -181,8 +195,6 @@
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbPhone attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    
-    [self SetHeaderInfoWithModel];
 }
 
 - (void) NavRightButtonClickEvent:(UIButton *)sender
@@ -200,6 +212,9 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if(!isHasDefaultLover)
+        return 0;
+    
     return 2;
 }
 
@@ -411,10 +426,14 @@
 - (void) RequestRecordList:(block) block
 {
     UserModel *userinfo = [UserModel sharedUserInfo];
-    if(userinfo.userId == nil)
+    if(userinfo.userId == nil){
+        block(0, nil);
         return;
-    if(_defaultLover == nil)
+    }
+    if(_defaultLover == nil){
+        block(0, nil);
         return;
+    }
     
     NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
     [parmas setObject:userinfo.userId forKey:@"careId"];

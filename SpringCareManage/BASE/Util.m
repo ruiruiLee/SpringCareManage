@@ -122,15 +122,21 @@
     return  result;
 }
 
-+ (NSString*) convertTimeFromStringDate:(NSString*) stringdate
++ (NSArray*) convertTimeFromStringDate:(NSString*) stringdate
 {
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *date=[formatter dateFromString:stringdate];
     
     NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init] ;
     [formatter2 setDateFormat:@"HH:mm"];
-    return [formatter2 stringFromDate:date];
+    
+    NSDateFormatter *formatter3 = [[NSDateFormatter alloc] init] ;
+    [formatter3 setDateFormat:@"yyyy-MM-dd"];
+    
+    NSArray *array = [[NSArray alloc]initWithObjects:[formatter3 stringFromDate:date],[formatter2 stringFromDate:date], nil];
+    return array;
 }
 
 + (NSString *) reductionTimeFromOrderTime:(NSString *)orderTime

@@ -9,6 +9,6 @@
 #import "ObjImageDataInfo.h"
 
 @implementation ObjImageDataInfo
-@synthesize urlPath;
-
+@synthesize urlBigPath;
+@synthesize urlSmallPath;
 @end

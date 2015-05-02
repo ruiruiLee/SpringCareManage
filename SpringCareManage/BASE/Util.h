@@ -77,7 +77,7 @@ typedef enum : NSUInteger {
 + (NSString*) convertStringFromDateOnlyOnDay:(NSDate*) date;
 + (NSString*) orderTimeFromDate:(NSDate*) date;  //订单展示时间形式
 + (NSString *) reductionTimeFromOrderTime:(NSString *)orderTime;//逆转回来，和上面是一对
-+ (NSString*) convertTimeFromStringDate:(NSString*) stringdate;
++ (NSArray*) convertTimeFromStringDate:(NSString*) stringdate;
 + (int) getAgeWithBirthday:(NSDate*) birthDate;
 + (NSInteger) GetAgeByBirthday:(NSString *) day;
 +(NSString *)convertTimetoBroadFormat:(NSString*) inputDate;

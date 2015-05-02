@@ -8,6 +8,7 @@
 
 #import "EscortTimeDataModel.h"
 #import "ObjImageDataInfo.h"
+#import "define.h"
 #import "Util.h"
 #import "UserModel.h"
 
@@ -50,21 +51,21 @@ static NSInteger totalCount = 0;
     
     NSString *content = [dic objectForKey:@"content"];
     NSMutableString *str = [[NSMutableString alloc] init];
-//    if(model.replyUserName!= nil){
-//        if ([model.replyUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
-//            [str appendString:@"我"];
-//        }
-//        else
-//          [str appendString:model.replyUserName];
-//    }
-//    
-//    if(model.orgUserName != nil){
-//        if ([model.orgUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
-//           [str appendString:[NSString stringWithFormat:@"@%@",@"我"]];
-//        }
-//        else
-//            [str appendString:[NSString stringWithFormat:@"@%@", model.orgUserName]];
-//    }
+    if(model.replyUserName!= nil){
+        if ([model.replyUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
+            [str appendString:@"我"];
+        }
+        else
+          [str appendString:model.replyUserName];
+    }
+    
+    if(model.orgUserName != nil){
+        if ([model.orgUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
+           [str appendString:[NSString stringWithFormat:@"@%@",@"我"]];
+        }
+        else
+            [str appendString:[NSString stringWithFormat:@"@%@", model.orgUserName]];
+    }
     [str appendString:[NSString stringWithFormat:@":%@", content]];
 
     model.content = str;
@@ -124,17 +125,19 @@ static NSInteger totalCount = 0;
     model.careId = [dic objectForKey:@"careId"];
     model.content = [dic objectForKey:@"content"];
     model.createAt = [dic objectForKey:@"createdAt"];
-    model.createTime =  [Util convertTimeFromStringDate:model.createAt];
-    model.createDate = [Util convertTimetoBroadFormat:model.createAt];
+    NSArray *array = [Util convertTimeFromStringDate:model.createAt];
+    model.createTime =  array[1];
+    model.createDate =   array[0];//[Util convertTimetoBroadFormat:array[0]];
     model.replyInfos = [EscortTimeReplyDataModel ArrayFromDictionaryArray:[dic objectForKey:@"replys"]];
     
     NSArray *files = [dic objectForKey:@"files"];
     NSMutableArray *photoArray = [[NSMutableArray alloc] init];
     for (int i = 0; i < [files count]; i++) {
         FileDataModel *file = [FileDataModel ObjectFromDictionary:[files objectAtIndex:i]];
-        if(file.fileType == 99){
+        if(file.fileType == 1){
             ObjImageDataInfo *info = [[ObjImageDataInfo alloc] init];
-            info.urlPath = file.url;
+            info.urlBigPath = file.url;
+            info.urlSmallPath = TimesImage(file.url);
             [photoArray addObject:info];
         }else if (file.fileType == 2)
             model.VoliceDataModel = file;
@@ -147,21 +150,17 @@ static NSInteger totalCount = 0;
 }
 
 
-+ (void) LoadCareTimeListWithLoverId:(NSString *)loverId Pages:(NSInteger) num block:(block) block
++ (void) LoadCareTimeListWithLoverId:(NSString *)loverId pages:(NSInteger) num block:(block) block
 {
 
-    if(loverId == nil)
-    {
-        if(block)
-            block (1000, nil);
-    }
-    
     NSMutableDictionary *mdic = [[NSMutableDictionary alloc] init];
-
-    [mdic setObject:[UserModel sharedUserInfo].userId forKey:@"careId"];
+    if(loverId){
+        [mdic setObject:loverId forKey:@"loverId"];
+    }
+    NSInteger offset = num * LIMIT_COUNT;
+    [mdic setObject:[UserModel sharedUserInfo].userId forKey:@"registerId"];
     [mdic setObject:[NSNumber numberWithInteger:LIMIT_COUNT] forKey:@"limit"];
-    [mdic setObject:[NSNumber numberWithInteger:num] forKey:@"offset"];
-    [mdic setObject:loverId forKey:@"loverId"];
+    [mdic setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
     
     [LCNetWorkBase postWithMethod:@"api/careTime/list" Params:mdic Completion:^(int code, id content) {
         if(code){
@@ -169,7 +168,7 @@ static NSInteger totalCount = 0;
                 totalCount = [[content objectForKey:@"total"] integerValue];
             if (totalCount>0) {
                 NSArray *array = [content objectForKey:@"rows"];
-                NSString* previousDate=[Util StringFromDate:[NSDate date]];
+                NSString* previousDate=nil;
                 for (int i = 0; i < [array count]; i++) {
                     NSDictionary *dic = [array objectAtIndex:i];
                     EscortTimeDataModel *model = [EscortTimeDataModel ObjectFromDictionary:dic];
