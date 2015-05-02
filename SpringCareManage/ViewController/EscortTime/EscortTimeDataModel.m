@@ -158,7 +158,7 @@ static NSInteger totalCount = 0;
         [mdic setObject:loverId forKey:@"loverId"];
     }
     NSInteger offset = num * LIMIT_COUNT;
-    [mdic setObject:[UserModel sharedUserInfo].userId forKey:@"registerId"];
+    [mdic setObject:[UserModel sharedUserInfo].userId forKey:@"careId"];
     [mdic setObject:[NSNumber numberWithInteger:LIMIT_COUNT] forKey:@"limit"];
     [mdic setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
     
