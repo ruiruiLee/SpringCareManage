@@ -292,6 +292,22 @@
     EscortTimeDataModel *data = [_dataList objectAtIndex:indexPath.row];
     [cell setContentData:data];
     
+    BOOL showTime = NO;
+    NSString *createAt = [Util StringFromDate:[NSDate date]];
+    if(indexPath.row > 0){
+        createAt = ((EscortTimeDataModel*)[_dataList objectAtIndex:indexPath.row - 1]).createAt;
+    }
+    
+    showTime = [Util isDateShowFirstDate:createAt secondDate:data.createAt];
+    
+    if (showTime) {
+        
+        cell._lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+        cell._lbToday.hidden = NO;
+    }else{
+        cell._lbToday.hidden = YES;
+    }
+    
     return cell;
 }
 
@@ -317,6 +333,9 @@
         [self.view addSubview:_feedbackView.view];
 
     }
+    if(ReplyName != nil){
+        _feedbackView.feedbackTextField.placeholder = [NSString stringWithFormat:@"@%@:", ReplyName];
+    }
     [_feedbackView.feedbackTextField becomeFirstResponder];
 }
 
@@ -325,7 +344,7 @@
 {
     NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
     [parmas setObject:msg forKey:@"content"];
-//    [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"replyUserId"];
+    [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"replyUserId"];
     if(_replyContentModel){
         [parmas setObject:_replyContentModel.itemId forKey:@"careTimeId"];
     }
@@ -486,6 +505,7 @@
     vc.contentType= EnumEscortTime;
     vc.hidesBottomBarWhenPushed = YES;
     vc.NavTitle = @"发布陪护时光";
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

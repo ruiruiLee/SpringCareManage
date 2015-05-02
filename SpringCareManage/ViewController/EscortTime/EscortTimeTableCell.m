@@ -250,7 +250,7 @@
     EscortTimeReplyDataModel *model = [_model.replyInfos objectAtIndex:indexPath.row];
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([cellDelegate respondsToSelector:@selector(commentButtonClick:ReplyName:ReplyID:)]) {
-        [cellDelegate commentButtonClick:self ReplyName:model.replyUserName ReplyID:model.guId];
+        [cellDelegate commentButtonClick:self ReplyName:model.replyUserName ReplyID:model.replyUserId];
     }
 }
 
@@ -273,13 +273,13 @@
     NSString *voiceLen = data.VoliceDataModel.seconds;//音频时长
    _lbPublishTime.text = data.createTime;//发布时间;
     
-    if (data.showTime) {
-        
-        _lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
-        _lbToday.hidden = NO;
-      }else{
-        _lbToday.hidden = YES;
-    }
+//    if (data.showTime) {
+//        
+//        _lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+//        _lbToday.hidden = NO;
+//      }else{
+//        _lbToday.hidden = YES;
+//    }
     NSArray *replyData = data.replyInfos;//回复数据
     NSArray *imgPicArray = data.imgPathArray;//图片数据列表
     

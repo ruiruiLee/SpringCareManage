@@ -15,7 +15,7 @@
 
 #import "DefaultLoverSelectVC.h"
 
-@interface WorkSummaryVC ()<EscortPublishCellDelegate, DefaultLoverSelectDelegate>
+@interface WorkSummaryVC ()<EscortPublishCellDelegate, DefaultLoverSelectDelegate, EscortSendDelegate>
 
 @property (nonatomic, strong) EscortTimeTableCell *prototypeCell;
 
@@ -280,6 +280,22 @@
     EscortTimeDataModel *data = [_dataList objectAtIndex:indexPath.row];
     [cell setContentData:data];
     
+    BOOL showTime = NO;
+    NSString *createAt = [Util StringFromDate:[NSDate date]];
+    if(indexPath.row > 0){
+        createAt = ((EscortTimeDataModel*)[_dataList objectAtIndex:indexPath.row - 1]).createAt;
+    }
+    
+    showTime = [Util isDateShowFirstDate:createAt secondDate:data.createAt];
+    
+    if (showTime) {
+        
+        cell._lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+        cell._lbToday.hidden = NO;
+    }else{
+        cell._lbToday.hidden = YES;
+    }
+    
     return cell;
 }
 
@@ -453,6 +469,7 @@
     vc.loverId = _defaultLover.loverId ;
     vc.NavTitle = @"发布护理日志";
     vc.contentType = EnumWorkSummary;
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -506,6 +523,16 @@
         if(block)
             block(0, nil);
     }];
+}
+
+- (void)delegetSendEnd:(Boolean)sucess
+{
+    if (sucess) {
+        [self pullTableViewDidTriggerRefresh:self.tableView];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发布失败请重新发布" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 @end

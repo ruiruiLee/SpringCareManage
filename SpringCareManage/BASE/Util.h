@@ -125,4 +125,6 @@ typedef enum : NSUInteger {
 
 + (NSString*) convertShotStrFromDate:(NSDate*) date;
 
++ (BOOL) isDateShowFirstDate:(NSString *)date1 secondDate:(NSString *)date2;
+
 @end
