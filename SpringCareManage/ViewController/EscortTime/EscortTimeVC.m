@@ -335,7 +335,8 @@
     }
     if(ReplyName != nil){
         _feedbackView.feedbackTextField.placeholder = [NSString stringWithFormat:@"@%@:", ReplyName];
-    }
+    }else
+        _feedbackView.feedbackTextField.placeholder = @"我要回复";
     [_feedbackView.feedbackTextField becomeFirstResponder];
 }
 
