@@ -450,6 +450,7 @@
 {
     PublishInfoVC *vc = [[PublishInfoVC alloc] initWithNibName:nil bundle:nil];
     vc.hidesBottomBarWhenPushed = YES;
+    vc.loverId = _defaultLover.loverId ;
     vc.NavTitle = @"发布护理日志";
     vc.contentType = EnumWorkSummary;
     [self.navigationController pushViewController:vc animated:YES];
@@ -486,7 +487,7 @@
     [LCNetWorkBase postWithMethod:@"api/record/list" Params:parmas Completion:^(int code, id content) {
         if(code){
             
-            pages = [[content objectForKey:@"total"] integerValue];
+            totalPages = [[content objectForKey:@"total"] integerValue];
             NSArray *array = [content objectForKey:@"rows"];
             NSMutableArray *result = [[NSMutableArray alloc] init];
             for (int i = 0; i < [array count]; i++) {
@@ -498,6 +499,7 @@
                 [weakSelf.dataList removeAllObjects];
             
             [weakSelf.dataList addObjectsFromArray:result];
+            [weakSelf.tableView reloadData];
             if(block)
                 block(1, nil);
         }

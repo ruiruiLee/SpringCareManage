@@ -12,7 +12,7 @@
 #import <AVOSCloud/AVOSCloud.h>
 
 
-@interface PublishInfoVC ()
+@interface PublishInfoVC ()<UITextViewDelegate>
 
 @end
 
@@ -49,8 +49,11 @@
     
     _tvContent = [[PlaceholderTextView alloc] initWithFrame:CGRectZero];
     [_bgView addSubview:_tvContent];
+    _tvContent.font = _FONT(15);
     _tvContent.translatesAutoresizingMaskIntoConstraints = NO;
     _tvContent.placeholder = @"写下你的记录......";
+    _tvContent.delegate = self;
+    _tvContent.returnKeyType = UIReturnKeyDone;
     
     _btnRecord = [[UIButton alloc] initWithFrame:CGRectZero];
     [_bgView addSubview:_btnRecord];
@@ -88,7 +91,10 @@
     imageScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     //
     NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _tvContent, _btnTargetSelect, _btnRecord, _line, imageScrollView);
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_bgView]-0-|" options:0 metrics:nil views:views]];
+    
+    NSString *format = [NSString stringWithFormat:@"H:|-0-[_bgView(%f)]-0-|", ScreenWidth];
+    
+    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:format options:0 metrics:nil views:views]];
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-0-[imageScrollView]-0-|" options:0 metrics:nil views:views]];
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[imageScrollView]-0-|" options:0 metrics:nil views:views]];
     
@@ -298,7 +304,40 @@
 
 - (void)PublishWorkSummary
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+        [self fileupMothed];
+        NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+        [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
+        [parmas setObject:self.loverId forKey:@"loverId"];
+        [parmas setObject:_tvContent.text forKey:@"content"];
+        if (fileString!=nil) {
+            [parmas setObject:fileString forKey:@"fileIds"];
+        }
+        [LCNetWorkBase postWithMethod:@"api/record/save" Params:parmas Completion:^(int code, id content) {
+            if(code){
+                [_delegate delegetSendEnd:code];
+            }
+        }];
+        
+    });
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
     
+    [_tvContent resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
