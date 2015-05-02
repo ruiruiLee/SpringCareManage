@@ -428,7 +428,8 @@
                     weakSelf.tableView.tableHeaderView.hidden=YES;
                     [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
                 }
-            }
+            }else
+                [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
         }];
     }else{
         [self loadDataList];

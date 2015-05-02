@@ -58,7 +58,8 @@
     self.intro = [muser objectForKey:@"intro"];
     self.detailIntro = [muser objectForKey:@"detailIntro"];
     self.beginCareDate = [muser objectForKey:@"beginCareDate"];
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
+    });
 }
 -(NSString*) displayName{
         if (self.chineseName.length==0) {

@@ -42,7 +42,7 @@
         _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:loverInfo.sex]]);
         _lbPhone.text = loverInfo.phone;
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone);
+        NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress);
         if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
             AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
         }
@@ -86,7 +86,7 @@
     
     [headerbg removeConstraints:AttentionArray];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone);
+    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress);
     if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
         AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
     }
@@ -146,13 +146,18 @@
     _lbName.textAlignment = NSTextAlignmentRight;
     _lbName.textColor = _COLOR(0x22, 0x22, 0x22);
     
+    _imgvAddress = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [headerbg addSubview:_imgvAddress];
+    _imgvAddress.translatesAutoresizingMaskIntoConstraints = NO;
+    _imgvAddress.image = ThemeImage(@"nurselistlocation");
+    
     _btnAddr = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_btnAddr];
     _btnAddr.userInteractionEnabled = NO;
     _btnAddr.translatesAutoresizingMaskIntoConstraints = NO;
     _btnAddr.titleLabel.font = _FONT(14);
     [_btnAddr setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
-    [_btnAddr setImage:[UIImage imageNamed:@"nurselistlocation"] forState:UIControlStateNormal];
+//    [_btnAddr setImage:[UIImage imageNamed:@"nurselistlocation"] forState:UIControlStateNormal];
     
     _sex = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_sex];
@@ -180,17 +185,19 @@
     _lbPhone.textAlignment = NSTextAlignmentRight;
     _lbPhone.textColor = _COLOR(0x99, 0x99, 0x99);
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone);
+    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress);
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[headerbg]-0-|" options:0 metrics:nil views:views]];
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[headerbg(100)]->=0-|" options:0 metrics:nil views:views]];
     
     AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
     [headerbg addConstraints:AttentionArray];
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_btnAddr]->=20-|" options:0 metrics:nil views:views]];
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_btnMobile]-5-[_lbPhone]->=20-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_imgvAddress(15)]-2-[_btnAddr]->=20-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_btnMobile]-2-[_lbPhone]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_photoImgView(72)]-30-|" options:0 metrics:nil views:views]];
     
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-10-[_btnMobile(20)]-4-[_btnAddr(20)]-12-|" options:0 metrics:nil views:views]];
+    
+    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnAddr attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -372,10 +379,44 @@
 {
     pages = 0;
 //    [self loadDataList];
-    __weak WorkSummaryVC *weakSelf = self;
-    [self RequestRecordList:^(int code, id content) {
-        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
-    }];
+    [self RefreshDataList];
+}
+
+- (void) RefreshDataList
+{
+    UserModel *model = [UserModel sharedUserInfo];
+    OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
+    if(orderModel.orderId != nil){
+        __weak WorkSummaryVC *weakSelf = self;
+        [self RequestRecordList:^(int code, id content) {
+            [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
+        }];
+    }else{
+        __weak WorkSummaryVC *weakSelf = self;
+        [model LoadOrderInfo:^(int code, id content) {
+            if(code == 1){
+                OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
+                if(orderModel != nil){
+                    [weakSelf.tableView setBackgroundView:nil];
+                    weakSelf.tableView.tableHeaderView.hidden=NO;
+                    isHasDefaultLover = YES;
+                    
+                    [self RequestRecordList:^(int code, id content) {
+                        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
+                    }];
+                }else{
+                    
+                    isHasDefaultLover = NO;
+                    
+                    UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+                    [weakSelf.tableView setBackgroundView:imageView];
+                    weakSelf.tableView.tableHeaderView.hidden=YES;
+                    [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
+                }
+            }else
+                [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
+        }];
+    }
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)_pullTableView

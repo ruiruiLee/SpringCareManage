@@ -29,6 +29,8 @@
     UIButton *_btnMobile;
     UILabel *_lbPhone;
     
+    UIImageView *_imgvAddress;
+    
     //
     EscortTimeDataModel *_replyContentModel;//
     NSString *_reReplyPId;//被回复人id
