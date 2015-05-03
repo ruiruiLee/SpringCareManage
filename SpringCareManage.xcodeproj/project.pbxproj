@@ -38,6 +38,9 @@
 		86B4619E1AF46EDD00B1B66D /* EscortTimeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B4619B1AF46EDD00B1B66D /* EscortTimeDataModel.m */; };
 		86B4619F1AF46EDD00B1B66D /* ObjImageDataInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B4619D1AF46EDD00B1B66D /* ObjImageDataInfo.m */; };
 		86B461A11AF4797D00B1B66D /* img_index_03bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B461A01AF4797D00B1B66D /* img_index_03bg@2x.png */; };
+		86B461AD1AF5CB5D00B1B66D /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461AC1AF5CB5D00B1B66D /* UIView+MGBadgeView.m */; };
+		86B461B01AF5D0CF00B1B66D /* MsgListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461AF1AF5D0CF00B1B66D /* MsgListVC.m */; };
+		86B461B31AF5D2B800B1B66D /* MsgListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461B21AF5D2B800B1B66D /* MsgListCell.m */; };
 		86B749801AE9DE00000BA6DB /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B7497F1AE9DE00000BA6DB /* UserModel.m */; };
 		86B749831AE9E8CB000BA6DB /* LCNetWorkBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B749821AE9E8CB000BA6DB /* LCNetWorkBase.m */; };
 		86B749861AE9E9F0000BA6DB /* TextAndEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B749851AE9E9F0000BA6DB /* TextAndEmojiView.m */; };
@@ -431,6 +434,12 @@
 		86B4619C1AF46EDD00B1B66D /* ObjImageDataInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjImageDataInfo.h; path = SpringCareManage/ViewController/EscortTime/ObjImageDataInfo.h; sourceTree = SOURCE_ROOT; };
 		86B4619D1AF46EDD00B1B66D /* ObjImageDataInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjImageDataInfo.m; path = SpringCareManage/ViewController/EscortTime/ObjImageDataInfo.m; sourceTree = SOURCE_ROOT; };
 		86B461A01AF4797D00B1B66D /* img_index_03bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_index_03bg@2x.png"; sourceTree = "<group>"; };
+		86B461AB1AF5CB5D00B1B66D /* UIView+MGBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MGBadgeView.h"; sourceTree = "<group>"; };
+		86B461AC1AF5CB5D00B1B66D /* UIView+MGBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MGBadgeView.m"; sourceTree = "<group>"; };
+		86B461AE1AF5D0CF00B1B66D /* MsgListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgListVC.h; sourceTree = "<group>"; };
+		86B461AF1AF5D0CF00B1B66D /* MsgListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgListVC.m; sourceTree = "<group>"; };
+		86B461B11AF5D2B800B1B66D /* MsgListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgListCell.h; sourceTree = "<group>"; };
+		86B461B21AF5D2B800B1B66D /* MsgListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgListCell.m; sourceTree = "<group>"; };
 		86B7497E1AE9DE00000BA6DB /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		86B7497F1AE9DE00000BA6DB /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		86B749811AE9E8CB000BA6DB /* LCNetWorkBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCNetWorkBase.h; sourceTree = "<group>"; };
@@ -1134,6 +1143,8 @@
 		86B8E6151ADA36FC00A5139E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86B461AB1AF5CB5D00B1B66D /* UIView+MGBadgeView.h */,
+				86B461AC1AF5CB5D00B1B66D /* UIView+MGBadgeView.m */,
 				86B74A6A1AEC8262000BA6DB /* FaceBoardView.h */,
 				86B74A6B1AEC8262000BA6DB /* FaceBoardView.m */,
 				86B74A651AEC8247000BA6DB /* feedbackView.h */,
@@ -1235,6 +1246,8 @@
 				86B96A681ADB662E00441168 /* MyEscortObjectVC.m */,
 				86B74A3E1AEBDD5E000BA6DB /* OrderDetailsVC.h */,
 				86B74A3F1AEBDD5E000BA6DB /* OrderDetailsVC.m */,
+				86B461AE1AF5D0CF00B1B66D /* MsgListVC.h */,
+				86B461AF1AF5D0CF00B1B66D /* MsgListVC.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1297,6 +1310,8 @@
 				8655238A1ADAA4A700E803FD /* EvaluateListCell.m */,
 				86B96A6A1ADB668400441168 /* EscortObjectCell.h */,
 				86B96A6B1ADB668400441168 /* EscortObjectCell.m */,
+				86B461B11AF5D2B800B1B66D /* MsgListCell.h */,
+				86B461B21AF5D2B800B1B66D /* MsgListCell.m */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -2139,6 +2154,7 @@
 				86B749FD1AEA33F0000BA6DB /* WaitCommentOrderListModel.m in Sources */,
 				865523581ADA88E700E803FD /* MyOrderListVC.m in Sources */,
 				86B4619F1AF46EDD00B1B66D /* ObjImageDataInfo.m in Sources */,
+				86B461B01AF5D0CF00B1B66D /* MsgListVC.m in Sources */,
 				86B749E81AEA275F000BA6DB /* LoverInfoModel.m in Sources */,
 				CFBC53331ADD4C4C004FB8F3 /* UIImage+MultiFormat.m in Sources */,
 				86B749E51AEA221D000BA6DB /* OrderInfoModel.m in Sources */,
@@ -2147,6 +2163,7 @@
 				CFBC52131ADD3602004FB8F3 /* PickImgScrollView.m in Sources */,
 				861C181F1AECFDBE00BC5091 /* DefaultLoverSelectVC.m in Sources */,
 				86B8E6501ADA381C00A5139E /* NSStrUtil.m in Sources */,
+				86B461B31AF5D2B800B1B66D /* MsgListCell.m in Sources */,
 				86B749831AE9E8CB000BA6DB /* LCNetWorkBase.m in Sources */,
 				CFBC53321ADD4C4C004FB8F3 /* UIImage+GIF.m in Sources */,
 				86B74A641AEC81ED000BA6DB /* VoiceConverter.mm in Sources */,
@@ -2213,6 +2230,7 @@
 				86B74A301AEA8450000BA6DB /* EvaluateInfoModel.m in Sources */,
 				CFBC524E1ADD37E9004FB8F3 /* MWTapDetectingView.m in Sources */,
 				86B74A401AEBDD5E000BA6DB /* OrderDetailsVC.m in Sources */,
+				86B461AD1AF5CB5D00B1B66D /* UIView+MGBadgeView.m in Sources */,
 				CFA34A591AEE1BA40024B695 /* LCVoiceHud.m in Sources */,
 				86B96A721ADB6F4B00441168 /* UserLoginVC.m in Sources */,
 				CFBC52711ADD385D004FB8F3 /* ELCAsset.m in Sources */,

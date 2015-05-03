@@ -12,9 +12,11 @@
 #import "MyOrderListVC.h"
 #import "MyEvaluateListVC.h"
 #import "MyEscortObjectVC.h"
+#import "MsgListVC.h"
 
 #import "UserLoginVC.h"
 #import "UserModel.h"
+#import "UIView+MGBadgeView.h"
 
 @interface HomePageVC ()
 
@@ -284,6 +286,23 @@
     
     _detailInfo.text = userInfo.intro;
     
+    _btnTreatPay.badgeView.badgeValue = 0;
+    _btnNew.badgeView.badgeValue = 0;
+    _btnSubscribe.badgeView.badgeValue = 0;
+    _btnEvaluate.badgeView.badgeValue = 0;
+    
+    if(userInfo.userOrderInfo != nil){
+        UserDetailModel *detail = userInfo.userOrderInfo;
+        if(detail.newCount > 0)
+            _btnNew.badgeView.badgeValue = detail.newCount;
+        if(detail.confirmedCount > 0)
+            _btnSubscribe.badgeView.badgeValue = detail.confirmedCount;
+        if(detail.waitPayCount > 0)
+            _btnTreatPay.badgeView.badgeValue = detail.waitPayCount;
+        if(detail.waitCommentCount > 0)
+            _btnEvaluate.badgeView.badgeValue = detail.waitCommentCount;
+    }
+    
     NSString *title = [NSString stringWithFormat:@"%@ %d岁 护龄%d年", userInfo.birthAddr, [Util getAgeWithBirthday:userInfo.birthDay], [Util getAgeWithBirthday:userInfo.beginCareDate]];
     [_btnInfo setTitle:title forState:UIControlStateNormal];
     
@@ -430,6 +449,10 @@
         MyEscortObjectVC *vc = [[MyEscortObjectVC alloc] initWithNibName:nil bundle:nil];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        MsgListVC *vc = [[MsgListVC alloc] initWithNibName:nil bundle:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -456,6 +479,7 @@
         vc.NavTitle = @"待付款订单";
     else
         vc.NavTitle = @"待评价订单";
+    sender.badgeView.badgeValue = 0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

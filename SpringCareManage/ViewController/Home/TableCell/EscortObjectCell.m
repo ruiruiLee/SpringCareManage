@@ -35,6 +35,8 @@
     _photoImgV = [[UIImageView alloc] initWithFrame:CGRectZero];
     _photoImgV.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_photoImgV];
+    _photoImgV.clipsToBounds = YES;
+    _photoImgV.layer.cornerRadius = 30;
     
     _lbNickName = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_lbNickName];

@@ -48,6 +48,8 @@
     UIImageView *headerbg;
     
     BOOL isHasDefaultLover;
+    
+    UIButton *_btnLoverSelect;
 }
 
 @property (nonatomic, strong) PullTableView *tableView;

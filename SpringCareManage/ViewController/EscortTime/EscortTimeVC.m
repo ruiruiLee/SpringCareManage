@@ -38,6 +38,8 @@
         
         _defaultLover = orderModel.loverinfo;
         
+        [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
+        
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         RegisterInfoModel *registerInfo = orderModel.registerInfo;
         _lbName.text = loverInfo.name;
@@ -64,6 +66,8 @@
 
 - (void) setContent
 {
+    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
+    
     _lbName.text = _defaultLover.name;
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
     [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
@@ -93,8 +97,21 @@
     self.NavigationBar.btnLeft.hidden = YES;
     self.NavigationBar.alpha = 0.8;
     
-    self.NavigationBar.btnRight.hidden = NO;
-    self.NavigationBar.btnRight.backgroundColor = [UIColor redColor];
+//    self.NavigationBar.btnRight.hidden = NO;
+//    self.NavigationBar.btnRight.layer.cornerRadius = 20;
+//    self.NavigationBar.btnRight.clipsToBounds = YES;
+    
+    _btnLoverSelect = [[UIButton alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:_btnLoverSelect];
+    _btnLoverSelect.translatesAutoresizingMaskIntoConstraints = NO;
+    _btnLoverSelect.clipsToBounds = YES;
+    _btnLoverSelect.layer.cornerRadius = 20;
+    [_btnLoverSelect addTarget:self action:@selector(NavRightButtonClickEvent:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnLoverSelect(40)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_btnLoverSelect)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=0-[_btnLoverSelect(40)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_btnLoverSelect)]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_btnLoverSelect attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1 constant:-10]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_btnLoverSelect attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.NavigationBar attribute:NSLayoutAttributeBottom multiplier:1 constant:-2]];
 
     tableView = [[PullTableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
