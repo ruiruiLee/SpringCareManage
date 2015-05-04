@@ -18,7 +18,7 @@
 #import "UserModel.h"
 #import "UIView+MGBadgeView.h"
 
-@interface HomePageVC ()
+@interface HomePageVC ()<EGORefreshTableHeaderDelegate>
 {
     BOOL _reloading;
 }
