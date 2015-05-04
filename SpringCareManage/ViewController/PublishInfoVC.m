@@ -224,7 +224,7 @@
         [self PublishEscortTime];
     else
         [self PublishWorkSummary];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
     
 }
 - (void) NavLeftButtonClickEvent:(UIButton *)sender
@@ -284,32 +284,47 @@
 
 - (void)PublishEscortTime
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
-    [self fileupMothed];
-    NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
-    [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
-    [parmas setObject:self.loverId forKey:@"loverId"];
-    [parmas setObject:_tvContent.text forKey:@"content"];
-    if (fileString!=nil) {
-      [parmas setObject:fileString forKey:@"fileIds"];
+    if(fileString == nil && (_tvContent.text == nil || [_tvContent.text length] == 0)){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
     }
-    [LCNetWorkBase postWithMethod:@"api/careTime/save" Params:parmas Completion:^(int code, id content) {
-        if(code){
-            [_delegate delegetSendEnd:code];
-        }
-    }];
-        
-    });
-}
-
-- (void)PublishWorkSummary
-{
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
         [self fileupMothed];
         NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
         [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
         [parmas setObject:self.loverId forKey:@"loverId"];
-        [parmas setObject:_tvContent.text forKey:@"content"];
+        if(_tvContent.text != nil && [_tvContent.text length] > 0)
+            [parmas setObject:_tvContent.text forKey:@"content"];
+        if (fileString!=nil) {
+          [parmas setObject:fileString forKey:@"fileIds"];
+        }
+        [LCNetWorkBase postWithMethod:@"api/careTime/save" Params:parmas Completion:^(int code, id content) {
+            if(code){
+                [_delegate delegetSendEnd:code];
+            }
+        }];
+    });
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)PublishWorkSummary
+{
+    if(fileString == nil && (_tvContent.text == nil || [_tvContent.text length] == 0)){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+        [self fileupMothed];
+        NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+        [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
+        [parmas setObject:self.loverId forKey:@"loverId"];
+        if(_tvContent.text != nil && [_tvContent.text length] > 0)
+            [parmas setObject:_tvContent.text forKey:@"content"];
         if (fileString!=nil) {
             [parmas setObject:fileString forKey:@"fileIds"];
         }
@@ -320,6 +335,8 @@
         }];
         
     });
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
