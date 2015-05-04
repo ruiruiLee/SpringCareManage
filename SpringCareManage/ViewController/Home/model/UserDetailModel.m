@@ -17,14 +17,15 @@
     
     [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"careId"];
     
+    __weak UserDetailModel *weakSelf = self;
     [LCNetWorkBase postWithMethod:@"api/care/index" Params:parmas Completion:^(int code, id content) {
         if(code == 1 && [content objectForKey:@"code"] == 0){
             //各类型订单数
             NSDictionary *orderCount = [content objectForKey:@"orderCount"];
-            self.newCount = [[orderCount objectForKey:@"newCount"] integerValue];
-            self.confirmedCount = [[orderCount objectForKey:@"confirmedCount"] integerValue];
-            self.waitPayCount = [[orderCount objectForKey:@"waitPayCount"] integerValue];
-            self.waitCommentCount = [[orderCount objectForKey:@"waitCommentCount"] integerValue];
+            weakSelf.newCount = [[orderCount objectForKey:@"newCount"] integerValue];
+            weakSelf.confirmedCount = [[orderCount objectForKey:@"confirmedCount"] integerValue];
+            weakSelf.waitPayCount = [[orderCount objectForKey:@"waitPayCount"] integerValue];
+            weakSelf.waitCommentCount = [[orderCount objectForKey:@"waitCommentCount"] integerValue];
             
             //当前正在执行的产品信息
             NSDictionary *processOrder = [content objectForKey:@"processOrder"];
@@ -33,7 +34,7 @@
             }
             
             if(block)
-                block (1, nil);
+                block (1, content);
         }
         else
         {

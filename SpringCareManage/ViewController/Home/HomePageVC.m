@@ -119,6 +119,8 @@
     [_bgView addSubview:_btnCert];
     _btnCert.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnCert setImage:[UIImage imageNamed:@"certLogo"] forState:UIControlStateNormal];
+    [_btnCert addTarget:self action:@selector(lookImageAction:) forControlEvents:UIControlEventTouchUpInside];
+    _btnCert.hidden = YES;
     
     _lbMobile = [self createLabel:_FONT(13) txtColor:_COLOR(0x22, 0x22, 0x22) rootView:_bgView];//电话
     
@@ -300,6 +302,11 @@
     _lbMobile.text = userInfo.mobilePhoneNumber;
     
     _detailInfo.text = userInfo.intro;
+    
+    if(userInfo.certList == nil || [userInfo.certList count] == 0){
+        _btnCert.hidden = YES;
+    }else
+        _btnCert.hidden = NO;
     
     _btnTreatPay.badgeView.badgeValue = 0;
     _btnNew.badgeView.badgeValue = 0;
@@ -557,6 +564,21 @@
     
     return [NSDate date]; // should return date data source was last changed
     
+}
+
+-(void)lookImageAction:(UIButton *)sender
+{
+    NSLog(@"lookImageAction");
+    _imageList = [[HBImageViewList alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [_imageList addTarget:self tapOnceAction:@selector(dismissImageAction:)];
+    [_imageList addImagesURL:[UserModel sharedUserInfo].certList withSmallImage:nil];
+    [self.view.window addSubview:_imageList];
+}
+
+-(void)dismissImageAction:(UIImageView*)sender
+{
+    NSLog(@"dismissImageAction");
+    [_imageList removeFromSuperview];
 }
 
 @end

@@ -125,7 +125,13 @@
 
 - (void) LoadOrderInfo:(block) block
 {
+    __weak UserModel *weakSelf = self;
     [self.userOrderInfo RequestOrderInfo:^(int code, id content) {
+        
+        if(code == 1){
+            weakSelf.certList = [[content objectForKey:@"care"] objectForKey:@"certList"];
+        }
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:User_DetailInfo_Get object:nil];
         if(block){
             block(code, content);

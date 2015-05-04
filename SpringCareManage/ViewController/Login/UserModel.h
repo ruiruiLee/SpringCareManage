@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSString *mobilePhoneNumber;
 @property (nonatomic, strong) NSString *currentDetailAdrress;
 @property (nonatomic, strong) NSString *detailIntro;
+
+@property (nonatomic, strong) NSArray *certList;
 //detail
 + (UserModel *) sharedUserInfo;
 
