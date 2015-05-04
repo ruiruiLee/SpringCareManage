@@ -48,10 +48,10 @@
         /* Config Status Updated Label */
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, midY - 10, self.frame.size.width, 20.0f)];
 		label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		label.font = [UIFont boldSystemFontOfSize:13.0f];
+        label.font =  [UIFont systemFontOfSize:13.0f];  //[UIFont boldSystemFontOfSize:13.0f];
 		label.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = UITextAlignmentCenter;
+		label.textAlignment= NSTextAlignmentCenter;
 		[self addSubview:label];
 		_statusLabel=label;
 		
@@ -113,7 +113,7 @@
 	switch (aState) {
 		case EGOOPullPulling:
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"Release to load more...",@"PullTableViewLan", @"Release to load more status");
+			_statusLabel.text = NSLocalizedStringFromTable(@"释放显示...",@"PullTableViewLan", @"Release to load more status");
 			[CATransaction begin];
 			[CATransaction setAnimationDuration:FLIP_ANIMATION_DURATION];
 			_arrowImage.transform = CATransform3DIdentity;
@@ -129,7 +129,7 @@
 				[CATransaction commit];
 			}
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"Pull up to load more...", @"PullTableViewLan",@"Pull down to load more status");
+			_statusLabel.text = NSLocalizedStringFromTable(@"上拉继续加载...", @"PullTableViewLan",@"Pull down to load more status");
 			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
@@ -140,7 +140,7 @@
 			break;
 		case EGOOPullLoading:
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"Loading...", @"PullTableViewLan",@"Loading Status");
+			_statusLabel.text = NSLocalizedStringFromTable(@"努力加载中...", @"PullTableViewLan",@"Loading Status");
 			[_activityView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 

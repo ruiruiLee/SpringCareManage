@@ -81,10 +81,14 @@
     _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     refreshView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, -100, ScreenWidth, 100)];
-    refreshView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+//    refreshView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     refreshView.delegate = self;
     [_tableview addSubview:refreshView];
     [refreshView refreshLastUpdatedDate];
+//    refreshView.translatesAutoresizingMaskIntoConstraints = NO;
+//    
+//    [_tableview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[refreshView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(refreshView)]];
+//    [_tableview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-100)-[refreshView(100)]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(refreshView)]];
     
     _reloading = NO;
     

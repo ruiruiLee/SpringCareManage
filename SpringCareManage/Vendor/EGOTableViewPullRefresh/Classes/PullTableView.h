@@ -57,6 +57,7 @@
     UIColor *pullTextColor;
     NSDate *pullLastRefreshDate;
     
+    UIImageView *backgroundImageView;
     // Status
     BOOL pullTableIsRefreshing;
     BOOL pullTableIsLoadingMore;
@@ -82,4 +83,6 @@
 /* Delegate */
 @property (nonatomic, assign) IBOutlet id<PullTableViewDelegate> pullDelegate;
 
+-(void)displayEmpityImageView:(UIImage *)img;
+-(void)removeBackgroudImgView;
 @end
