@@ -7,7 +7,7 @@
 //
 
 #import "LCNetWorkBase.h"
-
+#import "ProjectDefine.h"
 #import <AFNetworking.h>
 #import "SBJson.h"
 
@@ -36,6 +36,21 @@
     /**
      * 处理短时间内重复请求
      **/
+    NSMutableString *Tag = [[NSMutableString alloc] init];
+    [Tag appendString:path];
+    for (int i = 0; i < [params.allKeys count]; i++) {
+        NSString *key = [params.allKeys objectAtIndex:i];
+        [Tag appendFormat:@"%@=%@", key, [params objectForKey:key]];
+    }
+    
+    if([ProjectDefine searchRequestTag:Tag])
+    {
+        if (completion!=nil) {
+            completion(0, nil);
+        }
+        return;
+    }
+    [ProjectDefine addRequestTag:Tag];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -46,6 +61,7 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     [manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [ProjectDefine removeRequestTag:Tag];
         SBJsonParser *_parser = [[SBJsonParser alloc] init];
         NSDictionary *result = [_parser objectWithData:(NSData *)responseObject];
         
@@ -54,6 +70,7 @@
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [ProjectDefine removeRequestTag:Tag];
         NSLog(@"请求URL：%@ \n请求方法:%@ \n请求参数：%@\n 请求结果：%@\n==================================", SERVER_ADDRESS, method, params, error);
         if (error.code != -1001) {
             completion(0, error);
@@ -75,6 +92,21 @@
     /**
      * 处理短时间内重复请求
      **/
+    NSMutableString *Tag = [[NSMutableString alloc] init];
+    [Tag appendString:path];
+    for (int i = 0; i < [params.allKeys count]; i++) {
+        NSString *key = [params.allKeys objectAtIndex:i];
+        [Tag appendFormat:@"%@=%@", key, [params objectForKey:key]];
+    }
+    
+    if([ProjectDefine searchRequestTag:Tag])
+    {
+        if (completion!=nil) {
+            completion(0, nil);
+        }
+        return;
+    }
+    [ProjectDefine addRequestTag:Tag];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -85,6 +117,7 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
     
     [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [ProjectDefine removeRequestTag:Tag];
         SBJsonParser *_parser = [[SBJsonParser alloc] init];
         NSDictionary *result = [_parser objectWithData:(NSData *)responseObject];
         
@@ -101,6 +134,7 @@
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [ProjectDefine removeRequestTag:Tag];
         NSLog(@"请求URL：%@ \n请求方法:%@ \n请求参数：%@\n 请求结果：%@\n==================================", SERVER_ADDRESS, method, params, error);
         if (error.code != -1001) {
             

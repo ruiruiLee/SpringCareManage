@@ -41,6 +41,7 @@
 		86B461AD1AF5CB5D00B1B66D /* UIView+MGBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461AC1AF5CB5D00B1B66D /* UIView+MGBadgeView.m */; };
 		86B461B01AF5D0CF00B1B66D /* MsgListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461AF1AF5D0CF00B1B66D /* MsgListVC.m */; };
 		86B461B31AF5D2B800B1B66D /* MsgListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461B21AF5D2B800B1B66D /* MsgListCell.m */; };
+		86B461BC1AF7B15B00B1B66D /* ProjectDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B461BB1AF7B15B00B1B66D /* ProjectDefine.m */; };
 		86B749801AE9DE00000BA6DB /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B7497F1AE9DE00000BA6DB /* UserModel.m */; };
 		86B749831AE9E8CB000BA6DB /* LCNetWorkBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B749821AE9E8CB000BA6DB /* LCNetWorkBase.m */; };
 		86B749861AE9E9F0000BA6DB /* TextAndEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B749851AE9E9F0000BA6DB /* TextAndEmojiView.m */; };
@@ -440,6 +441,8 @@
 		86B461AF1AF5D0CF00B1B66D /* MsgListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgListVC.m; sourceTree = "<group>"; };
 		86B461B11AF5D2B800B1B66D /* MsgListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgListCell.h; sourceTree = "<group>"; };
 		86B461B21AF5D2B800B1B66D /* MsgListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgListCell.m; sourceTree = "<group>"; };
+		86B461BA1AF7B15B00B1B66D /* ProjectDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectDefine.h; sourceTree = "<group>"; };
+		86B461BB1AF7B15B00B1B66D /* ProjectDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectDefine.m; sourceTree = "<group>"; };
 		86B7497E1AE9DE00000BA6DB /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		86B7497F1AE9DE00000BA6DB /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		86B749811AE9E8CB000BA6DB /* LCNetWorkBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCNetWorkBase.h; sourceTree = "<group>"; };
@@ -1727,6 +1730,8 @@
 				86B8E6131ADA36C300A5139E /* define.h */,
 				86B749811AE9E8CB000BA6DB /* LCNetWorkBase.h */,
 				86B749821AE9E8CB000BA6DB /* LCNetWorkBase.m */,
+				86B461BA1AF7B15B00B1B66D /* ProjectDefine.h */,
+				86B461BB1AF7B15B00B1B66D /* ProjectDefine.m */,
 				CFEBF8851ACE357300BC4EC5 /* Images.xcassets */,
 				CFEBF8781ACE357300BC4EC5 /* Supporting Files */,
 			);
@@ -2244,6 +2249,7 @@
 				CFBC524A1ADD37E9004FB8F3 /* MWPhoto.m in Sources */,
 				CFBC532A1ADD4C4C004FB8F3 /* SDImageCache.m in Sources */,
 				CFBC532E1ADD4C4C004FB8F3 /* SDWebImageDownloaderOperation.m in Sources */,
+				86B461BC1AF7B15B00B1B66D /* ProjectDefine.m in Sources */,
 				86B8E68C1ADA3B5500A5139E /* HomePageVC.m in Sources */,
 				CFBC52701ADD385D004FB8F3 /* ELCAlbumPickerController.m in Sources */,
 				86B96A951ADB92DE00441168 /* ShowBigViewController.m in Sources */,
