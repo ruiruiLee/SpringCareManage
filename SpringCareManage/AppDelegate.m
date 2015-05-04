@@ -69,6 +69,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -102,6 +104,9 @@
     //可选 通过统计功能追踪通过提醒打开应用的行为
     [AVAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     
+    NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    
+    NSLog(@"%@", userInfo);
     //这儿你可以加入自己的代码 根据推送的数据进行相应处理
 }
 

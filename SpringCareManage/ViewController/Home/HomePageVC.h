@@ -7,8 +7,9 @@
 //
 
 #import "LCBaseVC.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface HomePageVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate>
+@interface HomePageVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate>
 {
     UIView *_bgView;
     UIImageView *_photoImage;//头像
@@ -54,5 +55,7 @@
     
     NSArray *constraints;
 }
+
+@property (nonatomic, strong) EGORefreshTableHeaderView *refreshView;
 
 @end

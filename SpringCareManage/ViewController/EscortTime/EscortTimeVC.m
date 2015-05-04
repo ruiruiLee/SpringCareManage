@@ -16,10 +16,6 @@
 #import "DefaultLoverSelectVC.h"
 
 @interface EscortTimeVC ()<EscortPublishCellDelegate, DefaultLoverSelectDelegate>
-{
-    
-}
-
 
 @property (nonatomic, strong) EscortTimeTableCell *prototypeCell;
 
@@ -32,10 +28,10 @@
 
 - (void) SetHeaderInfoWithModel
 {
+    
     UserModel *model = [UserModel sharedUserInfo];
     OrderInfoModel *orderModel = model.userOrderInfo.orderModel;
     if(orderModel != nil){
-        
         _defaultLover = orderModel.loverinfo;
         
         [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
@@ -96,6 +92,8 @@
     self.NavigationBar.Title = @"陪护时光";
     self.NavigationBar.btnLeft.hidden = YES;
     self.NavigationBar.alpha = 0.8;
+    
+    _defaultLover = nil;
     
 //    self.NavigationBar.btnRight.hidden = NO;
 //    self.NavigationBar.btnRight.layer.cornerRadius = 20;
