@@ -45,9 +45,9 @@
     
     if([ProjectDefine searchRequestTag:Tag])
     {
-        if (completion!=nil) {
-            completion(0, nil);
-        }
+//        if (completion!=nil) {
+//            completion(0, nil);
+//        }
         return;
     }
     [ProjectDefine addRequestTag:Tag];
@@ -101,9 +101,9 @@
     
     if([ProjectDefine searchRequestTag:Tag])
     {
-        if (completion!=nil) {
-            completion(0, nil);
-        }
+//        if (completion!=nil) {
+//            completion(0, nil);
+//        }
         return;
     }
     [ProjectDefine addRequestTag:Tag];

@@ -59,7 +59,7 @@
                 [weakSelf.DataList addObjectsFromArray:content];
                 [weakSelf.tableview reloadData];
             }
-            [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+            [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:1];
         }];
     }
 }
@@ -185,7 +185,7 @@
             [weakSelf.DataList addObjectsFromArray:content];
             [weakSelf.tableview reloadData];
         }
-        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
+        [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:1];
     }];
 }
 
@@ -200,7 +200,7 @@
             [weakSelf.DataList addObjectsFromArray:content];
             [weakSelf.tableview reloadData];
         }
-        [weakSelf performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:0.1];
+        [weakSelf performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:1];
     }];
 }
 
@@ -237,12 +237,10 @@
     if([_SearchConditionStr isEqual:searchStr])
         return;
     
-    //    [pullTableView reloadData];
     self.tableview.pullTableIsRefreshing = YES;
-    //    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString *searchStr = _searchBar.text;
     if(searchStr == nil || [searchStr isKindOfClass:[NSNull class]])

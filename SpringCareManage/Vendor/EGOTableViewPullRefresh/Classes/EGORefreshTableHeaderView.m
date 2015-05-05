@@ -235,7 +235,7 @@
         UIEdgeInsets currentInsets = scrollView.contentInset;
         currentInsets.top = offset;
         scrollView.contentInset = currentInsets;
-        NSLog(@"egoRefreshScrollViewDidScroll1:%f", currentInsets.top);
+//        NSLog(@"egoRefreshScrollViewDidScroll1:%f", currentInsets.top);
 		
 	} else if (scrollView.isDragging) {
 		if (_state == EGOOPullPulling && scrollView.contentOffset.y > -PULL_TRIGGER_HEIGHT && scrollView.contentOffset.y < 0.0f && !isLoading) {
