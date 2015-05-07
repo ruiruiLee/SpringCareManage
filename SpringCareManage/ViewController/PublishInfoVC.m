@@ -306,6 +306,8 @@
         return;
     }
     
+    BOOL isSelect = _btnTargetSelect.selected;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
         [self fileupMothed];
         NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
@@ -316,6 +318,10 @@
         if (fileString!=nil) {
           [parmas setObject:fileString forKey:@"fileIds"];
         }
+        if(isSelect){
+            [parmas setObject:@"true" forKey:@"isCopy"];
+        }else
+            [parmas setObject:@"false" forKey:@"isCopy"];
         [LCNetWorkBase postWithMethod:@"api/careTime/save" Params:parmas Completion:^(int code, id content) {
             if(code){
                 [_delegate delegetSendEnd:code];

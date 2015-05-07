@@ -57,6 +57,7 @@
         [headerbg addConstraints:AttentionArray];
     }
 
+    pages = 0;
     [self loadDataList];
 }
 
