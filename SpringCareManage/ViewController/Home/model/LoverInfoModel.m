@@ -27,6 +27,9 @@
     model.registerName = [dic objectForKey:@"registerName"];
     model.registerPhone = [dic objectForKey:@"registerPhone"];
     
+    model.height = [NSString stringWithFormat:@"%d", [[dic objectForKey:@"height"] integerValue]];
+    model.relationId = [dic objectForKey:@"relationId"];
+    
     return model;
 }
 

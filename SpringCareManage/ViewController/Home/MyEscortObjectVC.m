@@ -9,8 +9,10 @@
 #import "MyEscortObjectVC.h"
 #import "EscortObjectCell.h"
 #import "EscortObjectListModel.h"
+#import "EditUserInfoVC.h"
+#import "EditCellTypeData.h"
 
-@interface MyEscortObjectVC ()
+@interface MyEscortObjectVC ()<EditUserInfoVCDelegate>
 {
     EscortObjectListModel *_escortModel;
 }
@@ -121,6 +123,13 @@
     //    [self.navigationController pushViewController:vc animated:YES];
     //
     //    [model addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    EditUserInfoVC *vc = [[EditUserInfoVC alloc] initWithNibName:nil bundle:nil];
+    vc.hidesBottomBarWhenPushed = YES;
+    NSArray *mArray = [self getContentArray];
+    [vc setContentArray:mArray andmodel:[DataList objectAtIndex:indexPath.row]];//新增时为空
+    vc.delegate = self;
+    vc.NavTitle = @"编辑资料";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - PullTableViewDelegate
@@ -171,5 +180,45 @@
     self.tableview.pullTableIsLoadingMore = NO;
 }
 
+- (void) NotifyReloadData:(NSString*)loveID
+{
+    [self.tableview reloadData];
+}
+
+- (NSArray *)getContentArray
+{
+    NSMutableArray *mArray = [[NSMutableArray alloc] init];
+    EditCellTypeData *data1 = [[EditCellTypeData alloc] init];
+    data1.cellTitleName = @"地址";
+    data1.cellType = EnumTypeAddress;
+    [mArray addObject:data1];
+    
+    EditCellTypeData *data3 = [[EditCellTypeData alloc] init];
+    data3.cellTitleName = @"姓名";
+    data3.cellType = EnumTypeUserName;
+    [mArray addObject:data3];
+    
+    EditCellTypeData *data4 = [[EditCellTypeData alloc] init];
+    data4.cellTitleName = @"性别";
+    data4.cellType = EnumTypeSex;
+    [mArray addObject:data4];
+    
+    EditCellTypeData *data5 = [[EditCellTypeData alloc] init];
+    data5.cellTitleName = @"年龄";
+    data5.cellType = EnumTypeAge;
+    [mArray addObject:data5];
+    
+    EditCellTypeData *data6 = [[EditCellTypeData alloc] init];
+    data6.cellTitleName = @"电话";
+    data6.cellType = EnumTypeMobile;
+    [mArray addObject:data6];
+    
+    EditCellTypeData *data7 = [[EditCellTypeData alloc] init];
+    data7.cellTitleName = @"身高";
+    data7.cellType = EnumTypeHeight;
+    [mArray addObject:data7];
+    
+    return mArray;
+}
 
 @end

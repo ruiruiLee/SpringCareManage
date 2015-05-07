@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *sex;
 @property (nonatomic, strong) NSString *addr;
 @property (nonatomic, assign) NSInteger age;
+@property (nonatomic, strong) NSString *height;
+@property (nonatomic, strong) NSString *relationId;
 
 @property (nonatomic, strong) NSString *registerName;
 @property (nonatomic, strong) NSString *registerPhone;
