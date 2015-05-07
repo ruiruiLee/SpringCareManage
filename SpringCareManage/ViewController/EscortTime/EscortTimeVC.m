@@ -34,7 +34,7 @@
     if(orderModel != nil){
         _defaultLover = orderModel.loverinfo;
         
-        [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
+        [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
         
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         RegisterInfoModel *registerInfo = orderModel.registerInfo;
@@ -62,7 +62,7 @@
 
 - (void) setContent
 {
-    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
+    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
     
     _lbName.text = _defaultLover.name;
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
@@ -187,7 +187,7 @@
     _btnAddr.translatesAutoresizingMaskIntoConstraints = NO;
     _btnAddr.titleLabel.font = _FONT(13);
     [_btnAddr setTitleColor:_COLOR(0xff, 0xff, 0xff) forState:UIControlStateNormal];
-    [_btnAddr setImage:[UIImage imageNamed:@"escortlocation"] forState:UIControlStateNormal];
+    [_btnAddr setImage:[UIImage imageNamed:@"locator"] forState:UIControlStateNormal];
     
     _sex = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_sex];
@@ -230,7 +230,7 @@
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_relationName]->=10-[_lbMobile]-4-[_btnRing]-20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_photoImgView(72)]-30-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_btnRing]-32.5-|" options:0 metrics:nil views:views]];
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-0-[_btnAddr(30)]-0-[_relationName(16)]->=10-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-0-[_btnAddr(20)]-0-[_relationName(16)]->=10-|" options:0 metrics:nil views:views]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnRing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_relationName attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnRing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];

@@ -284,7 +284,7 @@
 
 - (void)PublishEscortTime
 {
-    if(fileString == nil && (_tvContent.text == nil || [_tvContent.text length] == 0)){
+    if(fileString == nil || voiceName == nil || [_tvContent.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
         return;

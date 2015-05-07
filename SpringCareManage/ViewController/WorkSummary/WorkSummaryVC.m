@@ -34,7 +34,7 @@
         
         _defaultLover = orderModel.loverinfo;
         
-        [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
+        [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
         
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         _lbName.text = loverInfo.name;
@@ -78,7 +78,7 @@
 
 - (void) setContent
 {
-    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
+    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
     
     _lbName.text = _defaultLover.name;
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
