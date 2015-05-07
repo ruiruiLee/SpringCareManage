@@ -102,7 +102,7 @@
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_tvContent]-10-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_btnTargetSelect]->=10-[_btnRecord]-20-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_line]-0-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_tvContent(120)]-5-[_btnRecord]-10-[_line(1)]-0-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_tvContent(120)]-5-[_btnRecord]-2-[_line(1)]-0-|" options:0 metrics:nil views:views]];
     [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:_btnTargetSelect attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_btnRecord attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
     
     if(contentType == EnumWorkSummary)
@@ -167,21 +167,37 @@
     else{
         [_voiceHud hide];
     }
+    
+    [self doBtnVoiceDelete:nil];
     //显示语音
     voiceData=fileData;
     voiceName=fileName;
     voiceSecconds =timelength;
     _btnVoice = [[UIButton alloc] initWithFrame:CGRectZero];
-    
-    //_btnVoice.translatesAutoresizingMaskIntoConstraints = NO;
+    _btnDelete = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_btnDelete addTarget:self action:@selector(doBtnVoiceDelete:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnDelete setImage:ThemeImage(@"delete") forState:UIControlStateNormal];
+    _lbVoiceLength = [[UILabel alloc] initWithFrame:CGRectZero];
+    _lbVoiceLength.backgroundColor = [UIColor clearColor];
+    _lbVoiceLength.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbVoiceLength.font = _FONT(12);
     [_bgView addSubview:_btnVoice];
+    [_bgView addSubview:_btnDelete];
+    [_bgView addSubview:_lbVoiceLength];
     
-    _btnVoice.frame = CGRectMake(0, 100,[self VoiceButtonWithVoiceTimeLength:timelength],
-                                 20);
+    CGFloat oheight = _btnRecord.frame.origin.y;
+    if(contentType == EnumWorkSummary)
+        oheight = _btnRecord.frame.origin.y + 14;
+    
+    _btnDelete.frame = CGRectMake(_btnTargetSelect.frame.origin.x + 2, oheight, 20, 20);
+    _btnVoice.frame = CGRectMake(_btnTargetSelect.frame.origin.x + 27, oheight - 2,[self VoiceButtonWithVoiceTimeLength:timelength],
+                                 25);
+    _lbVoiceLength.frame = CGRectMake(_btnTargetSelect.frame.origin.x + 27 + [self VoiceButtonWithVoiceTimeLength:timelength] + 15, oheight - 2,50,
+                                      25);
+    _lbVoiceLength.text = [NSString stringWithFormat:@"%d\"",timelength];
     _btnVoice.userInteractionEnabled=true;
     [_btnVoice setBackgroundImage:[[UIImage imageNamed:@"escorttimevolice"] stretchableImageWithLeftCapWidth:40 topCapHeight:5] forState:UIControlStateNormal];
     [_btnVoice addTarget:self action:@selector(VoicePlayClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     
 }
 
@@ -355,6 +371,22 @@
     }
     
     return YES;
+}
+
+- (void) doBtnVoiceDelete:(UIButton *)sender
+{
+    [_btnDelete removeFromSuperview];
+    _btnDelete = nil;
+    
+    [_btnVoice removeFromSuperview];
+    _btnVoice = nil;
+    
+    [_lbVoiceLength removeFromSuperview];
+    _lbVoiceLength = nil;
+    
+//    voiceData=fileData;
+//    voiceName=fileName;
+//    voiceSecconds =timelength;
 }
 
 @end

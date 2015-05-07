@@ -36,6 +36,9 @@ typedef enum : NSUInteger {
     NSData * voiceData ;
     NSInteger voiceSecconds;
     NSMutableString *fileString;
+    
+    UIButton *_btnDelete;
+    UILabel *_lbVoiceLength;
 }
 
 @property (nonatomic, assign) PublishContentType contentType;
