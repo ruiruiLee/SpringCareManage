@@ -13,9 +13,12 @@
 #import "EscortPublishCell.h"
 #import "PublishInfoVC.h"
 
+#import "EditUserInfoVC.h"
+#import "EditCellTypeData.h"
+
 #import "DefaultLoverSelectVC.h"
 
-@interface WorkSummaryVC ()<EscortPublishCellDelegate, DefaultLoverSelectDelegate, EscortSendDelegate>
+@interface WorkSummaryVC ()<EscortPublishCellDelegate, DefaultLoverSelectDelegate, EscortSendDelegate, EditUserInfoVCDelegate>
 
 @property (nonatomic, strong) EscortTimeTableCell *prototypeCell;
 
@@ -34,7 +37,7 @@
         
         _defaultLover = orderModel.loverinfo;
         
-        [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
+//        [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
         
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         _lbName.text = loverInfo.name;
@@ -76,9 +79,19 @@
     }
 }
 
+- (void) NotifyRefreshDefaultLover:(NSNotification *)notify
+{
+    NSDictionary *dic = notify.userInfo;
+    LoverInfoModel *model = [dic objectForKey:@"model"];
+    if([model.loverId isEqualToString:_defaultLover.loverId]){
+        _defaultLover = model;
+        [self setContent];
+    }
+}
+
 - (void) setContent
 {
-    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
+//    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
     
     _lbName.text = _defaultLover.name;
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
@@ -105,6 +118,7 @@
     self.dataList = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SetHeaderInfoWithModel) name:User_DetailInfo_Get object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
     pages = 0;
     _dataList = [[NSMutableArray alloc] init];
     self.NavigationBar.Title = @"护理日志";
@@ -138,16 +152,30 @@
     tableView.tableHeaderView = headerView;
     tableView.tableFooterView = [[UIView alloc] init];
     
+    [_btnLoverSelect sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
+    
     [self SetHeaderInfoWithModel];
+}
+
+- (void) btnEditLoverInfo:(UIButton*)sender
+{
+    EditUserInfoVC *vc = [[EditUserInfoVC alloc] initWithNibName:nil bundle:nil];
+    vc.hidesBottomBarWhenPushed = YES;
+    NSArray *mArray = [self getContentArray];
+    [vc setContentArray:mArray andmodel:_defaultLover];//新增时为空
+    vc.delegate = self;
+    vc.NavTitle = @"编辑资料";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)creatHeadView{
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
     
-    headerbg = [[UIImageView alloc] initWithFrame:CGRectZero];
+    headerbg = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:headerbg];
     headerbg.translatesAutoresizingMaskIntoConstraints = NO;
     headerbg.backgroundColor = _COLOR(233, 233, 233);
+    [headerbg addTarget:self action:@selector(btnEditLoverInfo:) forControlEvents:UIControlEventTouchUpInside];
     
     _photoImgView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_photoImgView];
@@ -317,7 +345,6 @@
 
 - (void) replyContentWithId:(NSString*)itemId
 {
-    
 }
 
 #pragma mark - 点中回复按钮
@@ -549,6 +576,47 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发布失败请重新发布" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
+}
+
+- (NSArray *)getContentArray
+{
+    NSMutableArray *mArray = [[NSMutableArray alloc] init];
+    EditCellTypeData *data1 = [[EditCellTypeData alloc] init];
+    data1.cellTitleName = @"地址";
+    data1.cellType = EnumTypeAddress;
+    [mArray addObject:data1];
+    
+    EditCellTypeData *data3 = [[EditCellTypeData alloc] init];
+    data3.cellTitleName = @"姓名";
+    data3.cellType = EnumTypeUserName;
+    [mArray addObject:data3];
+    
+    EditCellTypeData *data4 = [[EditCellTypeData alloc] init];
+    data4.cellTitleName = @"性别";
+    data4.cellType = EnumTypeSex;
+    [mArray addObject:data4];
+    
+    EditCellTypeData *data5 = [[EditCellTypeData alloc] init];
+    data5.cellTitleName = @"年龄";
+    data5.cellType = EnumTypeAge;
+    [mArray addObject:data5];
+    
+    EditCellTypeData *data6 = [[EditCellTypeData alloc] init];
+    data6.cellTitleName = @"电话";
+    data6.cellType = EnumTypeMobile;
+    [mArray addObject:data6];
+    
+    EditCellTypeData *data7 = [[EditCellTypeData alloc] init];
+    data7.cellTitleName = @"身高";
+    data7.cellType = EnumTypeHeight;
+    [mArray addObject:data7];
+    
+    return mArray;
+}
+
+- (void) NotifyReloadData:(NSString*)loveID
+{
+    [self setContent];
 }
 
 @end

@@ -311,6 +311,9 @@
         }
         
     }
+    else{
+        _lbContent.text = @"";
+    }
     
     if(voiceContentUrl != nil && ![voiceContentUrl isKindOfClass:[NSNull class]])
     {

@@ -15,6 +15,7 @@
 
 #define LCNetWorkBase [LCNetWorkBase sharedLCNetWorkBase]
 #define Notify_Resign_First_Responder @"Notify_Resign_First_Responder"
+#define Notify_Lover_Moditify @"Notify_Lover_Moditify"
 
 
 #define User_DetailInfo_Get @"User_DetailInfo_Get"

@@ -45,8 +45,9 @@
     
     [self initSubviews];
     
-    [self.DataList addObjectsFromArray:[EscortObjectListModel GetEscortObjectList]];
-    if([self.DataList count] == 0){
+//    [self.DataList addObjectsFromArray:[EscortObjectListModel GetEscortObjectList]];
+//    if([self.DataList count] == 0){
+        _escortModel.pages = 0;
         self.tableview.pullTableIsRefreshing = YES;
         __weak DefaultLoverSelectVC *weakSelf = self;
         [_escortModel RequsetEscortDataWithBlock:^(int code, id content) {
@@ -57,7 +58,7 @@
             
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.1];
         }];
-    }
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

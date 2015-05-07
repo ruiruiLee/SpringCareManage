@@ -46,7 +46,7 @@
     NSArray *AttentionArray;
     UIView *headerView;
     
-    UIImageView *headerbg;
+    UIButton *headerbg;
     
     BOOL isHasDefaultLover;
     

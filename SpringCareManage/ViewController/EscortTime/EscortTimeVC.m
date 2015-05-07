@@ -34,7 +34,7 @@
     if(orderModel != nil){
         _defaultLover = orderModel.loverinfo;
         
-        [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
+//        [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
         
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         RegisterInfoModel *registerInfo = orderModel.registerInfo;
@@ -62,8 +62,6 @@
 
 - (void) setContent
 {
-    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
-    
     _lbName.text = _defaultLover.name;
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
     [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
@@ -83,10 +81,21 @@
     [headerbg addConstraints:AttentionArray];
 }
 
+- (void) NotifyRefreshDefaultLover:(NSNotification *)notify
+{
+    NSDictionary *dic = notify.userInfo;
+    LoverInfoModel *model = [dic objectForKey:@"model"];
+    if([model.loverId isEqualToString:_defaultLover.loverId]){
+        _defaultLover = model;
+        [self setContent];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SetHeaderInfoWithModel) name:User_DetailInfo_Get object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
     pages = 0;
     _dataList = [[NSMutableArray alloc] init];
     self.NavigationBar.Title = @"陪护时光";
@@ -126,6 +135,8 @@
     [self creatHeadView];
     tableView.tableHeaderView = headerView;
     tableView.tableFooterView = [[UIView alloc] init];
+    
+    [_btnLoverSelect sd_setBackgroundImageWithURL:nil forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
     
     [self SetHeaderInfoWithModel];
 }

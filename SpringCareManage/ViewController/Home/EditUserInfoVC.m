@@ -115,6 +115,10 @@
             if(delegate && [delegate respondsToSelector:@selector(NotifyReloadData:)]){
                 [delegate NotifyReloadData:@"edit"];
             }
+            
+            NSDictionary *dic = @{@"model" : _loverModel};
+            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Lover_Moditify object:_loverModel.loverId userInfo:dic];
+            
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];

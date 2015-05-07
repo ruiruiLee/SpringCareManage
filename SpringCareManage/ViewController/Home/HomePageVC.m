@@ -40,11 +40,22 @@
     [self ValuationForView];
 }
 
+- (void) NotifyRefreshDefaultLover:(NSNotification *)notify
+{
+    NSDictionary *dic = notify.userInfo;
+    LoverInfoModel *model = [dic objectForKey:@"model"];
+    UserModel *userinfo = [UserModel sharedUserInfo];
+    if([model.loverId isEqualToString:userinfo.userOrderInfo.orderModel.loverinfo.loverId]){
+        [self egoRefreshTableHeaderDidTriggerRefresh:nil];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyDetailUserInfoGot:) name:User_DetailInfo_Get object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
     
     self.NavigationBar.Title = @"春风陪护";
     self.NavigationBar.btnLeft.hidden = YES;
