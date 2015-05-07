@@ -102,7 +102,7 @@
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_tvContent]-10-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_btnTargetSelect]->=10-[_btnRecord]-20-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_line]-0-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_tvContent(120)]-5-[_btnRecord]-10-[_line(1)]-0-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_tvContent(120)]-5-[_btnRecord]-2-[_line(1)]-0-|" options:0 metrics:nil views:views]];
     [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:_btnTargetSelect attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_btnRecord attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
     
     if(contentType == EnumWorkSummary)
@@ -172,16 +172,22 @@
     voiceName=fileName;
     voiceSecconds =timelength;
     _btnVoice = [[UIButton alloc] initWithFrame:CGRectZero];
-    
+    _btnDelete = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_btnDelete setImage:ThemeImage(@"") forState:UIControlStateNormal];
+    _lbVoiceLength = [[UILabel alloc] initWithFrame:CGRectZero];
+    _lbVoiceLength.backgroundColor = [UIColor clearColor];
+    _lbVoiceLength.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbVoiceLength.font = _FONT(12);
     //_btnVoice.translatesAutoresizingMaskIntoConstraints = NO;
     [_bgView addSubview:_btnVoice];
+    [_bgView addSubview:_btnDelete];
+    [_bgView addSubview:_lbVoiceLength];
     
-    _btnVoice.frame = CGRectMake(0, 100,[self VoiceButtonWithVoiceTimeLength:timelength],
-                                 20);
+    _btnVoice.frame = CGRectMake(_btnTargetSelect.frame.origin.x, _btnRecord.frame.origin.y - 2,[self VoiceButtonWithVoiceTimeLength:timelength],
+                                 25);
     _btnVoice.userInteractionEnabled=true;
     [_btnVoice setBackgroundImage:[[UIImage imageNamed:@"escorttimevolice"] stretchableImageWithLeftCapWidth:40 topCapHeight:5] forState:UIControlStateNormal];
     [_btnVoice addTarget:self action:@selector(VoicePlayClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     
 }
 
