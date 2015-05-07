@@ -28,7 +28,7 @@
 @property (nonatomic, assign) NSInteger commentStatus;
 @property (nonatomic, assign) PayStatus payStatus;
 @property (nonatomic, strong) NSString *createdDate;
-@property (nonatomic, strong) LoverInfoModel *loverinfo;
+@property (nonatomic, copy) LoverInfoModel *loverinfo;
 @property (nonatomic, strong) RegisterInfoModel *registerInfo;
 @property (nonatomic, strong) ProductInfoModel *productInfo;
 

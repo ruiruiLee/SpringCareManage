@@ -46,7 +46,8 @@
     LoverInfoModel *model = [dic objectForKey:@"model"];
     UserModel *userinfo = [UserModel sharedUserInfo];
     if([model.loverId isEqualToString:userinfo.userOrderInfo.orderModel.loverinfo.loverId]){
-        [self egoRefreshTableHeaderDidTriggerRefresh:nil];
+        userinfo.userOrderInfo.orderModel.loverinfo = model;
+        [self ValuationForView];
     }
 }
 
