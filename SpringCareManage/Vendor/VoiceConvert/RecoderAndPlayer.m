@@ -90,12 +90,7 @@
     return YES;
 }
 
-//删除临时文件
-- (void)removeTempfile:(NSString *)_filepath{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-     if ([fileManager fileExistsAtPath: _filepath])
-         [fileManager removeItemAtPath:_filepath error:nil];
-}
+
 
 
 
@@ -160,6 +155,13 @@
     }
 }
 
+//删除临时文件
+- (void)removeTempfile:(NSString *)_filepath{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath: _filepath])
+        [fileManager removeItemAtPath:_filepath error:nil];
+}
 
 /**
  @Brief 播放录音
