@@ -26,7 +26,7 @@
     //服务对象
     UIImageView *_photoImg;//头像
     UILabel *_lbName;
-    UILabel *_lbRelationship;
+//    UILabel *_lbRelationship;
     UIImageView *_sexLogo;
     UILabel *_lbAge;
     UIButton *_btnMobile;

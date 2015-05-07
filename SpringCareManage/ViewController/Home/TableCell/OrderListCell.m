@@ -87,7 +87,7 @@
     
     _lbName = [self createLabel:_FONT(18) txtColor:_COLOR(0x22, 0x22, 0x22)];
     
-    _lbRelationship = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+//    _lbRelationship = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
@@ -153,7 +153,7 @@
 - (void) createAutoLayoutConstraints
 {
     UIView *root = self.contentView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _lbRelationship, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=20-[_lbOrderStatus(45)]-19-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=20-[_lbOrderStatus(45)]-19-|" options:0 metrics:nil views:views]];
@@ -169,11 +169,11 @@
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_btnAddress]->=20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRelationship attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_photoImg attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+//    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRelationship attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_photoImg attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[FootView]-0-|" options:0 metrics:nil views:views]];
     //v方向
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_photoImg(52)]-4-[_lbRelationship]-10-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName]-0-[intervalV4]-0-[_btnMobile]-0-[intervalV5]-0-[_btnAddress]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName]-0-[intervalV4]-0-[_btnMobile]-0-[intervalV5]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbTotalValue]-0-[intervalV2]-0-[_btnRing]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_lbOrderStatus]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
@@ -185,7 +185,7 @@
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvDay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvNight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbRelationship attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+//    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbRelationship attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_sexLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
@@ -204,11 +204,11 @@
     _lbName.text = model.loverinfo.name;//@"张发财";
     if(model.loverinfo.name == nil || [model.loverinfo.name length] == 0)
         _lbName.text = @"姓名";
-    _lbRelationship.text = model.loverinfo.nickname;//@"父亲";
+//    _lbRelationship.text = model.loverinfo.nickname;//@"父亲";
     
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _lbRelationship, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
     UIView *root = self.contentView;
     [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
