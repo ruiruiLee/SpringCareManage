@@ -102,24 +102,42 @@
     // inputDate = [inputDate substringToIndex:10];
     //实例化一个NSDateFormatter对象
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate* compareDate = [dateFormatter dateFromString:inputDate];
-    NSTimeInterval  timeInterval = [compareDate timeIntervalSinceNow];
-    timeInterval = -timeInterval;
-    NSInteger temp = timeInterval/60/60; // 小时
-    NSString *result=@"";
-    if(temp<24){
-        result = NSLocalizedString(@"今天", @"");
+    
+    return [Util compareDate:compareDate];
+}
+
++(NSString *)compareDate:(NSDate *)date{
+    
+    NSTimeInterval secondsPerDay = 24 * 60 * 60;
+    NSDate *today = [[NSDate alloc] init];
+    NSDate *tomorrow, *yesterday;
+    
+//    tomorrow = [today dateByAddingTimeInterval: secondsPerDay];
+    yesterday = [today dateByAddingTimeInterval: -secondsPerDay];
+    
+    // 10 first characters of description is the calendar date:
+    NSString * todayString = [[today description] substringToIndex:10];
+    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
+//    NSString * tomorrowString = [[tomorrow description] substringToIndex:10];
+    
+    NSString * dateString = [[date description] substringToIndex:10];
+    
+    if ([dateString isEqualToString:todayString])
+    {
+        return @"今天";
+    } else if ([dateString isEqualToString:yesterdayString])
+    {
+        return @"昨天";
     }
-    else if(temp/24 <2){
-        result = NSLocalizedString(@"昨天", @"");
-    }
-    else{
-        //[dateFormatter setDateFormat:NSLocalizedString(@"MD",nil)];
+    else
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd/MM"];
-        result = [dateFormatter stringFromDate:compareDate];
+        NSString *result = [dateFormatter stringFromDate:date];
+        return result;
     }
-    return  result;
 }
 
 + (NSArray*) convertTimeFromStringDate:(NSString*) stringdate
@@ -395,9 +413,23 @@
 
 + (BOOL) isDateShowFirstDate:(NSString *)date1 secondDate:(NSString *)date2
 {
-    if([date1 isEqualToString:date2])
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSUInteger unitFlags = NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSCalendarUnitHour | NSCalendarUnitMinute;
+    NSDateComponents *components = [calendar components:unitFlags fromDate:[Util convertDateFromDateString:date1]];
+    
+    NSInteger beginday = [components day]; // 15
+    NSInteger beginmonth = [components month]; // 9
+    NSInteger beginyear = [components year]; // 5764
+    
+    components = [calendar components:unitFlags fromDate:[Util convertDateFromDateString:date2]];
+    NSInteger endday = [components day]; // 15
+    NSInteger endmonth = [components month]; // 9
+    NSInteger endyear = [components year]; // 5764
+    
+    if(beginyear == endyear && beginday == endday && beginmonth == endmonth)
+        return NO;
+    else
         return YES;
-    return NO;
 }
 
 @end
