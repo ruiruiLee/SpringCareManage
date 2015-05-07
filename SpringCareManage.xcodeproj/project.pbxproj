@@ -35,6 +35,7 @@
 		865523881ADAA31000E803FD /* orderend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523871ADAA31000E803FD /* orderend@2x.png */; };
 		8655238B1ADAA4A700E803FD /* EvaluateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8655238A1ADAA4A700E803FD /* EvaluateListCell.m */; };
 		8655238E1ADAA4C600E803FD /* MyEvaluateListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */; };
+		86B3EE811AFB480E005E29B1 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B3EE801AFB480E005E29B1 /* delete@2x.png */; };
 		86B4619E1AF46EDD00B1B66D /* EscortTimeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B4619B1AF46EDD00B1B66D /* EscortTimeDataModel.m */; };
 		86B4619F1AF46EDD00B1B66D /* ObjImageDataInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B4619D1AF46EDD00B1B66D /* ObjImageDataInfo.m */; };
 		86B461A11AF4797D00B1B66D /* img_index_03bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B461A01AF4797D00B1B66D /* img_index_03bg@2x.png */; };
@@ -432,6 +433,7 @@
 		8655238A1ADAA4A700E803FD /* EvaluateListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateListCell.m; sourceTree = "<group>"; };
 		8655238C1ADAA4C600E803FD /* MyEvaluateListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEvaluateListVC.h; sourceTree = "<group>"; };
 		8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEvaluateListVC.m; sourceTree = "<group>"; };
+		86B3EE801AFB480E005E29B1 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		86B4619A1AF46EDD00B1B66D /* EscortTimeDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EscortTimeDataModel.h; path = SpringCareManage/ViewController/EscortTime/EscortTimeDataModel.h; sourceTree = SOURCE_ROOT; };
 		86B4619B1AF46EDD00B1B66D /* EscortTimeDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EscortTimeDataModel.m; path = SpringCareManage/ViewController/EscortTime/EscortTimeDataModel.m; sourceTree = SOURCE_ROOT; };
 		86B4619C1AF46EDD00B1B66D /* ObjImageDataInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjImageDataInfo.h; path = SpringCareManage/ViewController/EscortTime/ObjImageDataInfo.h; sourceTree = SOURCE_ROOT; };
@@ -1108,6 +1110,7 @@
 		86B8E6141ADA36FC00A5139E /* PNG */ = {
 			isa = PBXGroup;
 			children = (
+				86B3EE801AFB480E005E29B1 /* delete@2x.png */,
 				CFB3226A1AFB3F1A005CAD6A /* nav-person@2x.png */,
 				CFB3226B1AFB3F1A005CAD6A /* nav-person@3x.png */,
 				86B461A01AF4797D00B1B66D /* img_index_03bg@2x.png */,
@@ -2025,6 +2028,7 @@
 				CFA34B3E1AEE23DA0024B695 /* fx_017@2x.png in Resources */,
 				CFA34B801AEE23DA0024B695 /* fx_052@2x.png in Resources */,
 				CFA34B8C1AEE23DA0024B695 /* fx_058@2x.png in Resources */,
+				86B3EE811AFB480E005E29B1 /* delete@2x.png in Resources */,
 				CFA34BBE1AEE23DA0024B695 /* fx_085@2x.png in Resources */,
 				CFA34BAF1AEE23DA0024B695 /* fx_077.png in Resources */,
 				CFA34B831AEE23DA0024B695 /* fx_054.png in Resources */,

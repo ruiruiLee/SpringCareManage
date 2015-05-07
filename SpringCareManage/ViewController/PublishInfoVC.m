@@ -167,24 +167,34 @@
     else{
         [_voiceHud hide];
     }
+    
+    [self doBtnVoiceDelete:nil];
     //显示语音
     voiceData=fileData;
     voiceName=fileName;
     voiceSecconds =timelength;
     _btnVoice = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnDelete = [[UIButton alloc] initWithFrame:CGRectZero];
-    [_btnDelete setImage:ThemeImage(@"") forState:UIControlStateNormal];
+    [_btnDelete addTarget:self action:@selector(doBtnVoiceDelete:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnDelete setImage:ThemeImage(@"delete") forState:UIControlStateNormal];
     _lbVoiceLength = [[UILabel alloc] initWithFrame:CGRectZero];
     _lbVoiceLength.backgroundColor = [UIColor clearColor];
     _lbVoiceLength.textColor = _COLOR(0x99, 0x99, 0x99);
     _lbVoiceLength.font = _FONT(12);
-    //_btnVoice.translatesAutoresizingMaskIntoConstraints = NO;
     [_bgView addSubview:_btnVoice];
     [_bgView addSubview:_btnDelete];
     [_bgView addSubview:_lbVoiceLength];
     
-    _btnVoice.frame = CGRectMake(_btnTargetSelect.frame.origin.x, _btnRecord.frame.origin.y - 2,[self VoiceButtonWithVoiceTimeLength:timelength],
+    CGFloat oheight = _btnRecord.frame.origin.y;
+    if(contentType == EnumWorkSummary)
+        oheight = _btnRecord.frame.origin.y + 14;
+    
+    _btnDelete.frame = CGRectMake(_btnTargetSelect.frame.origin.x + 2, oheight, 20, 20);
+    _btnVoice.frame = CGRectMake(_btnTargetSelect.frame.origin.x + 27, oheight - 2,[self VoiceButtonWithVoiceTimeLength:timelength],
                                  25);
+    _lbVoiceLength.frame = CGRectMake(_btnTargetSelect.frame.origin.x + 27 + [self VoiceButtonWithVoiceTimeLength:timelength] + 15, oheight - 2,50,
+                                      25);
+    _lbVoiceLength.text = [NSString stringWithFormat:@"%d\"",timelength];
     _btnVoice.userInteractionEnabled=true;
     [_btnVoice setBackgroundImage:[[UIImage imageNamed:@"escorttimevolice"] stretchableImageWithLeftCapWidth:40 topCapHeight:5] forState:UIControlStateNormal];
     [_btnVoice addTarget:self action:@selector(VoicePlayClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -361,6 +371,22 @@
     }
     
     return YES;
+}
+
+- (void) doBtnVoiceDelete:(UIButton *)sender
+{
+    [_btnDelete removeFromSuperview];
+    _btnDelete = nil;
+    
+    [_btnVoice removeFromSuperview];
+    _btnVoice = nil;
+    
+    [_lbVoiceLength removeFromSuperview];
+    _lbVoiceLength = nil;
+    
+//    voiceData=fileData;
+//    voiceName=fileName;
+//    voiceSecconds =timelength;
 }
 
 @end
