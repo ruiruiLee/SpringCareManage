@@ -300,7 +300,7 @@
 
 - (void)PublishEscortTime
 {
-    if(fileString == nil || voiceName == nil || [_tvContent.text length] == 0){
+    if(imageScrollView.selectImgArray.count == 0&&voiceName == nil &&[_tvContent.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
         return;
@@ -328,7 +328,7 @@
 
 - (void)PublishWorkSummary
 {
-    if(fileString == nil && (_tvContent.text == nil || [_tvContent.text length] == 0)){
+     if(imageScrollView.selectImgArray.count == 0&&voiceName == nil &&[_tvContent.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
         return;
@@ -383,10 +383,13 @@
     
     [_lbVoiceLength removeFromSuperview];
     _lbVoiceLength = nil;
-    
-//    voiceData=fileData;
-//    voiceName=fileName;
-//    voiceSecconds =timelength;
+    if (voiceName&&voiceData) {
+        voiceData=nil;
+        [_recoderAndPlayer removeTempfile:[_recoderAndPlayer getPathByFileName:voiceName ofType:@"amr"]];
+        [_recoderAndPlayer removeTempfile:[_recoderAndPlayer getPathByFileName:voiceName ofType:@"wav"]];
+        voiceName=nil;
+    }
+   
 }
 
 @end
