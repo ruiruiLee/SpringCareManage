@@ -22,6 +22,8 @@
 
 #define SERVER_ADDRESS @"http://baidu.com"
 
+#define LcationInstance [LocationManagerObserver sharedInstance]
+
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 

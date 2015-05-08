@@ -10,6 +10,8 @@
 #import "RootViewController.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
+#import "define.h"
+#import "LocationManagerObserver.h"
 
 #define AVOSCloudAppID  @"26x0xztg3ypms8o4ou42lxgk3gg6hl2rm6z9illft1pkoigh"
 #define AVOSCloudAppKey @"0xjxw6o8kk5jtkoqfi8mbl17fxoymrk29fo7b1u6ankirw31"
@@ -70,7 +72,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    application.applicationIconBadgeNumber = 0;
+    [self performSelector:@selector(openlocation) withObject:nil afterDelay:1.0f];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -108,6 +110,10 @@
     
     NSLog(@"%@", userInfo);
     //这儿你可以加入自己的代码 根据推送的数据进行相应处理
+}
+
+- (void)openlocation{
+    [LcationInstance startUpdateLocation];
 }
 
 @end
