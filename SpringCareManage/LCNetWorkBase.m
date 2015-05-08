@@ -11,8 +11,6 @@
 #import <AFNetworking.h>
 #import "SBJson.h"
 
-//#define SERVER_ADDRESS @"http://spring.avosapps.com/"
-#define SERVER_ADDRESS @"http://springcare.avosapps.com/"
 
 @implementation LCNetWorkBase
 

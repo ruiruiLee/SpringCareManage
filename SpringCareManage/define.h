@@ -20,7 +20,7 @@
 
 #define User_DetailInfo_Get @"User_DetailInfo_Get"
 
-#define SERVER_ADDRESS @"http://baidu.com"
+#define Service_Methord @"buspromotion/detailInfo/"
 
 #define LcationInstance [LocationManagerObserver sharedInstance]
 

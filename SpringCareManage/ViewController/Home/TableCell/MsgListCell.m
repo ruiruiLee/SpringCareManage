@@ -51,4 +51,10 @@
     // Configure the view for the selected state
 }
 
+- (void) SetContentDataWithModel:(MsgDataModel *) model
+{
+    _lbContent.text = model.newsTitle;
+    _lbTime.text = model.createdAt;
+}
+
 @end

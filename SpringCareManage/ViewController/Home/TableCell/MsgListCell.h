@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MsgDataModel.h"
 
 @interface MsgListCell : UITableViewCell
 {
     UILabel *_lbContent;
     UILabel *_lbTime;
 }
+
+- (void) SetContentDataWithModel:(MsgDataModel *) model;
 
 @end
