@@ -13,6 +13,7 @@
 		8652F0C51AFC9F0F002C6215 /* MsgDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0C41AFC9F0F002C6215 /* MsgDataModel.m */; };
 		8652F0C81AFCA214002C6215 /* MsgDataListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0C71AFCA214002C6215 /* MsgDataListModel.m */; };
 		8652F0CB1AFCB209002C6215 /* WebContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0CA1AFCB209002C6215 /* WebContentVC.m */; };
+		8652F0D21B03332F002C6215 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0D11B03332F002C6215 /* UserCenterVC.m */; };
 		865523531ADA872D00E803FD /* myEvaluate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523521ADA872D00E803FD /* myEvaluate@2x.png */; };
 		865523551ADA877600E803FD /* usercentershutgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523541ADA877600E803FD /* usercentershutgray@2x.png */; };
 		865523581ADA88E700E803FD /* MyOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 865523571ADA88E700E803FD /* MyOrderListVC.m */; };
@@ -413,6 +414,8 @@
 		8652F0C71AFCA214002C6215 /* MsgDataListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDataListModel.m; sourceTree = "<group>"; };
 		8652F0C91AFCB209002C6215 /* WebContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebContentVC.h; sourceTree = "<group>"; };
 		8652F0CA1AFCB209002C6215 /* WebContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebContentVC.m; sourceTree = "<group>"; };
+		8652F0D01B03332F002C6215 /* UserCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterVC.h; sourceTree = "<group>"; };
+		8652F0D11B03332F002C6215 /* UserCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterVC.m; sourceTree = "<group>"; };
 		865523521ADA872D00E803FD /* myEvaluate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myEvaluate@2x.png"; sourceTree = "<group>"; };
 		865523541ADA877600E803FD /* usercentershutgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usercentershutgray@2x.png"; sourceTree = "<group>"; };
 		865523561ADA88E700E803FD /* MyOrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListVC.h; sourceTree = "<group>"; };
@@ -969,6 +972,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8652F0CF1B0332EE002C6215 /* UserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				8652F0D31B0351B3002C6215 /* cell */,
+				8652F0D01B03332F002C6215 /* UserCenterVC.h */,
+				8652F0D11B03332F002C6215 /* UserCenterVC.m */,
+			);
+			path = UserCenter;
+			sourceTree = "<group>";
+		};
+		8652F0D31B0351B3002C6215 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		8655235C1ADA9AFC00E803FD /* EGOTableViewPullRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1209,6 +1229,7 @@
 		86B8E6161ADA36FC00A5139E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8652F0CF1B0332EE002C6215 /* UserCenter */,
 				86B96A6F1ADB6F2F00441168 /* Login */,
 				86B8E61C1ADA37DD00A5139E /* EscortTime */,
 				86B8E61D1ADA37DD00A5139E /* Home */,
@@ -2286,6 +2307,7 @@
 				86B749FA1AEA33C7000BA6DB /* WaitPayOrderListModel.m in Sources */,
 				86B749A41AE9EA1B000BA6DB /* SBJsonStreamParserAccumulator.m in Sources */,
 				86B74A301AEA8450000BA6DB /* EvaluateInfoModel.m in Sources */,
+				8652F0D21B03332F002C6215 /* UserCenterVC.m in Sources */,
 				CFBC524E1ADD37E9004FB8F3 /* MWTapDetectingView.m in Sources */,
 				86B74A401AEBDD5E000BA6DB /* OrderDetailsVC.m in Sources */,
 				86B461AD1AF5CB5D00B1B66D /* UIView+MGBadgeView.m in Sources */,

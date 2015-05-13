@@ -16,6 +16,7 @@
 @synthesize homeVC;
 @synthesize summaryVC;
 @synthesize messageListVC;
+@synthesize userCenter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,7 +41,13 @@
     [messageListVC.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:messageListVC];
     
-    self.viewControllers=@[nav1, nav3, nav2];
+    userCenter = [[UserCenterVC alloc] initWithNibName:nil bundle:nil];
+    userCenter.tabBarItem.title=@"个人中心";
+    [userCenter.tabBarItem setImage:[UIImage imageNamed:@"tab-lovetime"]];
+    [userCenter.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:userCenter];
+    
+    self.viewControllers=@[nav1, nav3, nav2, nav4];
     
     UIColor *normalColor = Disabled_Color;
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
