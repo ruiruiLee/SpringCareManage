@@ -135,4 +135,6 @@ typedef enum : NSUInteger {
 
 + (NSString *)getCurrentVersion;
 
++ (void)showAlertMessage:(NSString*)msg;
+
 @end

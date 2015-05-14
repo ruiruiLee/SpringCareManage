@@ -10,10 +10,10 @@
 
 @interface ModifyPwdVC : LCBaseVC<UITextFieldDelegate>
 {
-    UIScrollView *scrollview;
     UITextField *_tfPwd;
     UITextField *_tfRePwd;
     UITextField *_tfOldPwd;
 }
+@property (nonatomic, strong)UIScrollView *scrollview;
 
 @end

@@ -170,7 +170,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             NSString *url = [NSString stringWithFormat:@"%@%@%@", SERVER_ADDRESS, Service_Methord, Care_Agreement];
-            WebContentVC *vc = [[WebContentVC alloc] initWithTitle:@"用户陪护协议" url:url];
+            WebContentVC *vc = [[WebContentVC alloc] initWithTitle:@"护工协议" url:url];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
@@ -221,7 +221,7 @@
             cell._imgFold.hidden = NO;
         }
         else{
-            cell._lbTitle.text = @"用户陪护协议";
+            cell._lbTitle.text = @"护工协议";
             cell._lbContent.hidden = YES;
             cell._imgFold.hidden = NO;
         }
