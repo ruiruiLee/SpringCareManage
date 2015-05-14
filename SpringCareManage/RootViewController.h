@@ -17,6 +17,6 @@
 @property (strong, nonatomic) HomePageVC *homeVC;
 @property (strong, nonatomic) WorkSummaryVC *summaryVC;
 @property (strong, nonatomic) EscortTimeVC *messageListVC;
-@property (strong, nonatomic) UserCenterVC *userCenter;
+//@property (strong, nonatomic) UserCenterVC *userCenter;
 
 @end

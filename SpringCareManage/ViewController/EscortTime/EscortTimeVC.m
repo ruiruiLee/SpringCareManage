@@ -115,6 +115,7 @@
     _btnLoverSelect.clipsToBounds = YES;
     _btnLoverSelect.layer.cornerRadius = 20;
     [_btnLoverSelect addTarget:self action:@selector(NavRightButtonClickEvent:) forControlEvents:UIControlEventTouchUpInside];
+    _btnLoverSelect.hidden = YES;
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnLoverSelect(40)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_btnLoverSelect)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=0-[_btnLoverSelect(40)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_btnLoverSelect)]];
@@ -241,14 +242,16 @@
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_btnAddr]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_relationName]->=10-[_lbMobile]-4-[_btnRing]-20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_photoImgView(72)]-30-|" options:0 metrics:nil views:views]];
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_btnRing]-32.5-|" options:0 metrics:nil views:views]];
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-0-[_btnAddr(20)]-0-[_relationName(16)]->=10-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_btnRing]->=0-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-8-[_btnAddr(20)]-6-[_relationName(16)]->=10-|" options:0 metrics:nil views:views]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnRing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_relationName attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnRing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
 
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    
+    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_photoImgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
 }
 
 - (void)didReceiveMemoryWarning {

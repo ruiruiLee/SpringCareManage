@@ -14,6 +14,7 @@
 		8652F0C81AFCA214002C6215 /* MsgDataListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0C71AFCA214002C6215 /* MsgDataListModel.m */; };
 		8652F0CB1AFCB209002C6215 /* WebContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0CA1AFCB209002C6215 /* WebContentVC.m */; };
 		8652F0D21B03332F002C6215 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0D11B03332F002C6215 /* UserCenterVC.m */; };
+		8652F0D61B035271002C6215 /* UserCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0D51B035271002C6215 /* UserCenterCell.m */; };
 		865523531ADA872D00E803FD /* myEvaluate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523521ADA872D00E803FD /* myEvaluate@2x.png */; };
 		865523551ADA877600E803FD /* usercentershutgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523541ADA877600E803FD /* usercentershutgray@2x.png */; };
 		865523581ADA88E700E803FD /* MyOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 865523571ADA88E700E803FD /* MyOrderListVC.m */; };
@@ -416,6 +417,8 @@
 		8652F0CA1AFCB209002C6215 /* WebContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebContentVC.m; sourceTree = "<group>"; };
 		8652F0D01B03332F002C6215 /* UserCenterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterVC.h; sourceTree = "<group>"; };
 		8652F0D11B03332F002C6215 /* UserCenterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterVC.m; sourceTree = "<group>"; };
+		8652F0D41B035271002C6215 /* UserCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterCell.h; sourceTree = "<group>"; };
+		8652F0D51B035271002C6215 /* UserCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterCell.m; sourceTree = "<group>"; };
 		865523521ADA872D00E803FD /* myEvaluate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myEvaluate@2x.png"; sourceTree = "<group>"; };
 		865523541ADA877600E803FD /* usercentershutgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usercentershutgray@2x.png"; sourceTree = "<group>"; };
 		865523561ADA88E700E803FD /* MyOrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListVC.h; sourceTree = "<group>"; };
@@ -985,6 +988,8 @@
 		8652F0D31B0351B3002C6215 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				8652F0D41B035271002C6215 /* UserCenterCell.h */,
+				8652F0D51B035271002C6215 /* UserCenterCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -2241,6 +2246,7 @@
 				86B3EE841AFB4BB8005E29B1 /* EditUserInfoVC.m in Sources */,
 				8652F0CB1AFCB209002C6215 /* WebContentVC.m in Sources */,
 				86B461B31AF5D2B800B1B66D /* MsgListCell.m in Sources */,
+				8652F0D61B035271002C6215 /* UserCenterCell.m in Sources */,
 				86B749831AE9E8CB000BA6DB /* LCNetWorkBase.m in Sources */,
 				CFBC53321ADD4C4C004FB8F3 /* UIImage+GIF.m in Sources */,
 				86B74A641AEC81ED000BA6DB /* VoiceConverter.mm in Sources */,
