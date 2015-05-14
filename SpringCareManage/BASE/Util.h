@@ -127,4 +127,12 @@ typedef enum : NSUInteger {
 
 + (BOOL) isDateShowFirstDate:(NSString *)date1 secondDate:(NSString *)date2;
 
++ (void)updateVersion :(void(^)(NSArray *info))handleResponse;
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+
++ (UIImage *) GetBtnBackgroundImage;
+
++ (NSString *)getCurrentVersion;
+
 @end

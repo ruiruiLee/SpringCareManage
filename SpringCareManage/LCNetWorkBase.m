@@ -23,6 +23,21 @@
     return instance;
 }
 
+- (void)GetWithParams:(NSDictionary *)params Url:(NSString*)url Completion:(Completion)completion{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        if (completion!=nil) {
+            completion(1, responseObject);
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion!=nil) {
+            completion(0, error.localizedDescription);
+        }
+    }
+     ];
+}
 
 - (void)requestWithMethod:(NSString *)method Params:(NSDictionary *)params Completion:(Completion)completion
 {

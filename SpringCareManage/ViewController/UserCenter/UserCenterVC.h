@@ -7,11 +7,12 @@
 //
 
 #import "LCBaseVC.h"
-#import "EGORefreshTableHeaderView.h"
 
-@interface UserCenterVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate>
+@interface UserCenterVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate>
+{
+    NSString   *_appDownUrl;
+}
 
-@property (nonatomic, strong) EGORefreshTableHeaderView *refreshView;
 @property (nonatomic, strong) UITableView *tableview;
 
 @end

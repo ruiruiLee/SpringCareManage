@@ -92,4 +92,12 @@ typedef void(^block)(int code, id content);
 #define PostersImage(imageUrl) FormatImage(imageUrl,414,277)
 #define PostersImage4s(imageUrl) FormatImage(imageUrl,320,175)
 
+//下载更新
+#define apkUrl @"http://itunes.apple.com/lookup"
+//#define KEY_APPLE_ID @"702715314"
+#define KEY_APPLE_ID @"992339154"
+
+#define About_Us @"5544ad2ee4b03fd8342e9c19"//关于我们
+#define Care_Agreement @"5544af16e4b03fd8342eb2d3"//用户协议
+
 #endif

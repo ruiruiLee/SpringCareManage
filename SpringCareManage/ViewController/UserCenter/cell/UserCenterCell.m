@@ -7,6 +7,7 @@
 //
 
 #import "UserCenterCell.h"
+#import "define.h"
 
 @implementation UserCenterCell
 @synthesize _imgvLogo;
@@ -24,6 +25,11 @@
         _imgvLogo = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_imgvLogo];
         _imgvLogo.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        _lbTitle = [[UILabel alloc] initWithFrame:CGRectZero];
+        [self.contentView addSubview:_lbTitle];
+        _lbTitle.translatesAutoresizingMaskIntoConstraints = NO;
+        _lbTitle.font = _FONT(18);
         
     }
     

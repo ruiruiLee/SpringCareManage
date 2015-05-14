@@ -30,7 +30,9 @@
     UIImageView *_sexLogo;
     UILabel *_lbAge;
     UIButton *_btnMobile;
+    UIImageView *_imgvMobile;
     UIButton *_btnAddress;
+    UIImageView *_imgvAddress;
     UIImageView *_statusImgv;//完成标志
     
     UIView *intervalV1;

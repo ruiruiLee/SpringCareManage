@@ -432,4 +432,64 @@
         return YES;
 }
 
++ (void)showAlertMessage:(NSString*)msg
+{
+    UIAlertView * mAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
+    [mAlert show];
+}
+
++ (void)updateVersion :(void(^)(NSArray *info))handleResponse{
+    NSDictionary *jsonInfo = [[NSDictionary alloc] initWithObjectsAndKeys:KEY_APPLE_ID, @"id", @"cn", @"country", nil];
+    [LCNetWorkBase GetWithParams:jsonInfo  Url:apkUrl Completion:^(int code, id content) {
+        if(code){
+            if ([[content objectForKey:@"resultCount"] integerValue]==0) {
+                [Util showAlertMessage:@"请等待上架appstore！"];
+            }
+            else{
+                NSArray *infoArray = [content objectForKey:@"results"];
+                if (infoArray) {
+                    if (handleResponse) {
+                        handleResponse(infoArray);
+                    }
+                }
+                else{
+                    [Util showAlertMessage:@"更新失败！"];
+                }
+            }
+        }
+        else{
+            [Util showAlertMessage:content];
+        }
+    }];
+    
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
++ (UIImage *) GetBtnBackgroundImage
+{
+    UIImage *image = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
+    UIEdgeInsets inset = UIEdgeInsetsMake(0, image.size.width/2-10, 0, image.size.width/2-10);
+    
+    return [image resizableImageWithCapInsets:inset ];
+}
+
++ (NSString *)getCurrentVersion
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    //CFShow((__bridge CFTypeRef)(infoDictionary));
+    NSString *currentVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    return currentVersion;
+}
+
 @end

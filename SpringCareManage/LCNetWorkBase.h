@@ -22,5 +22,6 @@ typedef void(^Completion) (int code, id content);
 
 - (void)postWithParams:(NSString*)params Url:(NSString*)url Completion:(Completion)completion;
 
+- (void)GetWithParams:(NSDictionary *)params Url:(NSString*)url Completion:(Completion)completion;
 
 @end

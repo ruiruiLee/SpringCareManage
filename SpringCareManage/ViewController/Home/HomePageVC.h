@@ -48,7 +48,13 @@
     UILabel *_line3;
     
     UIButton *_btnCustomerMobile;
+    UIImageView *_imgvMobile;
     UIButton *_btnAddress;
+    UIImageView *_imgvAddress;
+    UILabel *_lbLoverInfo;
+    UIImageView *_imgvLoverSex;
+    
+    UIButton *btnRing;
     
     UIView *_SepLine;
     
