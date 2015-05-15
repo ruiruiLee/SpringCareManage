@@ -341,6 +341,56 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0)
+        return NO;
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        EscortTimeDataModel *model = [_dataList objectAtIndex:indexPath.row];
+        
+        NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+        [parmas setObject:model.itemId forKey:@"id"];
+        [LCNetWorkBase postWithMethod:@"api/careTime/delete" Params:parmas Completion:^(int code, id content) {
+            if(code){
+                [tableView beginUpdates];
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [tableView endUpdates];
+                [tableView reloadData];
+            }
+        }];
+        
+        [_dataList removeObject:model];
+        
+        // Delete the row from the data source.
+        
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
+//编辑删除按钮的文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+//这个方法用来告诉表格 某一行是否可以移动
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete; //每行左边会出现红的删除按钮
+}
+
 - (void) replyContentWithId:(NSString*)itemId
 {
     

@@ -34,23 +34,25 @@
     
     _btnLeft = [[UIButton alloc] initWithFrame:CGRectZero];
     [self addSubview:_btnLeft];
-    _btnLeft.translatesAutoresizingMaskIntoConstraints = YES;
+    _btnLeft.translatesAutoresizingMaskIntoConstraints = NO;
     _btnLeft.titleLabel.font = _FONT(16);
     [_btnLeft setBackgroundImage:imageNormal forState:UIControlStateNormal];
     [_btnLeft setBackgroundImage:imageSelect forState:UIControlStateSelected];
     [_btnLeft addTarget:self action:@selector(doBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
     [_btnLeft setTitle:@"空闲" forState:UIControlStateNormal];
     [_btnLeft setTitleColor:_COLOR(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+    [_btnLeft setTitleColor:_COLOR(0xff, 0xff, 0xff) forState:UIControlStateSelected];
     
     _btnRight = [[UIButton alloc] initWithFrame:CGRectZero];
     [self addSubview:_btnRight];
-    _btnRight.translatesAutoresizingMaskIntoConstraints = YES;
+    _btnRight.translatesAutoresizingMaskIntoConstraints = NO;
     _btnRight.titleLabel.font = _FONT(16);
     [_btnRight setBackgroundImage:imageNormal forState:UIControlStateNormal];
     [_btnRight setBackgroundImage:imageSelect forState:UIControlStateSelected];
     [_btnRight addTarget:self action:@selector(doBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
     [_btnRight setTitle:@"休假" forState:UIControlStateNormal];
     [_btnRight setTitleColor:_COLOR(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+    [_btnRight setTitleColor:_COLOR(0xff, 0xff, 0xff) forState:UIControlStateSelected];
     
     _lbStatus = [[UILabel alloc] initWithFrame:CGRectZero];
     [self addSubview:_lbStatus];
@@ -112,11 +114,15 @@
         _lbStatus.hidden = YES;
         _btnLeft.hidden = NO;
         _btnRight.hidden = NO;
+        _btnLeft.selected = YES;
+        _btnRight.selected = NO;
     }
     else if (status == EnumWorkStatusHoliday){
         _lbStatus.hidden = YES;
         _btnLeft.hidden = NO;
         _btnRight.hidden = NO;
+        _btnRight.selected = YES;
+        _btnLeft.selected = NO;
     }
     else{
         _lbStatus.hidden = NO;
