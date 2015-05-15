@@ -84,14 +84,24 @@
             // 更新当前用户坐标到服务器
                 if ([AVUser currentUser]!=nil) {
                     AVUser *user = [AVUser currentUser];
-                    AVGeoPoint *point = [AVGeoPoint geoPointWithLatitude:_lat longitude:_lon];
-                    [user setObject:point forKey:@"locationPoint"];
-                    [user setObject:_currentDetailAdrress forKey:@"career"];
-                    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
+//                    AVGeoPoint *point = [AVGeoPoint geoPointWithLatitude:_lat longitude:_lon];
+//                    [user setObject:point forKey:@"locationPoint"];
+//                    [user setObject:_currentDetailAdrress forKey:@"career"];
+                    NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+                    [parmas setObject:[NSNumber numberWithFloat:_lat] forKey:@"latitude"];
+                    [parmas setObject:[NSNumber numberWithFloat:_lon] forKey:@"longitude"];
+                    [parmas setObject:user.objectId forKey:@"id"];
+                    [parmas setObject:_currentDetailAdrress forKey:@"addr"];
+                    [LCNetWorkBase postWithMethod:@"api/care/geo" Params:parmas Completion:^(int code, id content) {
+                        if(code){
                             [[UserModel sharedUserInfo] modifyLocation:_currentDetailAdrress];
                         }
                     }];
+//                    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                    if (succeeded) {
+//                            [[UserModel sharedUserInfo] modifyLocation:_currentDetailAdrress];
+//                        }
+//                    }];
                 }
             }
         }];
