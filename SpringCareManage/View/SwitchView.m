@@ -82,30 +82,54 @@
 {
     if(sender.selected == YES)
         return;
-    _btnLeft.selected = NO;
-    _btnRight.selected = NO;
     
-    sender.selected = YES;
+    NSString *msg = @"";
+    if(sender == _btnLeft){
+        msg = @"确认开始接单？";
+    }
+    else{
+        msg = @"确认要休假？";
+    }
     
-    NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
-    [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"careId"];
-    if(sender == _btnLeft)
-        [parmas setObject:@"0" forKey:@"workStatus"];//空闲
-    else
-        [parmas setObject:@"2" forKey:@"workStatus"];//休假
-    
-    [LCNetWorkBase postWithMethod:@"api/care/setStatus" Params:parmas Completion:^(int code, id content) {
-        if(code){
-            if([content objectForKey:@"code"] == nil){
-                
-            }else{
-                _btnLeft.selected = YES;
-                _btnRight.selected = YES;
-                sender.selected = NO;
-                [Util showAlertMessage:[content objectForKey:@"msg"]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alert show];
+    return;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        UIButton *sender = nil;
+        if(_btnLeft.selected == YES)
+            sender = _btnRight;
+        else
+            sender = _btnLeft;
+        
+        _btnLeft.selected = NO;
+        _btnRight.selected = NO;
+        
+        sender.selected = YES;
+        
+        NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+        [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"careId"];
+        if(sender == _btnLeft)
+            [parmas setObject:@"0" forKey:@"workStatus"];//空闲
+        else
+            [parmas setObject:@"2" forKey:@"workStatus"];//休假
+        
+        [LCNetWorkBase postWithMethod:@"api/care/setStatus" Params:parmas Completion:^(int code, id content) {
+            if(code){
+                if([content objectForKey:@"code"] == nil){
+                    
+                }else{
+                    _btnLeft.selected = YES;
+                    _btnRight.selected = YES;
+                    sender.selected = NO;
+                    [Util showAlertMessage:[content objectForKey:@"msg"]];
+                }
             }
-        }
-    }];
+        }];
+    }
 }
 
 - (void) SetCurrentWorkStatus:(EnumWorkStatus) status
