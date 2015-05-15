@@ -9,6 +9,7 @@
 #import "LCBaseVC.h"
 #import "EGORefreshTableHeaderView.h"
 #import "HBImageViewList.h"
+#import "SwitchView.h"
 
 @interface HomePageVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate>
 {
@@ -19,6 +20,8 @@
     UILabel *_lbMobile;//电话
     UIButton *_btnInfo;//年龄，护龄信息
     UILabel *_detailInfo;//详细信息
+    
+    SwitchView *_workStatus;//工作状态
     
     UIButton *_btnNew;//新订单
     UILabel *_lbNew;

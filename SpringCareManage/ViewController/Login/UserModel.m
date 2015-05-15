@@ -130,6 +130,7 @@
         
         if(code == 1){
             weakSelf.certList = [[content objectForKey:@"care"] objectForKey:@"certList"];
+            weakSelf.workStatus = [[[content objectForKey:@"care"] objectForKey:@"workStatus"] integerValue];
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:User_DetailInfo_Get object:nil];

@@ -10,6 +10,8 @@
 #import "define.h"
 #import "UserDetailModel.h"
  #import <AVOSCloud/AVOSCloud.h>
+#import "SwitchView.h"
+
 @interface UserModel : NSObject
 
 @property (nonatomic, strong) NSString *userId;
@@ -30,6 +32,7 @@
 @property (nonatomic, strong) NSString *detailIntro;
 
 @property (nonatomic, strong) NSArray *certList;
+@property (nonatomic, assign) EnumWorkStatus workStatus;
 //detail
 + (UserModel *) sharedUserInfo;
 

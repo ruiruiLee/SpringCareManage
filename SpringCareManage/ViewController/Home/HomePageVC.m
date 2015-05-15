@@ -159,6 +159,10 @@
     [_btnInfo setImage:[UIImage imageNamed:@"nurselistcert"] forState:UIControlStateNormal];
     _btnInfo.userInteractionEnabled = NO;
     
+    _workStatus = [[SwitchView alloc] initWithFrame:CGRectZero];
+    [_bgView addSubview:_workStatus];
+    _workStatus.translatesAutoresizingMaskIntoConstraints = NO;
+    
     _detailInfo = [self createLabel:_FONT(12) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_bgView];//详细信息
     _detailInfo.numberOfLines = 0;
     _detailInfo.preferredMaxLayoutWidth = ScreenWidth - 50;
@@ -278,6 +282,7 @@
     [_OrderInfoView addSubview:btnRing];
     btnRing.translatesAutoresizingMaskIntoConstraints = NO;
     [btnRing setImage:ThemeImage(@"userattentionring") forState:UIControlStateNormal];
+    [btnRing addTarget:self action:@selector(btnRingClicked) forControlEvents:UIControlEventTouchUpInside];
     
     [self createAutoLayoutConstraintsForHeader:headerView];
     
@@ -289,12 +294,14 @@
 
 - (void) createAutoLayoutConstraintsForHeader:(UIView*)rootview
 {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _imgvMobile, _lbLoverInfo, _imgvLoverSex, btnRing);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _imgvMobile, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus);
     //H
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_lbName]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_lbMobile]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_btnInfo]->=32-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_detailInfo]->=32-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_workStatus(120)]->=32-|" options:0 metrics:nil views:views]];
+    
+//    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_detailInfo]->=32-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-26-[_btnNew]-0-[intervalV1]-0-[_btnSubscribe]-0-[intervalV2]-0-[_btnTreatPay]-0-[intervalV3]-0-[_btnEvaluate]-26-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line1]-0-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnOrderOnDoing]->=0-|" options:0 metrics:nil views:views]];
@@ -324,8 +331,8 @@
     [rootview addConstraint:[NSLayoutConstraint constraintWithItem:intervalV3 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
     
     //V
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_photoImage(82)]-6-[_detailInfo]->=6-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_lbName]-4-[_lbMobile]-8-[_btnInfo]-10-[_detailInfo]-10-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_photoImage(82)]-6-[_workStatus(36)]->=6-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_lbName]-4-[_lbMobile]-8-[_btnInfo]-10-[_workStatus]-10-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_btnCert]->=0-|" options:0 metrics:nil views:views]];
     
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
@@ -353,9 +360,11 @@
     UserModel *userInfo = [UserModel sharedUserInfo];
     _lbName.text = userInfo.chineseName;
     
-    _lbMobile.text = userInfo.mobilePhoneNumber;
+    _lbMobile.text = userInfo.userName;
     
-    _detailInfo.text = userInfo.intro;
+    [_workStatus SetCurrentWorkStatus:userInfo.workStatus];
+    
+//    _detailInfo.text = userInfo.intro;
     
     if(userInfo.certList == nil || [userInfo.certList count] == 0){
         _btnCert.hidden = YES;
@@ -456,6 +465,24 @@
     headerView.frame = CGRectMake(0, 0, ScreenWidth, size.height + 1);
     
     _tableview.tableHeaderView = headerView;
+}
+
+- (void)btnRingClicked{
+    UserModel *userInfo = [UserModel sharedUserInfo];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您确定要拨打电话吗?" message:userInfo.userOrderInfo.orderModel.registerInfo.phone delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alertView setTag:12];
+    [alertView show];
+}
+
+#pragma alertdelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UserModel *userInfo = [UserModel sharedUserInfo];
+    if ([alertView tag] == 12) {
+        if (buttonIndex==0) {
+            NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",userInfo.userOrderInfo.orderModel.registerInfo.phone]];
+            [[UIApplication sharedApplication] openURL:phoneURL];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

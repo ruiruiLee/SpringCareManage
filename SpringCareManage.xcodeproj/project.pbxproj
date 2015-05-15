@@ -21,6 +21,7 @@
 		8652F0E11B0488A3002C6215 /* ModifyPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0E01B0488A3002C6215 /* ModifyPwdVC.m */; };
 		8652F0E61B04B8C3002C6215 /* feedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8652F0E81B04B8C3002C6215 /* feedbackView.xib */; };
 		8652F0F21B04BC0F002C6215 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8652F0F41B04BC0F002C6215 /* Localizable.strings */; };
+		8652F0F81B05932C002C6215 /* SwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0F71B05932C002C6215 /* SwitchView.m */; };
 		865523531ADA872D00E803FD /* myEvaluate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523521ADA872D00E803FD /* myEvaluate@2x.png */; };
 		865523551ADA877600E803FD /* usercentershutgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523541ADA877600E803FD /* usercentershutgray@2x.png */; };
 		865523581ADA88E700E803FD /* MyOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 865523571ADA88E700E803FD /* MyOrderListVC.m */; };
@@ -434,6 +435,8 @@
 		8652F0E71B04B8C3002C6215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/feedbackView.xib; sourceTree = "<group>"; };
 		8652F0F31B04BC0F002C6215 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8652F0F51B04BC20002C6215 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		8652F0F61B05932C002C6215 /* SwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchView.h; sourceTree = "<group>"; };
+		8652F0F71B05932C002C6215 /* SwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchView.m; sourceTree = "<group>"; };
 		865523521ADA872D00E803FD /* myEvaluate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myEvaluate@2x.png"; sourceTree = "<group>"; };
 		865523541ADA877600E803FD /* usercentershutgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usercentershutgray@2x.png"; sourceTree = "<group>"; };
 		865523561ADA88E700E803FD /* MyOrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListVC.h; sourceTree = "<group>"; };
@@ -1248,6 +1251,8 @@
 				86B8E6531ADA383F00A5139E /* LCNavigationbar.m */,
 				86B3EE851AFB4BDD005E29B1 /* LCPickView.h */,
 				86B3EE861AFB4BDD005E29B1 /* LCPickView.m */,
+				8652F0F61B05932C002C6215 /* SwitchView.h */,
+				8652F0F71B05932C002C6215 /* SwitchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2257,6 +2262,7 @@
 				86B749FD1AEA33F0000BA6DB /* WaitCommentOrderListModel.m in Sources */,
 				865523581ADA88E700E803FD /* MyOrderListVC.m in Sources */,
 				86B4619F1AF46EDD00B1B66D /* ObjImageDataInfo.m in Sources */,
+				8652F0F81B05932C002C6215 /* SwitchView.m in Sources */,
 				86B461B01AF5D0CF00B1B66D /* MsgListVC.m in Sources */,
 				86B749E81AEA275F000BA6DB /* LoverInfoModel.m in Sources */,
 				86B3EE871AFB4BDD005E29B1 /* LCPickView.m in Sources */,
