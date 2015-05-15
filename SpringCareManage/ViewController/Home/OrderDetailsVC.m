@@ -36,6 +36,7 @@
         [self.contentView addSubview:_btnStatus];
         [_btnStatus addTarget:self action:@selector(doBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         _btnStatus.layer.cornerRadius = 5;
+        _btnStatus.clipsToBounds = YES;
         
         _imgLogo = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_imgLogo];
@@ -51,6 +52,7 @@
         
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imgLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=20-[_imgLogo]-20-|" options:0 metrics:nil views:views]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnStatus(32)]->=0-|" options:0 metrics:nil views:views]];
     }
     return self;
 }
@@ -98,16 +100,25 @@
         else if(model.orderStatus == EnumOrderStatusTypeFinish && model.commentStatus == EnumTypeNoComment && model.payStatus == EnumTypePayed){
             _imgLogo.hidden = YES;
             _btnStatus.tag = 2;
-            [_btnStatus setTitle:@"未评价" forState:UIControlStateNormal];
-        }else if (model.orderStatus == EnumOrderStatusTypeNew){
+            [_btnStatus setTitle:@"去评价" forState:UIControlStateNormal];
+            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            //            _btnStatus.backgroundColor = Abled_Color;
+            [_btnStatus setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
+        }else if (model.orderStatus == EnumOrderStatusTypeNew && model.payStatus == EnumTypeNopay){
             _imgLogo.hidden = YES;
             _btnStatus.tag = 3;
-            [_btnStatus setTitle:@"已取消" forState:UIControlStateNormal];
+            [_btnStatus setTitle:@"取消订单" forState:UIControlStateNormal];
+            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            //            _btnStatus.backgroundColor = Abled_Color;
+            [_btnStatus setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
         }
         else if(model.payStatus == EnumTypeNopay){
             _imgLogo.hidden = YES;
             _btnStatus.tag = 1;
-            [_btnStatus setTitle:@"未付款" forState:UIControlStateNormal];
+            [_btnStatus setTitle:@"去付款" forState:UIControlStateNormal];
+            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            //            _btnStatus.backgroundColor = Abled_Color;
+            [_btnStatus setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
         }
         else{
             _imgLogo.hidden = YES;
