@@ -33,6 +33,9 @@
 
 @property (nonatomic, strong) NSArray *certList;
 @property (nonatomic, assign) EnumWorkStatus workStatus;
+
+@property (nonatomic, strong) NSString *careType;
+
 //detail
 + (UserModel *) sharedUserInfo;
 

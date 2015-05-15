@@ -37,6 +37,7 @@
             self.intro = [muser objectForKey:@"intro"];
             self.detailIntro = [muser objectForKey:@"detailIntro"];
             self.beginCareDate = [muser objectForKey:@"beginCareDate"];
+            self.careType = [muser objectForKey:@"careType"];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
                     });
         }
@@ -58,6 +59,7 @@
     self.intro = [muser objectForKey:@"intro"];
     self.detailIntro = [muser objectForKey:@"detailIntro"];
     self.beginCareDate = [muser objectForKey:@"beginCareDate"];
+    self.careType = [muser objectForKey:@"careType"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
     });
 }

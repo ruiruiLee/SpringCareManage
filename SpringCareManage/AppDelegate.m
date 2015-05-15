@@ -12,6 +12,7 @@
 #import <AVOSCloudSNS/AVOSCloudSNS.h>
 #import "define.h"
 #import "LocationManagerObserver.h"
+#import "UserModel.h"
 
 #define AVOSCloudAppID  @"26x0xztg3ypms8o4ou42lxgk3gg6hl2rm6z9illft1pkoigh"
 #define AVOSCloudAppKey @"0xjxw6o8kk5jtkoqfi8mbl17fxoymrk29fo7b1u6ankirw31"
@@ -38,12 +39,42 @@
     /* 重要! 注册子类 App生命周期内 只需要执行一次即可*/
     //    [Student registerSubclass];
     
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        // 第一次安装时运行打开推送
 #if !TARGET_IPHONE_SIMULATOR
-    [application registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge |
-     UIRemoteNotificationTypeAlert |
-     UIRemoteNotificationTypeSound];
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
+                                                    | UIUserNotificationTypeBadge
+                                                    | UIUserNotificationTypeSound
+                                                                                     categories:nil];
+            [application registerUserNotificationSettings:settings];
+            [application registerForRemoteNotifications];
+        }
+        else{
+            [application registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge |
+             UIRemoteNotificationTypeAlert |
+             UIRemoteNotificationTypeSound];
+        }
 #endif
+        // 引导界面展示
+        // [_rootTabController showIntroWithCrossDissolve];
+        
+    }
     
+    //判断程序是不是由推送服务完成的
+    if (launchOptions)
+    {
+        
+        NSDictionary* notificationPayload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (notificationPayload)
+        {
+            [self performSelector:@selector(pushDetailPage:) withObject:notificationPayload afterDelay:1.0];
+            [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+        }
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     RootViewController *vc = [[RootViewController alloc] initWithNibName:nil bundle:nil];
@@ -82,17 +113,24 @@
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     //推送功能打开时, 注册当前的设备, 同时记录用户活跃, 方便进行有针对的推送
+//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    
+//    //可选 但是很重要. 我们可以在任何地方给currentInstallation设置任意值,方便进行有针对的推送
+//    //比如如果我们知道用户的年龄了,可以加上下面这一行 这样推送时我们可以选择age>20岁的用户进行通知
+//    
+//    //我们当然也可以设置根据地理位置提醒 发挥想象力吧!
+//    
+//    
+//    //当然别忘了任何currentInstallation的变更后做保存
+//    [currentInstallation saveInBackground];
+    
+    [AVUser logOut];  //清除缓存用户对象
+    [UserModel sharedUserInfo].userId = nil;
     AVInstallation *currentInstallation = [AVInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    
-    //可选 但是很重要. 我们可以在任何地方给currentInstallation设置任意值,方便进行有针对的推送
-    //比如如果我们知道用户的年龄了,可以加上下面这一行 这样推送时我们可以选择age>20岁的用户进行通知
-    //[currentInstallation setObject:@"28" forKey:@"age"];
-    
-    //我们当然也可以设置根据地理位置提醒 发挥想象力吧!
-    
-    
-    //当然别忘了任何currentInstallation的变更后做保存
+    //[currentInstallation addUniqueObject:@"springCare" forKey:@"channels"];
+//    [currentInstallation addUniqueObject:@"registerUser" forKey:@"channels"];
     [currentInstallation saveInBackground];
 }
 
@@ -104,16 +142,30 @@
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     //可选 通过统计功能追踪通过提醒打开应用的行为
-    [AVAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-    
-    NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    
-    NSLog(@"%@", userInfo);
     //这儿你可以加入自己的代码 根据推送的数据进行相应处理
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+    // 程序在运行中接收到推送
+    if (application.applicationState == UIApplicationStateActive)
+    {
+//        [(RootViewController*)[SliderViewController sharedSliderController].MainVC pushtoController:userInfo];
+    }
+    else  //程序在后台中接收到推送
+    {
+        // The application was just brought from the background to the foreground,
+        // so we consider the app as having been "opened by a push notification."
+        [AVAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+//        [self pushDetailPage:userInfo PushType:PushFromBcakground];
+    }
 }
 
 - (void)openlocation{
     [LcationInstance startUpdateLocation];
+}
+
+-(void) pushDetailPage: (id)dic
+{
+//    [self pushDetailPage:dic PushType:PushFromTerminate];
 }
 
 @end
