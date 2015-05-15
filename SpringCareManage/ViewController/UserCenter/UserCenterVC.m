@@ -15,6 +15,7 @@
 #import "QuickmarkVC.h"
 #import "UserModel.h"
 #import "ModifyPwdVC.h"
+#import "UserLoginVC.h"
 
 @interface UserCenterVC ()
 
@@ -92,8 +93,11 @@
     [AVUser logOut];  //清除缓存用户对象
     [UserModel sharedUserInfo].userId = nil;
     //[[UserModel sharedUserInfo] modifyInfo];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Register_Logout object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Register_Logout object:nil];
     
+    UserLoginVC *vc = [[UserLoginVC alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
     
 }
 

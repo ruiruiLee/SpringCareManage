@@ -59,6 +59,17 @@ static BaseOrderListModel *waitCommentorderModel = nil;
     return nil;
 }
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) NotifyRegisterLogout:(NSNotification *)notify
+{
+    [self.dataList removeAllObjects];
+    self.pages = 0;
+}
+
 - (id) init
 {
     self = [super init];
@@ -68,6 +79,8 @@ static BaseOrderListModel *waitCommentorderModel = nil;
         self.totals = INT_MAX;
         self.pages = 0;
         self.dataList = [[NSMutableArray alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRegisterLogout:) name:Notify_Register_Logout object:nil];
     }
     
     return self;
@@ -77,36 +90,6 @@ static BaseOrderListModel *waitCommentorderModel = nil;
 {
     return self.dataList;
 }
-
-//- (id) initWithOrderListType:(OrderListType) type
-//{
-//    switch (type) {
-//        case EnumOrderAll:
-//            self = [[AllOrderListModel alloc] init];
-//            break;
-//        case EnumOrderNew:
-//            self = [[NewOrderListModel alloc] init];
-//            break;
-//        case EnumOrderSubscribe:
-//            self = [[ConfirmedOrderListModel alloc] init];
-//            break;
-//        case EnumOrderTreatPay:
-//            self = [[WaitPayOrderListModel alloc] init];
-//            break;
-//        case EnumOrderEvaluate:
-//            self = [[WaitCommentOrderListModel alloc] init];
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//    if(self){
-//        self.totals = INT_MAX;
-//        self.pages = 0;
-//    }
-//    
-//    return self;
-//}
 
 - (void) setPages:(NSInteger)pages
 {
