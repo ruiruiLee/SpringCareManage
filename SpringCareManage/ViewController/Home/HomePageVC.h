@@ -69,5 +69,6 @@
 }
 
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshView;
+@property (nonatomic, strong) UITableView *tableview;
 
 @end

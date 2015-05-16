@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "MPNotificationView.h"
 
 @interface RootViewController ()
 
@@ -96,6 +97,7 @@
     switch (mt) {
         case 1:   // 订单
         {
+            [homeVC.refreshView startAnimatingWithScrollView:homeVC.tableview];
             [homeVC egoRefreshTableHeaderDidTriggerRefresh:homeVC.refreshView];
             break;
         }
@@ -126,6 +128,22 @@
             break;
             
     }
+}
+
+-(void) pushtoController:(id)dic{
+    
+    if([[dic objectForKey:@"mt"] intValue] == 1){
+        [homeVC.refreshView startAnimatingWithScrollView:homeVC.tableview];
+        [homeVC egoRefreshTableHeaderDidTriggerRefresh:homeVC.refreshView];
+    }
+    
+    [MPNotificationView notifyWithText:@"信息提示"
+                                detail:[[dic objectForKey:@"aps"] objectForKey:@"alert"]
+                                 image:ThemeImage(@"icontitle")
+                           andDuration:4.0
+                             msgparams:dic];
+    
+    
 }
 
 @end

@@ -47,6 +47,8 @@
 		865523881ADAA31000E803FD /* orderend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 865523871ADAA31000E803FD /* orderend@2x.png */; };
 		8655238B1ADAA4A700E803FD /* EvaluateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8655238A1ADAA4A700E803FD /* EvaluateListCell.m */; };
 		8655238E1ADAA4C600E803FD /* MyEvaluateListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */; };
+		86B3004F1B07302F00ECA78B /* MPNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3004C1B07302F00ECA78B /* MPNotificationView.m */; };
+		86B300501B07302F00ECA78B /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3004E1B07302F00ECA78B /* OBGradientView.m */; };
 		86B3EE811AFB480E005E29B1 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B3EE801AFB480E005E29B1 /* delete@2x.png */; };
 		86B3EE841AFB4BB8005E29B1 /* EditUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3EE831AFB4BB8005E29B1 /* EditUserInfoVC.m */; };
 		86B3EE871AFB4BDD005E29B1 /* LCPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3EE861AFB4BDD005E29B1 /* LCPickView.m */; };
@@ -470,6 +472,10 @@
 		8655238A1ADAA4A700E803FD /* EvaluateListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateListCell.m; sourceTree = "<group>"; };
 		8655238C1ADAA4C600E803FD /* MyEvaluateListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEvaluateListVC.h; sourceTree = "<group>"; };
 		8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEvaluateListVC.m; sourceTree = "<group>"; };
+		86B3004B1B07302F00ECA78B /* MPNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNotificationView.h; sourceTree = "<group>"; };
+		86B3004C1B07302F00ECA78B /* MPNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNotificationView.m; sourceTree = "<group>"; };
+		86B3004D1B07302F00ECA78B /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
+		86B3004E1B07302F00ECA78B /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		86B3EE801AFB480E005E29B1 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		86B3EE821AFB4BB8005E29B1 /* EditUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserInfoVC.h; sourceTree = "<group>"; };
 		86B3EE831AFB4BB8005E29B1 /* EditUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserInfoVC.m; sourceTree = "<group>"; };
@@ -1056,6 +1062,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		86B3004A1B07302F00ECA78B /* MPNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				86B3004B1B07302F00ECA78B /* MPNotificationView.h */,
+				86B3004C1B07302F00ECA78B /* MPNotificationView.m */,
+				86B3004D1B07302F00ECA78B /* OBGradientView.h */,
+				86B3004E1B07302F00ECA78B /* OBGradientView.m */,
+			);
+			path = MPNotificationView;
+			sourceTree = "<group>";
+		};
 		86B749871AE9EA1B000BA6DB /* SBJson3.1.1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1276,6 +1293,7 @@
 		86B8E6171ADA371F00A5139E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				86B3004A1B07302F00ECA78B /* MPNotificationView */,
 				CFA34A531AEE1BA40024B695 /* LCVoiceHud */,
 				86B74A4C1AEC81ED000BA6DB /* VoiceConvert */,
 				86B749871AE9EA1B000BA6DB /* SBJson3.1.1 */,
@@ -2323,6 +2341,7 @@
 				86B74A7B1AECBC83000BA6DB /* EscortPublishCell.m in Sources */,
 				CFBC53311ADD4C4C004FB8F3 /* UIButton+WebCache.m in Sources */,
 				865523701ADA9AFC00E803FD /* LoadMoreTableFooterView.m in Sources */,
+				86B300501B07302F00ECA78B /* OBGradientView.m in Sources */,
 				86B749A31AE9EA1B000BA6DB /* SBJsonStreamParser.m in Sources */,
 				8652F0C81AFCA214002C6215 /* MsgDataListModel.m in Sources */,
 				CFBC52721ADD385D004FB8F3 /* ELCAssetCell.m in Sources */,
@@ -2338,6 +2357,7 @@
 				CFBC52751ADD385D004FB8F3 /* ELCPickerHelper.m in Sources */,
 				86B8E69A1ADA654900A5139E /* MainTableCell.m in Sources */,
 				CFBC53371ADD4C4C004FB8F3 /* UIView+WebCacheOperation.m in Sources */,
+				86B3004F1B07302F00ECA78B /* MPNotificationView.m in Sources */,
 				86B74A631AEC81ED000BA6DB /* RecoderAndPlayer.m in Sources */,
 				CFBC52511ADD37E9004FB8F3 /* MBProgressHUD.m in Sources */,
 				86B8E6471ADA381C00A5139E /* EscortTimeReplyCell.m in Sources */,

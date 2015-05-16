@@ -30,6 +30,7 @@
 
 @implementation HomePageVC
 @synthesize refreshView;
+@synthesize tableview = _tableview;
 
 - (void) dealloc
 {
@@ -47,9 +48,11 @@
     NSDictionary *dic = notify.userInfo;
     LoverInfoModel *model = [dic objectForKey:@"model"];
     UserModel *userinfo = [UserModel sharedUserInfo];
+    __weak HomePageVC *weakSelf = self;
     if([model.loverId isEqualToString:userinfo.userOrderInfo.orderModel.loverinfo.loverId]){
         userinfo.userOrderInfo.orderModel.loverinfo = model;
-        [self ValuationForView];
+        [weakSelf ValuationForView];
+        
     }
 }
 
@@ -84,6 +87,8 @@
     else{
         [self ValuationForView];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Lover_Moditify object:nil];
 }
 
 - (void) NavRightButtonClickEvent:(UIButton *)sender

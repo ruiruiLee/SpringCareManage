@@ -20,5 +20,6 @@
 //@property (strong, nonatomic) UserCenterVC *userCenter;
 
 -(void) pushtoController:(NSInteger)mt PushType:(PushType)curentPushtype;
+-(void) pushtoController:(id)dic;
 
 @end

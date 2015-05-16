@@ -121,8 +121,8 @@
     [UserModel sharedUserInfo].userId = nil;
     AVInstallation *currentInstallation = [AVInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-//    [currentInstallation addUniqueObject:@"deviceProfile" forKey:@"deviceProfile"];
-    [currentInstallation addObject:@"cfphu" forKey:@"deviceProfile"];
+    currentInstallation.deviceProfile = @"cfphu_nursedevelop";
+    //TODO设置使用的推送证书
     [currentInstallation saveInBackground];
 }
 
@@ -135,12 +135,12 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     //可选 通过统计功能追踪通过提醒打开应用的行为
     //这儿你可以加入自己的代码 根据推送的数据进行相应处理
-    
+    NSLog(@"%@", @"didReceiveRemoteNotification");
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     // 程序在运行中接收到推送
     if (application.applicationState == UIApplicationStateActive)
     {
-//        [(RootViewController*)[SliderViewController sharedSliderController].MainVC pushtoController:userInfo];
+        [rootVC pushtoController:userInfo];
     }
     else  //程序在后台中接收到推送
     {
