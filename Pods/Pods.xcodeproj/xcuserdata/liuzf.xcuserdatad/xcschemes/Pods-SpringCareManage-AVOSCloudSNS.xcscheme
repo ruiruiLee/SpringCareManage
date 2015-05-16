@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0FA93F4A499C676B7ECBCE7F"
+               BlueprintIdentifier = "A0E0FBDD66F6D325CA350D1C"
                BuildableName = "libPods-SpringCareManage-AVOSCloudSNS.a"
                BlueprintName = "Pods-SpringCareManage-AVOSCloudSNS"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -39,15 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0FA93F4A499C676B7ECBCE7F"
-            BuildableName = "libPods-SpringCareManage-AVOSCloudSNS.a"
-            BlueprintName = "Pods-SpringCareManage-AVOSCloudSNS"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0FA93F4A499C676B7ECBCE7F"
-            BuildableName = "libPods-SpringCareManage-AVOSCloudSNS.a"
-            BlueprintName = "Pods-SpringCareManage-AVOSCloudSNS"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
