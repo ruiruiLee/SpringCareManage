@@ -13,6 +13,12 @@
 #import "NSStrUtil.h"
 #import "Util.h"
 
+typedef enum
+{
+    PushFromBcakground=0,   //在后台内存未回收时进入
+    PushFromTerminate  //从中止了的应用程序进入
+}PushType;
+
 #define LCNetWorkBase [LCNetWorkBase sharedLCNetWorkBase]
 #define Notify_Resign_First_Responder @"Notify_Resign_First_Responder"
 #define Notify_Lover_Moditify @"Notify_Lover_Moditify"

@@ -74,6 +74,7 @@
     _btnRing.translatesAutoresizingMaskIntoConstraints = NO;
 //    _btnRing.imageView = ThemeImage(@"userattentionring");
     [_btnRing setImage:ThemeImage(@"userattentionring") forState:UIControlStateNormal];
+    [_btnRing addTarget:self action:@selector(btnRingClicked) forControlEvents:UIControlEventTouchUpInside];
     
     _line2 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line2.backgroundColor = SeparatorLineColor;
@@ -206,6 +207,8 @@
 
 - (void) SetContentWithModel:(OrderInfoModel *)model
 {
+    _orderModel = model;
+    
     _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
     _lbPublishTime.text = [NSString stringWithFormat:@"下单时间:%@", model.createdDate];//@"2015-03-19 12:46";//下单时间
     _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@", model.registerInfo.chineseName];//@"联系人:";
@@ -309,6 +312,23 @@
 - (NSString *) stringByReplaceString:(NSString *)oldString
 {
     return [oldString stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+}
+
+- (void)btnRingClicked{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您确定要拨打电话吗?" message:_orderModel.registerInfo.phone delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alertView setTag:12];
+    [alertView show];
+}
+
+#pragma alertdelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if ([alertView tag] == 12) {
+        if (buttonIndex==0) {
+            NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",_orderModel.registerInfo.phone]];
+            [[UIApplication sharedApplication] openURL:phoneURL];
+        }
+    }
 }
 
 @end

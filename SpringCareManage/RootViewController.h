@@ -19,4 +19,6 @@
 @property (strong, nonatomic) EscortTimeVC *messageListVC;
 //@property (strong, nonatomic) UserCenterVC *userCenter;
 
+-(void) pushtoController:(NSInteger)mt PushType:(PushType)curentPushtype;
+
 @end

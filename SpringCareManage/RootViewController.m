@@ -92,4 +92,40 @@
 #pragma mark - UIPageViewController delegate methods
 
 
+-(void) pushtoController:(NSInteger)mt PushType:(PushType)curentPushtype{
+    switch (mt) {
+        case 1:   // 订单
+        {
+            [homeVC egoRefreshTableHeaderDidTriggerRefresh:homeVC.refreshView];
+            break;
+        }
+        case 2:   // 陪护时光
+        {
+            self.selectedIndex = 1;
+            break;
+            
+        }
+        case 3:  // 关注
+        {
+//            UserAttentionVC *vc = [[UserAttentionVC alloc] initWithNibName:nil bundle:nil];
+//            if (curentPushtype==PushFromBcakground) {
+//                if ([[SliderViewController sharedSliderController].MainVC isKindOfClass: [UserAttentionVC class]]) {
+//                    [vc refreshTable];
+//                }
+//                else{
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }
+//            }
+//            else{
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
+            break;
+            
+        }
+        default:
+            break;
+            
+    }
+}
+
 @end

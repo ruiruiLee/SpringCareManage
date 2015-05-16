@@ -21,6 +21,9 @@
 //#define AVOSCloudAppKey @"pdmukojziwgkcgus3rusw5wlao3orf7w0iw41470mrac73de"
 
 @interface AppDelegate ()
+{
+    RootViewController *rootVC;
+}
 
 @end
 
@@ -77,8 +80,8 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    RootViewController *vc = [[RootViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    rootVC = [[RootViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVC];
     nav.navigationBarHidden = YES;
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
@@ -113,24 +116,13 @@
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     //推送功能打开时, 注册当前的设备, 同时记录用户活跃, 方便进行有针对的推送
-//    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
-//    
-//    //可选 但是很重要. 我们可以在任何地方给currentInstallation设置任意值,方便进行有针对的推送
-//    //比如如果我们知道用户的年龄了,可以加上下面这一行 这样推送时我们可以选择age>20岁的用户进行通知
-//    
-//    //我们当然也可以设置根据地理位置提醒 发挥想象力吧!
-//    
-//    
-//    //当然别忘了任何currentInstallation的变更后做保存
-//    [currentInstallation saveInBackground];
     
     [AVUser logOut];  //清除缓存用户对象
     [UserModel sharedUserInfo].userId = nil;
     AVInstallation *currentInstallation = [AVInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    //[currentInstallation addUniqueObject:@"springCare" forKey:@"channels"];
-//    [currentInstallation addUniqueObject:@"registerUser" forKey:@"channels"];
+//    [currentInstallation addUniqueObject:@"deviceProfile" forKey:@"deviceProfile"];
+    [currentInstallation addObject:@"cfphu" forKey:@"deviceProfile"];
     [currentInstallation saveInBackground];
 }
 
@@ -155,7 +147,7 @@
         // The application was just brought from the background to the foreground,
         // so we consider the app as having been "opened by a push notification."
         [AVAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-//        [self pushDetailPage:userInfo PushType:PushFromBcakground];
+        [self pushDetailPage:userInfo PushType:PushFromBcakground];
     }
 }
 
@@ -165,7 +157,12 @@
 
 -(void) pushDetailPage: (id)dic
 {
-//    [self pushDetailPage:dic PushType:PushFromTerminate];
+    [self pushDetailPage:dic PushType:PushFromTerminate];
+}
+
+-(void) pushDetailPage: (id)dic PushType:(PushType)myPushtype
+{
+    [rootVC pushtoController:[[dic objectForKey:@"mt"] intValue] PushType:myPushtype];
 }
 
 @end

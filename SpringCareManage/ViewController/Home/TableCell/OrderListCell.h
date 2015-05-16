@@ -47,6 +47,8 @@
     
     NSArray *constraintsArray;
     NSArray *constraintsAcctionArray;
+    
+    OrderInfoModel *_orderModel;
 }
 
 - (void) SetContentWithModel:(OrderInfoModel *)model;
