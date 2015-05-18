@@ -81,7 +81,7 @@
     [self.view addSubview:btnSetting];
     btnSetting.translatesAutoresizingMaskIntoConstraints = NO;
     [btnSetting addTarget:self action:@selector(NavRightButtonClickEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [btnSetting setImage:ThemeImage(@"chat_keyboard") forState:UIControlStateNormal];
+    [btnSetting setImage:ThemeImage(@"setting") forState:UIControlStateNormal];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[btnSetting(40)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnSetting)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=0-[btnSetting(40)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnSetting)]];
