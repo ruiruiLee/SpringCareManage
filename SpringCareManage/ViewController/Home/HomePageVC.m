@@ -220,7 +220,7 @@
     _orderTitleView = [[UIView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_orderTitleView];
     _orderTitleView.translatesAutoresizingMaskIntoConstraints = NO;
-    _orderTitleView.backgroundColor = SeparatorLineColor;
+    _orderTitleView.backgroundColor = _COLOR(233, 233, 233);
     
     _btnOrderOnDoing = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_btnOrderOnDoing];
@@ -360,7 +360,7 @@
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_lbName]-4-[_lbMobile]-8-[_btnInfo]-10-[_workStatus]-10-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_btnCert]->=0-|" options:0 metrics:nil views:views]];
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(10)]-0-|" options:0 metrics:nil views:views];
     [rootview addConstraints:constraints];
     
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbDetailText]-14-[_line3(1)]-16-[_imgvMobile]-10-[_imgvAddress]-10-[_lbLoverInfo]-16-|" options:0 metrics:nil views:views]];
@@ -508,16 +508,18 @@
             }
         }
         
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(10)]-0-|" options:0 metrics:nil views:views];
         [headerView addConstraints:constraints];
         _OrderInfoView.hidden = NO;
         _btnOrderOnDoing.hidden = NO;
+        _orderTitleView.hidden = NO;
         
     }else{
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_SepLine(10)]-0-|" options:0 metrics:nil views:views];
         [headerView addConstraints:constraints];
         _OrderInfoView.hidden = YES;
         _btnOrderOnDoing.hidden = YES;
+        _orderTitleView.hidden = YES;
     }
     
     _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@   %d岁", userInfo.userOrderInfo.orderModel.loverinfo.name, userInfo.userOrderInfo.orderModel.loverinfo.age];

@@ -29,7 +29,7 @@
 
 - (void) initSubviews
 {
-    UIImage *imageNormal = [Util imageWithColor:_COLOR(0x99, 0x99, 0x99) size:CGSizeMake(5, 5)];
+    UIImage *imageNormal = [Util imageWithColor:[UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0] size:CGSizeMake(5, 5)];
     UIImage *imageSelect = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
     
     _btnLeft = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -58,7 +58,7 @@
     [self addSubview:_lbStatus];
     _lbStatus.textColor = _COLOR(0x66, 0x66, 0x66);
     _lbStatus.font = _FONT(16);
-    _lbStatus.backgroundColor = _COLOR(0x99, 0x99, 0x99);
+    _lbStatus.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
     _lbStatus.text = @"工作中";
     _lbStatus.translatesAutoresizingMaskIntoConstraints = NO;
     _lbStatus.textAlignment = NSTextAlignmentCenter;
