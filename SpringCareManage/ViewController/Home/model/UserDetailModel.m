@@ -31,7 +31,8 @@
             NSDictionary *processOrder = [content objectForKey:@"processOrder"];
             if(processOrder){
                 self.orderModel = (OrderInfoModel*)[OrderInfoModel modelFromDictionary:processOrder];
-            }
+            }else
+                self.orderModel = nil;
             
             if(block)
                 block (1, content);

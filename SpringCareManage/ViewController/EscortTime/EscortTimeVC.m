@@ -168,8 +168,11 @@
         isHasDefaultLover = NO;
         
         UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+        imageView.contentMode =UIViewContentModeScaleAspectFill;
         [tableView setBackgroundView:imageView];
         tableView.tableHeaderView.hidden=YES;
+        [self.dataList removeAllObjects];
+        [tableView reloadData];
         [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
     }
 }
@@ -483,13 +486,6 @@
 
 #pragma mark - PullTableViewDelegate
 
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-//{
-//    
-//    NSLog(@"%f",tableView.contentInset.bottom);
-//}
-
-
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)_pullTableView
 {
     pages = 0;
@@ -524,6 +520,7 @@
                     isHasDefaultLover = NO;
                     
                     UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+                    imageView.contentMode =UIViewContentModeScaleAspectFill;
                     [weakSelf.tableView setBackgroundView:imageView];
                     weakSelf.tableView.tableHeaderView.hidden=YES;
                     [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];

@@ -74,7 +74,10 @@
         isHasDefaultLover = NO;
         
         UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+        imageView.contentMode =UIViewContentModeScaleAspectFill;
         [tableView setBackgroundView:imageView];
+        [self.dataList removeAllObjects];
+        [tableView reloadData];
         tableView.tableHeaderView.hidden=YES;
     }
 }
@@ -520,6 +523,7 @@
                     isHasDefaultLover = NO;
                     
                     UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+                    imageView.contentMode =UIViewContentModeScaleAspectFill;
                     [weakSelf.tableView setBackgroundView:imageView];
                     weakSelf.tableView.tableHeaderView.hidden=YES;
                     [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];

@@ -215,6 +215,12 @@
     
     _line1 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:headerView];
     _line1.backgroundColor = SeparatorLineColor;
+    _line1.hidden = YES;
+    
+    _orderTitleView = [[UIView alloc] initWithFrame:CGRectZero];
+    [headerView addSubview:_orderTitleView];
+    _orderTitleView.translatesAutoresizingMaskIntoConstraints = NO;
+    _orderTitleView.backgroundColor = SeparatorLineColor;
     
     _btnOrderOnDoing = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_btnOrderOnDoing];
@@ -227,6 +233,7 @@
     
     _line2 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:headerView];
     _line2.backgroundColor = SeparatorLineColor;
+    _line2.hidden = YES;
     
     _OrderInfoView = [[UIView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_OrderInfoView];
@@ -308,8 +315,12 @@
 
 - (void) createAutoLayoutConstraintsForHeader:(UIView*)rootview
 {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _imgvMobile, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _imgvMobile, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView);
     //H
+    [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_orderTitleView]-0-|" options:0 metrics:nil views:views]];
+    [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_orderTitleView(34)]->=0-|" options:0 metrics:nil views:views]];
+    [rootview addConstraint:[NSLayoutConstraint constraintWithItem:_orderTitleView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnOrderOnDoing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_lbName]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_lbMobile]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_btnInfo]->=32-|" options:0 metrics:nil views:views]];
@@ -500,11 +511,13 @@
         constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
         [headerView addConstraints:constraints];
         _OrderInfoView.hidden = NO;
+        _btnOrderOnDoing.hidden = NO;
         
     }else{
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-10-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_SepLine(7)]-0-|" options:0 metrics:nil views:views];
         [headerView addConstraints:constraints];
         _OrderInfoView.hidden = YES;
+        _btnOrderOnDoing.hidden = YES;
     }
     
     _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@   %d岁", userInfo.userOrderInfo.orderModel.loverinfo.name, userInfo.userOrderInfo.orderModel.loverinfo.age];

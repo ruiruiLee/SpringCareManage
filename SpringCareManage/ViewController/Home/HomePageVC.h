@@ -48,6 +48,7 @@
     UIView *intervalV3;
     
     UIView *_OrderInfoView;
+    UIView *_orderTitleView;
     
     UILabel *_line1;
     UIButton *_btnOrderOnDoing;

@@ -63,6 +63,11 @@
                 [weakSelf.DataList removeAllObjects];
                 [weakSelf.DataList addObjectsFromArray:content];
                 [weakSelf.tableview reloadData];
+                
+                if([weakSelf.DataList count] == 0){
+                    [weakSelf.tableview displayEmpityImageView:noOrderBackbroundImg];
+                }else
+                    [weakSelf.tableview removeBackgroudImgView];
             }
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:1];
         }];
@@ -190,6 +195,11 @@
             [weakSelf.DataList removeAllObjects];
             [weakSelf.DataList addObjectsFromArray:content];
             [weakSelf.tableview reloadData];
+            
+            if([weakSelf.DataList count] == 0){
+                [weakSelf.tableview displayEmpityImageView:noOrderBackbroundImg];
+            }else
+                [weakSelf.tableview removeBackgroudImgView];
         }
         [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:1];
     }];

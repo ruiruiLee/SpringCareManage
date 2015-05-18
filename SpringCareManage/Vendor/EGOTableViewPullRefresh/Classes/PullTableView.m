@@ -178,7 +178,7 @@
 // 在tableview 的 numberOfRowsInSection 方法里判断 没有数据就展示 。
 -(void)displayEmpityImageView:(UIImage *)img{
     if (backgroundImageView==nil) {
-        backgroundImageView= [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width/2-img.size.width/2, self.frame.size.height/2-img.size.height-64, img.size.width, img.size.height)];
+        backgroundImageView= [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width/2-img.size.width/2, self.frame.size.height/2-img.size.height, img.size.width, img.size.height)];
         // [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"orderend"]];
         backgroundImageView.image=img;
         [self addSubview:backgroundImageView];

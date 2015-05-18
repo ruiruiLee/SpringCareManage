@@ -209,7 +209,7 @@ static int const kMGBadgeViewTag = 9876;
     
     switch (position) {
         case MGBadgePositionTopRight: {
-            self.center = CGPointMake(superviewFrame.size.width, 0);
+            self.center = CGPointMake(superviewFrame.size.width - 4, 4);
             break;
         }
         case MGBadgePositionTopLeft: {
