@@ -13,7 +13,7 @@
 {
     UILabel *_lbOrderNum;//订单号
     UILabel *_lbPublishTime;//下单时间
-    UILabel *_lbOrderStatus;//状态
+    UIButton *_btnOrderStatus;//状态
     UILabel *_line1;
     UILabel *_lbServiceContent;//服务内容
     UILabel *_lbTotalValue;//总价值

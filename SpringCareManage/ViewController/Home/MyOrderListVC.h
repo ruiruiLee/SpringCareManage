@@ -21,6 +21,6 @@
 @property (nonatomic, assign) OrderListType orderType;
 @property (nonatomic, strong) NSMutableArray *DataList;
 
-- (id) initWithOrderType:(OrderListType) type;
+- (id) initWithOrderType:(OrderListType) type LoadFlag:(BOOL) flag;
 
 @end

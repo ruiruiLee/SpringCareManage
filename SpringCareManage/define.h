@@ -24,6 +24,12 @@ typedef enum
 #define Notify_Lover_Moditify @"Notify_Lover_Moditify"
 #define Notify_Register_Logout @"Notify_Register_Logout"
 
+//4个order列表
+#define Notify_Order_New_Changed @"Notify_Order_New_Changed"
+#define Notify_Order_Subscribe_Changed @"Notify_Order_Subscribe_Changed"
+#define Notify_Order_TreatPay_Changed @"Notify_Order_TreatPay_Changed"
+#define Notify_Order_Evaluate_Changed @"Notify_Order_Evaluate_Changed"
+
 
 #define User_DetailInfo_Get @"User_DetailInfo_Get"
 

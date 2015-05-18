@@ -15,6 +15,7 @@
 @interface MyOrderListVC ()
 {
     BaseOrderListModel *_orderModel;
+    BOOL LoadFlag;
 }
 
 @property (nonatomic, strong) OrderListCell *prototypeCell;
@@ -27,11 +28,12 @@
 @synthesize DataList;
 @synthesize prototypeCell;
 
-- (id) initWithOrderType:(OrderListType) type
+- (id) initWithOrderType:(OrderListType) type LoadFlag:(BOOL) flag
 {
     self = [super initWithNibName:nil bundle:nil];
     if(self){
         self.orderType = type;
+        LoadFlag = flag;
         
         self.DataList = [[NSMutableArray alloc] init];
         
@@ -51,11 +53,13 @@
     
     [self.DataList addObjectsFromArray:[_orderModel GetOrderList]];
     
-    if([self.DataList count] == 0){
+    if([self.DataList count] == 0 || LoadFlag){
         __weak MyOrderListVC *weakSelf = self;
+        _orderModel.pages = 0;
         self.tableview.pullTableIsRefreshing = YES;
         [_orderModel RequestOrderListWithBlock:^(int code, id content) {
             if(code == 1){
+                [weakSelf.DataList removeAllObjects];
                 [weakSelf.DataList addObjectsFromArray:content];
                 [weakSelf.tableview reloadData];
             }
@@ -72,6 +76,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [_tableview reloadData];
 }
 
 - (void) initSubviews

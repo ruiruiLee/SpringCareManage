@@ -9,6 +9,7 @@
 #import "OrderDetailsVC.h"
 #import "UIImageView+WebCache.h"
 #import "define.h"
+#import "UserModel.h"
 
 @implementation OrderPriceCell
 @synthesize delegate;
@@ -59,6 +60,8 @@
 
 - (void) setContentData:(OrderInfoModel *) model
 {
+    _orderModel = model;
+    
     NSMutableString *priceStr = [[NSMutableString alloc] init];
     [priceStr appendString:[NSString stringWithFormat:@"单价：¥%d", (int)model.unitPrice]];
     if(model.dateType == EnumTypeHalfDay){
@@ -86,50 +89,70 @@
     [_btnStatus setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnStatus.backgroundColor = [UIColor clearColor];
     _btnStatus.tag = 4;
-    if(model.orderStatus == EnumOrderStatusTypeCancel){
-        _imgLogo.hidden = YES;
-        [_btnStatus setTitle:@"已取消" forState:UIControlStateNormal];
-        _btnStatus.userInteractionEnabled = NO;
+    
+    _imgLogo.hidden = YES;
+    NSString *status = @"";
+    _btnStatus.userInteractionEnabled = NO;
+    UIImage *imageNormal = [Util imageWithColor:[UIColor clearColor] size:CGSizeMake(5, 5)];
+    UIImage *imageSelect = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
+    [_btnStatus setBackgroundImage:imageNormal forState:UIControlStateNormal];
+    [_btnStatus setTitleColor:_COLOR(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+    switch (model.orderStatus) {
+        case EnumOrderStatusTypeNew:
+            status = @"确认订单";
+            _btnStatus.userInteractionEnabled = YES;
+            [_btnStatus setBackgroundImage:imageSelect forState:UIControlStateNormal];
+            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            break;
+        case EnumOrderStatusTypeConfirm:
+            status = @"已预约";
+            break;
+        case EnumOrderStatusTypeServing:
+            status = @"服务中";
+            break;
+        case EnumOrderStatusTypeFinish:{
+            if(model.payStatus == EnumTypeNopay){
+                status = @"待付款";
+            }else if (model.commentStatus == EnumTypeNoComment){
+                status = @"待评价";
+            }else{
+                status = @"服务完成";
+                _imgLogo.hidden = NO;
+            }
+        }
+            break;
+        case EnumOrderStatusTypeCancel:
+            status = @"已取消";
+            break;
+        default:
+            break;
     }
-    else{
-        if(model.orderStatus == EnumOrderStatusTypeFinish && model.commentStatus == EnumTypeCommented && model.payStatus == EnumTypePayed)
-        {
-            [_btnStatus setTitle:@"已完成" forState:UIControlStateNormal];
-            _btnStatus.userInteractionEnabled = NO;
-        }
-        else if(model.orderStatus == EnumOrderStatusTypeFinish && model.commentStatus == EnumTypeNoComment && model.payStatus == EnumTypePayed){
-            _imgLogo.hidden = YES;
-            _btnStatus.tag = 2;
-            [_btnStatus setTitle:@"去评价" forState:UIControlStateNormal];
-            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            //            _btnStatus.backgroundColor = Abled_Color;
-            [_btnStatus setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
-        }else if (model.orderStatus == EnumOrderStatusTypeNew && model.payStatus == EnumTypeNopay){
-            _imgLogo.hidden = YES;
-            _btnStatus.tag = 3;
-            [_btnStatus setTitle:@"取消订单" forState:UIControlStateNormal];
-            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            //            _btnStatus.backgroundColor = Abled_Color;
-            [_btnStatus setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
-        }
-        else if(model.payStatus == EnumTypeNopay){
-            _imgLogo.hidden = YES;
-            _btnStatus.tag = 1;
-            [_btnStatus setTitle:@"去付款" forState:UIControlStateNormal];
-            [_btnStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            //            _btnStatus.backgroundColor = Abled_Color;
-            [_btnStatus setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
-        }
-        else{
-            _imgLogo.hidden = YES;
-            _btnStatus.userInteractionEnabled = NO;
-            [_btnStatus setTitle:@"已付款" forState:UIControlStateNormal];
-        }
-    }
+    [_btnStatus setTitle:status forState:UIControlStateNormal];
 }
 
 - (void) doBtnClicked:(UIButton*)sender
 {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"是否接单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+        
+        [parmas setObject:_orderModel.orderId forKey:@"orderId"];
+        [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"currentUserId"];
+        
+        [LCNetWorkBase postWithMethod:@"api/order/confirm" Params:parmas Completion:^(int code, id content) {
+            if(code){
+                if([content objectForKey:@"code"] == nil){
+                    _orderModel.orderStatus = EnumOrderStatusTypeConfirm;
+                    [self setContentData:_orderModel];
+                }
+            }
+        }];
+    }
 }
 
 @end

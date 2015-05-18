@@ -23,6 +23,7 @@
     UILabel *_lbTotalPrice;
     UIButton *_btnStatus;
     UIImageView *_imgLogo;
+    OrderInfoModel *_orderModel;
 }
 
 @property (nonatomic , assign) id<OrderPriceCellDelegate> delegate;

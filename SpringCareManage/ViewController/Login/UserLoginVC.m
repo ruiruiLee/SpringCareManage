@@ -117,8 +117,8 @@
            [[UserModel sharedUserInfo] modifyInfo];
             AVInstallation *currentInstallation = [AVInstallation currentInstallation];
             UserModel *user = [UserModel sharedUserInfo];
-//            [currentInstallation addUniqueObject:user.careType forKey:@"channels"];
             [currentInstallation addUniqueObject:@"careUser" forKey:@"channels"];
+            [currentInstallation addUniqueObject:user.careType forKey:@"channels"];
             [currentInstallation addUniqueObject:[UserModel sharedUserInfo].userId forKey:@"channels"];
             [currentInstallation saveInBackground];
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];

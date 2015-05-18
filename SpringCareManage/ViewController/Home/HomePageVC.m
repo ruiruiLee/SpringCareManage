@@ -59,6 +59,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    newCount = 0;
+    subscribeCount = 0;
+    treatPayCount = 0;
+    evaluateCount = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyDetailUserInfoGot:) name:User_DetailInfo_Get object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
@@ -87,8 +91,6 @@
     else{
         [self ValuationForView];
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Lover_Moditify object:nil];
 }
 
 - (void) NavRightButtonClickEvent:(UIButton *)sender
@@ -383,6 +385,28 @@
     
     if(userInfo.userOrderInfo != nil){
         UserDetailModel *detail = userInfo.userOrderInfo;
+        if(newCount != detail.newCount)
+            newFlag = YES;
+        else
+            newFlag = NO;
+        if(subscribeCount != detail.confirmedCount)
+            subscribeFlag = YES;
+        else
+            subscribeFlag = NO;
+        if(treatPayCount != detail.waitPayCount)
+            treatPayFlag = YES;
+        else
+            treatPayFlag = NO;
+        if(evaluateCount != detail.waitCommentCount)
+            evaluateFlag = YES;
+        else
+            evaluateFlag = NO;
+        
+        newCount = detail.newCount;
+        subscribeCount = detail.confirmedCount;
+        treatPayCount = detail.waitPayCount;
+        evaluateCount = detail.waitCommentCount;
+        
         if(detail.newCount > 0)
             _btnNew.badgeView.badgeValue = detail.newCount;
         if(detail.confirmedCount > 0)
@@ -554,7 +578,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 0){
-        MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:EnumOrderAll];
+        MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:EnumOrderAll LoadFlag:NO];
         vc.hidesBottomBarWhenPushed = YES;
         vc.NavTitle = @"我的订单";
         [self.navigationController pushViewController:vc animated:YES];
@@ -578,15 +602,28 @@
 - (void) btnClickedToLoadOrders:(UIButton*) sender
 {
     OrderListType type = EnumOrderAll;
-    if(sender == _btnNew)
+    BOOL flag = YES;
+    if(sender == _btnNew){
         type = EnumOrderNew;
-    else if (sender == _btnSubscribe)
+        flag = newFlag;
+        newFlag = NO;
+    }
+    else if (sender == _btnSubscribe){
         type = EnumOrderSubscribe;
-    else if (sender == _btnTreatPay)
+        flag = subscribeFlag;
+        subscribeFlag = NO;
+    }
+    else if (sender == _btnTreatPay){
         type = EnumOrderTreatPay;
-    else
+        flag = treatPayFlag;
+        treatPayFlag = NO;
+    }
+    else{
         type = EnumOrderEvaluate;
-    MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:type];
+        flag = evaluateFlag;
+        evaluateFlag = NO;
+    }
+    MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:type LoadFlag:flag];
     vc.hidesBottomBarWhenPushed = YES;
     if(sender == _btnNew)
         vc.NavTitle = @"新订单";
@@ -596,7 +633,6 @@
         vc.NavTitle = @"待付款订单";
     else
         vc.NavTitle = @"待评价订单";
-    sender.badgeView.badgeValue = 0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

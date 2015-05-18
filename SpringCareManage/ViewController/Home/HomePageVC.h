@@ -25,15 +25,23 @@
     
     UIButton *_btnNew;//新订单
     UILabel *_lbNew;
+    NSInteger newCount;
+    BOOL newFlag;
     
     UIButton *_btnSubscribe;//已预约
     UILabel *_lbSubscribe;
+    NSInteger subscribeCount;
+    BOOL subscribeFlag;
     
     UIButton *_btnTreatPay;//待付款
     UILabel *_lbTreatPay;
+    NSInteger treatPayCount;
+    BOOL treatPayFlag;
     
     UIButton *_btnEvaluate;//待评价
     UILabel *_lbEvaluate;
+    NSInteger evaluateCount;
+    BOOL evaluateFlag;
     
     UIView *intervalV1;
     UIView *intervalV2;

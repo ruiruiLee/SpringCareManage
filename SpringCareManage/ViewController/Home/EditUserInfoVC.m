@@ -203,7 +203,8 @@
         }
         else if(typedata.cellType == EnumTypeHeight){
             cell.tfEdit.keyboardType = UIKeyboardTypeNumberPad;
-            cell.tfEdit.text = [NSString stringWithFormat:@"%d", [[_EditDic objectForKey:@"Height"] integerValue]];
+            if([_EditDic objectForKey:@"Height"] != nil)
+                cell.tfEdit.text = [NSString stringWithFormat:@"%d", [[_EditDic objectForKey:@"Height"] integerValue]];
             cell.lbUnit.hidden = NO;
             cell.lbUnit.text = @"cm";
         }
@@ -289,7 +290,8 @@
                 [_EditDic setObject:attention.phone forKey:@"Mobile"];
         }
         else if(typedata.cellType == EnumTypeHeight){
-            [_EditDic setObject:attention.height forKey:@"Height"];
+            if(attention.height != nil)
+                [_EditDic setObject:attention.height forKey:@"Height"];
         }
         
     }

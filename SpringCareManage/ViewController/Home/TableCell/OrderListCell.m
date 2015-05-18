@@ -9,6 +9,7 @@
 #import "OrderListCell.h"
 #import "define.h"
 #import "UIImageView+WebCache.h"
+#import "UserModel.h"
 
 @implementation OrderListCell
 
@@ -48,7 +49,16 @@
     
     _lbPublishTime = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbOrderStatus = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
+//    _lbOrderStatus = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
+    _btnOrderStatus = [[UIButton alloc] initWithFrame:CGRectZero];
+    _btnOrderStatus.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentView addSubview:_btnOrderStatus];
+    _btnOrderStatus.titleLabel.font = _FONT(15);
+    [_btnOrderStatus setTitleColor:_COLOR(0x10, 0x9d, 0x59) forState:UIControlStateNormal];
+    _btnOrderStatus.userInteractionEnabled = NO;
+    _btnOrderStatus.clipsToBounds = YES;
+    _btnOrderStatus.layer.cornerRadius = 5;
+    [_btnOrderStatus addTarget:self action:@selector(doBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     _line1 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line1.backgroundColor = SeparatorLineColor;
@@ -164,10 +174,10 @@
 - (void) createAutoLayoutConstraints
 {
     UIView *root = self.contentView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress);
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=20-[_lbOrderStatus(45)]-19-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=20-[_lbOrderStatus(45)]-19-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbTotalValue]-19-|" options:0 metrics:nil views:views]];
     constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
@@ -190,12 +200,12 @@
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName]-0-[intervalV4]-0-[_imgvMobile]-0-[intervalV5]-0-[_imgvAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbTotalValue]-0-[intervalV2]-0-[_btnRing]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_lbOrderStatus]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(36)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV7 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV6 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV5 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV4 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_statusImgv attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_lbOrderStatus attribute:NSLayoutAttributeTop multiplier:1 constant:-3]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_statusImgv attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_btnOrderStatus attribute:NSLayoutAttributeTop multiplier:1 constant:-3]];
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvDay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvNight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -224,7 +234,7 @@
     
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _lbOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
     UIView *root = self.contentView;
     [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
@@ -279,9 +289,18 @@
     _lbServiceContent.text = [NSString stringWithFormat:@"%@：¥%.0f/%@h x %ld%@", model.productInfo.name, model.unitPrice, hourString, (long)model.orderCount, dayString];
     NSString *status = @"";
     _statusImgv.hidden = YES;
+    
+    _btnOrderStatus.userInteractionEnabled = NO;
+    UIImage *imageNormal = [Util imageWithColor:[UIColor clearColor] size:CGSizeMake(5, 5)];
+    UIImage *imageSelect = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
+    [_btnOrderStatus setBackgroundImage:imageNormal forState:UIControlStateNormal];
+    [_btnOrderStatus setTitleColor:_COLOR(0x66, 0x66, 0x66) forState:UIControlStateNormal];
     switch (model.orderStatus) {
         case EnumOrderStatusTypeNew:
-            status = @"确认中";
+            status = @"确认订单";
+            _btnOrderStatus.userInteractionEnabled = YES;
+            [_btnOrderStatus setBackgroundImage:imageSelect forState:UIControlStateNormal];
+            [_btnOrderStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             break;
         case EnumOrderStatusTypeConfirm:
             status = @"已预约";
@@ -306,12 +325,19 @@
         default:
             break;
     }
-    _lbOrderStatus.text = status;
+    [_btnOrderStatus setTitle:status forState:UIControlStateNormal];
 }
 
 - (NSString *) stringByReplaceString:(NSString *)oldString
 {
     return [oldString stringByReplacingOccurrencesOfString:@"(null)" withString:@""];
+}
+
+- (void) doBtnClicked:(UIButton*)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"是否接单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    alert.tag = 13;
+    [alert show];
 }
 
 - (void)btnRingClicked{
@@ -327,6 +353,22 @@
         if (buttonIndex==0) {
             NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",_orderModel.registerInfo.phone]];
             [[UIApplication sharedApplication] openURL:phoneURL];
+        }
+    }else if (alertView.tag == 13){
+        if(buttonIndex == 0){
+            NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
+            
+            [parmas setObject:_orderModel.orderId forKey:@"orderId"];
+            [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"currentUserId"];
+            
+            [LCNetWorkBase postWithMethod:@"api/order/confirm" Params:parmas Completion:^(int code, id content) {
+                if(code){
+                    if([content objectForKey:@"code"] == nil){
+                        _orderModel.orderStatus = EnumOrderStatusTypeConfirm;
+                        [self SetContentWithModel:_orderModel];
+                    }
+                }
+            }];
         }
     }
 }
