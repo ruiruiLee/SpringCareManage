@@ -56,6 +56,7 @@
     if([self.DataList count] == 0 || LoadFlag){
         __weak MyOrderListVC *weakSelf = self;
         _orderModel.pages = 0;
+        _orderModel.totals = INT_MAX;
         self.tableview.pullTableIsRefreshing = YES;
         [_orderModel RequestOrderListWithBlock:^(int code, id content) {
             if(code == 1){

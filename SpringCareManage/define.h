@@ -23,6 +23,7 @@ typedef enum
 #define Notify_Resign_First_Responder @"Notify_Resign_First_Responder"
 #define Notify_Lover_Moditify @"Notify_Lover_Moditify"
 #define Notify_Register_Logout @"Notify_Register_Logout"
+#define Notify_OrderInfo_Refresh @"Notify_OrderInfo_Refresh"
 
 //4个order列表
 #define Notify_Order_New_Changed @"Notify_Order_New_Changed"

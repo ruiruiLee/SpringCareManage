@@ -361,11 +361,13 @@
             [parmas setObject:_orderModel.orderId forKey:@"orderId"];
             [parmas setObject:[UserModel sharedUserInfo].userId forKey:@"currentUserId"];
             
+            __weak OrderListCell *weakelf = self;
             [LCNetWorkBase postWithMethod:@"api/order/confirm" Params:parmas Completion:^(int code, id content) {
                 if(code){
                     if([content objectForKey:@"code"] == nil){
                         _orderModel.orderStatus = EnumOrderStatusTypeConfirm;
-                        [self SetContentWithModel:_orderModel];
+                        [weakelf SetContentWithModel:_orderModel];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_OrderInfo_Refresh object:nil];
                     }
                 }
             }];

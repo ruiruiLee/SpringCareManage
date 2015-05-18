@@ -23,6 +23,7 @@
 @interface HomePageVC ()
 {
     BOOL _reloading;
+    MyOrderListVC *_orderListVC;
 }
 
 
@@ -56,6 +57,11 @@
     }
 }
 
+- (void) NotifyRefreshOrderInfo:(NSNotification *)notify
+{
+    [self egoRefreshTableHeaderDidTriggerRefresh:self.refreshView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -66,6 +72,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyDetailUserInfoGot:) name:User_DetailInfo_Get object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshOrderInfo:) name:Notify_OrderInfo_Refresh object:nil];
     
     self.NavigationBar.Title = @"春风陪护";
     self.NavigationBar.btnLeft.hidden = YES;
@@ -385,20 +392,42 @@
     
     if(userInfo.userOrderInfo != nil){
         UserDetailModel *detail = userInfo.userOrderInfo;
-        if(newCount != detail.newCount)
-            newFlag = YES;
+        if(newCount != detail.newCount){
+            if(_orderListVC.orderType == EnumOrderNew){
+                [_orderListVC pullTableViewDidTriggerRefresh:_orderListVC.tableview];
+                newFlag = NO;
+            }
+            else
+                newFlag = YES;
+        }
         else
             newFlag = NO;
-        if(subscribeCount != detail.confirmedCount)
-            subscribeFlag = YES;
+        if(subscribeCount != detail.confirmedCount){
+            if(_orderListVC.orderType == EnumOrderSubscribe){
+                [_orderListVC pullTableViewDidTriggerRefresh:_orderListVC.tableview];
+                subscribeFlag = NO;
+            }else
+                subscribeFlag = YES;
+        }
         else
             subscribeFlag = NO;
-        if(treatPayCount != detail.waitPayCount)
-            treatPayFlag = YES;
+        if(treatPayCount != detail.waitPayCount){
+            if(_orderListVC.orderType == EnumOrderTreatPay){
+                [_orderListVC pullTableViewDidTriggerRefresh:_orderListVC.tableview];
+                treatPayFlag = NO;
+            }
+            else
+                treatPayFlag = YES;
+        }
         else
             treatPayFlag = NO;
-        if(evaluateCount != detail.waitCommentCount)
-            evaluateFlag = YES;
+        if(evaluateCount != detail.waitCommentCount){
+            if(_orderListVC.orderType == EnumOrderEvaluate){
+                [_orderListVC pullTableViewDidTriggerRefresh:_orderListVC.tableview];
+                evaluateFlag = NO;
+            }else
+                evaluateFlag = YES;
+        }
         else
             evaluateFlag = NO;
         
@@ -623,17 +652,17 @@
         flag = evaluateFlag;
         evaluateFlag = NO;
     }
-    MyOrderListVC *vc = [[MyOrderListVC alloc] initWithOrderType:type LoadFlag:flag];
-    vc.hidesBottomBarWhenPushed = YES;
+    _orderListVC = [[MyOrderListVC alloc] initWithOrderType:type LoadFlag:flag];
+    _orderListVC.hidesBottomBarWhenPushed = YES;
     if(sender == _btnNew)
-        vc.NavTitle = @"新订单";
+        _orderListVC.NavTitle = @"新订单";
     else if (sender == _btnSubscribe)
-        vc.NavTitle = @"已预约订单";
+        _orderListVC.NavTitle = @"已预约订单";
     else if (sender == _btnTreatPay)
-        vc.NavTitle = @"待付款订单";
+        _orderListVC.NavTitle = @"待付款订单";
     else
-        vc.NavTitle = @"待评价订单";
-    [self.navigationController pushViewController:vc animated:YES];
+        _orderListVC.NavTitle = @"待评价订单";
+    [self.navigationController pushViewController:_orderListVC animated:YES];
 }
 
 #pragma mark -
