@@ -73,7 +73,7 @@
         
         isHasDefaultLover = NO;
         
-        UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+        UIImageView *imageView=[[UIImageView alloc]initWithImage:WorkSummaryImg];
         imageView.contentMode =UIViewContentModeScaleAspectFill;
         [tableView setBackgroundView:imageView];
         [self.dataList removeAllObjects];
@@ -127,6 +127,7 @@
     self.NavigationBar.Title = @"护理日志";
     self.NavigationBar.btnLeft.hidden = YES;
     self.NavigationBar.btnRight.hidden = YES;
+    self.NavigationBar.alpha = 0.8;
     
     _btnLoverSelect = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_btnLoverSelect];
@@ -144,13 +145,14 @@
     tableView = [[PullTableView alloc] initWithFrame:CGRectZero];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [self.ContentView addSubview:tableView];
+//    [self.ContentView addSubview:tableView];
+    [self.view insertSubview:tableView belowSubview:self.NavigationBar];
     tableView.translatesAutoresizingMaskIntoConstraints = NO;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.pullDelegate = self;
     
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-49-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-49-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
     
     [self creatHeadView];
     tableView.tableHeaderView = headerView;
@@ -173,7 +175,7 @@
 }
 
 -(void)creatHeadView{
-    headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 100)];
+    headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 180)];
     
     headerbg = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerView addSubview:headerbg];
@@ -235,7 +237,7 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress);
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[headerbg]-0-|" options:0 metrics:nil views:views]];
-    [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[headerbg(100)]->=0-|" options:0 metrics:nil views:views]];
+    [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[headerbg(182)]->=0-|" options:0 metrics:nil views:views]];
     
     AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]->=20-|" options:0 metrics:nil views:views];
     [headerbg addConstraints:AttentionArray];
@@ -243,13 +245,14 @@
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_btnMobile]-2-[_lbPhone]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_photoImgView(72)]-30-|" options:0 metrics:nil views:views]];
     
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-8-[_btnMobile(20)]-6-[_btnAddr(20)]-12-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-8-[_btnMobile(20)]-6-[_btnAddr(20)]->=12-|" options:0 metrics:nil views:views]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnAddr attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbPhone attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_photoImgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
 }
 
 - (void) NavRightButtonClickEvent:(UIButton *)sender
@@ -522,7 +525,7 @@
                     
                     isHasDefaultLover = NO;
                     
-                    UIImageView *imageView=[[UIImageView alloc]initWithImage:TimeBackbroundImg];
+                    UIImageView *imageView=[[UIImageView alloc]initWithImage:WorkSummaryImg];
                     imageView.contentMode =UIViewContentModeScaleAspectFill;
                     [weakSelf.tableView setBackgroundView:imageView];
                     weakSelf.tableView.tableHeaderView.hidden=YES;

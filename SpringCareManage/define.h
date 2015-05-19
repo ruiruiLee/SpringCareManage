@@ -86,6 +86,7 @@ typedef void(^block)(int code, id content);
 #define orderBackbroundImg ThemeImage(@"orderend")
 // 陪护时光无数据时加载的页面。
 #define TimeBackbroundImg ThemeImage(@"img_index_03bg")
+#define WorkSummaryImg ThemeImage(@"img_worksummary")
 
 #define chat_VoiceCache_path [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"VoiceCache"]
 
