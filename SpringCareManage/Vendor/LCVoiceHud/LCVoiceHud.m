@@ -257,6 +257,7 @@
 
 -(void) createMainUI{
     
+    CGPoint oPoint = self.center;
     
     CGRect frame2 = CGRectMake(_DEVICE_WIDTH/2-164/2, 200, 179, 179);
     CGRect frame1 = CGRectMake(frame2.origin.x-8, IPhone5?192:146, 180, 213);
@@ -271,11 +272,11 @@
     backBlackImageView.layer.cornerRadius=8.0;
     [self addSubview:backBlackImageView];
     [backBlackImageView release];
-    backBlackImageView.center = CGPointMake(self.center.x, self.center.y + 10);
+    backBlackImageView.center = CGPointMake(oPoint.x, oPoint.y + 10);
     
     UIImageView * micNormalImageView = [[UIImageView alloc] initWithImage:_IMAGE_MIC_NORMAL];
     micNormalImageView.frame = frame2;
-    micNormalImageView.center = self.center;
+    micNormalImageView.center = oPoint;
     [self addSubview:micNormalImageView];
     [micNormalImageView release];
     
@@ -288,12 +289,12 @@
     _tipLable.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
      [self addSubview:_tipLable];
     [_tipLable release];
-    _tipLable.center = CGPointMake(self.center.x, self.center.y + micNormalImageView.frame.size.height/2 + 10);
+    _tipLable.center = CGPointMake(oPoint.x, oPoint.y + micNormalImageView.frame.size.height/2 + 10);
     
     _talkingImageView = [[UIImageView alloc] initWithFrame:frame3];
     _talkingImageView.image = _IMAGE_MIC_TALKING;
     [self addSubview:_talkingImageView];
-    _talkingImageView.center = self.center;
+    _talkingImageView.center = oPoint;
     [_talkingImageView release];
     
     _dynamicProgress = [[LCPorgressImageView alloc] initWithFrame:frame4];
@@ -305,7 +306,7 @@
     _dynamicProgress.progress = 0;
     _dynamicProgress.hasGrayscaleBackground = NO;
     _dynamicProgress.verticalProgress = YES;
-    _dynamicProgress.center = CGPointMake(self.center.x, self.center.y-13);
+    _dynamicProgress.center = CGPointMake(oPoint.x, oPoint.y-13);
 }
 
 #pragma mark - Custom Accessor
