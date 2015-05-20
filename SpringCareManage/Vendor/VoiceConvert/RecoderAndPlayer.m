@@ -49,8 +49,13 @@
 
 - (NSString*)getPathByFileName:(NSString *)_fileName ofType:(NSString *)_type
 {
-    NSString* fileDirectory = [[chat_VoiceCache_path stringByAppendingPathComponent:_fileName]stringByAppendingPathExtension:_type];
-    return fileDirectory;
+    if (_type==nil) {
+        return [chat_VoiceCache_path stringByAppendingPathComponent:_fileName];
+    }
+    else{
+        return [[chat_VoiceCache_path stringByAppendingPathComponent:_fileName]stringByAppendingPathExtension:_type];
+        
+    }
 }
 
 //录音
