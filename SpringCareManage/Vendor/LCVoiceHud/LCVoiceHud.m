@@ -271,6 +271,7 @@
     backBlackImageView.layer.cornerRadius=8.0;
     [self addSubview:backBlackImageView];
     [backBlackImageView release];
+    backBlackImageView.center = CGPointMake(self.center.x, self.center.y + 10);
     
     UIImageView * micNormalImageView = [[UIImageView alloc] initWithImage:_IMAGE_MIC_NORMAL];
     micNormalImageView.frame = frame2;
@@ -287,6 +288,7 @@
     _tipLable.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
      [self addSubview:_tipLable];
     [_tipLable release];
+    _tipLable.center = CGPointMake(self.center.x, self.center.y + micNormalImageView.frame.size.height/2 + 10);
     
     _talkingImageView = [[UIImageView alloc] initWithFrame:frame3];
     _talkingImageView.image = _IMAGE_MIC_TALKING;
