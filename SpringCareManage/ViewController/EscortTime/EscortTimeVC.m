@@ -316,6 +316,12 @@
         if(!cell)
             cell = [[EscortPublishCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell1"];
         cell.delegate = self;
+        
+        if(_dataList == nil || [_dataList count] == 0)
+            cell._lbTimeLine.hidden = YES;
+        else
+            cell._lbTimeLine.hidden = NO;
+        
         return cell;
     }
     EscortTimeTableCell *cell = nil;
