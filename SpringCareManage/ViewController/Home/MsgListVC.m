@@ -63,8 +63,9 @@
     _tableview.pullDelegate = self;
     [self.ContentView addSubview:_tableview];
     _tableview.translatesAutoresizingMaskIntoConstraints = NO;
-    _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableview.backgroundColor = TableBackGroundColor;
+    _tableview.tableFooterView = [[UIView alloc] init];
     
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableview]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableview]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];

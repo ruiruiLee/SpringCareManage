@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *endDate;//订单结束日期;
 @property (nonatomic, assign) DateType dateType;//
 @property (nonatomic, assign) NSInteger orderCount;
-@property (nonatomic, assign) CGFloat orgUnitPrice;
+//@property (nonatomic, assign) CGFloat orgUnitPrice;
 @property (nonatomic, assign) CGFloat unitPrice;
 @property (nonatomic, assign) CGFloat totalPrice;
 @property (nonatomic, assign) OrderStatus orderStatus;

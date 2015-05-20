@@ -19,7 +19,7 @@
     model.endDate = [dic objectForKey:@"endDate"];
     model.dateType = [Util getDateType:[[dic objectForKey:@"dateType"] integerValue]];
     model.orderCount = [[dic objectForKey:@"orderCount"] integerValue];
-    model.orgUnitPrice = [[dic objectForKey:@"orgUnitPrice"] floatValue];
+//    model.orgUnitPrice = [[dic objectForKey:@"orgUnitPrice"] floatValue];
     model.unitPrice = [[dic objectForKey:@"unitPrice"] floatValue];
     model.totalPrice = [[dic objectForKey:@"totalPrice"] floatValue];
     model.orderStatus = [Util GetOrderStatus:[[dic objectForKey:@"orderStatus"] integerValue]];

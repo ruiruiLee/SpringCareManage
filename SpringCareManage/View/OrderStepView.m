@@ -135,6 +135,7 @@
 //    lb.textColor = _COLOR(0x27, 0xa6, 0x69);
     lb.textColor = _COLOR(0x99, 0x99, 0x99);
     lb.translatesAutoresizingMaskIntoConstraints = NO;
+    lb.backgroundColor = [UIColor clearColor];
     lb.text = str;
     return lb;
 }

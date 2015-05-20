@@ -9,6 +9,8 @@
 #import "RootViewController.h"
 #import "MPNotificationView.h"
 
+#import "MsgListVC.h"
+
 @interface RootViewController ()
 
 @end
@@ -124,6 +126,12 @@
             break;
             
         }
+        case 4:{
+            MsgListVC *vc = [[MsgListVC alloc] initWithNibName:nil bundle:nil];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
         default:
             break;
             

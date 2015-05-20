@@ -114,6 +114,7 @@
     lb.translatesAutoresizingMaskIntoConstraints = NO;
     lb.textColor = txtColor;
     lb.font = font;
+    lb.backgroundColor = [UIColor clearColor];
     return lb;
 }
 
@@ -138,7 +139,10 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_tableview);
     
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_tableview]-0-|" options:0 metrics:nil views:views]];
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableview]-49-|" options:0 metrics:nil views:views]];
+    if(_IPHONE_OS_VERSION_UNDER_7_0)
+        [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableview]-0-|" options:0 metrics:nil views:views]];
+    else
+        [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_tableview]-49-|" options:0 metrics:nil views:views]];
 }
 
 - (UIView*) createTableHeaderView

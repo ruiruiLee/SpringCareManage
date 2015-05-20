@@ -37,12 +37,14 @@
     [self.contentView addSubview:_lbName];
     _lbName.font = _FONT(13);
     _lbName.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbName.backgroundColor = [UIColor clearColor];
     
     _lbServiceTime = [[UILabel alloc] initWithFrame:CGRectZero];
     _lbServiceTime.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_lbServiceTime];
     _lbServiceTime.font = _FONT(12);
     _lbServiceTime.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbServiceTime.backgroundColor = [UIColor clearColor];
     
     _lbContent = [[UILabel alloc] initWithFrame:CGRectZero];
     _lbContent.translatesAutoresizingMaskIntoConstraints = NO;
@@ -51,6 +53,7 @@
     _lbContent.textColor = _COLOR(0x66, 0x66, 0x66);
     _lbContent.numberOfLines = 0;
     _lbContent.preferredMaxLayoutWidth = ScreenWidth - 29;
+    _lbContent.backgroundColor = [UIColor clearColor];
     
     _line = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_line];

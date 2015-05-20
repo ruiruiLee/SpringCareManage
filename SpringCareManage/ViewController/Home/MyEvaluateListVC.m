@@ -72,6 +72,7 @@
     lbTitle.translatesAutoresizingMaskIntoConstraints = NO;
     lbTitle.textColor = _COLOR(0x99, 0x99, 0x99);
     lbTitle.font = _FONT(15);
+    lbTitle.backgroundColor = [UIColor clearColor];
     [headerView addSubview:lbTitle];
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[lbTitle]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lbTitle)]];
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-19-[lbTitle]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lbTitle)]];

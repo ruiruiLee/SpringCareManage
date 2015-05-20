@@ -40,6 +40,7 @@
     lb.translatesAutoresizingMaskIntoConstraints = NO;
     lb.textColor = txtColor;
     lb.font = font;
+    lb.backgroundColor = [UIColor clearColor];
     return lb;
 }
 
@@ -166,7 +167,7 @@
     FootView = [[UIView alloc] initWithFrame:CGRectZero];
     FootView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:FootView];
-    FootView.backgroundColor = TableBackGroundColor;
+    FootView.backgroundColor = TableSectionBackgroundColor;
     
     [self createAutoLayoutConstraints];
 }

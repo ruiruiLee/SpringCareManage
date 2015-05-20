@@ -30,6 +30,7 @@
         [self.contentView addSubview:_lbTitle];
         _lbTitle.translatesAutoresizingMaskIntoConstraints = NO;
         _lbTitle.font = _FONT(18);
+        _lbTitle.backgroundColor = [UIColor clearColor];
         
     }
     

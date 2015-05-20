@@ -120,6 +120,7 @@
 		86B96A951ADB92DE00441168 /* ShowBigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B96A921ADB92DE00441168 /* ShowBigViewController.m */; };
 		86B96A991ADB933500441168 /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86B96A961ADB933500441168 /* ZYQAssetPicker.Bundle */; };
 		86B96A9A1ADB933500441168 /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B96A981ADB933500441168 /* ZYQAssetPickerController.m */; };
+		86B9BEE61B0C387F000469A7 /* aboutUsLogo@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 86B9BEE51B0C387F000469A7 /* aboutUsLogo@2x.jpeg */; };
 		CFA34A591AEE1BA40024B695 /* LCVoiceHud.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA34A551AEE1BA40024B695 /* LCVoiceHud.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CFA34A5A1AEE1BA40024B695 /* mic_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CFA34A561AEE1BA40024B695 /* mic_normal.png */; };
 		CFA34A5B1AEE1BA40024B695 /* mic_talk.png in Resources */ = {isa = PBXBuildFile; fileRef = CFA34A571AEE1BA40024B695 /* mic_talk.png */; };
@@ -575,6 +576,7 @@
 		86B96A961ADB933500441168 /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
 		86B96A971ADB933500441168 /* ZYQAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQAssetPickerController.h; sourceTree = "<group>"; };
 		86B96A981ADB933500441168 /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
+		86B9BEE51B0C387F000469A7 /* aboutUsLogo@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "aboutUsLogo@2x.jpeg"; sourceTree = "<group>"; };
 		CFA34A541AEE1BA40024B695 /* LCVoiceHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCVoiceHud.h; sourceTree = "<group>"; };
 		CFA34A551AEE1BA40024B695 /* LCVoiceHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCVoiceHud.m; sourceTree = "<group>"; };
 		CFA34A561AEE1BA40024B695 /* mic_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_normal.png; sourceTree = "<group>"; };
@@ -1100,6 +1102,7 @@
 		86B8E6141ADA36FC00A5139E /* PNG */ = {
 			isa = PBXGroup;
 			children = (
+				86B9BEE51B0C387F000469A7 /* aboutUsLogo@2x.jpeg */,
 				86B74A771AECA054000BA6DB /* escortlocation@2x.png */,
 				86B8E6901ADA421900A5139E /* NAV */,
 			);
@@ -1910,6 +1913,7 @@
 				CFA34B2F1AEE23DA0024B695 /* fx_010.png in Resources */,
 				CFA34B581AEE23DA0024B695 /* fx_031@2x.png in Resources */,
 				CFA34B791AEE23DA0024B695 /* fx_049.png in Resources */,
+				86B9BEE61B0C387F000469A7 /* aboutUsLogo@2x.jpeg in Resources */,
 				CFA34B211AEE23DA0024B695 /* fx_003.png in Resources */,
 				CFA34B1D1AEE23DA0024B695 /* fx_001.png in Resources */,
 				CFA34B911AEE23DA0024B695 /* fx_061.png in Resources */,

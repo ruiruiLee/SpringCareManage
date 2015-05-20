@@ -26,6 +26,7 @@
         _lbTitle.translatesAutoresizingMaskIntoConstraints = NO;
         _lbTitle.textColor = _COLOR(0x66, 0x66, 0x66);
         _lbTitle.font = _FONT(16);
+        _lbTitle.backgroundColor = [UIColor clearColor];
         
         _imgUnfold = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_imgUnfold];

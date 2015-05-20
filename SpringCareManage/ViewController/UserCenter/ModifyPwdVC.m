@@ -71,6 +71,7 @@
     _tfOldPwd.leftViewMode = UITextFieldViewModeAlways;
     _tfOldPwd.delegate = self;
     _tfOldPwd.returnKeyType = UIReturnKeyNext;
+    _tfOldPwd.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UILabel *lbPwd = [[UILabel alloc] initWithFrame:CGRectZero];
     [scrollview addSubview:lbPwd];
@@ -78,6 +79,7 @@
     lbPwd.font = _FONT(14);
     lbPwd.text = @"新密码：";
     lbPwd.textColor = _COLOR(0x66, 0x66, 0x66);
+    lbPwd.backgroundColor = [UIColor clearColor];
     
     _tfPwd = [[UITextField alloc] initWithFrame:CGRectZero];
     [scrollview addSubview:_tfPwd];
@@ -93,6 +95,7 @@
     _tfPwd.leftViewMode = UITextFieldViewModeAlways;
     _tfPwd.delegate = self;
     _tfPwd.returnKeyType = UIReturnKeyNext;
+    _tfPwd.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UILabel *lbRePwd = [[UILabel alloc] initWithFrame:CGRectZero];
     [scrollview addSubview:lbRePwd];
@@ -100,6 +103,7 @@
     lbRePwd.font = _FONT(14);
     lbRePwd.text = @"确认密码：";
     lbRePwd.textColor = _COLOR(0x66, 0x66, 0x66);
+    lbRePwd.backgroundColor = [UIColor clearColor];
     
     _tfRePwd = [[UITextField alloc] initWithFrame:CGRectZero];
     [scrollview addSubview:_tfRePwd];
@@ -115,6 +119,7 @@
     _tfRePwd.leftViewMode = UITextFieldViewModeAlways;
     _tfRePwd.delegate = self;
     _tfRePwd.returnKeyType = UIReturnKeySend;
+    _tfRePwd.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UIButton *btnSubmit = [[UIButton alloc] initWithFrame:CGRectZero];
     [scrollview addSubview:btnSubmit];

@@ -43,19 +43,21 @@
     _lbNickName.translatesAutoresizingMaskIntoConstraints = NO;
     _lbNickName.textColor = _COLOR(0x22, 0x22, 0x22);
     _lbNickName.font = _FONT(15);
-    
+    _lbNickName.backgroundColor = [UIColor clearColor];
     
     _lbNameAge = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_lbNameAge];
     _lbNameAge.translatesAutoresizingMaskIntoConstraints = NO;
     _lbNameAge.textColor = _COLOR(0x66, 0x66, 0x66);
     _lbNameAge.font = _FONT(16);
+    _lbNameAge.backgroundColor = [UIColor clearColor];
     
     _lbAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_lbAddress];
     _lbAddress.translatesAutoresizingMaskIntoConstraints = NO;
     _lbAddress.textColor = _COLOR(0x99, 0x99, 0x99);
     _lbAddress.font = _FONT(12);
+    _lbAddress.backgroundColor = [UIColor clearColor];
     
     _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnRing];

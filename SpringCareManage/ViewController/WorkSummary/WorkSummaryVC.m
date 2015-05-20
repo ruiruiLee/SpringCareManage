@@ -128,6 +128,7 @@
     self.NavigationBar.btnLeft.hidden = YES;
     self.NavigationBar.btnRight.hidden = YES;
     self.NavigationBar.alpha = 0.8;
+    self.ContentView.hidden = YES;
     
     _btnLoverSelect = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_btnLoverSelect];
@@ -151,7 +152,10 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.pullDelegate = self;
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-49-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
+    if(_IPHONE_OS_VERSION_UNDER_7_0)
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
+    else
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-49-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
     
     [self creatHeadView];
@@ -195,6 +199,7 @@
     _lbName.font = _FONT(16);
     _lbName.textAlignment = NSTextAlignmentRight;
     _lbName.textColor = _COLOR(0x22, 0x22, 0x22);
+    _lbName.backgroundColor = [UIColor clearColor];
     
     _imgvAddress = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_imgvAddress];
@@ -219,6 +224,7 @@
     _lbAge.font = _FONT(14);
     _lbAge.textAlignment = NSTextAlignmentRight;
     _lbAge.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbAge.backgroundColor = [UIColor clearColor];
     
     _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_btnMobile];
@@ -234,6 +240,7 @@
     _lbPhone.font = _FONT(14);
     _lbPhone.textAlignment = NSTextAlignmentRight;
     _lbPhone.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbPhone.backgroundColor = [UIColor clearColor];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress);
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[headerbg]-0-|" options:0 metrics:nil views:views]];

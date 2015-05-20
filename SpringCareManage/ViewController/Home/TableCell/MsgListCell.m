@@ -22,6 +22,7 @@
         _lbContent.textColor = _COLOR(0x66, 0x66, 0x66);
         _lbContent.preferredMaxLayoutWidth = ScreenWidth - 40;
         _lbContent.numberOfLines = 0;
+        _lbContent.backgroundColor = [UIColor clearColor];
         
         
         _lbTime = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -30,6 +31,7 @@
         _lbTime.font = _FONT(12);
         _lbTime.textColor = _COLOR(0x99, 0x99, 0x99);
         _lbTime.textAlignment = NSTextAlignmentRight;
+        _lbTime.backgroundColor = [UIColor clearColor];
         
         NSDictionary *views = NSDictionaryOfVariableBindings(_lbTime, _lbContent);
         

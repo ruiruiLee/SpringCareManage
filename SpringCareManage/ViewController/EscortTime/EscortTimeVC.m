@@ -131,7 +131,10 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.pullDelegate = self;
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-49-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
+    if(_IPHONE_OS_VERSION_UNDER_7_0)
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
+    else
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-49-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)]];
     
     [self creatHeadView];
@@ -196,6 +199,7 @@
     _lbName.font = _FONT(16);
     _lbName.textAlignment = NSTextAlignmentRight;
     _lbName.textColor = _COLOR(0xff, 0xff, 0xff);
+    _lbName.backgroundColor = [UIColor clearColor];
     
     _btnAddr = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_btnAddr];
@@ -215,6 +219,7 @@
     _lbAge.font = _FONT(14);
     _lbAge.textAlignment = NSTextAlignmentRight;
     _lbAge.textColor = _COLOR(0xff, 0xff, 0xff);
+    _lbAge.backgroundColor = [UIColor clearColor];
     
     _relationName = [[UILabel alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_relationName];
@@ -222,6 +227,7 @@
     _relationName.font = _FONT(13);
     _relationName.textAlignment = NSTextAlignmentRight;
     _relationName.textColor = _COLOR(0xff, 0xff, 0xff);
+    _relationName.backgroundColor = [UIColor clearColor];
     
     _lbMobile = [[UILabel alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_lbMobile];
@@ -229,6 +235,7 @@
     _lbMobile.font = _FONT(13);
     _lbMobile.textAlignment = NSTextAlignmentRight;
     _lbMobile.textColor = _COLOR(0xff, 0xff, 0xff);
+    _lbMobile.backgroundColor = [UIColor clearColor];
     
     _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_btnRing];

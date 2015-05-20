@@ -53,7 +53,8 @@ static int const kMGBadgeViewTag = 9876;
         [_badgeColor set];
         CGContextFillEllipseInRect(context, CGRectInset(rect, _outlineWidth + 1.0, _outlineWidth + 1.0));
         
-        CGSize numberSize = [stringToDraw sizeWithAttributes:@{NSFontAttributeName: _font}];
+//        CGSize numberSize = [stringToDraw sizeWithAttributes:@{NSFontAttributeName: _font}];
+        CGSize numberSize = [stringToDraw sizeWithFont:_font];
         
         [_textColor set];
         NSMutableParagraphStyle *paragrapStyle = [NSMutableParagraphStyle new];
@@ -62,11 +63,12 @@ static int const kMGBadgeViewTag = 9876;
         
         CGRect lblRect = CGRectMake(rect.origin.x, (rect.size.height / 2.0) - (numberSize.height / 2.0), rect.size.width, numberSize.height);
     
-        [stringToDraw drawInRect:lblRect withAttributes:@{
-                                                          NSFontAttributeName : _font,
-                                                          NSParagraphStyleAttributeName : paragrapStyle,
-                                                          NSForegroundColorAttributeName : _textColor
-                                                          }];
+//        [stringToDraw drawInRect:lblRect withAttributes:@{
+//                                                          NSFontAttributeName : _font,
+//                                                          NSParagraphStyleAttributeName : paragrapStyle,
+//                                                          NSForegroundColorAttributeName : _textColor
+//                                                          }];
+        [stringToDraw drawInRect:lblRect withFont:_font lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentCenter];
         
     }
 }
@@ -179,7 +181,9 @@ static int const kMGBadgeViewTag = 9876;
 
 - (void)mg_updateBadgeViewSize {
     //Calculate badge bounds
-    CGSize numberSize = [[NSString stringWithFormat:@"%ld", (long)_badgeValue] sizeWithAttributes:@{NSFontAttributeName: _font}];
+//    CGSize numberSize = [[NSString stringWithFormat:@"%ld", (long)_badgeValue] sizeWithAttributes:@{NSFontAttributeName: _font}];
+    NSString *badgeStr = [NSString stringWithFormat:@"%ld", (long)_badgeValue];
+    CGSize numberSize = [badgeStr sizeWithFont:_font];
     
     float badgeHeight = MAX(BADGE_TOTAL_OFFSET + numberSize.height, _minDiameter);
     float badgeWidth = MAX(badgeHeight, BADGE_TOTAL_OFFSET + numberSize.width);

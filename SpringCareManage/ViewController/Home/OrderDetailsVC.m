@@ -23,12 +23,14 @@
         _lbPrice.textColor = _COLOR(0x99, 0x99, 0x99);
         _lbPrice.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_lbPrice];
+        _lbPrice.backgroundColor = [UIColor clearColor];
         
         _lbTotalPrice = [[UILabel alloc] initWithFrame:CGRectZero];
         _lbTotalPrice.font = _FONT(15);
         _lbTotalPrice.textColor = _COLOR(0x99, 0x99, 0x99);
         _lbTotalPrice.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_lbTotalPrice];
+        _lbTotalPrice.backgroundColor = [UIColor clearColor];
         
         _btnStatus = [[UIButton alloc] initWithFrame:CGRectZero];
         _btnStatus.titleLabel.font = _FONT(16);
@@ -176,6 +178,7 @@
         _lbName.textColor = _COLOR(0x66, 0x66, 0x66);
         _lbName.font = _FONT(18);
         _lbName.translatesAutoresizingMaskIntoConstraints = NO;
+        _lbName.backgroundColor = [UIColor clearColor];
         
         _btnInfo = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_btnInfo];
@@ -191,6 +194,7 @@
         _lbIntro.font = _FONT(13);
         _lbIntro.textColor = _COLOR(0x99, 0x99, 0x99);
         _lbIntro.preferredMaxLayoutWidth = ScreenWidth - 132;
+        _lbIntro.backgroundColor = [UIColor clearColor];
         
         _line = [[UILabel alloc] initWithFrame:CGRectZero];
         _line.backgroundColor = SeparatorLineColor;
@@ -202,18 +206,21 @@
         _lbType.translatesAutoresizingMaskIntoConstraints = NO;
         _lbType.font = _FONT(15);
         _lbType.textColor = _COLOR(0x99, 0x99, 0x99);
+        _lbType.backgroundColor = [UIColor clearColor];
         
         _lbDetailTime = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_lbDetailTime];
         _lbDetailTime.translatesAutoresizingMaskIntoConstraints = NO;
         _lbDetailTime.font = _FONT(15);
         _lbDetailTime.textColor = _COLOR(0x99, 0x99, 0x99);
+        _lbDetailTime.backgroundColor = [UIColor clearColor];
         
         _lbPrice = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_lbPrice];
         _lbPrice.translatesAutoresizingMaskIntoConstraints = NO;
         _lbPrice.font = _FONT(15);
         _lbPrice.textColor = _COLOR(0x99, 0x99, 0x99);
+        _lbPrice.backgroundColor = [UIColor clearColor];
 //        _lbPrice.text = @"单价：380元/24小时";
         
         NSDictionary *views = NSDictionaryOfVariableBindings(_lbType, _lbPrice, _lbName, _lbIntro, _lbDetailTime, _line, _btnInfo, _imgPhoto);
@@ -311,18 +318,21 @@
         _lbName.textColor = _COLOR(0x66, 0x66, 0x66);
         _lbName.font = _FONT(16);
         _lbName.textAlignment = NSTextAlignmentCenter;
+        _lbName.backgroundColor = [UIColor clearColor];
         
         _LbRelation = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_LbRelation];
         _LbRelation.translatesAutoresizingMaskIntoConstraints = NO;
         _LbRelation.textColor = _COLOR(0x22, 0x22, 0x22);
         _LbRelation.font = _FONT(18);
+        _LbRelation.backgroundColor = [UIColor clearColor];
         
         _lbAge = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_lbAge];
         _lbAge.translatesAutoresizingMaskIntoConstraints = NO;
         _lbAge.textColor = _COLOR(0x66, 0x66, 0x66);
         _lbAge.font = _FONT(15);
+        _lbAge.backgroundColor = [UIColor clearColor];
         
         _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_btnMobile];
@@ -454,6 +464,7 @@
     [_tableview registerClass:[OrderPriceCell class] forCellReuseIdentifier:@"cell0"];
     [_tableview registerClass:[OrderInfoCell class] forCellReuseIdentifier:@"cell1"];
     [_tableview registerClass:[BeCareInfoCell class] forCellReuseIdentifier:@"cell2"];
+    _tableview.backgroundView = nil;
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_tableview);
     
@@ -497,17 +508,20 @@
         [cell setContentData:_orderModel];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
+        cell.backgroundView = nil;
         return cell;
     }
     else if (indexPath.section == 1){
         OrderInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
         [cell setContentData:_orderModel];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundView = nil;
         return cell;
     }else{
         BeCareInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         [cell setContentData:_orderModel];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundView = nil;
         return cell;
     }
 }
@@ -550,6 +564,7 @@
         lbOrderNum.textColor = _COLOR(0x66, 0x66, 0x66);
         lbOrderNum.font = _FONT(14);
         lbOrderNum.text = [NSString stringWithFormat:@"订 单 号 ：%@", _orderModel.serialNumber];
+        lbOrderNum.backgroundColor = [UIColor clearColor];
         
         lbOrderTime = [[UILabel alloc] initWithFrame:CGRectZero];
         lbOrderTime.translatesAutoresizingMaskIntoConstraints = NO;
@@ -557,6 +572,7 @@
         lbOrderTime.textColor = _COLOR(0x66, 0x66, 0x66);
         lbOrderTime.font = _FONT(14);
         lbOrderTime.text = [NSString stringWithFormat:@"下单时间：%@", _orderModel.createdDate];//@"下单时间：2015-03-19 12:46";
+        lbOrderTime.backgroundColor = [UIColor clearColor];
         
         NSDictionary*views = NSDictionaryOfVariableBindings(lbOrderNum, lbOrderTime);
         [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[lbOrderNum]-20-|" options:0 metrics:nil views:views]];
@@ -570,6 +586,7 @@
         lb.textColor = _COLOR(0x66, 0x66, 0x66);
         lb.font = _FONT(14);
         lb.text = @"被陪护人信息";
+        lb.backgroundColor = [UIColor clearColor];
         
         [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[lb]-20-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
         [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[lb]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
