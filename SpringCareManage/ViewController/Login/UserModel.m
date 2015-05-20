@@ -16,6 +16,7 @@
     static UserModel *user = nil;
     dispatch_once(&onceToken, ^{
         user = [[UserModel alloc] init];
+        user.userStatus = YES;
     });
     return user;
 }
@@ -38,11 +39,22 @@
             self.detailIntro = [muser objectForKey:@"detailIntro"];
             self.beginCareDate = [muser objectForKey:@"beginCareDate"];
             self.careType = [muser objectForKey:@"careType"];
+            BOOL status = self.userStatus;
+            self.userStatus = [[muser objectForKey:@"status"] boolValue];
+            if(!self.userStatus && status)
+            {
+                [self performSelector:@selector(postNotify) withObject:nil afterDelay:0.1];
+            }
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
                     });
         }
     }
     return self;
+}
+
+- (void) postNotify
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_User_Forbidden object:nil];
 }
 
 -(void)modifyInfo{
@@ -60,6 +72,12 @@
     self.detailIntro = [muser objectForKey:@"detailIntro"];
     self.beginCareDate = [muser objectForKey:@"beginCareDate"];
     self.careType = [muser objectForKey:@"careType"];
+    BOOL status = self.userStatus;
+    self.userStatus = [[muser objectForKey:@"status"] boolValue];
+    if(!self.userStatus && status)
+    {
+        [self performSelector:@selector(postNotify) withObject:nil afterDelay:0.1];
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
     });
 }

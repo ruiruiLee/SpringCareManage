@@ -106,8 +106,10 @@
     _btnSubmit = [[UIButton alloc] initWithFrame:CGRectZero];
     [_scrollview addSubview:_btnSubmit];
     _btnSubmit.translatesAutoresizingMaskIntoConstraints = NO;
-    _btnSubmit.backgroundColor = Abled_Color;
+//    _btnSubmit.backgroundColor = Abled_Color;
+    [_btnSubmit setBackgroundImage:[Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)] forState:UIControlStateNormal];
     _btnSubmit.layer.cornerRadius = 5;
+    _btnSubmit.clipsToBounds = YES;
     [_btnSubmit setTitle:@"登录" forState:UIControlStateNormal];
     [_btnSubmit addTarget:self action:@selector(ActionToLogin:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -183,6 +185,7 @@
         return;
     }
     
+    __weak UserLoginVC *weakSelf = self;
     [AVUser logInWithMobilePhoneNumberInBackground:userName password:pwd block:^(AVUser *user, NSError *error) {
         if(error == nil){
            [[UserModel sharedUserInfo] modifyInfo];
@@ -193,13 +196,24 @@
                 [currentInstallation addUniqueObject:user.careType forKey:@"channels"];
             [currentInstallation addUniqueObject:[UserModel sharedUserInfo].userId forKey:@"channels"];
             [currentInstallation saveInBackground];
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            if(user.userStatus)
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            else{
+                [Util showAlertMessage:@"该账户被禁用，请与管理员联系"];
+                [weakSelf RestTextField];
+            }
         }
         else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alert show];
         }
     }];
+}
+
+- (void)RestTextField
+{
+    _tfPhoneNum.text = @"";
+    _tfPwd.text = @"";
 }
 
 - (void)btnRingClicked{

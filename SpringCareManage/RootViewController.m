@@ -10,6 +10,8 @@
 #import "MPNotificationView.h"
 
 #import "MsgListVC.h"
+#import "UserModel.h"
+#import "UserLoginVC.h"
 
 @interface RootViewController ()
 
@@ -21,10 +23,28 @@
 @synthesize messageListVC;
 //@synthesize userCenter;
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)NotifyUserForbidden:(NSNotification *)notify
+{
+    AVUser *user = [AVUser currentUser];
+    if(![[user objectForKey:@"status"] boolValue]){
+        UserLoginVC *vc = [[UserLoginVC alloc] initWithNibName:nil bundle:nil];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+        [Util showAlertMessage:@"该账户被禁用，请与管理员联系"];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor greenColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyUserForbidden:) name:Notify_User_Forbidden object:nil];
     
     homeVC = [[HomePageVC alloc] initWithNibName:nil bundle:nil];
     homeVC.tabBarItem.title=@"工作台";

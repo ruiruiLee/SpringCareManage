@@ -35,6 +35,7 @@
 @property (nonatomic, assign) EnumWorkStatus workStatus;
 
 @property (nonatomic, strong) NSString *careType;
+@property (nonatomic, assign) BOOL userStatus;
 
 //detail
 + (UserModel *) sharedUserInfo;

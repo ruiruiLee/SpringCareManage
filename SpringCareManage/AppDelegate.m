@@ -153,6 +153,21 @@
 
 - (void)openlocation{
     [LcationInstance startUpdateLocation];
+    AVUser *user = [AVUser currentUser];
+    if(user != nil){
+//        if(![[user objectForKey:@"status"] boolValue]){
+//            [self performSelector:@selector(postNotify) withObject:nil afterDelay:0];
+//        }
+//        else{
+            [user fetchWithKeys:@[@"status"]];
+            [[UserModel sharedUserInfo] modifyInfo];
+//        }
+    }
+}
+
+- (void) postNotify
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_User_Forbidden object:nil];
 }
 
 -(void) pushDetailPage: (id)dic

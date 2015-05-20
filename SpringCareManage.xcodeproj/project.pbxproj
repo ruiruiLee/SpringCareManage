@@ -839,7 +839,7 @@
 		CFBC53251ADD4C4C004FB8F3 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		CFBC53261ADD4C4C004FB8F3 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		CFBC53271ADD4C4C004FB8F3 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		CFEBF8751ACE357300BC4EC5 /* SpringCareManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringCareManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFEBF8751ACE357300BC4EC5 /* 春风陪护师.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "春风陪护师.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFEBF8791ACE357300BC4EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFEBF87A1ACE357300BC4EC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CFEBF87C1ACE357300BC4EC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1663,7 +1663,7 @@
 		CFEBF8761ACE357300BC4EC5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CFEBF8751ACE357300BC4EC5 /* SpringCareManage.app */,
+				CFEBF8751ACE357300BC4EC5 /* 春风陪护师.app */,
 				CFEBF88E1ACE357300BC4EC5 /* SpringCareManageTests.xctest */,
 			);
 			name = Products;
@@ -1740,7 +1740,7 @@
 			);
 			name = SpringCareManage;
 			productName = SpringCareManage;
-			productReference = CFEBF8751ACE357300BC4EC5 /* SpringCareManage.app */;
+			productReference = CFEBF8751ACE357300BC4EC5 /* 春风陪护师.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CFEBF88D1ACE357300BC4EC5 /* SpringCareManageTests */ = {
@@ -2265,7 +2265,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "05a7a509-baae-4174-baf9-08cbc00fa339";
+				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2301,7 +2301,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "05a7a509-baae-4174-baf9-08cbc00fa339";
+				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2321,8 +2321,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "05a7a509-baae-4174-baf9-08cbc00fa339";
+				PRODUCT_NAME = "春风陪护师";
+				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
 			};
 			name = Debug;
 		};
@@ -2340,8 +2340,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "05a7a509-baae-4174-baf9-08cbc00fa339";
+				PRODUCT_NAME = "春风陪护师";
+				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
 			};
 			name = Release;
 		};

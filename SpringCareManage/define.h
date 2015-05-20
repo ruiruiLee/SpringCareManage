@@ -24,6 +24,7 @@ typedef enum
 #define Notify_Lover_Moditify @"Notify_Lover_Moditify"
 #define Notify_Register_Logout @"Notify_Register_Logout"
 #define Notify_OrderInfo_Refresh @"Notify_OrderInfo_Refresh"
+#define Notify_User_Forbidden @"Notify_User_Forbidden"
 
 //4个order列表
 #define Notify_Order_New_Changed @"Notify_Order_New_Changed"
