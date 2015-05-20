@@ -139,9 +139,9 @@
     
     NSString *btnFormat = [NSString stringWithFormat:@"H:|-18-[btnSubmit(%f)]-18-|", ScreenWidth - 36];
     [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:btnFormat options:0 metrics:nil views:views]];
-    [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[lbPwd]-10-[_tfPwd]-18-|" options:0 metrics:nil views:views]];
+    [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-31-[lbPwd]-10-[_tfPwd]-18-|" options:0 metrics:nil views:views]];
     [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[lbRePwd]-10-[_tfRePwd]-18-|" options:0 metrics:nil views:views]];
-    [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[lbOldPwd]-10-[_tfOldPwd]-18-|" options:0 metrics:nil views:views]];
+    [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-31-[lbOldPwd]-10-[_tfOldPwd]-18-|" options:0 metrics:nil views:views]];
     
     [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[lbOldPwd(42)]-16-[lbPwd(42)]-16-[lbRePwd(42)]-30-[btnSubmit(42)]->=10-|" options:0 metrics:nil views:views]];
     [scrollview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_tfOldPwd(42)]->=0-|" options:0 metrics:nil views:views]];
