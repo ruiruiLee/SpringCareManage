@@ -234,7 +234,7 @@
     else
         _lbAge.text = @"年龄：";
     if(model.loverinfo.height != nil)
-        _lbHeight.text = [self stringByReplaceString:[NSString stringWithFormat:@"%@", model.loverinfo.height]];
+        _lbHeight.text = [self stringByReplaceString:[NSString stringWithFormat:@"%@cm", model.loverinfo.height]];
     else
         _lbHeight.text = @"身高：";
     

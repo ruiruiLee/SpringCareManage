@@ -41,6 +41,8 @@
         
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         _lbName.text = loverInfo.name;
+        if(loverInfo.name == nil)
+            _lbName.text = @"姓名";
         [_btnAddr setTitle:loverInfo.addr forState:UIControlStateNormal];
         [_photoImgView sd_setImageWithURL:[NSURL URLWithString:loverInfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
         _lbAge.text = [NSString stringWithFormat:@"%d岁", loverInfo.age];
@@ -102,6 +104,8 @@
 //    [_btnLoverSelect sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
     
     _lbName.text = _defaultLover.name;
+    if(_defaultLover.name == nil)
+        _lbName.text = @"姓名";
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
     [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     _lbAge.text = [NSString stringWithFormat:@"%d岁", _defaultLover.age];

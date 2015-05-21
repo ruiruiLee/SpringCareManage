@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CFEBF8741ACE357300BC4EC5"
-               BuildableName = "SpringCareManage.app"
+               BuildableName = "&#x6625;&#x98ce;&#x966a;&#x62a4;&#x5e08;.app"
                BlueprintName = "SpringCareManage"
                ReferencedContainer = "container:SpringCareManage.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CFEBF8741ACE357300BC4EC5"
-            BuildableName = "SpringCareManage.app"
+            BuildableName = "&#x6625;&#x98ce;&#x966a;&#x62a4;&#x5e08;.app"
             BlueprintName = "SpringCareManage"
             ReferencedContainer = "container:SpringCareManage.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CFEBF8741ACE357300BC4EC5"
-            BuildableName = "SpringCareManage.app"
+            BuildableName = "&#x6625;&#x98ce;&#x966a;&#x62a4;&#x5e08;.app"
             BlueprintName = "SpringCareManage"
             ReferencedContainer = "container:SpringCareManage.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CFEBF8741ACE357300BC4EC5"
-            BuildableName = "SpringCareManage.app"
+            BuildableName = "&#x6625;&#x98ce;&#x966a;&#x62a4;&#x5e08;.app"
             BlueprintName = "SpringCareManage"
             ReferencedContainer = "container:SpringCareManage.xcodeproj">
          </BuildableReference>
