@@ -225,7 +225,7 @@
             cell._imgFold.hidden = NO;
         }
         else{
-            cell._lbTitle.text = @"护工协议";
+            cell._lbTitle.text = @"陪护师协议";
             cell._lbContent.hidden = YES;
             cell._imgFold.hidden = NO;
         }

@@ -114,7 +114,7 @@ typedef void(^block)(int code, id content);
 #define KEY_APPLE_ID @"992339154"
 
 #define About_Us @"5544ad2ee4b03fd8342e9c19"//关于我们
-#define Care_Agreement @"5544af16e4b03fd8342eb2d3"//用户协议
+#define Care_Agreement @"555d829ee4b0b8cc433ea2b5"//陪护师协议
 
 // 订单列表页面没有数据的时候 加载的图片
 #define noOrderBackbroundImg ThemeImage(@"noorderBackground")
