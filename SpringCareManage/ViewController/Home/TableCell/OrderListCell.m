@@ -102,6 +102,7 @@
 //    _lbRelationship = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbHeight = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnMobile];
@@ -175,7 +176,7 @@
 - (void) createAutoLayoutConstraints
 {
     UIView *root = self.contentView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress, _lbHeight);
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
@@ -185,9 +186,10 @@
     [root addConstraints:constraintsArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line2]-0-|" options:0 metrics:nil views:views]];
-    constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views];
+    constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]->=0-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsAcctionArray];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvMobile(16)]-0-[_btnMobile]->=20-|" options:0 metrics:nil views:views]];
+    constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvMobile(16)]-0-[_btnMobile]-6-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+    [root addConstraints:constraintsLoverArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvAddress(15)]-0-[_btnAddress]->=20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -212,7 +214,8 @@
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvNight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
 //    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbRelationship attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_sexLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbHeight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
 }
 
@@ -222,20 +225,26 @@
     
     _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
     _lbPublishTime.text = [NSString stringWithFormat:@"下单时间:%@", model.createdDate];//@"2015-03-19 12:46";//下单时间
-    _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@", model.registerInfo.chineseName];//@"联系人:";
+    _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@  %@", model.registerInfo.chineseName, model.registerInfo.phone];//@"联系人:";
     [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
     [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
     
-    _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%ld岁", (long)model.loverinfo.age]];//;//@"72岁";
+    if(model.loverinfo.age > 0)
+        _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%ld岁", (long)model.loverinfo.age]];//;//@"72岁";
+    else
+        _lbAge.text = @"年龄：";
+    if(model.loverinfo.height != nil)
+        _lbHeight.text = [self stringByReplaceString:[NSString stringWithFormat:@"%@", model.loverinfo.height]];
+    else
+        _lbHeight.text = @"身高：";
     
     _lbName.text = model.loverinfo.name;//@"张发财";
     if(model.loverinfo.name == nil || [model.loverinfo.name length] == 0)
         _lbName.text = @"姓名";
-//    _lbRelationship.text = model.loverinfo.nickname;//@"父亲";
     
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _imgvMobile);
     UIView *root = self.contentView;
     [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
@@ -256,14 +265,28 @@
     }
     
     [root addConstraints:constraintsArray];
-    
     [root removeConstraints:constraintsAcctionArray];
+    [root removeConstraints:constraintsLoverArray];
     NSString *sex = [Util SexImagePathWith:[Util GetSexByName:model.loverinfo.sex]];
-    if(sex == nil){
-        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views];
+    
+    if(model.loverinfo.phone == nil || [model.loverinfo.phone length] == 0){
+        constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+        [root addConstraints:constraintsLoverArray];
+        _imgvMobile.hidden = YES;
+        _btnMobile.hidden = YES;
     }
     else{
-        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]->=0-|" options:0 metrics:nil views:views];
+        constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvMobile(16)]-0-[_btnMobile]-6-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+        [root addConstraints:constraintsLoverArray];
+        _imgvMobile.hidden = NO;
+        _btnMobile.hidden = NO;
+    }
+    
+    if(sex == nil){
+        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]->=0-|" options:0 metrics:nil views:views];
+    }
+    else{
+        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]->=0-|" options:0 metrics:nil views:views];
     }
     [root addConstraints:constraintsAcctionArray];
     

@@ -593,7 +593,7 @@
     switch (indexPath.row) {
         case 0:
         {
-            cell.lbTitle.text = @"全部订单";
+            cell.lbTitle.text = @"我的订单";
             cell.photoImgV.image = [UIImage imageNamed:@"allOrder"];
         }
             break;

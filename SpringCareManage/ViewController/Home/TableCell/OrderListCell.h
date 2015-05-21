@@ -29,6 +29,7 @@
 //    UILabel *_lbRelationship;
     UIImageView *_sexLogo;
     UILabel *_lbAge;
+    UILabel *_lbHeight;
     UIButton *_btnMobile;
     UIImageView *_imgvMobile;
     UIButton *_btnAddress;
@@ -47,6 +48,7 @@
     
     NSArray *constraintsArray;
     NSArray *constraintsAcctionArray;
+    NSArray *constraintsLoverArray;
     
     OrderInfoModel *_orderModel;
 }

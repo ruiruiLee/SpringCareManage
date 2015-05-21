@@ -24,12 +24,12 @@
     UIImageView  *_photoImgView;//头像
     UILabel *_lbName;//姓名
     UIButton *_btnAddr;//信息
+    UIImageView *_imgvAddr;
     
     UIImageView *_sex;
     UILabel *_lbAge;
-    UILabel *_relationName;
     UILabel *_lbMobile;
-    UIButton *_btnRing;
+    UIImageView *_imgvMoblie;
     
     //
     EscortTimeDataModel *_replyContentModel;//

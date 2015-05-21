@@ -176,9 +176,9 @@
 //    
 //    [model addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
-    OrderInfoModel *model = [self.DataList objectAtIndex:indexPath.row];
-    OrderDetailsVC *vc = [[OrderDetailsVC alloc] initWithOrderModel:model];
-    [self.navigationController pushViewController:vc animated:YES];
+//    OrderInfoModel *model = [self.DataList objectAtIndex:indexPath.row];
+//    OrderDetailsVC *vc = [[OrderDetailsVC alloc] initWithOrderModel:model];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - PullTableViewDelegate

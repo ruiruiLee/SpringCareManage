@@ -56,9 +56,9 @@
     
     _lbStatus = [[UILabel alloc] initWithFrame:CGRectZero];
     [self addSubview:_lbStatus];
-    _lbStatus.textColor = _COLOR(0x66, 0x66, 0x66);
+    _lbStatus.textColor = [UIColor whiteColor];
     _lbStatus.font = _FONT(16);
-    _lbStatus.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
+    _lbStatus.backgroundColor = Abled_Color;
     _lbStatus.text = @"工作中";
     _lbStatus.translatesAutoresizingMaskIntoConstraints = NO;
     _lbStatus.textAlignment = NSTextAlignmentCenter;
