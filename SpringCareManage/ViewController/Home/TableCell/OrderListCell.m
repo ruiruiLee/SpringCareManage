@@ -101,8 +101,8 @@
     
 //    _lbRelationship = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    _lbHeight = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99)];
+    _lbHeight = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99)];
     
     _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnMobile];
