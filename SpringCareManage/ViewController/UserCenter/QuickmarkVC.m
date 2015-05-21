@@ -36,11 +36,11 @@
     
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=0-[imageView(260)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(imageView, lbExplain)]];
     [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=0-[lbExplain(260)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(imageView, lbExplain)]];
-    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[lbExplain]-10-[imageView(260)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(imageView, lbExplain)]];
+    [self.ContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[lbExplain]-10-[imageView(260)]->=0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(imageView, lbExplain)]];
     
     [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:lbExplain attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.ContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.ContentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-//    [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.ContentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:-80]];
+    [self.ContentView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.ContentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:-30]];
 }
 
 - (void)didReceiveMemoryWarning {
