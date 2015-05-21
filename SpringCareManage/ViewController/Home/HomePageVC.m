@@ -495,7 +495,7 @@
         _lbCareType.text = [NSString stringWithFormat:@"%@：¥%.2f/%@h x %ld%@ = ¥%.2f", userInfo.userOrderInfo.orderModel.productInfo.name, userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount,dayString, userInfo.userOrderInfo.orderModel.totalPrice];//@"医院陪护：¥180/12h";
         
         [_btnAddress setTitle:userInfo.userOrderInfo.orderModel.loverinfo.addr forState:UIControlStateNormal];
-        NSString *phone = [NSString stringWithFormat:@"联系电话：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
+        NSString *phone = [NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
         [_btnCustomerMobile setTitle:phone forState:UIControlStateNormal];
         
         _lbDetailText.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.beginDate] enddate:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.endDate] datetype:userInfo.userOrderInfo.orderModel.dateType];
@@ -526,7 +526,24 @@
         _orderTitleView.hidden = YES;
     }
     
-    _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@   %d岁", userInfo.userOrderInfo.orderModel.loverinfo.name, userInfo.userOrderInfo.orderModel.loverinfo.age];
+    NSString *age = @"";
+    if(userInfo.userOrderInfo.orderModel.loverinfo.age > 0)
+        age = [NSString stringWithFormat:@"%ld岁", userInfo.userOrderInfo.orderModel.loverinfo.age];
+    else
+        age = @"年龄：";
+    NSString *height = @"";
+    if(userInfo.userOrderInfo.orderModel.loverinfo.height != nil)
+        height = [NSString stringWithFormat:@"%@cm", userInfo.userOrderInfo.orderModel.loverinfo.height];
+    else
+        height = @"身高：";
+    
+    NSString *name = @"";
+    if(userInfo.userOrderInfo.orderModel.loverinfo.name != nil)
+        name = userInfo.userOrderInfo.orderModel.loverinfo.name;
+    else
+        name = @"姓名：";
+    
+    _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@   %@  %@", name, age, height];
     
     if([Util GetSexByName:userInfo.userOrderInfo.orderModel.loverinfo.sex] == EnumMale)
         _imgvLoverSex.image = ThemeImage(@"mail");

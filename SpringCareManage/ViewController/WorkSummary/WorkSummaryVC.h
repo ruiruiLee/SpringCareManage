@@ -28,6 +28,7 @@
     UILabel *_lbAge;
     UIButton *_btnMobile;
     UILabel *_lbPhone;
+    UILabel *_lbHeight;
     
     UIImageView *_imgvAddress;
     

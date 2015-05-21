@@ -29,6 +29,7 @@
     UIImageView *_sex;
     UILabel *_lbAge;
     UILabel *_lbMobile;
+    UILabel *_lbHeight;
     UIImageView *_imgvMoblie;
     
     //
