@@ -289,7 +289,7 @@
         for (UIImage *image in imageScrollView.selectImgArray) {
              //添加文件名
         @autoreleasepool {
-            NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.f);
             AVFile *file = [AVFile fileWithName:@"timeImags.jpg" data:imageData];
             [file.metaData setObject:@"1" forKey:@"fileType"];
             [file save];

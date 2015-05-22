@@ -250,7 +250,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //原图 ：UIImagePickerControllerOriginalImage  裁剪的图：UIImagePickerControllerEditedImage
-    NSData *imageData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"],0.8);
+    NSData *imageData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"],0.5f);
     [_parentController dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [UIImage imageWithData:imageData];
     [NSThread detachNewThreadSelector:@selector(useImage:) toTarget:self withObject:image];
@@ -258,7 +258,7 @@
 }
 
 - (void)useImage:(UIImage *)image {
-    @autoreleasepool{
+//    @autoreleasepool{
     // Create a graphics image context
         // Get the new image from the context
         UIImage* newImage = [self fitSmallImage:image scaledToSize:imgCompressSize];
@@ -266,7 +266,7 @@
         
         [self addImageToUploadArray:newImage index:_selectImgArray.count];
         [self dismissViewConttroller];
-    }
+//    }
 }
 
 

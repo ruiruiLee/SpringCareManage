@@ -185,8 +185,8 @@
             {
                 [weakSelf.dataList removeAllObjects];
                 [weakSelf.dataList addObjectsFromArray:content];
-                [weakSelf.tableView reloadData];
             }
+            [weakSelf.tableView reloadData];
             [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
         }];
     }else{
@@ -552,8 +552,8 @@
                         {
                             [weakSelf.dataList removeAllObjects];
                             [weakSelf.dataList addObjectsFromArray:content];
-                            [weakSelf.tableView reloadData];
                         }
+                        [weakSelf.tableView reloadData];
                         [weakSelf performSelector:@selector(refreshTable) withObject:nil afterDelay:0.2];
                     }];
                 }else{
