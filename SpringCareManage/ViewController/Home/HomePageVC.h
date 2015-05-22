@@ -65,6 +65,7 @@
     UIImageView *_imgvAddress;
     UILabel *_lbLoverInfo;
     UIImageView *_imgvLoverSex;
+    UILabel *_lbOtherInfo;
     
     UIButton *btnRing;
     

@@ -261,7 +261,7 @@
     [_OrderInfoView addSubview:_btnCustomerMobile];
     _btnCustomerMobile.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnCustomerMobile setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
-    _btnCustomerMobile.titleLabel.font = _FONT(13);
+    _btnCustomerMobile.titleLabel.font = _FONT(14);
     _btnCustomerMobile.userInteractionEnabled = NO;
     
 //    _imgvMobile = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -274,6 +274,8 @@
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
     [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnAddress.titleLabel.font = _FONT(14);
+    
+    _lbOtherInfo = [self createLabel:_FONT(14) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];
     
     _imgvAddress = [[UIImageView alloc] initWithFrame:CGRectZero];
     [_OrderInfoView addSubview:_imgvAddress];
@@ -319,7 +321,7 @@
 
 - (void) createAutoLayoutConstraintsForHeader:(UIView*)rootview
 {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo);
     //H
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_orderTitleView]-0-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_orderTitleView(34)]->=0-|" options:0 metrics:nil views:views]];
@@ -341,11 +343,12 @@
 //    btnRing
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnCustomerMobile]->=4-[btnRing(48)]-10-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvAddress(17)]-5-[_btnAddress]->=18-|" options:0 metrics:nil views:views]];
-    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbLoverInfo]-10-[_imgvLoverSex(18)]->=18-|" options:0 metrics:nil views:views]];
+    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbLoverInfo]-10-[_imgvLoverSex(18)]-10-[_lbOtherInfo]->=18-|" options:0 metrics:nil views:views]];
 //    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_btnCustomerMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnCustomerMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvAddress attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_imgvLoverSex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbOtherInfo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_OrderInfoView]-0-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line3]-0-|" options:0 metrics:nil views:views]];
@@ -492,7 +495,13 @@
     
     [headerView removeConstraints:constraints];
     if(userInfo.userOrderInfo.orderModel != nil){
-        _lbCareType.text = [NSString stringWithFormat:@"%@：¥%.2f/%@h x %ld%@ = ¥%.2f", userInfo.userOrderInfo.orderModel.productInfo.name, userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount,dayString, userInfo.userOrderInfo.orderModel.totalPrice];//@"医院陪护：¥180/12h";
+        NSString *careType = [NSString stringWithFormat:@"%@：¥%ld/%@h x %ld%@ = ¥%ld", userInfo.userOrderInfo.orderModel.productInfo.name, (long)userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount,dayString, (long)userInfo.userOrderInfo.orderModel.totalPrice];
+        
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithString:careType];
+        NSRange range = [careType rangeOfString:[NSString stringWithFormat:@"¥%ld", (long)userInfo.userOrderInfo.orderModel.totalPrice] options:NSBackwardsSearch];
+        [string addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
+        [string addAttribute:NSFontAttributeName value:_FONT(16) range:range];
+        _lbCareType.attributedText = string;
         
         [_btnAddress setTitle:userInfo.userOrderInfo.orderModel.loverinfo.addr forState:UIControlStateNormal];
         NSString *phone = [NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
@@ -543,7 +552,8 @@
     else
         name = @"姓名：";
     
-    _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@   %@  %@", name, age, height];
+    _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@", name];
+    _lbOtherInfo.text = [NSString stringWithFormat:@"%@  %@",  age, height];
     
     if([Util GetSexByName:userInfo.userOrderInfo.orderModel.loverinfo.sex] == EnumMale)
         _imgvLoverSex.image = ThemeImage(@"mail");
