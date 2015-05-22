@@ -284,9 +284,12 @@
     
     if(sex == nil){
         constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]->=0-|" options:0 metrics:nil views:views];
+        _sexLogo.hidden = YES;
     }
     else{
         constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]->=0-|" options:0 metrics:nil views:views];
+        _sexLogo.image = ThemeImage(sex);
+        _sexLogo.hidden = NO;
     }
     [root addConstraints:constraintsAcctionArray];
     
@@ -318,7 +321,7 @@
     UIImage *imageNormal = [Util imageWithColor:[UIColor clearColor] size:CGSizeMake(5, 5)];
     UIImage *imageSelect = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
     [_btnOrderStatus setBackgroundImage:imageNormal forState:UIControlStateNormal];
-    [_btnOrderStatus setTitleColor:_COLOR(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+    [_btnOrderStatus setTitleColor:_COLOR(0x22, 0x22, 0x22) forState:UIControlStateNormal];
     switch (model.orderStatus) {
         case EnumOrderStatusTypeNew:
             status = @"确认订单";

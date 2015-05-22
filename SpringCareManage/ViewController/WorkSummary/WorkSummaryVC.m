@@ -43,7 +43,8 @@
         _lbName.text = loverInfo.name;
         if(loverInfo.name == nil)
             _lbName.text = @"姓名";
-        [_btnAddr setTitle:loverInfo.addr forState:UIControlStateNormal];
+//        [_btnAddr setTitle:loverInfo.addr forState:UIControlStateNormal];
+        _lbAddr.text = loverInfo.addr;
 //        [_photoImgView sd_setImageWithURL:[NSURL URLWithString:loverInfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
         [_btnphotoImg sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
         _lbAge.text = [NSString stringWithFormat:@"%d岁", loverInfo.age];
@@ -55,7 +56,7 @@
         _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:loverInfo.sex]]);
         _lbPhone.text = loverInfo.phone;
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
+        NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _lbAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
         if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
             AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
         }
@@ -107,7 +108,8 @@
     _lbName.text = _defaultLover.name;
     if(_defaultLover.name == nil)
         _lbName.text = @"姓名";
-    [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
+//    [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
+    _lbAddr.text = _defaultLover.addr;
 //    [_btnphotoImg sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     [_btnphotoImg sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
     _lbAge.text = [NSString stringWithFormat:@"%d岁", _defaultLover.age];
@@ -124,7 +126,7 @@
     
     [headerbg removeConstraints:AttentionArray];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
+    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _lbAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
     if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
         AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
     }
@@ -233,12 +235,15 @@
     _imgvAddress.translatesAutoresizingMaskIntoConstraints = NO;
     _imgvAddress.image = ThemeImage(@"nurselistlocation");
     
-    _btnAddr = [[UIButton alloc] initWithFrame:CGRectZero];
-    [headerbg addSubview:_btnAddr];
-    _btnAddr.userInteractionEnabled = NO;
-    _btnAddr.translatesAutoresizingMaskIntoConstraints = NO;
-    _btnAddr.titleLabel.font = _FONT(14);
-    [_btnAddr setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
+    _lbAddr = [[UILabel alloc] initWithFrame:CGRectZero];
+    [headerbg addSubview:_lbAddr];
+    _lbAddr.userInteractionEnabled = NO;
+    _lbAddr.translatesAutoresizingMaskIntoConstraints = NO;
+    _lbAddr.font = _FONT(14);
+//    [_btnAddr setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
+    _lbAddr.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbAddr.numberOfLines = 0;
+    _lbAddr.backgroundColor = [UIColor clearColor];
 //    [_btnAddr setImage:[UIImage imageNamed:@"nurselistlocation"] forState:UIControlStateNormal];
     
     _sex = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -269,19 +274,19 @@
     _lbPhone.textColor = _COLOR(0x99, 0x99, 0x99);
     _lbPhone.backgroundColor = [UIColor clearColor];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _btnAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
+    NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _lbAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[headerbg]-0-|" options:0 metrics:nil views:views]];
     [headerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[headerbg(182)]->=0-|" options:0 metrics:nil views:views]];
     
     AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
     [headerbg addConstraints:AttentionArray];
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_imgvAddress(15)]-2-[_btnAddr]->=20-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_imgvAddress(15)]-2-[_lbAddr]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_btnMobile(16)]-2-[_lbPhone]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_btnphotoImg(72)]-30-|" options:0 metrics:nil views:views]];
     
-    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-4-[_btnMobile(16)]-5-[_btnAddr(16)]->=12-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-4-[_btnMobile(16)]-5-[_lbAddr]->=12-|" options:0 metrics:nil views:views]];
     
-    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnAddr attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_lbAddr attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];

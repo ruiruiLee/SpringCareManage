@@ -22,7 +22,7 @@
     feedbackView  *_feedbackView;
     UIButton  *_btnphotoImg;//头像
     UILabel *_lbName;//姓名
-    UIButton *_btnAddr;//信息
+    UILabel *_lbAddr;//信息
     
     UIImageView *_sex;
     UILabel *_lbAge;
