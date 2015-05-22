@@ -275,7 +275,7 @@
     _btnAddress = [[UIButton alloc] initWithFrame:CGRectZero];
     [_OrderInfoView addSubview:_btnAddress];
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
-    [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
+    [_btnAddress setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _btnAddress.titleLabel.font = _FONT(14);
     
     _lbOtherInfo = [self createLabel:_FONT(14) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];

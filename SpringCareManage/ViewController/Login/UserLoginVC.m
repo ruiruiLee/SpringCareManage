@@ -210,7 +210,7 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"密码输入错误！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             }else if (code == 211){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"账户手机号出错！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"账户手机号错误！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             }
             else{

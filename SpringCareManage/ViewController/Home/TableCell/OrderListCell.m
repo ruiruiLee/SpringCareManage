@@ -54,7 +54,7 @@
     _btnOrderStatus = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnOrderStatus.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_btnOrderStatus];
-    _btnOrderStatus.titleLabel.font = _FONT(15);
+    _btnOrderStatus.titleLabel.font = _FONT_B(15);
     [_btnOrderStatus setTitleColor:_COLOR(0x10, 0x9d, 0x59) forState:UIControlStateNormal];
     _btnOrderStatus.userInteractionEnabled = NO;
     _btnOrderStatus.clipsToBounds = YES;
@@ -321,7 +321,7 @@
     UIImage *imageNormal = [Util imageWithColor:[UIColor clearColor] size:CGSizeMake(5, 5)];
     UIImage *imageSelect = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
     [_btnOrderStatus setBackgroundImage:imageNormal forState:UIControlStateNormal];
-    [_btnOrderStatus setTitleColor:_COLOR(0x22, 0x22, 0x22) forState:UIControlStateNormal];
+    [_btnOrderStatus setTitleColor:Abled_Color forState:UIControlStateNormal];
     switch (model.orderStatus) {
         case EnumOrderStatusTypeNew:
             status = @"确认订单";
@@ -352,6 +352,7 @@
         default:
             break;
     }
+    
     [_btnOrderStatus setTitle:status forState:UIControlStateNormal];
 }
 
