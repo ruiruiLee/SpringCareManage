@@ -251,11 +251,9 @@
 {
     //原图 ：UIImagePickerControllerOriginalImage  裁剪的图：UIImagePickerControllerEditedImage
     NSData *imageData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"],0.8);
-    UIImage *image = [UIImage imageWithData:imageData];
-    
-    [NSThread detachNewThreadSelector:@selector(useImage:) toTarget:self withObject:image];
-    
     [_parentController dismissViewControllerAnimated:YES completion:nil];
+    UIImage *image = [UIImage imageWithData:imageData];
+    [NSThread detachNewThreadSelector:@selector(useImage:) toTarget:self withObject:image];
     
 }
 
