@@ -44,9 +44,10 @@
             if(!self.userStatus && status)
             {
                 [self performSelector:@selector(postNotify) withObject:nil afterDelay:0.1];
-            }
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
+            }else{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
                     });
+            }
         }
     }
     return self;
@@ -54,6 +55,12 @@
 
 - (void) postNotify
 {
+    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+    [currentInstallation removeObject:[UserModel sharedUserInfo].userId forKey:@"channels"];
+    [currentInstallation saveInBackground];
+    [AVUser logOut];
+    [UserModel sharedUserInfo].userId = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Register_Logout object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:Notify_User_Forbidden object:nil];
 }
 
@@ -77,9 +84,10 @@
     if(!self.userStatus && status)
     {
         [self performSelector:@selector(postNotify) withObject:nil afterDelay:0.1];
+    }else{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
+        });
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{[self LoadOrderInfo:nil];
-    });
 }
 -(NSString*) displayName{
         if (self.chineseName.length==0) {
