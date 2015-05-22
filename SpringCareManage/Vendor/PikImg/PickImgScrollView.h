@@ -23,6 +23,8 @@
     UIAlertView   *alertView;
     CGRect myframe;
     MWPhotoBrowser *_photoBrowser;
+    
+    UIImagePickerController  *imagePicker;
 }
 @property (nonatomic,assign) id <PickImgEndDelegate> delegate;
 @property (strong, nonatomic) UIViewController *parentController;

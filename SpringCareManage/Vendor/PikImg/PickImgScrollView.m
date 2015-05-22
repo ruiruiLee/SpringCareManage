@@ -10,7 +10,7 @@
 #define kImageButtonTag 100
 #define MAXIMAGECOUNT 9
 //上传图片压缩比例大小
-#define imgCompressSize CGSizeMake(1024, 1024)
+#define imgCompressSize CGSizeMake(512, 512)
 @implementation PickImgScrollView
 
 
@@ -250,13 +250,25 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //原图 ：UIImagePickerControllerOriginalImage  裁剪的图：UIImagePickerControllerEditedImage
-    NSData *imageData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"],1.0);
+    NSData *imageData = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerOriginalImage"],0.8);
     UIImage *image = [UIImage imageWithData:imageData];
-    image = [self fitSmallImage:image scaledToSize:imgCompressSize];
-    [self addImageToUploadArray:image index:_selectImgArray.count];
-     [self dismissViewConttroller];
+    
+    [NSThread detachNewThreadSelector:@selector(useImage:) toTarget:self withObject:image];
+    
     [_parentController dismissViewControllerAnimated:YES completion:nil];
     
+}
+
+- (void)useImage:(UIImage *)image {
+    @autoreleasepool{
+    // Create a graphics image context
+        // Get the new image from the context
+        UIImage* newImage = [self fitSmallImage:image scaledToSize:imgCompressSize];
+        // End the context
+        
+        [self addImageToUploadArray:newImage index:_selectImgArray.count];
+        [self dismissViewConttroller];
+    }
 }
 
 
@@ -271,16 +283,19 @@
 
 - (void)openCamera:(UIViewController*)currentViewController allowEdit:(BOOL)allowEdit completion:(void (^)(void))completion
 {
-    UIImagePickerController  *picker = [[UIImagePickerController alloc] init];
+    if(imagePicker == nil){
+        imagePicker = [[UIImagePickerController alloc] init];
+    }
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-        picker.delegate      = (id)self;
-        picker.allowsEditing = allowEdit;
-        picker.sourceType    = UIImagePickerControllerSourceTypeCamera;
-        picker.mediaTypes =  [[NSArray alloc] initWithObjects: (NSString *) kUTTypeImage, nil];
+        imagePicker.delegate      = (id)self;
+        imagePicker.allowsEditing = allowEdit;
+        imagePicker.sourceType    = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.mediaTypes =  [[NSArray alloc] initWithObjects: (NSString *) kUTTypeImage, nil];
   
-        [currentViewController presentViewController:picker animated:YES completion:completion];
+        [currentViewController presentViewController:imagePicker animated:YES completion:completion];
     }
+
 }
 
 

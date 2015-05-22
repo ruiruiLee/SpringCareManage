@@ -33,7 +33,11 @@
     // Do any additional setup after loading the view.
     [self.NavigationBar.btnRight setImage:[UIImage imageNamed:@"submit"] forState:UIControlStateNormal];
     [self initSubviews];
-    [_tvContent becomeFirstResponder];
+    
+    EnDeviceType type = [NSStrUtil GetCurrentDeviceType];
+    if(type == EnumValueTypeiPhone4S){}
+    else
+        [_tvContent becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -219,7 +223,7 @@
 #pragma mark -
 #pragma mark PickImgEndDelegate
 - (void) imagePickerControllerDissMethod{
-    [_tvContent becomeFirstResponder];
+//    [_tvContent becomeFirstResponder];
 }
 
 
