@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^Completion) (int code, id content);
-//#define SERVER_ADDRESS @"http://spring.avosapps.com/"
-#define SERVER_ADDRESS @"http://dev.springcare.avosapps.com/"
+#define SERVER_ADDRESS @"http://spring.avosapps.com/"
+//#define SERVER_ADDRESS @"http://dev.springcare.avosapps.com/"
 
 @interface LCNetWorkBase : NSObject
 

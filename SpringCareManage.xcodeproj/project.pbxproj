@@ -2266,7 +2266,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
+				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2302,7 +2302,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
+				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2323,7 +2323,7 @@
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "春风陪护师";
-				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
+				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
 			};
 			name = Debug;
 		};
@@ -2342,7 +2342,7 @@
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "春风陪护师";
-				PROVISIONING_PROFILE = "7380edea-c75b-4f38-88ad-a1014fcbe4f0";
+				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
 			};
 			name = Release;
 		};

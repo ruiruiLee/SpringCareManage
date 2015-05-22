@@ -157,6 +157,9 @@
     _photoImage = [[UIImageView alloc] initWithFrame:CGRectZero];//头像
     [_bgView addSubview:_photoImage];
     _photoImage.translatesAutoresizingMaskIntoConstraints = NO;
+    _photoImage.clipsToBounds = YES;
+    _photoImage.layer.cornerRadius = 41;
+    _photoImage.contentMode = UIViewContentModeScaleAspectFill;
     
     _lbName = [self createLabel:_FONT(16) txtColor:_COLOR(0x22, 0x22, 0x22) rootView:_bgView];//姓名
     
@@ -471,7 +474,7 @@
     NSString *placeholderImage = @"nurselistfemale";
     if(sex == EnumMale)
         placeholderImage = @"nurselistmale";
-    [_photoImage sd_setImageWithURL:[NSURL URLWithString:userInfo.headerImage] placeholderImage:[UIImage imageNamed:placeholderImage]];
+    [_photoImage sd_setImageWithURL:[NSURL URLWithString:userInfo.headerFile] placeholderImage:[UIImage imageNamed:placeholderImage]];
     
     NSString *dayString = @"";
     NSString *hourString = @"";

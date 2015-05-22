@@ -29,7 +29,8 @@
             self.userId = muser.objectId;
             self.userName = muser.username;
             self.chineseName = [muser objectForKey:@"chineseName"];
-            self.headerFile = [(AVFile*)[muser objectForKey:@"headerImage"] url];
+            AVFile *file = (AVFile*)[muser objectForKey:@"headerImage"];
+            self.headerFile = file.url;
             self.locationPoint =[muser objectForKey:@"locationPoint"];
             self.birthDay = [muser objectForKey:@"birthDay"];
             self.birthAddr = [muser objectForKey:@"birthplace"];
