@@ -207,15 +207,15 @@
             
             long code = [[error.userInfo objectForKey:@"code"] longValue];
             if(code == 210){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"密码错误！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"密码输入错误！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             }else if (code == 211){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"账户错误！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"账户手机号出错！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             }
             else{
             
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"网络错误，请稍候在试" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             }
         }
