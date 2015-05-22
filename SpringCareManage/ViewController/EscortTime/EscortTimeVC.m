@@ -34,8 +34,6 @@
     if(orderModel != nil){
         _defaultLover = orderModel.loverinfo;
         
-//        [_btnLoverSelect sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"nav-person")];
-        
         LoverInfoModel *loverInfo = orderModel.loverinfo;
         _lbName.text = loverInfo.name;
         if(loverInfo.name == nil)
@@ -76,7 +74,7 @@
         _lbName.text = @"姓名";
     [_btnAddr setTitle:_defaultLover.addr forState:UIControlStateNormal];
     [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
-    _lbAge.text = [NSString stringWithFormat:@"%d岁", _defaultLover.age];
+    _lbAge.text = [NSString stringWithFormat:@"%ld岁", _defaultLover.age];
     if(_defaultLover.age == 0)
         _lbAge.text = @"年龄：";
     
@@ -109,11 +107,17 @@
     }
 }
 
+- (void) ReLoadLoverHeaderImage:(NSNotification *)notify
+{
+    [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SetHeaderInfoWithModel) name:User_DetailInfo_Get object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReLoadLoverHeaderImage:) name:Notify_Lover_HeaderImage_Moditify object:nil];
     pages = 0;
     _dataList = [[NSMutableArray alloc] init];
     self.NavigationBar.Title = @"陪护时光";

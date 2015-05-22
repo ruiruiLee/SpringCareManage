@@ -20,7 +20,7 @@
     EscortTimeDataModel *_model;
     
     feedbackView  *_feedbackView;
-    UIImageView  *_photoImgView;//头像
+    UIButton  *_btnphotoImg;//头像
     UILabel *_lbName;//姓名
     UIButton *_btnAddr;//信息
     
