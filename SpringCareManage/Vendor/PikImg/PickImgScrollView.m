@@ -7,12 +7,19 @@
 
 #import "PickImgScrollView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "define.h"
+
 #define kImageButtonTag 100
 #define MAXIMAGECOUNT 9
 //上传图片压缩比例大小
-#define imgCompressSize CGSizeMake(512, 512)
+#define imgCompressSize CGSizeMake(1024, 1024)
 @implementation PickImgScrollView
 
+- (void) dealloc
+{
+    if(_cameraView)
+        [_cameraView removeFromSuperview];
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if ((self = [super initWithCoder:aDecoder])) {
@@ -84,6 +91,7 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
+        __weak PickImgScrollView *weakSelf = self;
         [[ELCPickerHelper sharedElcPickerHelper] defineDeleget:self];
         [[ELCPickerHelper sharedElcPickerHelper] openELImagePicker:_parentController
           maxImageCount:MAXIMAGECOUNT - _selectImgArray.count
@@ -91,7 +99,7 @@
                 if (imageArray.count) {
                     for (UIImage *image in imageArray) {
                         @autoreleasepool {
-                              [self addImageToUploadArray:image index:_selectImgArray.count];
+                              [weakSelf addImageToUploadArray:image index:weakSelf.selectImgArray.count];
                           }
                         }
                 }
@@ -100,7 +108,8 @@
         
     }else if (buttonIndex == 1) //调用相机
     {
-        [self openCamera:_parentController allowEdit:NO completion:nil];
+//        [self openCamera:_parentController allowEdit:NO completion:nil];
+        [self launchCamera:nil];
     }
     else{
         
@@ -130,17 +139,20 @@
             //btn长按事件
             [imageScrollView addSubview:btn];
             imageScrollView.contentSize = CGSizeMake(MAX(imageScrollView.frame.size.width+1,(cameraButton.frame.size.width+1)*(arrayCount+1)), imageScrollView.contentSize.height);
+            __weak UIButton *weakButton = cameraButton;
+            __weak UIScrollView *weakScrollView = imageScrollView;
+            __weak PickImgScrollView *weakSelf = self;
             [UIView animateWithDuration:0.2f
                                   delay:0.0f
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^{
-                                 cameraButton.frame = CGRectMake(cameraButton.frame.origin.x + (cameraButton.frame.size.width)+1,
-                                                                 cameraButton.frame.origin.y,
-                                                                 cameraButton.frame.size.width,
-                                                                 cameraButton.frame.size.height);
+                                 weakButton.frame = CGRectMake(weakButton.frame.origin.x + (weakButton.frame.size.width)+1,
+                                                                 weakButton.frame.origin.y,
+                                                                 weakButton.frame.size.width,
+                                                                 weakButton.frame.size.height);
                              } completion:^(BOOL finished) {
-                                 if (_selectImgArray.count>5) {
-                                     [imageScrollView setContentOffset:CGPointMake(imageScrollView.contentSize.width-imageScrollView.bounds.size.width, 0) animated:YES];
+                                 if (weakSelf.selectImgArray.count>5) {
+                                     [weakScrollView setContentOffset:CGPointMake(weakScrollView.contentSize.width-weakScrollView.bounds.size.width, 0) animated:YES];
 
              
                                  }
@@ -168,6 +180,9 @@
 - (void) deleteImageButtonAtIndex: (NSInteger)index {
     NSInteger arrayCount = _selectImgArray.count;
     UIButton* btn = (UIButton*)[imageScrollView viewWithTag:index+kImageButtonTag];
+    __weak PickImgScrollView *weakSelf = self;
+    __weak UIButton *weakButton = cameraButton;
+    __weak UIScrollView *weakScrollView = imageScrollView;
     [UIView animateWithDuration:0.15f
               delay:0.0f
             options:UIViewAnimationOptionCurveEaseInOut
@@ -175,21 +190,21 @@
              btn.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
          } completion:^(BOOL finished) {
              [btn removeFromSuperview];
-             [_selectImgArray removeObjectAtIndex:index];
-             imageScrollView.contentSize = CGSizeMake(MAX(imageScrollView.frame.size.width+1, (cameraButton.frame.size.width+1)*(_selectImgArray.count+1)), imageScrollView.contentSize.height);
-             cameraButton.frame = CGRectMake(cameraButton.frame.origin.x - (cameraButton.frame.size.width + 1),
-                                             cameraButton.frame.origin.y,
-                                             cameraButton.frame.size.width,
-                                             cameraButton.frame.size.height);
+             [weakSelf.selectImgArray removeObjectAtIndex:index];
+             weakScrollView.contentSize = CGSizeMake(MAX(weakScrollView.frame.size.width+1, (weakButton.frame.size.width+1)*(weakSelf.selectImgArray.count+1)), weakScrollView.contentSize.height);
+             weakButton.frame = CGRectMake(weakButton.frame.origin.x - (weakButton.frame.size.width + 1),
+                                             weakButton.frame.origin.y,
+                                             weakButton.frame.size.width,
+                                             weakButton.frame.size.height);
              [UIView animateWithDuration:0.15f
                    delay:0.0f
                  options:UIViewAnimationOptionCurveEaseInOut
               animations:^{
                   for (int i = 0; i < arrayCount; i++) {
                       @autoreleasepool {
-                      UIButton* subBtn = (UIButton*)[imageScrollView viewWithTag:kImageButtonTag+i];
+                      UIButton* subBtn = (UIButton*)[weakScrollView viewWithTag:kImageButtonTag+i];
                       if (subBtn.tag > index+kImageButtonTag) {
-                          subBtn.frame = CGRectMake(subBtn.frame.origin.x - (cameraButton.frame.size.width +1),
+                          subBtn.frame = CGRectMake(subBtn.frame.origin.x - (weakButton.frame.size.width +1),
                                                     subBtn.frame.origin.y,
                                                     subBtn.frame.size.width,
                                                     subBtn.frame.size.height);
@@ -199,7 +214,7 @@
                   }
                
               } completion:^(BOOL finished) {
-                [self dismissViewConttroller];
+                [weakSelf dismissViewConttroller];
               }];
          }];
 }
@@ -226,26 +241,84 @@
 
 -(UIImage *)fitSmallImage:(UIImage *)image scaledToSize:(CGSize)tosize
 {
-    if (!image)
-    {
-        return nil;
+    @autoreleasepool{
+        if (!image)
+        {
+            return nil;
+        }
+        if (image.size.width<tosize.width && image.size.height<tosize.height)
+        {
+            return image;
+        }
+        CGFloat wscale = image.size.width/tosize.width;
+        CGFloat hscale = image.size.height/tosize.height;
+        CGFloat scale = (wscale>hscale)?wscale:hscale;
+        CGSize newSize = CGSizeMake(image.size.width/scale, image.size.height/scale);
+        UIGraphicsBeginImageContext(newSize);
+        CGRect rect = CGRectMake(0, 0, newSize.width, newSize.height);
+        [image drawInRect:rect];
+        UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return newimg;
     }
-    if (image.size.width<tosize.width && image.size.height<tosize.height)
-    {
-        return image;
-    }
-    CGFloat wscale = image.size.width/tosize.width;
-    CGFloat hscale = image.size.height/tosize.height;
-    CGFloat scale = (wscale>hscale)?wscale:hscale;
-    CGSize newSize = CGSizeMake(image.size.width/scale, image.size.height/scale);
-    UIGraphicsBeginImageContext(newSize);
-    CGRect rect = CGRectMake(0, 0, newSize.width, newSize.height);
-    [image drawInRect:rect];
-    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newimg;
 }
 
+- (void)launchCamera:(id)sender {
+    
+    //Set white status bar
+    
+    //Instantiate the camera view & assign its frame
+    if(_cameraView == nil){
+        _cameraView = [[CameraSessionView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, SCREEN_HEIGHT)];
+        
+        //Set the camera view's delegate and add it as a subview
+        _cameraView.delegate = self;
+        
+        //Apply animation effect to present the camera view
+        CATransition *applicationLoadViewIn =[CATransition animation];
+        [applicationLoadViewIn setDuration:0.6];
+        [applicationLoadViewIn setType:kCATransitionReveal];
+        [applicationLoadViewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+        [[_cameraView layer]addAnimation:applicationLoadViewIn forKey:kCATransitionReveal];
+    }
+    
+    [_parentController.view addSubview:_cameraView];
+    
+    //____________________________Example Customization____________________________
+    //[_cameraView setTopBarColor:[UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha: 0.64]];
+    //[_cameraView hideFlashButton]; //On iPad flash is not present, hence it wont appear.
+    //[_cameraView hideCameraToogleButton];
+    //[_cameraView hideDismissButton];
+}
+
+-(void)didCaptureImage:(UIImage *)image {
+    NSLog(@"CAPTURED IMAGE");
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [self.cameraView removeFromSuperview];
+     UIImage* newImage = [self fitSmallImage:image scaledToSize:imgCompressSize];
+    image = nil;
+    [self addImageToUploadArray:newImage index:_selectImgArray.count];
+}
+
+-(void)didCaptureImageWithData:(NSData *)imageData {
+    NSLog(@"CAPTURED IMAGE DATA");
+    //UIImage *image = [[UIImage alloc] initWithData:imageData];
+    //UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    //[self.cameraView removeFromSuperview];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    //Show error alert if image could not be saved
+    if (error) [[[UIAlertView alloc] initWithTitle:@"Error!" message:@"Image couldn't be saved" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+
+/*
 #pragma mark- UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -254,7 +327,7 @@
     [_parentController dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [UIImage imageWithData:imageData];
     [NSThread detachNewThreadSelector:@selector(useImage:) toTarget:self withObject:image];
-    
+    image = nil;
 }
 
 - (void)useImage:(UIImage *)image {
@@ -283,18 +356,19 @@
 {
     if(imagePicker == nil){
         imagePicker = [[UIImagePickerController alloc] init];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            imagePicker.delegate      = (id)self;
+            imagePicker.allowsEditing = allowEdit;
+            imagePicker.sourceType    = UIImagePickerControllerSourceTypeCamera;
+        }
     }
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-        imagePicker.delegate      = (id)self;
-        imagePicker.allowsEditing = allowEdit;
-        imagePicker.sourceType    = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.mediaTypes =  [[NSArray alloc] initWithObjects: (NSString *) kUTTypeImage, nil];
-  
         [currentViewController presentViewController:imagePicker animated:YES completion:completion];
     }
 
-}
+}*/
 
 
 

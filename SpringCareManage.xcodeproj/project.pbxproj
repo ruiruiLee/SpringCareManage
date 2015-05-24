@@ -10,6 +10,18 @@
 		1A0DE605A065EF1D9FD20743 /* libPods-SpringCareManage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8A4418B996CB40DA865D52 /* libPods-SpringCareManage.a */; };
 		861C181F1AECFDBE00BC5091 /* DefaultLoverSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 861C181E1AECFDBE00BC5091 /* DefaultLoverSelectVC.m */; };
 		861C18221AECFEDD00BC5091 /* LoverSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 861C18211AECFEDD00BC5091 /* LoverSelectCell.m */; };
+		863AC1451B11AF3900C06D96 /* CameraSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC12C1B11AF3900C06D96 /* CameraSessionView.m */; };
+		863AC1461B11AF3900C06D96 /* CameraDismissButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1301B11AF3900C06D96 /* CameraDismissButton.m */; };
+		863AC1471B11AF3900C06D96 /* CameraFlashButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1321B11AF3900C06D96 /* CameraFlashButton.m */; };
+		863AC1481B11AF3900C06D96 /* CameraFocalReticule.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1341B11AF3900C06D96 /* CameraFocalReticule.m */; };
+		863AC1491B11AF3900C06D96 /* CameraShutterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1361B11AF3900C06D96 /* CameraShutterButton.m */; };
+		863AC14A1B11AF3900C06D96 /* CameraToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1381B11AF3900C06D96 /* CameraToggleButton.m */; };
+		863AC14B1B11AF3900C06D96 /* LaunchCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC13A1B11AF3900C06D96 /* LaunchCameraButton.m */; };
+		863AC14C1B11AF3900C06D96 /* Cool Camera Mockup.sketch in Resources */ = {isa = PBXBuildFile; fileRef = 863AC13B1B11AF3900C06D96 /* Cool Camera Mockup.sketch */; };
+		863AC14D1B11AF3900C06D96 /* PaintCodeFile.pcvd in Resources */ = {isa = PBXBuildFile; fileRef = 863AC13C1B11AF3900C06D96 /* PaintCodeFile.pcvd */; };
+		863AC14E1B11AF3900C06D96 /* CameraStyleKitClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC13F1B11AF3900C06D96 /* CameraStyleKitClass.m */; };
+		863AC14F1B11AF3900C06D96 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1421B11AF3900C06D96 /* CaptureSessionManager.m */; };
+		863AC1501B11AF3900C06D96 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 863AC1441B11AF3900C06D96 /* Constants.m */; };
 		8652F0C51AFC9F0F002C6215 /* MsgDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0C41AFC9F0F002C6215 /* MsgDataModel.m */; };
 		8652F0C81AFCA214002C6215 /* MsgDataListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0C71AFCA214002C6215 /* MsgDataListModel.m */; };
 		8652F0CB1AFCB209002C6215 /* WebContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652F0CA1AFCB209002C6215 /* WebContentVC.m */; };
@@ -367,6 +379,28 @@
 		861C181E1AECFDBE00BC5091 /* DefaultLoverSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultLoverSelectVC.m; sourceTree = "<group>"; };
 		861C18201AECFEDD00BC5091 /* LoverSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoverSelectCell.h; sourceTree = "<group>"; };
 		861C18211AECFEDD00BC5091 /* LoverSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoverSelectCell.m; sourceTree = "<group>"; };
+		863AC12B1B11AF3900C06D96 /* CameraSessionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSessionView.h; sourceTree = "<group>"; };
+		863AC12C1B11AF3900C06D96 /* CameraSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSessionView.m; sourceTree = "<group>"; };
+		863AC12F1B11AF3900C06D96 /* CameraDismissButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraDismissButton.h; sourceTree = "<group>"; };
+		863AC1301B11AF3900C06D96 /* CameraDismissButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraDismissButton.m; sourceTree = "<group>"; };
+		863AC1311B11AF3900C06D96 /* CameraFlashButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFlashButton.h; sourceTree = "<group>"; };
+		863AC1321B11AF3900C06D96 /* CameraFlashButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFlashButton.m; sourceTree = "<group>"; };
+		863AC1331B11AF3900C06D96 /* CameraFocalReticule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFocalReticule.h; sourceTree = "<group>"; };
+		863AC1341B11AF3900C06D96 /* CameraFocalReticule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFocalReticule.m; sourceTree = "<group>"; };
+		863AC1351B11AF3900C06D96 /* CameraShutterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShutterButton.h; sourceTree = "<group>"; };
+		863AC1361B11AF3900C06D96 /* CameraShutterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShutterButton.m; sourceTree = "<group>"; };
+		863AC1371B11AF3900C06D96 /* CameraToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraToggleButton.h; sourceTree = "<group>"; };
+		863AC1381B11AF3900C06D96 /* CameraToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraToggleButton.m; sourceTree = "<group>"; };
+		863AC1391B11AF3900C06D96 /* LaunchCameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchCameraButton.h; sourceTree = "<group>"; };
+		863AC13A1B11AF3900C06D96 /* LaunchCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchCameraButton.m; sourceTree = "<group>"; };
+		863AC13B1B11AF3900C06D96 /* Cool Camera Mockup.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cool Camera Mockup.sketch"; sourceTree = "<group>"; };
+		863AC13C1B11AF3900C06D96 /* PaintCodeFile.pcvd */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = PaintCodeFile.pcvd; sourceTree = "<group>"; };
+		863AC13E1B11AF3900C06D96 /* CameraStyleKitClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraStyleKitClass.h; sourceTree = "<group>"; };
+		863AC13F1B11AF3900C06D96 /* CameraStyleKitClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraStyleKitClass.m; sourceTree = "<group>"; };
+		863AC1411B11AF3900C06D96 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
+		863AC1421B11AF3900C06D96 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
+		863AC1431B11AF3900C06D96 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		863AC1441B11AF3900C06D96 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		8652F0C31AFC9F0F002C6215 /* MsgDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDataModel.h; sourceTree = "<group>"; };
 		8652F0C41AFC9F0F002C6215 /* MsgDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgDataModel.m; sourceTree = "<group>"; };
 		8652F0C61AFCA214002C6215 /* MsgDataListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgDataListModel.h; sourceTree = "<group>"; };
@@ -898,6 +932,75 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		863AC1291B11AF3900C06D96 /* CustomizableCamera */ = {
+			isa = PBXGroup;
+			children = (
+				863AC12A1B11AF3900C06D96 /* Camera View */,
+				863AC12D1B11AF3900C06D96 /* Graphical Assets */,
+				863AC1401B11AF3900C06D96 /* Model Classes */,
+			);
+			path = CustomizableCamera;
+			sourceTree = "<group>";
+		};
+		863AC12A1B11AF3900C06D96 /* Camera View */ = {
+			isa = PBXGroup;
+			children = (
+				863AC12B1B11AF3900C06D96 /* CameraSessionView.h */,
+				863AC12C1B11AF3900C06D96 /* CameraSessionView.m */,
+			);
+			path = "Camera View";
+			sourceTree = "<group>";
+		};
+		863AC12D1B11AF3900C06D96 /* Graphical Assets */ = {
+			isa = PBXGroup;
+			children = (
+				863AC12E1B11AF3900C06D96 /* CameraViewComponents */,
+				863AC13B1B11AF3900C06D96 /* Cool Camera Mockup.sketch */,
+				863AC13C1B11AF3900C06D96 /* PaintCodeFile.pcvd */,
+				863AC13D1B11AF3900C06D96 /* UI Assets */,
+			);
+			path = "Graphical Assets";
+			sourceTree = "<group>";
+		};
+		863AC12E1B11AF3900C06D96 /* CameraViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				863AC12F1B11AF3900C06D96 /* CameraDismissButton.h */,
+				863AC1301B11AF3900C06D96 /* CameraDismissButton.m */,
+				863AC1311B11AF3900C06D96 /* CameraFlashButton.h */,
+				863AC1321B11AF3900C06D96 /* CameraFlashButton.m */,
+				863AC1331B11AF3900C06D96 /* CameraFocalReticule.h */,
+				863AC1341B11AF3900C06D96 /* CameraFocalReticule.m */,
+				863AC1351B11AF3900C06D96 /* CameraShutterButton.h */,
+				863AC1361B11AF3900C06D96 /* CameraShutterButton.m */,
+				863AC1371B11AF3900C06D96 /* CameraToggleButton.h */,
+				863AC1381B11AF3900C06D96 /* CameraToggleButton.m */,
+				863AC1391B11AF3900C06D96 /* LaunchCameraButton.h */,
+				863AC13A1B11AF3900C06D96 /* LaunchCameraButton.m */,
+			);
+			path = CameraViewComponents;
+			sourceTree = "<group>";
+		};
+		863AC13D1B11AF3900C06D96 /* UI Assets */ = {
+			isa = PBXGroup;
+			children = (
+				863AC13E1B11AF3900C06D96 /* CameraStyleKitClass.h */,
+				863AC13F1B11AF3900C06D96 /* CameraStyleKitClass.m */,
+			);
+			path = "UI Assets";
+			sourceTree = "<group>";
+		};
+		863AC1401B11AF3900C06D96 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				863AC1411B11AF3900C06D96 /* CaptureSessionManager.h */,
+				863AC1421B11AF3900C06D96 /* CaptureSessionManager.m */,
+				863AC1431B11AF3900C06D96 /* Constants.h */,
+				863AC1441B11AF3900C06D96 /* Constants.m */,
+			);
+			path = "Model Classes";
+			sourceTree = "<group>";
+		};
 		8652F0CF1B0332EE002C6215 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1157,6 +1260,7 @@
 		86B8E6171ADA371F00A5139E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				863AC1291B11AF3900C06D96 /* CustomizableCamera */,
 				86B3004A1B07302F00ECA78B /* MPNotificationView */,
 				CFA34A531AEE1BA40024B695 /* LCVoiceHud */,
 				86B74A4C1AEC81ED000BA6DB /* VoiceConvert */,
@@ -1806,6 +1910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFA34BA21AEE23DA0024B695 /* fx_070@2x.png in Resources */,
+				863AC14C1B11AF3900C06D96 /* Cool Camera Mockup.sketch in Resources */,
 				CFA34B381AEE23DA0024B695 /* fx_014@2x.png in Resources */,
 				CFA34B9E1AEE23DA0024B695 /* fx_068@2x.png in Resources */,
 				CFA34B6F1AEE23DA0024B695 /* fx_044.png in Resources */,
@@ -1840,6 +1945,7 @@
 				CFA34B3C1AEE23DA0024B695 /* fx_016@2x.png in Resources */,
 				CFA34B241AEE23DA0024B695 /* fx_004@2x.png in Resources */,
 				CFA34B8A1AEE23DA0024B695 /* fx_057@2x.png in Resources */,
+				863AC14D1B11AF3900C06D96 /* PaintCodeFile.pcvd in Resources */,
 				CFA34BB11AEE23DA0024B695 /* fx_078.png in Resources */,
 				CFA34BA71AEE23DA0024B695 /* fx_073.png in Resources */,
 				CFA34B881AEE23DA0024B695 /* fx_056@2x.png in Resources */,
@@ -2062,6 +2168,7 @@
 				86B749A21AE9EA1B000BA6DB /* SBJsonParser.m in Sources */,
 				86B74A5F1AEC81ED000BA6DB /* amrFileCodec.mm in Sources */,
 				CFBC532D1ADD4C4C004FB8F3 /* SDWebImageDownloader.m in Sources */,
+				863AC14A1B11AF3900C06D96 /* CameraToggleButton.m in Sources */,
 				865523721ADA9AFC00E803FD /* PullTableView.m in Sources */,
 				86B8E61B1ADA375700A5139E /* LCBaseVC.m in Sources */,
 				86B74A601AEC81ED000BA6DB /* wav.mm in Sources */,
@@ -2087,15 +2194,19 @@
 				86B8E6501ADA381C00A5139E /* NSStrUtil.m in Sources */,
 				86B3EE841AFB4BB8005E29B1 /* EditUserInfoVC.m in Sources */,
 				8652F0CB1AFCB209002C6215 /* WebContentVC.m in Sources */,
+				863AC14B1B11AF3900C06D96 /* LaunchCameraButton.m in Sources */,
 				86B461B31AF5D2B800B1B66D /* MsgListCell.m in Sources */,
 				8652F0D61B035271002C6215 /* UserCenterCell.m in Sources */,
 				86B749831AE9E8CB000BA6DB /* LCNetWorkBase.m in Sources */,
 				CFBC53321ADD4C4C004FB8F3 /* UIImage+GIF.m in Sources */,
+				863AC1491B11AF3900C06D96 /* CameraShutterButton.m in Sources */,
 				86B74A641AEC81ED000BA6DB /* VoiceConverter.mm in Sources */,
 				86B8E6541ADA383F00A5139E /* LCNavigationbar.m in Sources */,
+				863AC14F1B11AF3900C06D96 /* CaptureSessionManager.m in Sources */,
 				86B96A621ADB5FCD00441168 /* GradeInfoView.m in Sources */,
 				CFBC52731ADD385D004FB8F3 /* ELCAssetTablePicker.m in Sources */,
 				CFA34A5E1AEE1E790024B695 /* HBImageViewList.m in Sources */,
+				863AC1471B11AF3900C06D96 /* CameraFlashButton.m in Sources */,
 				8652F0C51AFC9F0F002C6215 /* MsgDataModel.m in Sources */,
 				86B74A001AEA3421000BA6DB /* BaseOrderListModel.m in Sources */,
 				86B74A331AEA855B000BA6DB /* EvaluateListModel.m in Sources */,
@@ -2118,12 +2229,14 @@
 				86B8E6891ADA39CD00A5139E /* RootViewController.m in Sources */,
 				86B749A51AE9EA1B000BA6DB /* SBJsonStreamParserAdapter.m in Sources */,
 				86B8E6451ADA381C00A5139E /* PageLoadFootView.m in Sources */,
+				863AC1501B11AF3900C06D96 /* Constants.m in Sources */,
 				8655238B1ADAA4A700E803FD /* EvaluateListCell.m in Sources */,
 				CFEBF87E1ACE357300BC4EC5 /* AppDelegate.m in Sources */,
 				86B74A6C1AEC8262000BA6DB /* FaceBoardView.m in Sources */,
 				CFBC53351ADD4C4C004FB8F3 /* UIImageView+HighlightedWebCache.m in Sources */,
 				86B749AA1AE9EA1B000BA6DB /* SBJsonTokeniser.m in Sources */,
 				CFEBF87B1ACE357300BC4EC5 /* main.m in Sources */,
+				863AC14E1B11AF3900C06D96 /* CameraStyleKitClass.m in Sources */,
 				86B74A681AEC8247000BA6DB /* feedbackView.m in Sources */,
 				CFBC532F1ADD4C4C004FB8F3 /* SDWebImageManager.m in Sources */,
 				86B74A3A1AEB3DDC000BA6DB /* UserDetailModel.m in Sources */,
@@ -2133,6 +2246,7 @@
 				CFBC53301ADD4C4C004FB8F3 /* SDWebImagePrefetcher.m in Sources */,
 				86B74A7B1AECBC83000BA6DB /* EscortPublishCell.m in Sources */,
 				CFBC53311ADD4C4C004FB8F3 /* UIButton+WebCache.m in Sources */,
+				863AC1451B11AF3900C06D96 /* CameraSessionView.m in Sources */,
 				865523701ADA9AFC00E803FD /* LoadMoreTableFooterView.m in Sources */,
 				86B300501B07302F00ECA78B /* OBGradientView.m in Sources */,
 				86B749A31AE9EA1B000BA6DB /* SBJsonStreamParser.m in Sources */,
@@ -2158,6 +2272,7 @@
 				86B749FA1AEA33C7000BA6DB /* WaitPayOrderListModel.m in Sources */,
 				86B749A41AE9EA1B000BA6DB /* SBJsonStreamParserAccumulator.m in Sources */,
 				86B74A301AEA8450000BA6DB /* EvaluateInfoModel.m in Sources */,
+				863AC1461B11AF3900C06D96 /* CameraDismissButton.m in Sources */,
 				8652F0D21B03332F002C6215 /* UserCenterVC.m in Sources */,
 				CFBC524E1ADD37E9004FB8F3 /* MWTapDetectingView.m in Sources */,
 				86B74A401AEBDD5E000BA6DB /* OrderDetailsVC.m in Sources */,
@@ -2170,6 +2285,7 @@
 				86B4619E1AF46EDD00B1B66D /* EscortTimeDataModel.m in Sources */,
 				8652F0DC1B0483EB002C6215 /* QuickmarkVC.m in Sources */,
 				86B749A81AE9EA1B000BA6DB /* SBJsonStreamWriterAccumulator.m in Sources */,
+				863AC1481B11AF3900C06D96 /* CameraFocalReticule.m in Sources */,
 				CFBC52741ADD385D004FB8F3 /* ELCImagePickerController.m in Sources */,
 				861C18221AECFEDD00BC5091 /* LoverSelectCell.m in Sources */,
 				CFBC532B1ADD4C4C004FB8F3 /* SDWebImageCompat.m in Sources */,

@@ -68,9 +68,6 @@
     longPrees.delegate = (id)self;
     [_btnRecord addGestureRecognizer:longPrees];
     
-    
-    
-    
     _btnTargetSelect = [[UIButton alloc] initWithFrame:CGRectZero];
     [_bgView addSubview:_btnTargetSelect];
     _btnTargetSelect.translatesAutoresizingMaskIntoConstraints = NO;
@@ -270,8 +267,6 @@
     }
 }
 
-
-
 -(void)fileupMothed
 {
     fileString = [[NSMutableString alloc]init];
@@ -301,7 +296,6 @@
     //文字内容
 }
 
-
 - (void)PublishEscortTime
 {
     if(imageScrollView.selectImgArray.count == 0&&voiceName == nil &&[_tvContent.text length] == 0){
@@ -312,13 +306,15 @@
     
     BOOL isSelect = _btnTargetSelect.selected;
     
+    __weak PublishInfoVC *weakSelf = self;
+    __weak UITextView *weaktvContent = _tvContent;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
-        [self fileupMothed];
+        [weakSelf fileupMothed];
         NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
         [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
-        [parmas setObject:self.loverId forKey:@"loverId"];
-        if(_tvContent.text != nil && [_tvContent.text length] > 0)
-            [parmas setObject:_tvContent.text forKey:@"content"];
+        [parmas setObject:weakSelf.loverId forKey:@"loverId"];
+        if(weaktvContent.text != nil && [weaktvContent.text length] > 0)
+            [parmas setObject:weaktvContent.text forKey:@"content"];
         if (fileString!=nil) {
           [parmas setObject:fileString forKey:@"fileIds"];
         }
@@ -328,7 +324,7 @@
             [parmas setObject:@"false" forKey:@"isCopy"];
         [LCNetWorkBase postWithMethod:@"api/careTime/save" Params:parmas Completion:^(int code, id content) {
             if(code){
-                [_delegate delegetSendEnd:code];
+                [weakSelf.delegate delegetSendEnd:code];
             }
         }];
     });
@@ -344,19 +340,21 @@
         return;
     }
     
+    __weak PublishInfoVC *weakSelf = self;
+    __weak UITextView *weaktvContent = _tvContent;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
         [self fileupMothed];
         NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
         [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
-        [parmas setObject:self.loverId forKey:@"loverId"];
-        if(_tvContent.text != nil && [_tvContent.text length] > 0)
-            [parmas setObject:_tvContent.text forKey:@"content"];
+        [parmas setObject:weakSelf.loverId forKey:@"loverId"];
+        if(weaktvContent.text != nil && [weaktvContent.text length] > 0)
+            [parmas setObject:weaktvContent.text forKey:@"content"];
         if (fileString!=nil) {
             [parmas setObject:fileString forKey:@"fileIds"];
         }
         [LCNetWorkBase postWithMethod:@"api/record/save" Params:parmas Completion:^(int code, id content) {
             if(code){
-                [_delegate delegetSendEnd:code];
+                [weakSelf.delegate delegetSendEnd:code];
             }
         }];
         

@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "MWPhotoBrowser.h"
 #import "ELCPickerHelper.h"
+#import "CameraSessionView.h"
 
 @protocol PickImgEndDelegate<NSObject>
 @optional
 - (void) imagePickerControllerDissMethod;
 @end
 
-@interface PickImgScrollView : UIView<UIActionSheetDelegate,MWPhotoBrowserDelegate,DelegateDismissPick>
+@interface PickImgScrollView : UIView<UIActionSheetDelegate,MWPhotoBrowserDelegate,DelegateDismissPick, CACameraSessionDelegate>
 
 {
     UIScrollView *imageScrollView;
@@ -24,10 +25,11 @@
     CGRect myframe;
     MWPhotoBrowser *_photoBrowser;
     
-    UIImagePickerController  *imagePicker;
+//    UIImagePickerController  *imagePicker;
 }
 @property (nonatomic,assign) id <PickImgEndDelegate> delegate;
-@property (strong, nonatomic) UIViewController *parentController;
+@property (weak, nonatomic) UIViewController *parentController;
 @property (strong,nonatomic,readonly) NSMutableArray *selectImgArray;
+@property (nonatomic, strong) CameraSessionView *cameraView;
 
 @end
