@@ -39,6 +39,7 @@ static MsgDataListModel *msgList = nil;
     if(pages == 0){
         _pages = pages;
         self.totals = INT_MAX;
+        [self.dataList removeAllObjects];
     }
     else
         _pages = pages;
