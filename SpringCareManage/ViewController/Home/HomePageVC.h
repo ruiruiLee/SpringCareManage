@@ -59,6 +59,10 @@
     UILabel *_lbDetailText;
     UILabel *_line3;
     
+    UILabel *_lbTotalValue;//总价值
+    UILabel *_lbCouponValue;
+    UILabel *_lbRealValue;//
+    
     UIButton *_btnCustomerMobile;
 //    UIImageView *_imgvMobile;
     UIButton *_btnAddress;
@@ -74,6 +78,7 @@
     UITableView *_tableview;
     
     NSArray *constraints;
+    NSArray *couponConstraints;
     
     HBImageViewList *_imageList;
 }

@@ -66,7 +66,10 @@
     
     _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbTotalValue = [self createLabel:_FONT(18) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
+    _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    
+    _lbRealValue = [self createLabel:_FONT(22) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
+    _lbCouponValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _imgvDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvDay];
@@ -176,12 +179,13 @@
 - (void) createAutoLayoutConstraints
 {
     UIView *root = self.contentView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress, _lbHeight);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress, _lbHeight, _lbRealValue, _lbCouponValue);
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbTotalValue]-19-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbTotalValue]-10-[_lbCouponValue]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
     constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing]->=0-|" options:0 metrics:nil views:views]];
@@ -192,16 +196,18 @@
     [root addConstraints:constraintsLoverArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvAddress(15)]-0-[_btnAddress]->=20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbRealValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvAddress attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
 //    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRelationship attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_photoImg attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[FootView]-0-|" options:0 metrics:nil views:views]];
     //v方向
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
+    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+    [root addConstraints:orderPriceConstraints];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName]-0-[intervalV4]-0-[_imgvMobile]-0-[intervalV5]-0-[_imgvAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbTotalValue]-0-[intervalV2]-0-[_btnRing]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbRealValue]-0-[intervalV2]-0-[_btnRing]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(36)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV7 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV6 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
@@ -244,8 +250,26 @@
     
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _imgvMobile);
+    _lbRealValue.text = [NSString stringWithFormat:@"¥ %d", (int)model.realyTotalPrice];
+    _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", model.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", model.totalPrice]];//[NSString stringWithFormat:@"¥%.0f", model.totalPrice];//@"¥180.00";
+    _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", model.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", model.couponsAmount]];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _imgvMobile, _lbRealValue, _lbCouponValue);
+    
     UIView *root = self.contentView;
+    [root removeConstraints:orderPriceConstraints];
+    if(model.couponsAmount > 0){
+        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+        [root addConstraints:orderPriceConstraints];
+        _lbCouponValue.hidden = NO;
+        _lbTotalValue.hidden = NO;
+    }else{
+        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+        [root addConstraints:orderPriceConstraints];
+        _lbCouponValue.hidden = YES;
+        _lbTotalValue.hidden = YES;
+    }
+    
     [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
     constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
@@ -294,7 +318,6 @@
     [root addConstraints:constraintsAcctionArray];
     
     _lbDetailServiceTime.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:model.beginDate] enddate:[Util convertDateFromDateString:model.endDate] datetype:model.dateType];
-    _lbTotalValue.text = [NSString stringWithFormat:@"¥%.0f", model.totalPrice];//@"¥180.00";
     NSString *dayString = @"";
     NSString *hourString = @"";
     DateType dateType = model.dateType;
@@ -401,6 +424,16 @@
             }];
         }
     }
+}
+
+- (NSMutableAttributedString *)AttributedStringFromString:(NSString*)string subString:(NSString *)subString
+{
+    NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
+    NSRange range = [UnitPrice rangeOfString:subString];
+    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
+//    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
+    return attString;
 }
 
 @end

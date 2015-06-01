@@ -31,5 +31,7 @@
 @property (nonatomic, strong) LoverInfoModel *loverinfo;
 @property (nonatomic, strong) RegisterInfoModel *registerInfo;
 @property (nonatomic, strong) ProductInfoModel *productInfo;
+@property (nonatomic, assign) CGFloat  realyTotalPrice;
+@property (nonatomic, assign) CGFloat  couponsAmount;
 
 @end

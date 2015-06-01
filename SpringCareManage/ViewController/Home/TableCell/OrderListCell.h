@@ -17,6 +17,10 @@
     UILabel *_line1;
     UILabel *_lbServiceContent;//服务内容
     UILabel *_lbTotalValue;//总价值
+    
+    UILabel *_lbCouponValue;
+    UILabel *_lbRealValue;//
+    
     UIImageView *_imgvDay;//白天
     UIImageView *_imgvNight;//夜晚
     UILabel *_lbDetailServiceTime;//具体时间
@@ -49,6 +53,7 @@
     NSArray *constraintsArray;
     NSArray *constraintsAcctionArray;
     NSArray *constraintsLoverArray;
+    NSArray *orderPriceConstraints;
     
     OrderInfoModel *_orderModel;
 }

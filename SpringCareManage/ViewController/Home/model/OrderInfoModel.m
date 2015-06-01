@@ -31,6 +31,9 @@
     model.registerInfo = (RegisterInfoModel*)[RegisterInfoModel modelFromDictionary:[dic objectForKey:@"register"]];
     model.productInfo = (ProductInfoModel*)[ProductInfoModel modelFromDictionary:[dic objectForKey:@"product"]];
     
+    model.couponsAmount = [[dic objectForKey:@"couponsAmount"] floatValue];
+    model.realyTotalPrice = [[dic objectForKey:@"realyTotalPrice"] floatValue];
+    
     return model;
 }
 
