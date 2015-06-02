@@ -150,24 +150,24 @@
 #pragma UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if(prototypeCell == nil){
-//        prototypeCell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//        prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    }
-//    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
-//    OrderListCell *cell = (OrderListCell *)self.prototypeCell;
-//    [cell SetContentWithModel:data];
-//    
-//    [cell setNeedsLayout];
-//    [cell layoutIfNeeded];
-//    
-//    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    return 1  + size.height;
+    if(prototypeCell == nil){
+        prototypeCell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
-    if(data.couponsAmount > 0)
-        return 265;
-    else
-        return 242;
+    OrderListCell *cell = (OrderListCell *)self.prototypeCell;
+    [cell SetContentWithModel:data];
+    
+    [cell setNeedsLayout];
+    [cell layoutIfNeeded];
+    
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return 1  + size.height;
+//    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
+//    if(data.couponsAmount > 0)
+//        return 265;
+//    else
+//        return 242;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

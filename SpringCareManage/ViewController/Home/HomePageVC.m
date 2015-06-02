@@ -276,11 +276,14 @@
 //    _imgvMobile.translatesAutoresizingMaskIntoConstraints = NO;
 //    _imgvMobile.image = ThemeImage(@"telephone");
     
-    _btnAddress = [[UIButton alloc] initWithFrame:CGRectZero];
+    _btnAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     [_OrderInfoView addSubview:_btnAddress];
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
-    [_btnAddress setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _btnAddress.titleLabel.font = _FONT(14);
+//    [_btnAddress setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _btnAddress.textColor = [UIColor blackColor];
+    _btnAddress.font = _FONT(14);
+    _btnAddress.numberOfLines = 0;
+    _btnAddress.preferredMaxLayoutWidth = ScreenWidth - 58;
     
     _lbOtherInfo = [self createLabel:_FONT(14) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];
     
@@ -527,7 +530,9 @@
         _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", userInfo.userOrderInfo.orderModel.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.totalPrice]];
         _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount]];
         
-        [_btnAddress setTitle:userInfo.userOrderInfo.orderModel.loverinfo.addr forState:UIControlStateNormal];
+        _btnAddress.text = userInfo.userOrderInfo.orderModel.loverinfo.addr;
+        NSLog(@"%@", _btnAddress.text);
+//        [_btnAddress setTitle:userInfo.userOrderInfo.orderModel.loverinfo.addr forState:UIControlStateNormal];
         NSString *phone = [NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
         [_btnCustomerMobile setTitle:phone forState:UIControlStateNormal];
         

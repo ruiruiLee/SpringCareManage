@@ -39,7 +39,7 @@
     [_btnLeft setBackgroundImage:imageNormal forState:UIControlStateNormal];
     [_btnLeft setBackgroundImage:imageSelect forState:UIControlStateSelected];
     [_btnLeft addTarget:self action:@selector(doBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [_btnLeft setTitle:@"空闲" forState:UIControlStateNormal];
+    [_btnLeft setTitle:@"接单" forState:UIControlStateNormal];
     [_btnLeft setTitleColor:_COLOR(0x66, 0x66, 0x66) forState:UIControlStateNormal];
     [_btnLeft setTitleColor:_COLOR(0xff, 0xff, 0xff) forState:UIControlStateSelected];
     

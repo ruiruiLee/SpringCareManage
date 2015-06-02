@@ -36,7 +36,7 @@
     UILabel *_lbHeight;
     UIButton *_btnMobile;
     UIImageView *_imgvMobile;
-    UIButton *_btnAddress;
+    UILabel *_btnAddress;
     UIImageView *_imgvAddress;
     UIImageView *_statusImgv;//完成标志
     

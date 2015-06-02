@@ -119,12 +119,14 @@
     _imgvMobile.translatesAutoresizingMaskIntoConstraints = NO;
     _imgvMobile.image = ThemeImage(@"orderdetailtel");
     
-    _btnAddress = [[UIButton alloc] initWithFrame:CGRectZero];
+    _btnAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnAddress];
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
-//    [_btnAddress setImage:[UIImage imageNamed:@"nurselistlocation"] forState:UIControlStateNormal];
-    [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
-    _btnAddress.titleLabel.font = _FONT(15);
+//    [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
+    _btnAddress.textColor = _COLOR(0x99, 0x99, 0x99);
+    _btnAddress.numberOfLines = 0;
+    _btnAddress.preferredMaxLayoutWidth = ScreenWidth - 121;
+    _btnAddress.font = _FONT(15);
     
     _imgvAddress = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvAddress];
@@ -194,19 +196,22 @@
     [root addConstraints:constraintsAcctionArray];
     constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvMobile(16)]-0-[_btnMobile]-6-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsLoverArray];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvAddress(15)]-0-[_btnAddress]->=20-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvAddress(15)]-0-[_btnAddress]->=10-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbRealValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvAddress attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_btnAddress attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-//    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRelationship attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_photoImg attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[FootView]-0-|" options:0 metrics:nil views:views]];
     //v方向
-    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+//    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
     [root addConstraints:orderPriceConstraints];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName]-0-[intervalV4]-0-[_imgvMobile]-0-[intervalV5]-0-[_imgvAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
+//    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName(22)]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-11-[_photoImg(52)]->=11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbRealValue]-0-[intervalV2]-0-[_btnRing]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(36)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
@@ -218,7 +223,6 @@
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvDay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvNight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-//    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbRelationship attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_sexLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbHeight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -232,7 +236,8 @@
     _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
     _lbPublishTime.text = [NSString stringWithFormat:@"下单时间:%@", model.createdDate];//@"2015-03-19 12:46";//下单时间
     _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@  %@", model.registerInfo.chineseName, model.registerInfo.phone];//@"联系人:";
-    [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
+//    [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
+    _btnAddress.text = model.loverinfo.addr;
     [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
     
     if(model.loverinfo.age > 0)
@@ -259,12 +264,14 @@
     UIView *root = self.contentView;
     [root removeConstraints:orderPriceConstraints];
     if(model.couponsAmount > 0){
-        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+//        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
         [root addConstraints:orderPriceConstraints];
         _lbCouponValue.hidden = NO;
         _lbTotalValue.hidden = NO;
     }else{
-        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+//        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
         [root addConstraints:orderPriceConstraints];
         _lbCouponValue.hidden = YES;
         _lbTotalValue.hidden = YES;

@@ -65,7 +65,7 @@
     
     UIButton *_btnCustomerMobile;
 //    UIImageView *_imgvMobile;
-    UIButton *_btnAddress;
+    UILabel *_btnAddress;
     UIImageView *_imgvAddress;
     UILabel *_lbLoverInfo;
     UIImageView *_imgvLoverSex;
