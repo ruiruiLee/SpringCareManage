@@ -286,7 +286,7 @@
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbHeight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_sex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvMoblie attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvMoblie attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:1]];
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddr attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_lbAddr attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
     
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbName attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_photoImgView attribute:NSLayoutAttributeTop multiplier:1 constant:9]];

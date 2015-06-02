@@ -200,9 +200,9 @@
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbRealValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:-1]];
     
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_btnAddress attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_btnAddress attribute:NSLayoutAttributeTop multiplier:1 constant:1]];
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[FootView]-0-|" options:0 metrics:nil views:views]];
