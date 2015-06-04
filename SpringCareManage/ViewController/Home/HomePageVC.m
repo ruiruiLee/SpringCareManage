@@ -353,12 +353,10 @@
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgDay]-0-[_imgNight]-0-[_lbDetailText]->=18-|" options:0 metrics:nil views:views]];
-//    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvMobile(15)]-5-[_btnCustomerMobile]->=18-|" options:0 metrics:nil views:views]];
-//    btnRing
-    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnCustomerMobile]->=4-[btnRing(48)]-10-|" options:0 metrics:nil views:views]];
+    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnCustomerMobile]->=4-[btnRing(32)]-10-|" options:0 metrics:nil views:views]];
+    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvAddress(17)]-5-[_btnAddress]->=18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbLoverInfo]-10-[_imgvLoverSex(18)]-10-[_lbOtherInfo]->=18-|" options:0 metrics:nil views:views]];
-//    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_btnCustomerMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnCustomerMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvAddress attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_imgvLoverSex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -384,7 +382,7 @@
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-4-[_btnOrderOnDoing]-4-[_line2(1)]-0-[_OrderInfoView]-0-[_SepLine(10)]-0-|" options:0 metrics:nil views:views];
     [rootview addConstraints:constraints];
     
-    couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbTotalValue]-12-[_lbDetailText]-14-[_line3(1)]-16-[_btnCustomerMobile]-10-[_lbLoverInfo]-10-[_imgvAddress]-16-|" options:0 metrics:nil views:views];
+    couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbTotalValue]-12-[_lbDetailText]-14-[_line3(1)]-10-[_btnCustomerMobile]-4-[_lbLoverInfo]-4-[_imgvAddress]-10-|" options:0 metrics:nil views:views];
     [_OrderInfoView addConstraints:couponConstraints];
     
     [rootview addConstraint:[NSLayoutConstraint constraintWithItem:_imgDay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailText attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -410,8 +408,6 @@
     _lbMobile.text = userInfo.userName;
     
     [_workStatus SetCurrentWorkStatus:userInfo.workStatus];
-    
-//    _detailInfo.text = userInfo.intro;
     
     if(userInfo.certList == nil || [userInfo.certList count] == 0){
         _btnCert.hidden = YES;
@@ -498,12 +494,12 @@
         _lbRealValue.text = [NSString stringWithFormat:@"¥%ld", (long)userInfo.userOrderInfo.orderModel.realyTotalPrice];
         [_OrderInfoView removeConstraints:couponConstraints];
         if(userInfo.userOrderInfo.orderModel.couponsAmount > 0){
-            couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbTotalValue]-12-[_lbDetailText]-14-[_line3(1)]-16-[_btnCustomerMobile]-10-[_lbLoverInfo]-10-[_imgvAddress]-16-|" options:0 metrics:nil views:views];
+            couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbTotalValue]-12-[_lbDetailText]-14-[_line3(1)]-10-[_btnCustomerMobile]-4-[_lbLoverInfo]-6-[_imgvAddress]-10-|" options:0 metrics:nil views:views];
             [_OrderInfoView addConstraints:couponConstraints];
             _lbTotalValue.hidden = NO;
             _lbCouponValue.hidden = NO;
         }else{
-            couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbDetailText]-14-[_line3(1)]-16-[_btnCustomerMobile]-10-[_lbLoverInfo]-10-[_imgvAddress]-16-|" options:0 metrics:nil views:views];
+            couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[_lbCareType]-12-[_lbDetailText]-14-[_line3(1)]-10-[_btnCustomerMobile]-4-[_lbLoverInfo]-6-[_imgvAddress]-10-|" options:0 metrics:nil views:views];
             [_OrderInfoView addConstraints:couponConstraints];
             _lbTotalValue.hidden = YES;
             _lbCouponValue.hidden = YES;
@@ -514,8 +510,7 @@
         _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount]];
         
         _btnAddress.text = userInfo.userOrderInfo.orderModel.loverinfo.addr;
-        NSLog(@"%@", _btnAddress.text);
-//        [_btnAddress setTitle:userInfo.userOrderInfo.orderModel.loverinfo.addr forState:UIControlStateNormal];
+        
         NSString *phone = [NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
         [_btnCustomerMobile setTitle:phone forState:UIControlStateNormal];
         

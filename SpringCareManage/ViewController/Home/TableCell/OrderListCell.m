@@ -190,7 +190,8 @@
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbTotalValue]-10-[_lbCouponValue]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
     constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsArray];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line2]-0-|" options:0 metrics:nil views:views]];
     constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]->=0-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsAcctionArray];
@@ -207,12 +208,12 @@
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[FootView]-0-|" options:0 metrics:nil views:views]];
     //v方向
-//    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
     orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
     [root addConstraints:orderPriceConstraints];
-//    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-6-[_lbName(22)]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-11-[_photoImg(52)]->=11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbRealValue]-0-[intervalV2]-0-[_btnRing]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
+//    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbRealValue]-0-[intervalV2]-0-[_btnRing(32)]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:10]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLinkman attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(36)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV7 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV6 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
