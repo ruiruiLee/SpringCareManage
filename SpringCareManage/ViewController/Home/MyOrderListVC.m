@@ -135,7 +135,7 @@
     if(!cell){
         cell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
     [cell SetContentWithModel:data];
     
@@ -157,7 +157,6 @@
     OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
     OrderListCell *cell = (OrderListCell *)self.prototypeCell;
     [cell SetContentWithModel:data];
-    
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
     

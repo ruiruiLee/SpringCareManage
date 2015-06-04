@@ -131,23 +131,23 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 0){
         // 版本更新
-        [Util  updateVersion:^(NSArray *info) {
-            NSDictionary *releaseInfo = [info objectAtIndex:0];
-            NSString  *appVersion  = [releaseInfo objectForKey:@"version"];
-            _appDownUrl = [releaseInfo objectForKey:@"trackViewUrl"]; // 获取 更新用滴 URL
-            if ([[Util getCurrentVersion] floatValue] < [appVersion floatValue])
-            {
-                UIAlertView * updateAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"升级到新版本%@", appVersion]
-                                                                       message:[releaseInfo objectForKey:@"releaseNotes"] delegate:self
-                                                             cancelButtonTitle:@"取消"
-                                                             otherButtonTitles:@"升级", nil];
-                updateAlert.tag=512;
-                updateAlert.delegate = self;
-                [updateAlert show];
-                
-            }
-            
-        }];
+//        [Util  updateVersion:^(NSArray *info) {
+//            NSDictionary *releaseInfo = [info objectAtIndex:0];
+//            NSString  *appVersion  = [releaseInfo objectForKey:@"version"];
+//            _appDownUrl = [releaseInfo objectForKey:@"trackViewUrl"]; // 获取 更新用滴 URL
+//            if ([[Util getCurrentVersion] floatValue] < [appVersion floatValue])
+//            {
+//                UIAlertView * updateAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"升级到新版本%@", appVersion]
+//                                                                       message:[releaseInfo objectForKey:@"releaseNotes"] delegate:self
+//                                                             cancelButtonTitle:@"取消"
+//                                                             otherButtonTitles:@"升级", nil];
+//                updateAlert.tag=512;
+//                updateAlert.delegate = self;
+//                [updateAlert show];
+//                
+//            }
+//            
+//        }];
     }
     if(indexPath.section == 1){
         ModifyPwdVC *vc = [[ModifyPwdVC alloc] initWithNibName:nil bundle:nil];
@@ -191,10 +191,11 @@
     
     if(indexPath.section == 0)
     {
-        cell._lbTitle.text = @"版本检测";
-        cell._lbContent.text = [Util getCurrentVersion];
+        cell._lbTitle.text = @"当前版本";
+        cell._lbContent.text =  [NSString stringWithFormat:@"V%@",[Util getCurrentVersion]];
         cell._lbContent.hidden = NO;
         cell._imgFold.hidden = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }else if (indexPath.section == 1){
         cell._lbTitle.text = @"修改密码";
         cell._lbContent.hidden = YES;

@@ -46,9 +46,9 @@
 
 - (void) initSubviews
 {
-    _lbOrderNum = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbOrderNum = [self createLabel:_FONT(14) txtColor: [UIColor blackColor]];
     
-    _lbPublishTime = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbPublishTime = [self createLabel:_FONT(14) txtColor:[UIColor blackColor]];
     
 //    _lbOrderStatus = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _btnOrderStatus = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -79,9 +79,9 @@
     [self.contentView addSubview:_imgvNight];
     _imgvNight.translatesAutoresizingMaskIntoConstraints = NO;
     
-    _lbDetailServiceTime = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbDetailServiceTime = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbLinkman = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbLinkman = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnRing];
