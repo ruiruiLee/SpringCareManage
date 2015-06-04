@@ -488,29 +488,12 @@
         placeholderImage = @"nurselistmale";
     [_photoImage sd_setImageWithURL:[NSURL URLWithString:userInfo.headerFile] placeholderImage:[UIImage imageNamed:placeholderImage]];
     
-    NSString *dayString = @"";
-    NSString *hourString = @"";
-    DateType dateType = userInfo.userOrderInfo.orderModel.dateType;
-    if(dateType == EnumTypeHalfDay){
-        dayString = @"天";
-        hourString = @"12";
-    }else if (dateType == EnumTypeOneDay){
-        dayString = @"天";
-        hourString = @"24";
-    }
-    else if (dateType == EnumTypeOneWeek){
-        dayString = @"周";
-        hourString = @"24";
-    }
-    else if (dateType == EnumTypeOneMounth){
-        dayString = @"月";
-        hourString = @"24";
-    }
+    NSString *hourString = userInfo.userOrderInfo.orderModel.priceName;
     NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _imgNight, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbTotalValue, _lbRealValue, _lbCouponValue);
     
     [headerView removeConstraints:constraints];
     if(userInfo.userOrderInfo.orderModel != nil){
-        NSString *careType = [NSString stringWithFormat:@"%@：¥%ld/%@h x %ld%@", userInfo.userOrderInfo.orderModel.productInfo.name, (long)userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount,dayString];
+        NSString *careType = [NSString stringWithFormat:@"%@：¥%ld/%@ x %ld", userInfo.userOrderInfo.orderModel.productInfo.name, (long)userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount];
         
         _lbRealValue.text = [NSString stringWithFormat:@"¥%ld", (long)userInfo.userOrderInfo.orderModel.realyTotalPrice];
         [_OrderInfoView removeConstraints:couponConstraints];

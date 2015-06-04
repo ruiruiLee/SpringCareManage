@@ -256,7 +256,7 @@
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
     _lbRealValue.text = [NSString stringWithFormat:@"¥ %d", (int)model.realyTotalPrice];
-    _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", model.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", model.totalPrice]];//[NSString stringWithFormat:@"¥%.0f", model.totalPrice];//@"¥180.00";
+    _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", model.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", model.totalPrice]];//
     _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", model.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", model.couponsAmount]];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _imgvMobile, _lbRealValue, _lbCouponValue);
@@ -264,13 +264,11 @@
     UIView *root = self.contentView;
     [root removeConstraints:orderPriceConstraints];
     if(model.couponsAmount > 0){
-//        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
         orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
         [root addConstraints:orderPriceConstraints];
         _lbCouponValue.hidden = NO;
         _lbTotalValue.hidden = NO;
     }else{
-//        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-11-[_photoImg(52)]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
         orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
         [root addConstraints:orderPriceConstraints];
         _lbCouponValue.hidden = YES;
@@ -325,25 +323,8 @@
     [root addConstraints:constraintsAcctionArray];
     
     _lbDetailServiceTime.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:model.beginDate] enddate:[Util convertDateFromDateString:model.endDate] datetype:model.dateType];
-    NSString *dayString = @"";
-    NSString *hourString = @"";
-    DateType dateType = model.dateType;
-    if(dateType == EnumTypeHalfDay){
-        dayString = @"天";
-        hourString = @"12";
-    }else if (dateType == EnumTypeOneDay){
-        dayString = @"天";
-        hourString = @"24";
-    }
-    else if (dateType == EnumTypeOneWeek){
-        dayString = @"周";
-        hourString = @"24";
-    }
-    else if (dateType == EnumTypeOneMounth){
-        dayString = @"月";
-        hourString = @"24";
-    }
-    _lbServiceContent.text = [NSString stringWithFormat:@"%@：¥%.0f/%@h x %ld%@", model.productInfo.name, model.unitPrice, hourString, (long)model.orderCount, dayString];
+    NSString *hourString = model.priceName;
+    _lbServiceContent.text = [NSString stringWithFormat:@"%@：¥%.0f/%@ x %ld", model.productInfo.name, model.unitPrice, hourString, (long)model.orderCount];
     NSString *status = @"";
     _statusImgv.hidden = YES;
     

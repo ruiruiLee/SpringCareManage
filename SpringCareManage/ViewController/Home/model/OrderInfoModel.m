@@ -33,6 +33,7 @@
     
     model.couponsAmount = [[dic objectForKey:@"couponsAmount"] floatValue];
     model.realyTotalPrice = [[dic objectForKey:@"realyTotalPrice"] floatValue];
+    model.priceName = [dic objectForKey:@"priceName"];
     
     return model;
 }

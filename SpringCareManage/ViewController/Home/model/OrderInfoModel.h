@@ -34,4 +34,6 @@
 @property (nonatomic, assign) CGFloat  realyTotalPrice;
 @property (nonatomic, assign) CGFloat  couponsAmount;
 
+@property (nonatomic, strong) NSString *priceName;
+
 @end
