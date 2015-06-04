@@ -111,8 +111,7 @@ typedef void(^block)(int code, id content);
 
 //下载更新
 #define apkUrl @"http://itunes.apple.com/lookup"
-//#define KEY_APPLE_ID @"702715314"
-#define KEY_APPLE_ID @"992339154"
+#define KEY_APPLE_ID @"998243545"
 
 #define About_Us @"5544ad2ee4b03fd8342e9c19"//关于我们
 #define Care_Agreement @"555d829ee4b0b8cc433ea2b5"//陪护师协议
