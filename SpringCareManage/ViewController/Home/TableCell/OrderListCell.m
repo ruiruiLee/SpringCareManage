@@ -212,7 +212,7 @@
     [root addConstraints:orderPriceConstraints];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-11-[_photoImg(52)]->=11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
 //    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbRealValue]-0-[intervalV2]-0-[_btnRing(32)]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:10]];
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLinkman attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(36)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
