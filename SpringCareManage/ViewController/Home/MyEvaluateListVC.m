@@ -103,7 +103,7 @@
     if(!cell){
         cell = [[EvaluateListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     EvaluateInfoModel *data = [DataList objectAtIndex:indexPath.row];
     [cell SetContentWithModel:data];
     
