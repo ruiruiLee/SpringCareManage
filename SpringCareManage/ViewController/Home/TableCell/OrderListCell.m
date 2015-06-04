@@ -102,15 +102,12 @@
     
     _lbName = [self createLabel:_FONT(18) txtColor:_COLOR(0x22, 0x22, 0x22)];
     
-//    _lbRelationship = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    
     _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99)];
     _lbHeight = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99)];
     
     _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnMobile];
     _btnMobile.translatesAutoresizingMaskIntoConstraints = NO;
-//    [_btnMobile setImage:[UIImage imageNamed:@"orderdetailtel"] forState:UIControlStateNormal];
     [_btnMobile setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnMobile.titleLabel.font = _FONT(15);
     
@@ -122,7 +119,6 @@
     _btnAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_btnAddress];
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
-//    [_btnAddress setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
     _btnAddress.textColor = _COLOR(0x99, 0x99, 0x99);
     _btnAddress.numberOfLines = 0;
     _btnAddress.preferredMaxLayoutWidth = ScreenWidth - 121;
@@ -188,7 +184,7 @@
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbTotalValue]-10-[_lbCouponValue]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
-    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsArray];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
@@ -211,7 +207,6 @@
     orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
     [root addConstraints:orderPriceConstraints];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-11-[_photoImg(52)]->=11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
-//    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line1]-0-[intervalV1]-0-[_lbRealValue]-0-[intervalV2]-0-[_btnRing(32)]-0-[intervalV3]-0-[_line2]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLinkman attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
@@ -236,8 +231,10 @@
     
     _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
     _lbPublishTime.text = [NSString stringWithFormat:@"下单时间:%@", model.createdDate];//@"2015-03-19 12:46";//下单时间
-    _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@  %@", model.registerInfo.chineseName, model.registerInfo.phone];//@"联系人:";
-//    [_btnAddress setTitle:model.loverinfo.addr forState:UIControlStateNormal];//陪护对象地址
+    if(model.registerInfo.chineseName == nil || [model.registerInfo.chineseName isKindOfClass:[NSNull class]])
+        _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@", model.registerInfo.phone];//@"联系人:";
+    else
+        _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@  %@", model.registerInfo.chineseName, model.registerInfo.phone];//@"联系人:";
     _btnAddress.text = model.loverinfo.addr;
     [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
     
@@ -250,7 +247,7 @@
     else
         _lbHeight.text = @"身高：";
     
-    _lbName.text = model.loverinfo.name;//@"张发财";
+    _lbName.text = model.loverinfo.name;
     if(model.loverinfo.name == nil || [model.loverinfo.name length] == 0)
         _lbName.text = @"姓名";
     
@@ -278,16 +275,16 @@
     
     [root removeConstraints:constraintsArray];
     ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
-    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
     if(type == EnumServiceTimeNight){
         _imgvNight.image = ThemeImage(@"night");
         _imgvDay.image = nil;
-        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
+        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
     }
     else if (type == EnumServiceTimeDay){
         _imgvNight.image = nil;
         _imgvDay.image = ThemeImage(@"daytime");
-        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_lbDetailServiceTime]->=50-|" options:0 metrics:nil views:views];
+        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
     }
     else{
         _imgvNight.image = ThemeImage(@"night");

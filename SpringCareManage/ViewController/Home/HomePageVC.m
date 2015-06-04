@@ -264,12 +264,14 @@
     _line3 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:_OrderInfoView];
     _line3.backgroundColor = SeparatorLineColor;
     
-    _btnCustomerMobile = [[UIButton alloc] initWithFrame:CGRectZero];
+    _btnCustomerMobile = [[UILabel alloc] initWithFrame:CGRectZero];
     [_OrderInfoView addSubview:_btnCustomerMobile];
     _btnCustomerMobile.translatesAutoresizingMaskIntoConstraints = NO;
-    [_btnCustomerMobile setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
-    _btnCustomerMobile.titleLabel.font = _FONT(14);
+//    [_btnCustomerMobile setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
+    _btnCustomerMobile.textColor = _COLOR(0x99, 0x99, 0x99);
+    _btnCustomerMobile.font = _FONT(14);
     _btnCustomerMobile.userInteractionEnabled = NO;
+    _btnCustomerMobile.backgroundColor = [UIColor clearColor];
     
 //    _imgvMobile = [[UIImageView alloc] initWithFrame:CGRectZero];
 //    [_OrderInfoView addSubview:_imgvMobile];
@@ -489,7 +491,7 @@
     
     [headerView removeConstraints:constraints];
     if(userInfo.userOrderInfo.orderModel != nil){
-        NSString *careType = [NSString stringWithFormat:@"%@：¥%ld/%@ x %ld", userInfo.userOrderInfo.orderModel.productInfo.name, (long)userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount];
+        NSMutableAttributedString *careType = [self AttributedTitleFromString:[NSString stringWithFormat:@"%@：¥%ld/%@ x %ld", userInfo.userOrderInfo.orderModel.productInfo.name, (long)userInfo.userOrderInfo.orderModel.unitPrice, hourString, (long)userInfo.userOrderInfo.orderModel.orderCount] title:[NSString stringWithFormat:@"%@：", userInfo.userOrderInfo.orderModel.productInfo.name]];
         
         _lbRealValue.text = [NSString stringWithFormat:@"¥%ld", (long)userInfo.userOrderInfo.orderModel.realyTotalPrice];
         [_OrderInfoView removeConstraints:couponConstraints];
@@ -505,14 +507,15 @@
             _lbCouponValue.hidden = YES;
         }
         
-        _lbCareType.text = careType;
+        _lbCareType.attributedText = careType;
         _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", userInfo.userOrderInfo.orderModel.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.totalPrice]];
         _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount]];
         
         _btnAddress.text = userInfo.userOrderInfo.orderModel.loverinfo.addr;
         
-        NSString *phone = [NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
-        [_btnCustomerMobile setTitle:phone forState:UIControlStateNormal];
+        NSMutableAttributedString *phone = [self AttributedTitleFromString:[NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone] title:@"联系人："];
+//        [_btnCustomerMobile setAttributedTitle:phone forState:UIControlStateNormal];
+        _btnCustomerMobile.attributedText = phone;
         
         _lbDetailText.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.beginDate] enddate:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.endDate] datetype:userInfo.userOrderInfo.orderModel.dateType];
         
@@ -559,7 +562,7 @@
     else
         name = @"姓名：";
     
-    _lbLoverInfo.text = [NSString stringWithFormat:@"陪护对象：%@", name];
+    _lbLoverInfo.attributedText = [self AttributedTitleFromString:[NSString stringWithFormat:@"陪护对象：%@", name] title:@"陪护对象："];//[NSString stringWithFormat:@"陪护对象：%@", name];
     _lbOtherInfo.text = [NSString stringWithFormat:@"%@  %@",  age, height];
     
     if([Util GetSexByName:userInfo.userOrderInfo.orderModel.loverinfo.sex] == EnumMale)
@@ -801,6 +804,15 @@
     NSRange range = [UnitPrice rangeOfString:subString];
     [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
     //    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
+    return attString;
+}
+
+- (NSMutableAttributedString *)AttributedTitleFromString:(NSString*)string title:(NSString *)title
+{
+    NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
+    NSRange range = [UnitPrice rangeOfString:title];
+    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:range];
     return attString;
 }
 

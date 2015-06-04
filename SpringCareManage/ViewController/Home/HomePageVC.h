@@ -63,7 +63,7 @@
     UILabel *_lbCouponValue;
     UILabel *_lbRealValue;//
     
-    UIButton *_btnCustomerMobile;
+    UILabel *_btnCustomerMobile;
 //    UIImageView *_imgvMobile;
     UILabel *_btnAddress;
     UIImageView *_imgvAddress;
