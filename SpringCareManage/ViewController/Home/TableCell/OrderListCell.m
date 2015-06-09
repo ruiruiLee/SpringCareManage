@@ -68,7 +68,7 @@
     
     _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbRealValue = [self createLabel:_FONT(22) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
+    _lbRealValue = [self createLabel:_FONT(18) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
     _lbCouponValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _imgvDay = [[UIImageView alloc] initWithFrame:CGRectZero];

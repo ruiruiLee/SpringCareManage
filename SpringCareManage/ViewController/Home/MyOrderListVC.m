@@ -18,15 +18,12 @@
     BOOL LoadFlag;
 }
 
-@property (nonatomic, strong) OrderListCell *prototypeCell;
-
 @end
 
 @implementation MyOrderListVC
 @synthesize orderType;
 @synthesize tableview = _tableview;
 @synthesize DataList;
-@synthesize prototypeCell;
 
 - (id) initWithOrderType:(OrderListType) type LoadFlag:(BOOL) flag
 {
@@ -150,23 +147,16 @@
 #pragma UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(prototypeCell == nil){
-        prototypeCell = [[OrderListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        prototypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
     OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
-    OrderListCell *cell = (OrderListCell *)self.prototypeCell;
-    [cell SetContentWithModel:data];
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
     
-    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return 1  + size.height;
-//    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
-//    if(data.couponsAmount > 0)
-//        return 265;
-//    else
-//        return 242;
+    CGSize size = [data.loverinfo.addr sizeWithFont:_FONT(15) constrainedToSize:CGSizeMake(ScreenWidth - 121, INT_MAX)];
+    
+    if(data.couponsAmount > 0){
+        return 263.5 + size.height - 17.5 ;
+    }
+    else{
+        return 238 + size.height - 17.5;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
