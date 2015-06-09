@@ -93,8 +93,8 @@ static BaseOrderListModel *waitCommentorderModel = nil;
 
 - (void) setPages:(NSInteger)pages
 {
-    if(pages == 0)
-        [self cleanDataList];
+//    if(pages == 0)
+//        [self cleanDataList];
     _pages = pages;
 }
 
@@ -136,9 +136,7 @@ static BaseOrderListModel *waitCommentorderModel = nil;
     [parmas setObject:[self GetTypeNameWithOrderType:type] forKey:@"orderType"];
     [parmas setObject:[NSNumber numberWithInt:LIMIT_COUNT] forKey:@"limit"];
     [parmas setObject:[NSNumber numberWithInt:LIMIT_COUNT * self.pages] forKey:@"offset"];
-    NSLog(@"postWithMethod1");
     [LCNetWorkBase postWithMethod:Method Params:parmas Completion:^(int code, id content) {
-        NSLog(@"postWithMethod");
         if(code){
             if([content isKindOfClass:[NSDictionary class]]){
                 NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -148,6 +146,9 @@ static BaseOrderListModel *waitCommentorderModel = nil;
                     OrderInfoModel *model = (OrderInfoModel *)[OrderInfoModel modelFromDictionary:[rows objectAtIndex:i]];
                     [result addObject:model];
                 }
+                
+                if(self.pages == 0)
+                    [self cleanDataList];
                 
                 [self.dataList addObjectsFromArray:result];
                 

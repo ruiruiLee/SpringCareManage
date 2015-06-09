@@ -37,7 +37,6 @@ static NSMutableArray *escortList = nil;
 - (void) setPages:(NSInteger)page
 {
     if(page == 0){
-        [self cleanDataList];
         self.totals = INT_MAX;
     }
     pages = page;
@@ -76,6 +75,8 @@ static NSMutableArray *escortList = nil;
                 [result addObject:model];
             }
             
+            if(self.pages == 0)
+                [self cleanDataList];
             [escortList addObjectsFromArray:result];
             
             if(block){

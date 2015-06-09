@@ -36,7 +36,7 @@ static EvaluateListModel *model = nil;
 - (void) setPages:(NSInteger)pages
 {
     if(pages == 0){
-        [self cleanDataList];
+//        [self cleanDataList];
         self.totals = INT_MAX;
     }
     _pages = pages;
@@ -86,7 +86,8 @@ static EvaluateListModel *model = nil;
                     EvaluateInfoModel *model = [EvaluateInfoModel modelFromDictionary:dic];
                     [result addObject:model];
                 }
-                
+                if(self.pages == 0)
+                    [self cleanDataList];
                 [self.evaluateList addObjectsFromArray:result];
                 
                 if(block)

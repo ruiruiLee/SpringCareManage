@@ -39,7 +39,7 @@ static MsgDataListModel *msgList = nil;
     if(pages == 0){
         _pages = pages;
         self.totals = INT_MAX;
-        [self.dataList removeAllObjects];
+//        [self.dataList removeAllObjects];
     }
     else
         _pages = pages;
@@ -73,6 +73,8 @@ static MsgDataListModel *msgList = nil;
                 [result addObject:model];
             }
             
+            if(self.pages == 0)
+                [self.dataList removeAllObjects];
             [self.dataList addObjectsFromArray:result];
             
             if(block)
