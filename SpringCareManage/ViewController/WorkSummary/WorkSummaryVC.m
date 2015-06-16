@@ -58,10 +58,10 @@
         
         NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _lbAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
         if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
-            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
         }
         else
-            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_sex]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
         [headerbg addConstraints:AttentionArray];
         
         pages = 0;
@@ -128,10 +128,10 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _btnphotoImg, _lbName, _lbAddr, _sex, _lbAge, _btnMobile, _lbPhone, _imgvAddress, _lbHeight);
     if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
-        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
     }
     else
-        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_btnphotoImg(72)]-10-[_lbName]-10-[_sex]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
     [headerbg addConstraints:AttentionArray];
 }
 
@@ -364,6 +364,10 @@
         cell._lbTimeLine.backgroundColor = [UIColor clearColor];
         cell._lbToday.backgroundColor = [UIColor clearColor];
         cell._lbToday.textColor = _COLOR(0x22, 0x22, 0x22);
+        cell.lbmounth.hidden = YES;
+        cell._lbToday.font = _FONT(26);
+        cell.lbday.hidden = YES;
+        cell.imageview.hidden = YES;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell._btnReply.hidden = YES;
     }
@@ -379,9 +383,25 @@
     
     showTime = [Util isDateShowFirstDate:createAt secondDate:data.createAt];
     
+//    if (showTime) {
+//        
+//        cell._lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+//        cell._lbToday.hidden = NO;
+//    }else{
+//        cell._lbToday.hidden = YES;
+//    }
     if (showTime) {
-        
-        cell._lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+        NSString *dateStr = [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+        if(dateStr ==nil){
+            NSString *str = [NSString stringWithFormat:@"%02d %02d",[Util GetDayFromdate:data.createDate], [Util GetMonthFromdate:data.createDate]];
+            NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:str];
+            NSRange range = [str rangeOfString:[NSString stringWithFormat:@"%02d", [Util GetMonthFromdate:data.createDate]]];
+            [attString addAttribute:NSFontAttributeName value:_FONT(15) range:range];
+            cell._lbToday.attributedText = attString;
+        }
+        else{
+            cell._lbToday.text =  dateStr;
+        }
         cell._lbToday.hidden = NO;
     }else{
         cell._lbToday.hidden = YES;

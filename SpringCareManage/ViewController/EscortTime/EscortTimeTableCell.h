@@ -38,6 +38,11 @@ typedef void(^ReplayAction)(int index);
     UIImageView *_replyTableBg;
     UITableView *_replyTableView;
     
+    UILabel *lbmounth;
+    UILabel *lbday;
+    UIImageView *imageview;
+
+    
     
     NSInteger numOfLines;
     NSInteger limitLines;
@@ -65,6 +70,10 @@ typedef void(^ReplayAction)(int index);
 @property (nonatomic, strong) EscortTimeDataModel *_model;
 @property (nonatomic, strong) UILabel *_lbTimeLine;
 @property (nonatomic, strong) UIButton *_btnReply;
+
+@property (nonatomic, strong) UILabel *lbmounth;
+@property (nonatomic, strong) UILabel *lbday;
+@property (nonatomic, strong) UIImageView *imageview;
 
 - (id)initWithReuseIdentifier:(NSString*)reuseIdentifier blocks:(ReplayAction)blocks;
 

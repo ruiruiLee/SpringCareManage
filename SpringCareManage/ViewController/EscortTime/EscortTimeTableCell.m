@@ -17,6 +17,9 @@
 @synthesize _model = _model;
 @synthesize _btnReply = _btnReply;
 @synthesize _lbTimeLine = _lbTimeLine;
+@synthesize lbday;
+@synthesize lbmounth;
+@synthesize imageview;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -52,6 +55,23 @@
     _lbToday.backgroundColor = Abled_Color;
     _lbToday.layer.cornerRadius = 30;
     _lbToday.clipsToBounds = YES;
+    
+    imageview = [[UIImageView alloc] initWithFrame:CGRectMake(7, 0, 60, 60)];
+    [_lbToday addSubview:imageview];
+    imageview.image = ThemeImage(@"timeintervalline");
+    
+    lbday = [[UILabel alloc] initWithFrame:CGRectMake(6, 10, 30, 22)];
+    lbday.font = _FONT(26);
+    lbday.textColor = [UIColor whiteColor];
+    lbday.backgroundColor = [UIColor clearColor];
+    [_lbToday addSubview:lbday];
+    lbday.textAlignment = NSTextAlignmentRight;
+    
+    lbmounth = [[UILabel alloc] initWithFrame:CGRectMake(32, 30, 26, 20)];
+    lbmounth.font = _FONT(16);
+    lbmounth.textColor = [UIColor whiteColor];
+    lbmounth.backgroundColor = [UIColor clearColor];
+    [_lbToday addSubview:lbmounth];
 
     
     _lbTimeLine = [[UILabel alloc] initWithFrame:CGRectZero];

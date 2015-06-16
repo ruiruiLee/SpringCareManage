@@ -57,10 +57,10 @@
         
         NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _lbAddr, _sex, _lbAge, _lbMobile, _lbHeight);
         if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
-            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
         }
         else
-            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+            AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
         [headerbg addConstraints:AttentionArray];
     }
 
@@ -92,10 +92,10 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(headerbg, _photoImgView, _lbName, _lbAddr, _sex, _lbAge, _lbMobile, _lbHeight);
     if([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]] == nil){
-        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
     }
     else
-        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-20-[_lbAge]-10-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
+        AttentionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_lbName]-10-[_sex]-10-[_lbAge]-10-[_lbHeight]->=10-|" options:0 metrics:nil views:views];
     [headerbg addConstraints:AttentionArray];
 }
 
@@ -374,9 +374,30 @@
     
     showTime = [Util isDateShowFirstDate:createAt secondDate:data.createAt];
     
+//    if (showTime) {
+//        
+//        cell._lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+//        cell._lbToday.hidden = NO;
+//    }else{
+//        cell._lbToday.hidden = YES;
+//    }
     if (showTime) {
-        
-        cell._lbToday.text =  [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+        NSString *dateStr = [Util convertTimetoBroadFormat:data.createDate]; //发布日期
+        if(dateStr ==nil){
+            cell._lbToday.text =  @"";
+            cell.lbday.hidden = NO;
+            cell.lbday.text = [NSString stringWithFormat:@"%02d", [Util GetDayFromdate:data.createDate]];
+            cell.lbmounth.hidden = NO;
+            cell.lbmounth.text = [NSString stringWithFormat:@"%02d", [Util GetMonthFromdate:data.createDate]];
+            cell.imageview.hidden = NO;
+            
+        }
+        else{
+            cell._lbToday.text =  dateStr;
+            cell.lbday.hidden = YES;
+            cell.lbmounth.hidden = YES;
+            cell.imageview.hidden = YES;
+        }
         cell._lbToday.hidden = NO;
     }else{
         cell._lbToday.hidden = YES;
