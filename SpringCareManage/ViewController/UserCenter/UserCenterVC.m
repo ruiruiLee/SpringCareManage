@@ -108,15 +108,13 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 0 || section == 1)
+    if(section == 0)
         return 1;
-    else if (section == 2)
-        return 2;
     else
         return 2;
 }
@@ -129,7 +127,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.section == 0){
+   // if(indexPath.section == 0){
         // 版本更新
 //        [Util  updateVersion:^(NSArray *info) {
 //            NSDictionary *releaseInfo = [info objectAtIndex:0];
@@ -148,12 +146,12 @@
 //            }
 //            
 //        }];
-    }
-    if(indexPath.section == 1){
+  //  }
+    if(indexPath.section == 0){
         ModifyPwdVC *vc = [[ModifyPwdVC alloc] initWithNibName:nil bundle:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    if(indexPath.section == 2){
+    if(indexPath.section == 1){
         if(indexPath.row == 0)
         {
             // 告诉朋友
@@ -166,7 +164,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
         }
     }
-    if(indexPath.section == 3){
+    if(indexPath.section == 2){
         if(indexPath.row == 0)
         {
             NSString *url = [NSString stringWithFormat:@"%@%@%@", SERVER_ADDRESS, Service_Methord, About_Us];
@@ -189,19 +187,20 @@
         cell.selectedBackgroundView.backgroundColor = TableSectionBackgroundColor;
     }
     
-    if(indexPath.section == 0)
-    {
-        cell._lbTitle.text = @"当前版本";
-        cell._lbContent.text =  [NSString stringWithFormat:@"V%@",[Util getCurrentVersion]];
-        cell._lbContent.hidden = NO;
-        cell._imgFold.hidden = YES;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }else if (indexPath.section == 1){
+//    if(indexPath.section == 0)
+//    {
+//        cell._lbTitle.text = @"当前版本";
+//        cell._lbContent.text =  [NSString stringWithFormat:@"V%@",[Util getCurrentVersion]];
+//        cell._lbContent.hidden = NO;
+//        cell._imgFold.hidden = YES;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  //  }else
+if (indexPath.section == 0){
         cell._lbTitle.text = @"修改密码";
         cell._lbContent.hidden = YES;
         cell._imgFold.hidden = NO;
     }
-    else if (indexPath.section == 2)
+    else if (indexPath.section == 1)
     {
         if(indexPath.row == 0){
             cell._lbTitle.text = @"告诉朋友";
@@ -218,7 +217,7 @@
             cell._imgFold.hidden = NO;
         }
     }
-    else if (indexPath.section == 3)
+    else if (indexPath.section == 2)
     {
         if(indexPath.row == 0){
             cell._lbTitle.text = @"关于我们";
