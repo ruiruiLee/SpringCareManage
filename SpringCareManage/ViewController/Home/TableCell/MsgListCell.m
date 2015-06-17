@@ -18,7 +18,7 @@
         _lbContent = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.contentView addSubview:_lbContent];
         _lbContent.translatesAutoresizingMaskIntoConstraints = NO;
-        _lbContent.font = _FONT(14);
+        _lbContent.font = _FONT(16);
         _lbContent.textColor = _COLOR(0x66, 0x66, 0x66);
         _lbContent.preferredMaxLayoutWidth = ScreenWidth - 40;
         _lbContent.numberOfLines = 0;
