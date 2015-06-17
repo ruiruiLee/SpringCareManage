@@ -148,11 +148,11 @@
     yesterday = [today dateByAddingTimeInterval: -secondsPerDay];
     
     // 10 first characters of description is the calendar date:
-    NSString * todayString = [[today description] substringToIndex:10];
-    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
+    NSString * todayString = [[self StringFromDate:today] substringToIndex:10];
+    NSString * yesterdayString = [[self StringFromDate:yesterday] substringToIndex:10];
 //    NSString * tomorrowString = [[tomorrow description] substringToIndex:10];
     
-    NSString * dateString = [[date description] substringToIndex:10];
+    NSString * dateString = [[self StringFromDate:date] substringToIndex:10];
     
     if ([dateString isEqualToString:todayString])
     {

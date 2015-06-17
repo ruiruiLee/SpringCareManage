@@ -124,6 +124,7 @@
     _dataList = [[NSMutableArray alloc] init];
     self.NavigationBar.Title = @"陪护时光";
     self.NavigationBar.btnLeft.hidden = YES;
+    self.NavigationBar.btnRight.hidden = YES;
     self.NavigationBar.alpha = 0.8;
     
     _defaultLover = nil;
