@@ -241,11 +241,11 @@
     if(model.loverinfo.age > 0)
         _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%ld岁", (long)model.loverinfo.age]];//;//@"72岁";
     else
-        _lbAge.text = @"年龄：";
+        _lbAge.text = @"年龄";
     if(model.loverinfo.height != nil)
         _lbHeight.text = [self stringByReplaceString:[NSString stringWithFormat:@"%@cm", model.loverinfo.height]];
     else
-        _lbHeight.text = @"身高：";
+        _lbHeight.text = @"身高";
     
     _lbName.text = model.loverinfo.name;
     if(model.loverinfo.name == nil || [model.loverinfo.name length] == 0)

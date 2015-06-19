@@ -549,18 +549,18 @@
     if(userInfo.userOrderInfo.orderModel.loverinfo.age > 0)
         age = [NSString stringWithFormat:@"%ld岁", userInfo.userOrderInfo.orderModel.loverinfo.age];
     else
-        age = @"年龄：";
+        age = @"年龄";
     NSString *height = @"";
     if(userInfo.userOrderInfo.orderModel.loverinfo.height != nil)
         height = [NSString stringWithFormat:@"%@cm", userInfo.userOrderInfo.orderModel.loverinfo.height];
     else
-        height = @"身高：";
+        height = @"身高";
     
     NSString *name = @"";
     if(userInfo.userOrderInfo.orderModel.loverinfo.name != nil)
         name = userInfo.userOrderInfo.orderModel.loverinfo.name;
     else
-        name = @"姓名：";
+        name = @"姓名";
     
     _lbLoverInfo.attributedText = [self AttributedTitleFromString:[NSString stringWithFormat:@"陪护对象：%@", name] title:@"陪护对象："];//[NSString stringWithFormat:@"陪护对象：%@", name];
     _lbOtherInfo.text = [NSString stringWithFormat:@"%@  %@",  age, height];

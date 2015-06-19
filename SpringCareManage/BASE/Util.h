@@ -83,6 +83,7 @@ typedef enum : NSUInteger {
 +(NSString *)convertTimetoBroadFormat:(NSString*) inputDate;
 + (NSInteger)GetDayFromdate:(NSString *)inputDate;
 + (NSInteger)GetMonthFromdate:(NSString *)inputDate;
++ (NSString*) convertChinese:(NSInteger)number;
 /**
  *@Method openCamera:
  *@Brief 打开照相机
