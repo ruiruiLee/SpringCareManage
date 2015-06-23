@@ -365,7 +365,7 @@
         cell._lbToday.backgroundColor = [UIColor clearColor];
         cell._lbToday.textColor = _COLOR(0x22, 0x22, 0x22);
         cell.lbmounth.hidden = YES;
-        cell._lbToday.font = _FONT(26);
+        cell._lbToday.font = _FONT(21);
         cell.lbday.hidden = YES;
         cell.imageview.hidden = YES;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -398,7 +398,7 @@
             NSString *str = [NSString stringWithFormat:@"%02d %@",[Util GetDayFromdate:data.createDate], [Util convertChinese:month]];
             NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:str];
             NSRange range = [str rangeOfString:[NSString stringWithFormat:@"%@", [Util convertChinese:month]]];
-            [attString addAttribute:NSFontAttributeName value:_FONT_B(11) range:range];
+            [attString addAttribute:NSFontAttributeName value:_FONT_B(10) range:range];
             cell._lbToday.attributedText = attString;
         }
         else{
