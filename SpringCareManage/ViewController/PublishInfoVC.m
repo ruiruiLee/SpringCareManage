@@ -238,9 +238,9 @@
 - (void) NavRightButtonClickEvent:(UIButton *)sender
 {
     if(contentType == EnumEscortTime)
-        [self PublishEscortTime];
+        [self PublishEscortTime:self.loverId];
     else
-        [self PublishWorkSummary];
+        [self PublishWorkSummary:self.loverId];
 //    [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -303,7 +303,7 @@
     //文字内容
 }
 
-- (void)PublishEscortTime
+- (void)PublishEscortTime:(NSString*) loverID
 {
     if(imageScrollView.selectImgArray.count == 0&&voiceName == nil &&[_tvContent.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -319,7 +319,7 @@
         [self fileupMothed];
         NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
         [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
-        [parmas setObject:self.loverId forKey:@"loverId"];
+        [parmas setObject:loverID forKey:@"loverId"];
         if(weaktvContent.text != nil && [weaktvContent.text length] > 0)
             [parmas setObject:weaktvContent.text forKey:@"content"];
         if (fileString!=nil) {
@@ -339,7 +339,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)PublishWorkSummary
+- (void)PublishWorkSummary:(NSString*) loverID
 {
      if(imageScrollView.selectImgArray.count == 0&&voiceName == nil &&[_tvContent.text length] == 0){
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未输入内容" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -353,7 +353,7 @@
         [self fileupMothed];
         NSMutableDictionary *parmas = [[NSMutableDictionary alloc] init];
         [parmas setObject: [UserModel sharedUserInfo].userId forKey:@"careId"];
-        [parmas setObject:self.loverId forKey:@"loverId"];
+        [parmas setObject:loverID forKey:@"loverId"];
         if(weaktvContent.text != nil && [weaktvContent.text length] > 0)
             [parmas setObject:weaktvContent.text forKey:@"content"];
         if (fileString!=nil) {
