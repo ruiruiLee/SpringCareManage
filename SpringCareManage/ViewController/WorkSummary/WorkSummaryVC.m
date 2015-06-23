@@ -49,10 +49,10 @@
         [_btnphotoImg sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
         _lbAge.text = [NSString stringWithFormat:@"%d岁", loverInfo.age];
         if(loverInfo.age == 0)
-            _lbAge.text = @"年龄：";
+            _lbAge.text = @"年龄";
         _lbHeight.text = [NSString stringWithFormat:@"%@cm", loverInfo.height];
         if(loverInfo.height == nil)
-            _lbHeight.text = @"身高：";
+            _lbHeight.text = @"身高";
         _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:loverInfo.sex]]);
         _lbPhone.text = loverInfo.phone;
         
@@ -114,7 +114,7 @@
     [_btnphotoImg sd_setBackgroundImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] forState:UIControlStateNormal placeholderImage:ThemeImage(@"placeholderimage")];
     _lbAge.text = [NSString stringWithFormat:@"%d岁", _defaultLover.age];
     if(_defaultLover.age == 0)
-        _lbAge.text = @"年龄：";
+        _lbAge.text = @"年龄";
     _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]]);
     //        [_btnMobile setTitle:loverInfo.phone forState:UIControlStateNormal];
     _lbPhone.text = _defaultLover.phone;
@@ -122,7 +122,7 @@
         _lbPhone.text = @"电话号码";
     _lbHeight.text = [NSString stringWithFormat:@"%@cm", _defaultLover.height];
     if(_defaultLover.height == nil)
-        _lbHeight.text = @"身高：";
+        _lbHeight.text = @"身高";
     
     [headerbg removeConstraints:AttentionArray];
     
@@ -393,10 +393,12 @@
     if (showTime) {
         NSString *dateStr = [Util convertTimetoBroadFormat:data.createDate]; //发布日期
         if(dateStr ==nil){
-            NSString *str = [NSString stringWithFormat:@"%02d %02d",[Util GetDayFromdate:data.createDate], [Util GetMonthFromdate:data.createDate]];
+            NSInteger month =[Util GetMonthFromdate:data.createDate];
+            
+            NSString *str = [NSString stringWithFormat:@"%02d %@",[Util GetDayFromdate:data.createDate], [Util convertChinese:month]];
             NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:str];
-            NSRange range = [str rangeOfString:[NSString stringWithFormat:@"%02d", [Util GetMonthFromdate:data.createDate]]];
-            [attString addAttribute:NSFontAttributeName value:_FONT(15) range:range];
+            NSRange range = [str rangeOfString:[NSString stringWithFormat:@"%@", [Util convertChinese:month]]];
+            [attString addAttribute:NSFontAttributeName value:_FONT_B(11) range:range];
             cell._lbToday.attributedText = attString;
         }
         else{

@@ -131,18 +131,6 @@
         }
         case 3:  // 关注
         {
-//            UserAttentionVC *vc = [[UserAttentionVC alloc] initWithNibName:nil bundle:nil];
-//            if (curentPushtype==PushFromBcakground) {
-//                if ([[SliderViewController sharedSliderController].MainVC isKindOfClass: [UserAttentionVC class]]) {
-//                    [vc refreshTable];
-//                }
-//                else{
-//                    [self.navigationController pushViewController:vc animated:YES];
-//                }
-//            }
-//            else{
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
             break;
             
         }

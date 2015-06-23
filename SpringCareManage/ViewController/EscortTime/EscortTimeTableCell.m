@@ -68,7 +68,7 @@
     lbday.textAlignment = NSTextAlignmentRight;
     
     lbmounth = [[UILabel alloc] initWithFrame:CGRectMake(32, 30, 26, 20)];
-    lbmounth.font = _FONT(16);
+    lbmounth.font = _FONT(15);
     lbmounth.textColor = [UIColor whiteColor];
     lbmounth.backgroundColor = [UIColor clearColor];
     [_lbToday addSubview:lbmounth];

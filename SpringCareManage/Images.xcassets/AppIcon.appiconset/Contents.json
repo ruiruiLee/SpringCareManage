@@ -45,7 +45,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "120-1.png",
+      "filename" : "120.png",
       "scale" : "2x"
     },
     {
@@ -115,9 +115,8 @@
       "scale" : "2x"
     },
     {
-      "size" : "120x120",
       "idiom" : "car",
-      "filename" : "120-2.png",
+      "size" : "120x120",
       "scale" : "1x"
     }
   ],

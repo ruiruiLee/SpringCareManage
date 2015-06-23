@@ -2361,8 +2361,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: // / (XY5GVE4YYR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: // / (XY5GVE4YYR)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2382,7 +2382,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
+				PROVISIONING_PROFILE = "e12567fc-8198-4e1e-9bc2-5e73fdaef459";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2404,8 +2404,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: // / (XY5GVE4YYR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: // / (XY5GVE4YYR)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2418,7 +2418,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
+				PROVISIONING_PROFILE = "e12567fc-8198-4e1e-9bc2-5e73fdaef459";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2430,8 +2430,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: // / (XY5GVE4YYR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: // / (XY5GVE4YYR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhiqiang li (CH83K85T7A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhiqiang li (CH83K85T7A)";
 				INFOPLIST_FILE = SpringCareManage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -2439,7 +2439,7 @@
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "春风陪护师";
-				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
+				PROVISIONING_PROFILE = "e12567fc-8198-4e1e-9bc2-5e73fdaef459";
 			};
 			name = Debug;
 		};
@@ -2449,8 +2449,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: // / (XY5GVE4YYR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: // / (XY5GVE4YYR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhiqiang li (CH83K85T7A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zhiqiang li (CH83K85T7A)";
 				INFOPLIST_FILE = SpringCareManage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -2458,7 +2458,7 @@
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "春风陪护师";
-				PROVISIONING_PROFILE = "45c581aa-abe0-4dcd-a299-cbbd9340db72";
+				PROVISIONING_PROFILE = "e12567fc-8198-4e1e-9bc2-5e73fdaef459";
 			};
 			name = Release;
 		};

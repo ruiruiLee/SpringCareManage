@@ -69,6 +69,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     self.feedbackTextField.text = @"";
     self.feedbackTextField.delegate=self;
    // self.controlView.frame =CGRectMake(0, 0, _winSize.width, 50);
@@ -321,10 +322,12 @@
 
 - (void)didReceiveMemoryWarning
 {
+    [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
   [self finishOpration];
 }
 

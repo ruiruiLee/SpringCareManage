@@ -86,7 +86,6 @@
     
     CGColorSpaceRef baseSpace   = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient      = CGGradientCreateWithColorComponents(baseSpace, colors, locations, 2);
-    
     CGContextRef context    = UIGraphicsGetCurrentContext();
     
     CGFloat height          = rect.size.height;
@@ -306,6 +305,10 @@ static UIColor *titleColor;
 @implementation ZYQAssetViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
@@ -390,6 +393,10 @@ static UIColor *titleColor;
 
 - (id)init
 {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
     _indexPathsForSelectedItems=[[NSMutableArray alloc] init];
     
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
@@ -659,17 +666,17 @@ static UIColor *titleColor;
 
     }
     
-    NSString *format;
-    
-    if (photosSelected && videoSelected)
-        format = NSLocalizedString(@"已选择 %ld 个项目", nil);
-    
-    else if (photosSelected)
-        format = (indexPaths.count > 1) ? NSLocalizedString(@"已选择 %ld 张照片", nil) : NSLocalizedString(@"已选择 %ld 张照片 ", nil);
-    
-    
-    else if (videoSelected)
-        format = (indexPaths.count > 1) ? NSLocalizedString(@"已选择 %ld 部视频", nil) : NSLocalizedString(@"已选择 %ld 部视频 ", nil);
+//    NSString *format;
+//    
+//    if (photosSelected && videoSelected)
+//        format = NSLocalizedString(@"已选择 %ld 个项目", nil);
+//    
+//    else if (photosSelected)
+//        format = (indexPaths.count > 1) ? NSLocalizedString(@"已选择 %ld 张照片", nil) : NSLocalizedString(@"已选择 %ld 张照片 ", nil);
+//    
+//    
+//    else if (videoSelected)
+//        format = (indexPaths.count > 1) ? NSLocalizedString(@"已选择 %ld 部视频", nil) : NSLocalizedString(@"已选择 %ld 部视频 ", nil);
     
     //self.title = [NSString stringWithFormat:format, (long)indexPaths.count];
  

@@ -43,10 +43,10 @@
         [_photoImgView sd_setImageWithURL:[NSURL URLWithString:loverInfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
         _lbAge.text = [NSString stringWithFormat:@"%d岁", loverInfo.age];
         if(_defaultLover.age == 0)
-            _lbAge.text = @"年龄：";
+            _lbAge.text = @"年龄";
         _lbHeight.text = [NSString stringWithFormat:@"%@cm", loverInfo.height];
         if(loverInfo.height == nil)
-            _lbHeight.text = @"身高：";
+            _lbHeight.text = @"身高";
         
         _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:loverInfo.sex]]);
         _lbMobile.text = _defaultLover.phone;
@@ -78,7 +78,7 @@
     [_photoImgView sd_setImageWithURL:[NSURL URLWithString:_defaultLover.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     _lbAge.text = [NSString stringWithFormat:@"%ld岁", _defaultLover.age];
     if(_defaultLover.age == 0)
-        _lbAge.text = @"年龄：";
+        _lbAge.text = @"年龄";
     
     _sex.image = ThemeImage([Util SexImagePathWith:[Util GetSexByName:_defaultLover.sex]]);
     _lbMobile.text = _defaultLover.phone;
