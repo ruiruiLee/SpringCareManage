@@ -11,6 +11,8 @@
 #define extendedLen 50
 #define contentHeight 50
 @implementation feedbackView
+@synthesize targetFrame;
+@synthesize offset;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil controlHidden:(bool)hidden Reply:(bool)hasReply{
@@ -139,15 +141,23 @@
     NSDictionary *info = [notification userInfo];
    _keyBoardSize =[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
    // NSLog(@"%f",_keyBoardSize.height);
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         //父view变化
-           offheight =_winSize.height-navHeight-_keyBoardSize.height+20;
+        offheight =_winSize.height-navHeight-_keyBoardSize.height+20 - 6;
         
-        if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]&&!_hasShow) {
-            [_delegate changeParentViewFram:offheight];
+        self.view.frame=CGRectMake(0,offheight,self.view.frame.size.width,_keyBoardSize.height+contentHeight);
+        CGFloat height = _winSize.height-navHeight-_keyBoardSize.height;
+        CGFloat targetheight = targetFrame.size.height + targetFrame.origin.y;
+        
+        CGFloat newheight = (height + 16 > targetheight) ? 0 : targetheight - height - 16;//+14;
+        offheight = newheight - offset;
+        offset = offheight;
+        
+        if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]/*&&!_hasShow*/) {
+            [_delegate changeParentViewFram: offheight];
         }
-       self.view.frame=CGRectMake(0,offheight,self.view.frame.size.width,_keyBoardSize.height+contentHeight);
-       _hasShow=YES;
+        
+        _hasShow=YES;
         } completion:nil];
 
 }
@@ -155,7 +165,7 @@
 - (void)keyBoardWillHide:(NSNotification*)notification {
     if (!faceshow) {
     [self.commitButton setImage:ThemeImage(@"chat_smailbtn") forState:UIControlStateNormal];
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         [self.feedbackTextField resignFirstResponder];
         if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]&&!_hasShow) {
             [_delegate changeParentViewFram:-offheight];

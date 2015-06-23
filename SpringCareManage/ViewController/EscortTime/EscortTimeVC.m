@@ -464,12 +464,15 @@
 
 #pragma mark - 点中回复按钮
 #pragma mark EscortTimeTableCellDelegate
--(void)commentButtonClick:(id)target ReplyName:(NSString*)ReplyName ReplyID:(NSString*)ReplyID{
+-(void)commentButtonClick:(id)target ReplyName:(NSString*)ReplyName ReplyID:(NSString*)ReplyID subframe:(CGRect)frame{
 //    _replyContentModel = target.model;
+    CGRect rect = CGRectZero;
     if([target isKindOfClass:[EscortTimeTableCell class]]){
+        rect = [self.view convertRect:((EscortTimeTableCell*)target).frame fromView:tableView];
         _replyContentModel = ((EscortTimeTableCell*)target)._model;
-    }else
+    }else{
         _replyContentModel = nil;
+    }
     
     _reReplyPId = ReplyID;
     _reReplyName=ReplyName;
@@ -479,6 +482,9 @@
         [self.view addSubview:_feedbackView.view];
 
     }
+    
+    _feedbackView.targetFrame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, frame.size.height + frame.origin.y);
+    _feedbackView.offset = 0;
     if(ReplyName != nil){
         _feedbackView.feedbackTextField.placeholder = [NSString stringWithFormat:@"@%@:", ReplyName];
     }else
@@ -541,7 +547,7 @@
 
 -(void)changeParentViewFram:(int)newHeight
 {
-    newHeight=newHeight>0?newHeight-20:newHeight+20;
+//    newHeight=newHeight>0?newHeight-20:newHeight+20;
     NSLog(@"%f",tableView.contentOffset.y);
    [tableView setContentOffset:CGPointMake(0.0,tableView.contentOffset.y+ newHeight) animated:YES];
      NSLog(@"%f",tableView.contentOffset.y);

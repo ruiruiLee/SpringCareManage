@@ -39,6 +39,9 @@
 
 @property (assign, nonatomic) id<feedbackViewDelegate> delegate;
 
+@property (nonatomic, assign) CGRect targetFrame;
+@property (nonatomic, assign) int offset;
+
 //@property (assign, nonatomic) BOOL hasReply;
 -(void)finishOpration;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil controlHidden:(bool)hidden;

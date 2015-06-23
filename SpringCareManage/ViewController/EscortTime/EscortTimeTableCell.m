@@ -212,8 +212,8 @@
 }
 
 - (void)btnReplyPressed {
-    if ([cellDelegate respondsToSelector:@selector(commentButtonClick:ReplyName:ReplyID:)]) {
-        [cellDelegate commentButtonClick:self ReplyName:nil ReplyID:nil];
+    if ([cellDelegate respondsToSelector:@selector(commentButtonClick:ReplyName:ReplyID:subframe:)]) {
+        [cellDelegate commentButtonClick:self ReplyName:nil ReplyID:nil subframe:self.bounds];
     }
 
 }
@@ -269,8 +269,10 @@
 {
     EscortTimeReplyDataModel *model = [_model.replyInfos objectAtIndex:indexPath.row];
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([cellDelegate respondsToSelector:@selector(commentButtonClick:ReplyName:ReplyID:)]) {
-        [cellDelegate commentButtonClick:self ReplyName:model.replyUserName ReplyID:model.replyUserId];
+    if ([cellDelegate respondsToSelector:@selector(commentButtonClick:ReplyName:ReplyID:subframe:)]) {
+        EscortTimeReplyCell *replyCell = (EscortTimeReplyCell*)[tableView cellForRowAtIndexPath:indexPath];
+        CGRect frame = [self convertRect:replyCell.frame fromView:tableView];
+        [cellDelegate commentButtonClick:self ReplyName:model.replyUserName ReplyID:model.replyUserId subframe:frame];
     }
 }
 
