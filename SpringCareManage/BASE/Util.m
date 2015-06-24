@@ -289,7 +289,7 @@
     
     NSInteger beginHour = [components hour];
     
-    if(beginHour >= 18)
+    if(beginHour > 12)
         return EnumServiceTimeNight;
     else
         return EnumServiceTimeDay;
@@ -335,6 +335,11 @@
             [result appendString:[NSString stringWithFormat:@"次日"]];
         [result appendString:[NSString stringWithFormat:@"%02ld", endHour]];
         [result appendString:[NSString stringWithFormat:@".%02ld", endMinute]];
+        [result appendString:[NSString stringWithFormat:@")"]];
+    }else{
+        [result appendString:[NSString stringWithFormat:@"("]];
+        [result appendString:[NSString stringWithFormat:@"%02ld", beginHour]];
+        [result appendString:[NSString stringWithFormat:@".%02ld", beginMinute]];
         [result appendString:[NSString stringWithFormat:@")"]];
     }
     

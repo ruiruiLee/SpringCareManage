@@ -42,7 +42,7 @@
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.backgroundColor = TableBackGroundColor;
     
-    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 80)];
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 110)];
     
     UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectZero];
     btnCancel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -52,28 +52,42 @@
     [btnCancel setBackgroundImage:[Util GetBtnBackgroundImage] forState:UIControlStateNormal];
     btnCancel.clipsToBounds = YES;
     [footView addSubview:btnCancel];
-    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-28-[btnCancel]-28-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel)]];
-    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[btnCancel]-13-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel)]];
+    
+    UILabel *_lbVersion = [[UILabel alloc] initWithFrame:CGRectZero];
+    [footView addSubview:_lbVersion];
+    _lbVersion.translatesAutoresizingMaskIntoConstraints = NO;
+    _lbVersion.textColor = _COLOR(0x99, 0x99, 0x99);
+    _lbVersion.font = _FONT(12);
+    _lbVersion.textAlignment = NSTextAlignmentCenter;
+    _lbVersion.text = [NSString stringWithFormat:@"iphone版: V %@",[Util getCurrentVersion]];
+    
+//    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-28-[btnCancel]-28-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel)]];
+//    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[btnCancel]-13-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel)]];
+    
+    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-28-[btnCancel]-28-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel, _lbVersion)]];
+    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_lbVersion]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel, _lbVersion)]];
+    [footView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-26-[btnCancel]-13-[_lbVersion(20)]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(btnCancel, _lbVersion)]];
+    
     [btnCancel addTarget:self action:@selector(btnCancelPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     EnDeviceType type = [NSStrUtil GetCurrentDeviceType];
     if(type == EnumValueTypeiPhone4S){
-        footView.frame = CGRectMake(0, 0, ScreenWidth, 80);
+        footView.frame = CGRectMake(0, 0, ScreenWidth, 110);
         btnCancel.titleLabel.font = _FONT(17);
     }
     else if (type == EnumValueTypeiPhone5){
-        footView.frame = CGRectMake(0, 0, ScreenWidth, 80);
+        footView.frame = CGRectMake(0, 0, ScreenWidth, 110);
         btnCancel.titleLabel.font = _FONT(17);
     }
     else if (type == EnumValueTypeiPhone6){
-        footView.frame = CGRectMake(0, 0, ScreenWidth, 90);
+        footView.frame = CGRectMake(0, 0, ScreenWidth, 120);
         btnCancel.titleLabel.font = _FONT(18);
     }
     else if (type == EnumValueTypeiPhone6P){
-        footView.frame = CGRectMake(0, 0, ScreenWidth, 100);
+        footView.frame = CGRectMake(0, 0, ScreenWidth, 130);
         btnCancel.titleLabel.font = _FONT(20);
     }else{
-        footView.frame = CGRectMake(0, 0, ScreenWidth, 80);
+        footView.frame = CGRectMake(0, 0, ScreenWidth, 110);
         btnCancel.titleLabel.font = _FONT(17);
     }
     

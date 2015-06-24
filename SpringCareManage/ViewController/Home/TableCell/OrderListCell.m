@@ -274,21 +274,27 @@
     }
     
     [root removeConstraints:constraintsArray];
-    ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
     constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
-    if(type == EnumServiceTimeNight){
-        _imgvNight.image = ThemeImage(@"night");
-        _imgvDay.image = nil;
-        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
-    }
-    else if (type == EnumServiceTimeDay){
-        _imgvNight.image = nil;
-        _imgvDay.image = ThemeImage(@"daytime");
-        constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
-    }
-    else{
-        _imgvNight.image = ThemeImage(@"night");
-        _imgvDay.image = ThemeImage(@"daytime");
+    
+    _imgvNight.image = ThemeImage(@"night");
+    _imgvDay.image = ThemeImage(@"daytime");
+    
+    if(model.dateType == EnumTypeHalfDay){
+        ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
+        if(type == EnumServiceTimeNight){
+            _imgvNight.image = ThemeImage(@"night");
+            _imgvDay.image = nil;
+            constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
+        }
+        else if (type == EnumServiceTimeDay){
+            _imgvNight.image = nil;
+            _imgvDay.image = ThemeImage(@"daytime");
+            constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
+        }
+        else{
+            _imgvNight.image = ThemeImage(@"night");
+            _imgvDay.image = ThemeImage(@"daytime");
+        }
     }
     
     [root addConstraints:constraintsArray];

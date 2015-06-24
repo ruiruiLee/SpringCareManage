@@ -514,7 +514,6 @@
         _btnAddress.text = userInfo.userOrderInfo.orderModel.loverinfo.addr;
         
         NSMutableAttributedString *phone = [self AttributedTitleFromString:[NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone] title:@"联系人："];
-//        [_btnCustomerMobile setAttributedTitle:phone forState:UIControlStateNormal];
         _btnCustomerMobile.attributedText = phone;
         
         _lbDetailText.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.beginDate] enddate:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.endDate] datetype:userInfo.userOrderInfo.orderModel.dateType];
