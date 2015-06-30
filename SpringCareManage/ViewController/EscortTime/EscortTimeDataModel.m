@@ -50,25 +50,8 @@ static NSInteger totalCount = 0;
     model.orgUserId = [dic objectForKey:@"orgUserId"];
     
     NSString *content = [dic objectForKey:@"content"];
-    NSMutableString *str = [[NSMutableString alloc] init];
-    if(model.replyUserName!= nil){
-        if ([model.replyUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
-            [str appendString:@"我"];
-        }
-        else
-          [str appendString:model.replyUserName];
-    }
-    
-    if(model.orgUserName != nil){
-        if ([model.orgUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
-           [str appendString:[NSString stringWithFormat:@"@%@",@"我"]];
-        }
-        else
-            [str appendString:[NSString stringWithFormat:@"@%@", model.orgUserName]];
-    }
-    [str appendString:[NSString stringWithFormat:@":%@", content]];
 
-    model.content = str;
+    model.content = content;
     
     return model;
 }
@@ -91,6 +74,50 @@ static NSInteger totalCount = 0;
     }
     
     return result;
+}
+
++ (NSMutableAttributedString *)getFullStringWithModel:(EscortTimeReplyDataModel *)model
+{
+    UIColor *nameColor = _COLOR(125, 212, 249);
+    
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] init];
+    if(model.replyUserName!= nil){
+        if ([model.replyUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
+            //            [str appendString:@"我"];
+            NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"我"];
+            [att addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, 1)];
+            [str appendAttributedString:att];
+        }
+        else{
+            NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:model.replyUserName];
+            [att addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, [model.replyUserName length])];
+            [str appendAttributedString:att];
+        }
+    }
+    
+    if(model.orgUserName != nil){
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"回复"];
+        //    [str appendString:[NSString stringWithFormat:@":%@", content]];
+        [str appendAttributedString:att];
+        
+        if ([model.orgUserName isEqualToString:[UserModel sharedUserInfo].displayName]) {
+            NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"我"];
+            [att addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, 1)];
+            [str appendAttributedString:att];
+            //           [str appendString:[NSString stringWithFormat:@"@%@",@"我"]];
+        }
+        else{
+            NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:model.orgUserName];
+            [att addAttribute:NSForegroundColorAttributeName value:nameColor range:NSMakeRange(0, [model.orgUserName length])];
+            [str appendAttributedString:att];
+            //            [str appendString:[NSString stringWithFormat:@"@%@", model.orgUserName]];
+        }
+    }
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@":"];
+    //    [str appendString:[NSString stringWithFormat:@":%@", content]];
+    [str appendAttributedString:att];
+    
+    return str;
 }
 
 @end

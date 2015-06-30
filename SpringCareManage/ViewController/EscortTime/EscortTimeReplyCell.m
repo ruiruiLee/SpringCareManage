@@ -47,6 +47,8 @@
 
 - (void) setContentWithData:(EscortTimeReplyDataModel*)data
 {
+    NSMutableAttributedString *str = [EscortTimeReplyDataModel getFullStringWithModel:data];
+    _lbReplyContent.attr = str;
     _lbReplyContent.textString = data.content;
 }
 

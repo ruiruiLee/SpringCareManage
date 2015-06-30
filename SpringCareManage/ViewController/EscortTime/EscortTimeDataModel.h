@@ -35,6 +35,8 @@
 
 + (EscortTimeReplyDataModel *) ObjectFromDictionary:(NSDictionary *)dic;
 + (NSArray *) ArrayFromDictionaryArray:(NSArray *) array;
++ (NSMutableAttributedString *)getFullStringWithModel:(EscortTimeReplyDataModel *)model;
+
 @end
 
 @interface EscortTimeDataModel : NSObject

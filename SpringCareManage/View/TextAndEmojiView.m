@@ -42,39 +42,26 @@
     CGFloat     y = 0.0f;
     int breakWordNum=1;
     NSMutableArray *messageArray = [[NSMutableArray alloc] init];
+    if(self.attr != nil){
+        [messageArray addObject:self.attr];
+    }
+    
     [self getImageRange:_textString array:messageArray];
     
     NSUInteger count = [messageArray count];
     for (int i = 0; i < count; i ++) {
        
         NSString *str = [messageArray objectAtIndex:i];
-        if ([predicate evaluateWithObject:str]) {
-            if ((x+kEmojiSize) <= _maxWidth) {
-                
-            }else {
-                x = 0.0f;
-                y += kSigleTextHeight+3;
-            }
-             @autoreleasepool {
-            //添加单个表情
-                UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",str]];
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-                imageView.frame = CGRectMake(x, y, kEmojiSize, kEmojiSize);
-                imageView.backgroundColor= [UIColor clearColor];
-                [self addSubview:imageView];
-            }
-            //重设x
-            x += kEmojiSize;
-            
-        }
-        else {
-            NSUInteger length = [str length];
+        
+        if([str isKindOfClass:[NSMutableAttributedString class]]){
+            NSMutableAttributedString *attrStr = (NSMutableAttributedString*)str;
+            NSUInteger length = [attrStr.string length];
             CGFloat strWidth = 0.0f;
             //记录单行文字
             NSMutableString *onelineString = [NSMutableString string];
             for (int j = 0; j < length; j ++) {
                 //取出单个文字
-                NSString *temp = [str substringWithRange:NSMakeRange(j, 1)];
+                NSString *temp = [attrStr.string substringWithRange:NSMakeRange(j, 1)];
                 //单个字的size
                 CGSize tempSize = [temp sizeWithFont:[UIFont systemFontOfSize:_fontsize]];
                 //当文字的宽度不超过最大行宽时，继续执行，并记录文字的宽度
@@ -85,53 +72,112 @@
                     [onelineString appendString:temp];
                     if ([temp isEqual: @"\n"]) {
                         breakWordNum++;
-                      }
-                    continue;
-                 }
-                else {
-                    @autoreleasepool {
-                    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(x, y, strWidth, breakWordNum*kSigleTextHeight)];
-                    lable.font = [UIFont systemFontOfSize:_fontsize];
-                     lable.textColor = _fontcolor;
-                    [lable setLineBreakMode:NSLineBreakByWordWrapping];
-                    [lable setNumberOfLines:0];
-                    lable.text = onelineString;
-                    lable.backgroundColor = [UIColor clearColor];
-                    [self addSubview:lable];
-                    //重新记录x,y
-                    x = 0.0f;
-                    y +=  breakWordNum*kSigleTextHeight;
-                    //重新记录单行文字宽度
-                    strWidth = tempSize.width;
-                    //重新记录单行文字,清空字符串,记录当前字符
-                    onelineString.string = @"";
-                    breakWordNum=1;
-                    [onelineString appendString:temp];
-                    if (_wordWrop && y>_maxTextHeight) {
-                        y=_maxTextHeight;
-                        lable.text = [NSString stringWithFormat:@"%@……", lable.text ];
-                        break;
-                      }
                     }
+                    continue;
                 }
-              }
+            }
             
             //添加最后一行的字符串
-            if (onelineString.length>0) {
-               UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(x, y, strWidth, breakWordNum*kSigleTextHeight)];
-               lable.font = [UIFont systemFontOfSize:_fontsize];
+            if (length > 0) {
+                UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(x, y, strWidth, breakWordNum*kSigleTextHeight)];
+                lable.font = [UIFont systemFontOfSize:_fontsize];
                 lable.textColor = _fontcolor;
-               [lable setLineBreakMode:NSLineBreakByWordWrapping];
-               [lable setNumberOfLines:0];
-               lable.text = onelineString;
-               lable.backgroundColor = [UIColor clearColor];
-               [self addSubview:lable];
+                [lable setLineBreakMode:NSLineBreakByWordWrapping];
+                [lable setNumberOfLines:0];
+                //                lable.text = onelineString;
+                lable.attributedText = attrStr;
+                lable.backgroundColor = [UIColor clearColor];
+                [self addSubview:lable];
                 //重新记录x
                 x += strWidth;
             }
+        }
+        else{
+            if ([predicate evaluateWithObject:str]) {
+                if ((x+kEmojiSize) <= _maxWidth) {
+                    
+                }else {
+                    x = 0.0f;
+                    y += kSigleTextHeight+3;
+                }
+                 @autoreleasepool {
+                //添加单个表情
+                    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",str]];
+                    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+                    imageView.frame = CGRectMake(x, y, kEmojiSize, kEmojiSize);
+                    imageView.backgroundColor= [UIColor clearColor];
+                    [self addSubview:imageView];
+                }
+                //重设x
+                x += kEmojiSize;
+                
+            }
+            else {
+                NSUInteger length = [str length];
+                CGFloat strWidth = 0.0f;
+                //记录单行文字
+                NSMutableString *onelineString = [NSMutableString string];
+                for (int j = 0; j < length; j ++) {
+                    //取出单个文字
+                    NSString *temp = [str substringWithRange:NSMakeRange(j, 1)];
+                    //单个字的size
+                    CGSize tempSize = [temp sizeWithFont:[UIFont systemFontOfSize:_fontsize]];
+                    //当文字的宽度不超过最大行宽时，继续执行，并记录文字的宽度
+                    if ((x+strWidth+tempSize.width) <= _maxWidth) {
+                        //记录文字宽度
+                        strWidth += tempSize.width;
+                        //将单个文字记录并保存
+                        [onelineString appendString:temp];
+                        if ([temp isEqual: @"\n"]) {
+                            breakWordNum++;
+                          }
+                        continue;
+                     }
+                    else {
+                        @autoreleasepool {
+                        UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(x, y, strWidth, breakWordNum*kSigleTextHeight)];
+                        lable.font = [UIFont systemFontOfSize:_fontsize];
+                         lable.textColor = _fontcolor;
+                        [lable setLineBreakMode:NSLineBreakByWordWrapping];
+                        [lable setNumberOfLines:0];
+                        lable.text = onelineString;
+                        lable.backgroundColor = [UIColor clearColor];
+                        [self addSubview:lable];
+                        //重新记录x,y
+                        x = 0.0f;
+                        y +=  breakWordNum*kSigleTextHeight;
+                        //重新记录单行文字宽度
+                        strWidth = tempSize.width;
+                        //重新记录单行文字,清空字符串,记录当前字符
+                        onelineString.string = @"";
+                        breakWordNum=1;
+                        [onelineString appendString:temp];
+                        if (_wordWrop && y>_maxTextHeight) {
+                            y=_maxTextHeight;
+                            lable.text = [NSString stringWithFormat:@"%@……", lable.text ];
+                            break;
+                          }
+                        }
+                    }
+                  }
+                
+                //添加最后一行的字符串
+                if (onelineString.length>0) {
+                   UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(x, y, strWidth, breakWordNum*kSigleTextHeight)];
+                   lable.font = [UIFont systemFontOfSize:_fontsize];
+                    lable.textColor = _fontcolor;
+                   [lable setLineBreakMode:NSLineBreakByWordWrapping];
+                   [lable setNumberOfLines:0];
+                   lable.text = onelineString;
+                   lable.backgroundColor = [UIColor clearColor];
+                   [self addSubview:lable];
+                    //重新记录x
+                    x += strWidth;
+                }
 
-         }
-        
+             }
+            
+        }
     }
     
     if (y < kSigleTextHeight) {
