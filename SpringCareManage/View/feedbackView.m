@@ -116,6 +116,8 @@
     
          // 要减去tabbar的高度
          int pheight =_winSize.height-navHeight-_faceBoardView.frame.size.height+20-55;
+         if(_IPHONE_OS_VERSION_UNDER_7_0)
+             pheight -= 20;
          self.view.frame = CGRectMake(0,pheight,self.view.frame.size.width,_faceBoardView.frame.size.height+contentHeight);
              } completion:^(BOOL finished) {
                // self.myTableView.userInteractionEnabled = NO;
@@ -144,8 +146,10 @@
    // NSLog(@"%f",_keyBoardSize.height);
     [UIView animateWithDuration:0.25 animations:^{
         //父view变化
-        offheight =_winSize.height-navHeight-_keyBoardSize.height+20 - 6;
+        offheight =_winSize.height-navHeight-_keyBoardSize.height + 20 - 6;
         
+        if(_IPHONE_OS_VERSION_UNDER_7_0)
+            offheight -= 20;
         self.view.frame=CGRectMake(0,offheight,self.view.frame.size.width,_keyBoardSize.height+contentHeight);
         CGFloat height = _winSize.height-navHeight-_keyBoardSize.height;
         CGFloat targetheight = targetFrame.size.height + targetFrame.origin.y;
