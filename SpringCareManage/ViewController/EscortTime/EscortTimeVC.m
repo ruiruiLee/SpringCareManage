@@ -116,6 +116,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _offset = 0;
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SetHeaderInfoWithModel) name:User_DetailInfo_Get object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(NotifyRefreshDefaultLover:) name:Notify_Lover_Moditify object:nil];
@@ -480,6 +481,7 @@
         _feedbackView =[[feedbackView alloc ] initWithNibName:@"feedbackView" bundle:nil controlHidden:NO];
         _feedbackView.delegate=(id)self;
         [self.view addSubview:_feedbackView.view];
+        [_feedbackView.view addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
 
     }
     
@@ -664,6 +666,26 @@
     [self setContent];
     
     [self pullTableViewDidTriggerRefresh:self.tableView];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"frame"])
+    {
+        CGRect new = [[change objectForKey:@"new"] CGRectValue];
+        CGRect rect = _feedbackView.targetFrame;
+        CGFloat viewoffset = rect.origin.y + rect.size.height;
+        
+        if(new.origin.y < [UIScreen mainScreen].bounds.size.height - 20){
+            if(viewoffset - new.origin.y >= 0 ){
+                [tableView setContentOffset:CGPointMake(0.0,tableView.contentOffset.y + viewoffset - new.origin.y - _offset) animated:YES];
+                _offset = viewoffset - new.origin.y;
+            }
+        }else{
+            [tableView setContentOffset:CGPointMake(0.0,tableView.contentOffset.y - _offset) animated:YES];
+            _offset = 0;
+        }
+    }
 }
 
 @end

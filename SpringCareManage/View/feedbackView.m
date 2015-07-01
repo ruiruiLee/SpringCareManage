@@ -154,9 +154,9 @@
         offheight = newheight - offset;
         offset = offheight;
         
-        if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]/*&&!_hasShow*/) {
-            [_delegate changeParentViewFram: offheight];
-        }
+//        if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]/*&&!_hasShow*/) {
+//            [_delegate changeParentViewFram: offheight];
+//        }
         
         _hasShow=YES;
         } completion:nil];
@@ -168,9 +168,9 @@
     [self.commitButton setImage:ThemeImage(@"chat_smailbtn") forState:UIControlStateNormal];
     [UIView animateWithDuration:0.25 animations:^{
         [self.feedbackTextField resignFirstResponder];
-        if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]&&!_hasShow) {
-            [_delegate changeParentViewFram:-offheight];
-        }
+//        if ([_delegate respondsToSelector:@selector(changeParentViewFram:)]&&!_hasShow) {
+//            [_delegate changeParentViewFram:-offheight];
+//        }
         self.view.frame=CGRectMake(0,_winSize.height,self.view.frame.size.width,self.view.frame.size.height);    } completion:nil];
  }
 }
