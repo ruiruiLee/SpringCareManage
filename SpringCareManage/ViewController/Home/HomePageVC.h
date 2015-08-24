@@ -55,7 +55,6 @@
     UILabel *_line2;
     UILabel *_lbCareType;
     UIImageView *_imgDay;
-    UIImageView *_imgNight;
     UILabel *_lbDetailText;
     UILabel *_line3;
     
@@ -64,12 +63,13 @@
     UILabel *_lbRealValue;//
     
     UILabel *_btnCustomerMobile;
-//    UIImageView *_imgvMobile;
+    UIImageView *_imgvLover;
     UILabel *_btnAddress;
     UIImageView *_imgvAddress;
     UILabel *_lbLoverInfo;
     UIImageView *_imgvLoverSex;
     UILabel *_lbOtherInfo;
+    
     
     UIButton *btnRing;
     

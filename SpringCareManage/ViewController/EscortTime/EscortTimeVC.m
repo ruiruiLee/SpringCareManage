@@ -268,7 +268,6 @@
     _lbMobile.textAlignment = NSTextAlignmentRight;
     _lbMobile.textColor = _COLOR(0xff, 0xff, 0xff);
     _lbMobile.backgroundColor = [UIColor clearColor];
-//    [_btnMobile setImage:[UIImage imageNamed:@"orderdetailtel"] forState:UIControlStateNormal];
     _imgvMoblie = [[UIImageView alloc] initWithFrame:CGRectZero];
     [headerbg addSubview:_imgvMoblie];
     _imgvMoblie.translatesAutoresizingMaskIntoConstraints = NO;
@@ -283,6 +282,7 @@
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_imgvAddr(15)]-2-[_lbAddr]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_photoImgView(72)]-10-[_imgvMoblie(16)]-2-[_lbMobile]->=20-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_photoImgView(72)]-30-|" options:0 metrics:nil views:views]];
+    [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_imgvMoblie(16)]->=0-|" options:0 metrics:nil views:views]];
     [headerbg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=10-[_lbName(20)]-4-[_lbMobile(16)]-5-[_lbAddr]->=10-|" options:0 metrics:nil views:views]];
 
     [headerbg addConstraint:[NSLayoutConstraint constraintWithItem:_lbHeight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];

@@ -48,28 +48,25 @@
 {
     _lbOrderNum = [self createLabel:_FONT(14) txtColor: [UIColor blackColor]];
     
-    _lbPublishTime = [self createLabel:_FONT(14) txtColor:[UIColor blackColor]];
-    
-//    _lbOrderStatus = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _btnOrderStatus = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnOrderStatus.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_btnOrderStatus];
-    _btnOrderStatus.titleLabel.font = _FONT_B(15);
-    [_btnOrderStatus setTitleColor:_COLOR(0x10, 0x9d, 0x59) forState:UIControlStateNormal];
+    _btnOrderStatus.titleLabel.font = _FONT(12);
+    [_btnOrderStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _btnOrderStatus.userInteractionEnabled = NO;
     _btnOrderStatus.clipsToBounds = YES;
     _btnOrderStatus.layer.cornerRadius = 5;
+    _btnOrderStatus.backgroundColor = _COLOR(26, 147, 251);
     [_btnOrderStatus addTarget:self action:@selector(doBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     _line1 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line1.backgroundColor = SeparatorLineColor;
     
-    _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
     _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
-    _lbRealValue = [self createLabel:_FONT(18) txtColor:_COLOR(0xec, 0x5a, 0x4d)];
-    _lbCouponValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
     _imgvDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvDay];
@@ -78,59 +75,70 @@
     _imgvNight = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvNight];
     _imgvNight.translatesAutoresizingMaskIntoConstraints = NO;
+    _imgvNight.image = ThemeImage(@"stime");
     
-    _lbDetailServiceTime = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    
-    _lbLinkman = [self createLabel:_FONT(14) txtColor:_COLOR(0x66, 0x66, 0x66)];
-    
-    _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_btnRing];
-    _btnRing.translatesAutoresizingMaskIntoConstraints = NO;
-//    _btnRing.imageView = ThemeImage(@"userattentionring");
-    [_btnRing setImage:ThemeImage(@"userattentionring") forState:UIControlStateNormal];
-    [_btnRing addTarget:self action:@selector(btnRingClicked) forControlEvents:UIControlEventTouchUpInside];
+    _lbDetailServiceTime = [self createLabel:_FONT(13) txtColor:_COLOR(0xc2, 0xc2, 0xc2)];
     
     _line2 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line2.backgroundColor = SeparatorLineColor;
     
+    
+    _OrderInfoBg = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.contentView addSubview:_OrderInfoBg];
+    _OrderInfoBg.translatesAutoresizingMaskIntoConstraints = NO;
+    _OrderInfoBg.backgroundColor = _COLOR(235, 241, 245);
+    
+    _lbLinkman = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_OrderInfoBg addSubview:_lbLinkman];
+    _lbLinkman.translatesAutoresizingMaskIntoConstraints = NO;
+    _lbLinkman.textColor = _COLOR(0xc2, 0xc2, 0xc2);
+    _lbLinkman.font = _FONT(14);
+    _lbLinkman.backgroundColor = [UIColor clearColor];
+    
+    _btnRing = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_OrderInfoBg addSubview:_btnRing];
+    _btnRing.translatesAutoresizingMaskIntoConstraints = NO;
+    [_btnRing setImage:ThemeImage(@"orderdetailtel") forState:UIControlStateNormal];
+    [_btnRing addTarget:self action:@selector(btnRingClicked) forControlEvents:UIControlEventTouchUpInside];
+    
     //对象信息
     _photoImg = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_photoImg];
+    [_OrderInfoBg addSubview:_photoImg];
     _photoImg.translatesAutoresizingMaskIntoConstraints = NO;
     _photoImg.layer.cornerRadius = 26;
     _photoImg.clipsToBounds = YES;
     
-    _lbName = [self createLabel:_FONT(18) txtColor:_COLOR(0x22, 0x22, 0x22)];
+    _lbName = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_OrderInfoBg addSubview:_lbName];
+    _lbName.translatesAutoresizingMaskIntoConstraints = NO;
+    _lbName.textColor = _COLOR(0x3d, 0x3d, 0x3d);
+    _lbName.font = _FONT(14);
+    _lbName.backgroundColor = [UIColor clearColor];
     
-    _lbAge = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99)];
-    _lbHeight = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99)];
+    _lbAge =  [[UILabel alloc] initWithFrame:CGRectZero];
+    [_OrderInfoBg addSubview:_lbAge];
+    _lbAge.translatesAutoresizingMaskIntoConstraints = NO;
+    _lbAge.textColor = _COLOR(0x3d, 0x3d, 0x3d);
+    _lbAge.font = _FONT(14);
+    _lbAge.backgroundColor = [UIColor clearColor];
     
-    _btnMobile = [[UIButton alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_btnMobile];
-    _btnMobile.translatesAutoresizingMaskIntoConstraints = NO;
-    [_btnMobile setTitleColor:_COLOR(0x99, 0x99, 0x99) forState:UIControlStateNormal];
-    _btnMobile.titleLabel.font = _FONT(15);
-    
-    _imgvMobile = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_imgvMobile];
-    _imgvMobile.translatesAutoresizingMaskIntoConstraints = NO;
-    _imgvMobile.image = ThemeImage(@"orderdetailtel");
+    _lbHeight =  [[UILabel alloc] initWithFrame:CGRectZero];
+    [_OrderInfoBg addSubview:_lbHeight];
+    _lbHeight.translatesAutoresizingMaskIntoConstraints = NO;
+    _lbHeight.textColor = _COLOR(0x3d, 0x3d, 0x3d);
+    _lbHeight.font = _FONT(14);
+    _lbHeight.backgroundColor = [UIColor clearColor];
     
     _btnAddress = [[UILabel alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_btnAddress];
+    [_OrderInfoBg addSubview:_btnAddress];
     _btnAddress.translatesAutoresizingMaskIntoConstraints = NO;
-    _btnAddress.textColor = _COLOR(0x99, 0x99, 0x99);
-    _btnAddress.numberOfLines = 0;
+    _btnAddress.textColor = _COLOR(0x3d, 0x3d, 0x3d);
+    _btnAddress.numberOfLines = 2;
     _btnAddress.preferredMaxLayoutWidth = ScreenWidth - 121;
-    _btnAddress.font = _FONT(15);
-    
-    _imgvAddress = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_imgvAddress];
-    _imgvAddress.translatesAutoresizingMaskIntoConstraints = NO;
-    _imgvAddress.image = ThemeImage(@"nurselistlocation");
+    _btnAddress.font = _FONT(14);
     
     _sexLogo = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:_sexLogo];
+    [_OrderInfoBg addSubview:_sexLogo];
     _sexLogo.translatesAutoresizingMaskIntoConstraints = NO;
     
     _statusImgv = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -150,10 +158,6 @@
     [self.contentView addSubview:intervalV3];
     intervalV3.translatesAutoresizingMaskIntoConstraints = NO;
     
-    intervalV4 = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.contentView addSubview:intervalV4];
-    intervalV4.translatesAutoresizingMaskIntoConstraints = NO;
-    
     intervalV5 = [[UIView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:intervalV5];
     intervalV5.translatesAutoresizingMaskIntoConstraints = NO;
@@ -170,6 +174,11 @@
     FootView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:FootView];
     FootView.backgroundColor = TableSectionBackgroundColor;
+    _imgvDay.hidden = YES;
+    
+    _couponInfoView = [[CouponLogoView alloc] initWithFrame:CGRectZero];
+    [self.contentView addSubview:_couponInfoView];
+    _couponInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self createAutoLayoutConstraints];
 }
@@ -177,51 +186,49 @@
 - (void) createAutoLayoutConstraints
 {
     UIView *root = self.contentView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _imgvMobile, _imgvAddress, _lbHeight, _lbRealValue, _lbCouponValue);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _lbRealValue, _OrderInfoBg, _couponInfoView);
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbPublishTime]->=4-[_btnOrderStatus(70)]-10-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(54)]-20-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-22-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbTotalValue]-10-[_lbCouponValue]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
-    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay]-0-[_imgvNight]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
+    couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-4-[_couponInfoView]-19-|" options:0 metrics:nil views:views];
+    [root addConstraints:couponConstraints];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_OrderInfoBg]-0-|" options:0 metrics:nil views:views]];
+    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight]-6-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
     [root addConstraints:constraintsArray];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line2]-0-|" options:0 metrics:nil views:views]];
-    constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]->=0-|" options:0 metrics:nil views:views];
-    [root addConstraints:constraintsAcctionArray];
-    constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvMobile(16)]-0-[_btnMobile]-6-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
-    [root addConstraints:constraintsLoverArray];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvAddress(15)]-0-[_btnAddress]->=10-|" options:0 metrics:nil views:views]];
+    
+    [_OrderInfoBg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbLinkman]->=20-[_btnRing(32)]-20-|" options:0 metrics:nil views:views]];
+    [_OrderInfoBg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
+    constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]-6-[_lbHeight]->=0-|" options:0 metrics:nil views:views];
+    [_OrderInfoBg addConstraints:constraintsAcctionArray];
+    [_OrderInfoBg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_btnAddress]->=10-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=10-[_statusImgv]-20-|" options:0 metrics:nil views:views]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_lbRealValue attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnMobile attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:-1]];
-    
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvAddress attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_btnAddress attribute:NSLayoutAttributeTop multiplier:1 constant:1]];
-    
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[FootView]-0-|" options:0 metrics:nil views:views]];
     //v方向
-    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
+
+    orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[_lbOrderNum]-15-[_line1(0.6)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_OrderInfoBg(120)]-11-[_lbTotalValue]-11-[FootView(17)]-0-|" options:0 metrics:nil views:views];
     [root addConstraints:orderPriceConstraints];
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_line2]-11-[_photoImg(52)]->=11-[FootView(17)]-0-|" options:0 metrics:nil views:views]];
+    [_OrderInfoBg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_photoImg(52)]->=11-|" options:0 metrics:nil views:views]];
+    
+    [_OrderInfoBg addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_lbName]-4-[_btnAddress]->=11-[_lbLinkman]-16-|" options:0 metrics:nil views:views]];
+    
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLinkman attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(36)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(20)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV7 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV6 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV5 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV4 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_statusImgv attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_btnOrderStatus attribute:NSLayoutAttributeTop multiplier:1 constant:-3]];
     
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvDay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_imgvNight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailServiceTime attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_sexLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbHeight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [_OrderInfoBg addConstraint:[NSLayoutConstraint constraintWithItem:_sexLogo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [_OrderInfoBg addConstraint:[NSLayoutConstraint constraintWithItem:_lbAge attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [_OrderInfoBg addConstraint:[NSLayoutConstraint constraintWithItem:_lbHeight attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbName attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    
+    [root addConstraint:[NSLayoutConstraint constraintWithItem:_couponInfoView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
 }
 
@@ -229,14 +236,20 @@
 {
     _orderModel = model;
     
-    _lbOrderNum.text = [NSString stringWithFormat:@"订单号:%@", model.serialNumber];//@"订单号:";
-    _lbPublishTime.text = [NSString stringWithFormat:@"下单时间:%@", model.createdDate];//@"2015-03-19 12:46";//下单时间
+    NSString *orderNum = [NSString stringWithFormat:@"NO.%@", model.serialNumber];
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:orderNum];
+    NSRange range = [orderNum rangeOfString:model.serialNumber];
+    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xc2, 0xc2, 0xc2) range:range];
+    
+    _lbOrderNum.attributedText = attString;//@"订单号:";
     if(model.registerInfo.chineseName == nil || [model.registerInfo.chineseName isKindOfClass:[NSNull class]])
-        _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@", model.registerInfo.phone];//@"联系人:";
+    {
+        _lbLinkman.attributedText = [self AttributedString:[NSString stringWithFormat:@"下单人:  %@", model.registerInfo.phone] subString:@"下单人:"];
+    }
     else
-        _lbLinkman.text = [NSString stringWithFormat:@"联系人:%@  %@", model.registerInfo.chineseName, model.registerInfo.phone];//@"联系人:";
+        _lbLinkman.attributedText = [self AttributedString:[NSString stringWithFormat:@"下单人:  %@    %@", model.registerInfo.chineseName, model.registerInfo.phone] subString:@"下单人:"];
+    
     _btnAddress.text = model.loverinfo.addr;
-    [_btnMobile setTitle:model.loverinfo.phone forState:UIControlStateNormal];//陪护对象电话
     
     if(model.loverinfo.age > 0)
         _lbAge.text = [self stringByReplaceString:[NSString stringWithFormat:@"%ld岁", (long)model.loverinfo.age]];//;//@"72岁";
@@ -253,90 +266,59 @@
     
     [_photoImg sd_setImageWithURL:[NSURL URLWithString:model.loverinfo.headerImage] placeholderImage:ThemeImage(@"placeholderimage")];
     
-    _lbRealValue.text = [NSString stringWithFormat:@"¥ %d", (int)model.realyTotalPrice];
-    _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", model.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", model.totalPrice]];//
-    _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", model.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", model.couponsAmount]];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _lbPublishTime, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnMobile, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV4, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _imgvMobile, _lbRealValue, _lbCouponValue);
+    NSString *value = [NSString stringWithFormat:@"￥%d  × %@", (int)model.unitPrice, model.orderCountStr];
+    NSMutableAttributedString *attString1 = [[NSMutableAttributedString alloc]initWithString:value];
+    NSRange range1 = [value rangeOfString:[NSString stringWithFormat:@"  × %@", model.orderCountStr]];
+//    [attString1 addAttribute:NSForegroundColorAttributeName value:_COLOR(0xc2, 0xc2, 0xc2) range:range1];
+    [attString1 addAttribute:NSFontAttributeName value:_FONT(12) range:range1];
+    
+    _lbRealValue.attributedText = attString1;
+    NSMutableAttributedString *totalValue = [self AttributedStringFromString:[NSString stringWithFormat:@"实付:￥%.0f", model.realyTotalPrice] subString:[NSString stringWithFormat:@"￥%.0f", model.realyTotalPrice]];
+    [totalValue addAttribute:NSFontAttributeName value:_FONT(12) range:NSMakeRange(0, 3)];
+    _lbTotalValue.attributedText = totalValue;//
+    [_couponInfoView SetCouponValue:model.couponsAmount];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _lbRealValue, _couponInfoView);
     
     UIView *root = self.contentView;
-    [root removeConstraints:orderPriceConstraints];
-    if(model.couponsAmount > 0){
-        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbTotalValue]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
-        [root addConstraints:orderPriceConstraints];
-        _lbCouponValue.hidden = NO;
-        _lbTotalValue.hidden = NO;
-    }else{
-        orderPriceConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_lbOrderNum]-4-[_lbPublishTime]-10-[_line1(1)]-10-[_lbServiceContent]-8-[_lbDetailServiceTime]-8-[_lbLinkman]-10-[_line2(1)]-6-[_lbName]-0-[intervalV4(>=4)]-0-[_imgvMobile]-0-[intervalV5(>=4)]-0-[_btnAddress]-6-[FootView(17)]-0-|" options:0 metrics:nil views:views];
-        [root addConstraints:orderPriceConstraints];
-        _lbCouponValue.hidden = YES;
-        _lbTotalValue.hidden = YES;
-    }
     
-    [root removeConstraints:constraintsArray];
-    constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
-    
-    _imgvNight.image = ThemeImage(@"night");
-    _imgvDay.image = ThemeImage(@"daytime");
-    
-    if(model.dateType == EnumTypeHalfDay){
-        ServiceTimeType type = [Util GetServiceTimeType:[Util convertDateFromDateString:model.beginDate]];
-        if(type == EnumServiceTimeNight){
-            _imgvNight.image = ThemeImage(@"night");
-            _imgvDay.image = nil;
-            constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvNight(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
-        }
-        else if (type == EnumServiceTimeDay){
-            _imgvNight.image = nil;
-            _imgvDay.image = ThemeImage(@"daytime");
-            constraintsArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_imgvDay(18)]-0-[_lbDetailServiceTime]->=10-|" options:0 metrics:nil views:views];
-        }
-        else{
-            _imgvNight.image = ThemeImage(@"night");
-            _imgvDay.image = ThemeImage(@"daytime");
-        }
-    }
-    
-    [root addConstraints:constraintsArray];
     [root removeConstraints:constraintsAcctionArray];
-    [root removeConstraints:constraintsLoverArray];
     NSString *sex = [Util SexImagePathWith:[Util GetSexByName:model.loverinfo.sex]];
     
-    if(model.loverinfo.phone == nil || [model.loverinfo.phone length] == 0){
-        constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
-        [root addConstraints:constraintsLoverArray];
-        _imgvMobile.hidden = YES;
-        _btnMobile.hidden = YES;
-    }
-    else{
-        constraintsLoverArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg(52)]-22-[_imgvMobile(16)]-0-[_btnMobile]-6-[_lbAge]-6-[_lbHeight]->=20-|" options:0 metrics:nil views:views];
-        [root addConstraints:constraintsLoverArray];
-        _imgvMobile.hidden = NO;
-        _btnMobile.hidden = NO;
-    }
-    
     if(sex == nil){
-        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]->=0-|" options:0 metrics:nil views:views];
+        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_lbAge]-6-[_lbHeight]->=0-|" options:0 metrics:nil views:views];
         _sexLogo.hidden = YES;
     }
     else{
-        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]->=0-|" options:0 metrics:nil views:views];
+        constraintsAcctionArray = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_photoImg]-22-[_lbName]-6-[_sexLogo]-6-[_lbAge]-6-[_lbHeight]->=0-|" options:0 metrics:nil views:views];
         _sexLogo.image = ThemeImage(sex);
         _sexLogo.hidden = NO;
     }
     [root addConstraints:constraintsAcctionArray];
     
     _lbDetailServiceTime.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:model.beginDate] enddate:[Util convertDateFromDateString:model.endDate] datetype:model.dateType];
-    NSString *hourString = model.priceName;
-    _lbServiceContent.text = [NSString stringWithFormat:@"%@：¥%.0f/%@ x %ld", model.productInfo.name, model.unitPrice, hourString, (long)model.orderCount];
+
+    _lbServiceContent.text = [NSString stringWithFormat:@"%@(%@)", model.productInfo.name, model.productInfo.typeName];
     NSString *status = @"";
     _statusImgv.hidden = YES;
     
+    [root removeConstraints:couponConstraints];
+    if(model.couponsAmount <= 0){
+        couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+        _couponInfoView.hidden = YES;
+    }
+    else{
+        couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-4-[_couponInfoView]-19-|" options:0 metrics:nil views:views];
+        _couponInfoView.hidden = NO;
+    }
+    [root addConstraints:couponConstraints];
+    
     _btnOrderStatus.userInteractionEnabled = NO;
-    UIImage *imageNormal = [Util imageWithColor:[UIColor clearColor] size:CGSizeMake(5, 5)];
-    UIImage *imageSelect = [Util imageWithColor:Abled_Color size:CGSizeMake(5, 5)];
+    UIImage *imageNormal = [Util imageWithColor:_COLOR(26, 147, 251) size:CGSizeMake(5, 5)];
+    UIImage *imageSelect = [Util imageWithColor:_COLOR(26, 147, 251) size:CGSizeMake(5, 5)];
     [_btnOrderStatus setBackgroundImage:imageNormal forState:UIControlStateNormal];
-    [_btnOrderStatus setTitleColor:Abled_Color forState:UIControlStateNormal];
+    [_btnOrderStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     switch (model.orderStatus) {
         case EnumOrderStatusTypeNew:
             status = @"确认订单";
@@ -425,6 +407,15 @@
     NSRange range = [UnitPrice rangeOfString:subString];
     [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
 //    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
+    return attString;
+}
+
+- (NSMutableAttributedString *)AttributedString:(NSString*)string subString:(NSString *)subString
+{
+    NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
+    NSRange range = [UnitPrice rangeOfString:subString];
+    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0x3d, 0x3d, 0x3d) range:range];
     return attString;
 }
 
