@@ -244,8 +244,8 @@
     
     _lbCareType = [self createLabel:_FONT(16) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
     
-    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
-    _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
+    _lbTotalValue = [self createLabel:_FONT_B(19) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
+    _lbRealValue = [self createLabel:_FONT_B(16) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
     
     _imgDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [_OrderInfoView addSubview:_imgDay];
@@ -490,7 +490,7 @@
         NSString *value = [NSString stringWithFormat:@"￥%d  × %@", (int)userInfo.userOrderInfo.orderModel.unitPrice, userInfo.userOrderInfo.orderModel.orderCountStr];
         NSMutableAttributedString *attString1 = [[NSMutableAttributedString alloc]initWithString:value];
         NSRange range1 = [value rangeOfString:[NSString stringWithFormat:@"  × %@", userInfo.userOrderInfo.orderModel.orderCountStr]];
-        [attString1 addAttribute:NSFontAttributeName value:_FONT(12) range:range1];
+        [attString1 addAttribute:NSFontAttributeName value:_FONT(11) range:range1];
         _lbRealValue.attributedText = attString1;
     
         [_OrderInfoView removeConstraints:coupons];
@@ -509,8 +509,8 @@
 
         _lbCareType.text = [NSString stringWithFormat:@"%@(%@)", userInfo.userOrderInfo.orderModel.productInfo.name, userInfo.userOrderInfo.orderModel.productInfo.typeName];
         
-        NSMutableAttributedString *totalValue = [self AttributedStringFromString:[NSString stringWithFormat:@"实付:￥%.0f", userInfo.userOrderInfo.orderModel.realyTotalPrice] subString:[NSString stringWithFormat:@"￥%.0f", userInfo.userOrderInfo.orderModel.realyTotalPrice]];
-        [totalValue addAttribute:NSFontAttributeName value:_FONT(12) range:NSMakeRange(0, 3)];
+        NSMutableAttributedString *totalValue = [self AttributedStringFromString:[NSString stringWithFormat:@"￥%.0f", userInfo.userOrderInfo.orderModel.realyTotalPrice] subString:[NSString stringWithFormat:@"￥%.0f", userInfo.userOrderInfo.orderModel.realyTotalPrice]];
+        //[totalValue addAttribute:NSFontAttributeName value:_FONT(12) range:NSMakeRange(0, 3)];
         _lbTotalValue.attributedText = totalValue;//
         [_couponInfoView SetCouponValue:userInfo.userOrderInfo.orderModel.couponsAmount];
         
