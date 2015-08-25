@@ -244,7 +244,7 @@
     
     _lbCareType = [self createLabel:_FONT(16) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
     
-    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];
+    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
     _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
     
     _imgDay = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -340,9 +340,7 @@
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnOrderOnDoing]->=0-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line2]-18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbCareType]->=0-[_lbRealValue]-18-|" options:0 metrics:nil views:views]];
-//    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbTotalValue]-10-[_lbCouponValue]->=18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbCareType attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-//    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgDay]-6-[_lbDetailText]->=18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnCustomerMobile]->=4-[btnRing(32)]-10-|" options:0 metrics:nil views:views]];
@@ -495,11 +493,16 @@
         [attString1 addAttribute:NSFontAttributeName value:_FONT(12) range:range1];
         _lbRealValue.attributedText = attString1;
     
+        [_OrderInfoView removeConstraints:coupons];
         if(userInfo.userOrderInfo.orderModel.couponsAmount > 0){
-            _lbTotalValue.hidden = NO;
+//            _lbTotalValue.hidden = NO;
+            coupons = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-4-[_couponInfoView]-19-|" options:0 metrics:nil views:views];
+            [_OrderInfoView addConstraints:coupons];
             _couponInfoView.hidden = NO;
         }else{
-            _lbTotalValue.hidden = YES;
+            coupons = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-19-|" options:0 metrics:nil views:views];
+            [_OrderInfoView addConstraints:coupons];
+//            _lbTotalValue.hidden = YES;
             _couponInfoView.hidden = YES;
         }
         
@@ -803,7 +806,7 @@
     NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
     NSRange range = [UnitPrice rangeOfString:subString];
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:range];
+    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
     //    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
     return attString;
 }

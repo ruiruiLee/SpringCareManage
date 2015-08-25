@@ -51,7 +51,7 @@
     _btnOrderStatus = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnOrderStatus.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_btnOrderStatus];
-    _btnOrderStatus.titleLabel.font = _FONT(12);
+    _btnOrderStatus.titleLabel.font = _FONT(14);
     [_btnOrderStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _btnOrderStatus.userInteractionEnabled = NO;
     _btnOrderStatus.clipsToBounds = YES;
@@ -64,7 +64,7 @@
     
     _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
-    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
     _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
@@ -188,7 +188,7 @@
     UIView *root = self.contentView;
     NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _lbRealValue, _OrderInfoBg, _couponInfoView);
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(54)]-20-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(74)]-20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-22-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
     couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-4-[_couponInfoView]-19-|" options:0 metrics:nil views:views];
@@ -216,7 +216,7 @@
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLinkman attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(20)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(32)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV7 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV6 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
@@ -405,7 +405,7 @@
     NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
     NSRange range = [UnitPrice rangeOfString:subString];
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:range];
+    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
 //    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
     return attString;
 }
