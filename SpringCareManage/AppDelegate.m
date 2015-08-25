@@ -127,7 +127,7 @@
     [UserModel sharedUserInfo].userId = nil;
     AVInstallation *currentInstallation = [AVInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.deviceProfile = @"cfphu_nursedevelop";
+    currentInstallation.deviceProfile = @"cfphu_nurseProduct"; //cfphu_nurseProduct   cfphu_nursedevelop
     //TODO设置使用的推送证书
     [currentInstallation saveInBackground];
 }
