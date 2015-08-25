@@ -10,6 +10,7 @@
 #import "EGORefreshTableHeaderView.h"
 #import "HBImageViewList.h"
 #import "SwitchView.h"
+#import "CouponLogoView.h"
 
 @interface HomePageVC : LCBaseVC<UITableViewDataSource, UITableViewDelegate, EGORefreshTableHeaderDelegate>
 {
@@ -50,7 +51,6 @@
     UIView *_OrderInfoView;
     UIView *_orderTitleView;
     
-    UILabel *_line1;
     UIButton *_btnOrderOnDoing;
     UILabel *_line2;
     UILabel *_lbCareType;
@@ -59,7 +59,7 @@
     UILabel *_line3;
     
     UILabel *_lbTotalValue;//总价值
-    UILabel *_lbCouponValue;
+//    UILabel *_lbCouponValue;
     UILabel *_lbRealValue;//
     
     UILabel *_btnCustomerMobile;
@@ -79,8 +79,12 @@
     
     NSArray *constraints;
     NSArray *couponConstraints;
+    NSArray *loverInfoConstraints;
+    NSArray *coupons;
     
     HBImageViewList *_imageList;
+    
+    CouponLogoView *_couponInfoView;
 }
 
 @property (nonatomic, strong) EGORefreshTableHeaderView *refreshView;

@@ -147,7 +147,7 @@
 
 - (UIView*) createTableHeaderView
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 1000)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, INT_MAX)];
     
     _bgView = [[UIView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_bgView];
@@ -220,10 +220,6 @@
     _lbEvaluate.text = @"待评价";
     [_btnEvaluate addTarget:self action:@selector(btnClickedToLoadOrders:) forControlEvents:UIControlEventTouchUpInside];
     
-    _line1 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:headerView];
-    _line1.backgroundColor = SeparatorLineColor;
-    _line1.hidden = YES;
-    
     _OrderInfoView = [[UIView alloc] initWithFrame:CGRectZero];
     [headerView addSubview:_OrderInfoView];
     _OrderInfoView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -248,9 +244,8 @@
     
     _lbCareType = [self createLabel:_FONT(16) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
     
-    _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];
+    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];
     _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d) rootView:_OrderInfoView];
-    _lbCouponValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x99, 0x99, 0x99) rootView:_OrderInfoView];
     
     _imgDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [_OrderInfoView addSubview:_imgDay];
@@ -318,6 +313,10 @@
     [btnRing setImage:ThemeImage(@"orderdetailtel") forState:UIControlStateNormal];
     [btnRing addTarget:self action:@selector(btnRingClicked) forControlEvents:UIControlEventTouchUpInside];
     
+    _couponInfoView = [[CouponLogoView alloc] initWithFrame:CGRectZero];
+    [_OrderInfoView addSubview:_couponInfoView];
+    _couponInfoView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     [self createAutoLayoutConstraintsForHeader:headerView];
     
     CGSize size = [headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
@@ -328,37 +327,40 @@
 
 - (void) createAutoLayoutConstraintsForHeader:(UIView*)rootview
 {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbTotalValue, _lbRealValue, _lbCouponValue, _imgvLover);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbRealValue, _imgvLover, _couponInfoView, _lbTotalValue);
     //H
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_orderTitleView]-0-|" options:0 metrics:nil views:views]];
     
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_lbName]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_lbMobile]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_btnInfo]->=32-|" options:0 metrics:nil views:views]];
-    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage(82)]-10-[_workStatus(120)]->=32-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage]-10-[_lbMobile]->=10-[_btnCert]-32-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage]-10-[_btnInfo]->=32-|" options:0 metrics:nil views:views]];
+    [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage]-10-[_workStatus(120)]->=32-|" options:0 metrics:nil views:views]];
     
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-26-[_btnNew]-0-[intervalV1]-0-[_btnSubscribe]-0-[intervalV2]-0-[_btnTreatPay]-0-[intervalV3]-0-[_btnEvaluate]-26-|" options:0 metrics:nil views:views]];
-    [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line1]-0-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnOrderOnDoing]->=0-|" options:0 metrics:nil views:views]];
-    [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line2]-18-|" options:0 metrics:nil views:views]];
+    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line2]-18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbCareType]->=0-[_lbRealValue]-18-|" options:0 metrics:nil views:views]];
-    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbTotalValue]-10-[_lbCouponValue]->=18-|" options:0 metrics:nil views:views]];
+//    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbTotalValue]-10-[_lbCouponValue]->=18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbCareType attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+//    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbCouponValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbTotalValue attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgDay]-6-[_lbDetailText]->=18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnCustomerMobile]->=4-[btnRing(32)]-10-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[btnRing(32)]->=0-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvAddress(16)]-6-[_btnAddress]->=18-|" options:0 metrics:nil views:views]];
-    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvLover]-6-[_lbLoverInfo]-10-[_imgvLoverSex(18)]-10-[_lbOtherInfo]->=18-|" options:0 metrics:nil views:views]];
+    loverInfoConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvLover]-6-[_lbLoverInfo]-10-[_imgvLoverSex(18)]-10-[_lbOtherInfo]->=22-|" options:0 metrics:nil views:views];
+    [_OrderInfoView addConstraints:loverInfoConstraints];
+    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbTotalValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_couponInfoView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnCustomerMobile attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_btnAddress attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_imgvAddress attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_imgvLoverSex attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbOtherInfo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_imgvLover attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
+    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_couponInfoView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnOrderOnDoing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_OrderInfoView]-0-|" options:0 metrics:nil views:views]];
-    [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line3]-18-|" options:0 metrics:nil views:views]];
+    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line3]-18-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_bgView]-0-|" options:0 metrics:nil views:views]];
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_SepLine]-0-|" options:0 metrics:nil views:views]];
     [rootview addConstraint:[NSLayoutConstraint constraintWithItem:_lbNew attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_btnNew attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -374,11 +376,14 @@
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_lbName]-4-[_lbMobile]-8-[_btnInfo]-10-[_workStatus]-10-|" options:0 metrics:nil views:views]];
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_btnCert]->=0-|" options:0 metrics:nil views:views]];
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(1)]-1-[_OrderInfoView]-0-[_SepLine(12)]-0-|" options:0 metrics:nil views:views];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_OrderInfoView]-0-[_SepLine(12)]-0-|" options:0 metrics:nil views:views];
     [rootview addConstraints:constraints];
     
-    couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_orderTitleView(12)]-10-[_btnOrderOnDoing]-10-[_line2(0.6)]-14-[_lbCareType]-8-[_lbTotalValue]-8-[_lbDetailText]-8-[_line3(0.6)]-10-[_lbLoverInfo]-10-[_imgvAddress]-10-[_btnCustomerMobile]-10-|" options:0 metrics:nil views:views];
+    couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_orderTitleView(12)]-10-[_btnOrderOnDoing]-10-[_line2(0.6)]-14-[_lbCareType]-8-[_lbDetailText]-8-[_line3(0.6)]-10-[_lbLoverInfo]-10-[_imgvAddress]-10-[_btnCustomerMobile]-10-|" options:0 metrics:nil views:views];
     [_OrderInfoView addConstraints:couponConstraints];
+    
+    coupons = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-4-[_couponInfoView]-19-|" options:0 metrics:nil views:views];
+    [_OrderInfoView addConstraints:coupons];
     
     [rootview addConstraint:[NSLayoutConstraint constraintWithItem:_imgDay attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbDetailText attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [rootview addConstraint:[NSLayoutConstraint constraintWithItem:_btnSubscribe attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnNew attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -395,6 +400,7 @@
 - (void) ValuationForView
 {
     UIView *headerView = _tableview.tableHeaderView;
+    headerView.frame = CGRectMake(0, 0, ScreenWidth, INT_MAX);
     
     UserModel *userInfo = [UserModel sharedUserInfo];
     _lbName.text = userInfo.chineseName;
@@ -478,7 +484,7 @@
         placeholderImage = @"nurselistmale";
     [_photoImage sd_setImageWithURL:[NSURL URLWithString:userInfo.headerFile] placeholderImage:[UIImage imageNamed:placeholderImage]];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _line1, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbTotalValue, _lbRealValue, _lbCouponValue);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbRealValue, _imgvLover, _couponInfoView, _lbTotalValue);
     
     [headerView removeConstraints:constraints];
     if(userInfo.userOrderInfo.orderModel != nil){
@@ -486,39 +492,38 @@
         NSString *value = [NSString stringWithFormat:@"￥%d  × %@", (int)userInfo.userOrderInfo.orderModel.unitPrice, userInfo.userOrderInfo.orderModel.orderCountStr];
         NSMutableAttributedString *attString1 = [[NSMutableAttributedString alloc]initWithString:value];
         NSRange range1 = [value rangeOfString:[NSString stringWithFormat:@"  × %@", userInfo.userOrderInfo.orderModel.orderCountStr]];
-//        [attString1 addAttribute:NSForegroundColorAttributeName value:_COLOR(0xc2, 0xc2, 0xc2) range:range1];
         [attString1 addAttribute:NSFontAttributeName value:_FONT(12) range:range1];
         _lbRealValue.attributedText = attString1;
-        
-        [_OrderInfoView removeConstraints:couponConstraints];
     
         if(userInfo.userOrderInfo.orderModel.couponsAmount > 0){
-            couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_orderTitleView(12)]-10-[_btnOrderOnDoing]-10-[_line2(0.6)]-14-[_lbCareType]-8-[_lbTotalValue]-8-[_lbDetailText]-8-[_line3(0.6)]-10-[_lbLoverInfo]-6-[_imgvAddress]-6-[_btnCustomerMobile]-12-|" options:0 metrics:nil views:views];
-            [_OrderInfoView addConstraints:couponConstraints];
             _lbTotalValue.hidden = NO;
-            _lbCouponValue.hidden = NO;
+            _couponInfoView.hidden = NO;
         }else{
-            couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_orderTitleView(12)]-10-[_btnOrderOnDoing]-10-[_line2(0.6)]-14-[_lbCareType]-8-[_lbDetailText]-8-[_line3(0.6)]-10-[_lbLoverInfo]-6-[_imgvAddress]-6-[_btnCustomerMobile]-12-|" options:0 metrics:nil views:views];
-            [_OrderInfoView addConstraints:couponConstraints];
             _lbTotalValue.hidden = YES;
-            _lbCouponValue.hidden = YES;
+            _couponInfoView.hidden = YES;
         }
         
 
         _lbCareType.text = [NSString stringWithFormat:@"%@(%@)", userInfo.userOrderInfo.orderModel.productInfo.name, userInfo.userOrderInfo.orderModel.productInfo.typeName];
-        _lbTotalValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"原价：¥%.0f", userInfo.userOrderInfo.orderModel.totalPrice] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.totalPrice]];
-        _lbCouponValue.attributedText = [self AttributedStringFromString:[NSString stringWithFormat:@"优惠：¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount] subString:[NSString stringWithFormat:@"¥%.0f", userInfo.userOrderInfo.orderModel.couponsAmount]];
+        
+        NSMutableAttributedString *totalValue = [self AttributedStringFromString:[NSString stringWithFormat:@"实付:￥%.0f", userInfo.userOrderInfo.orderModel.realyTotalPrice] subString:[NSString stringWithFormat:@"￥%.0f", userInfo.userOrderInfo.orderModel.realyTotalPrice]];
+        [totalValue addAttribute:NSFontAttributeName value:_FONT(12) range:NSMakeRange(0, 3)];
+        _lbTotalValue.attributedText = totalValue;//
+        [_couponInfoView SetCouponValue:userInfo.userOrderInfo.orderModel.couponsAmount];
         
         _btnAddress.text = userInfo.userOrderInfo.orderModel.loverinfo.addr;
         
-//        NSMutableAttributedString *phone = [self AttributedTitleFromString:[NSString stringWithFormat:@"联系人：%@ %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone] title:@"联系人："];
-        _btnCustomerMobile.text = [NSString stringWithFormat:@"下单人：%@   %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
+        if(userInfo.userOrderInfo.orderModel.registerInfo.chineseName != nil && [userInfo.userOrderInfo.orderModel.registerInfo.chineseName length] > 0)
+            _btnCustomerMobile.text = [NSString stringWithFormat:@"下单人：%@   %@", userInfo.userOrderInfo.orderModel.registerInfo.chineseName, userInfo.userOrderInfo.orderModel.registerInfo.phone];
+        else{
+            _btnCustomerMobile.text = [NSString stringWithFormat:@"下单人：  %@", userInfo.userOrderInfo.orderModel.registerInfo.phone];
+        }
         
         _lbDetailText.text = [Util GetOrderServiceTime:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.beginDate] enddate:[Util convertDateFromDateString:userInfo.userOrderInfo.orderModel.endDate] datetype:userInfo.userOrderInfo.orderModel.dateType];
         
         _imgDay.image = [UIImage imageNamed:@"daytime"];
         
-        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_line1(0.6)]-1-[_OrderInfoView]-0-[_SepLine(12)]-0-|" options:0 metrics:nil views:views];
+        constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_bgView]-10-[_btnNew]-4-[_lbNew]-12-[_OrderInfoView]-0-[_SepLine(12)]-0-|" options:0 metrics:nil views:views];
         [headerView addConstraints:constraints];
         _OrderInfoView.hidden = NO;
         _btnOrderOnDoing.hidden = NO;
@@ -544,13 +549,12 @@
         height = @"身高";
     
     NSString *name = @"";
-    if(userInfo.userOrderInfo.orderModel.loverinfo.name != nil)
+    if(userInfo.userOrderInfo.orderModel.loverinfo.name != nil && [userInfo.userOrderInfo.orderModel.loverinfo.name length] > 0)
         name = userInfo.userOrderInfo.orderModel.loverinfo.name;
     else
         name = @"姓名";
     
     _lbLoverInfo.text = name;
-//    _lbLoverInfo.attributedText = [self AttributedTitleFromString:[NSString stringWithFormat:@"陪护对象：%@", name] title:@"陪护对象："];//[NSString stringWithFormat:@"陪护对象：%@", name];
     _lbOtherInfo.text = [NSString stringWithFormat:@"%@  %@",  age, height];
     
     if([Util GetSexByName:userInfo.userOrderInfo.orderModel.loverinfo.sex] == EnumMale)
@@ -559,6 +563,15 @@
         _imgvLoverSex.image = ThemeImage(@"femail");
     else
         _imgvLoverSex.image = nil;
+    
+    [_OrderInfoView removeConstraints:loverInfoConstraints];
+    if(_imgvLoverSex.image == nil){
+        loverInfoConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvLover]-6-[_lbLoverInfo]-10-[_lbOtherInfo]->=18-|" options:0 metrics:nil views:views];
+        [_OrderInfoView addConstraints:loverInfoConstraints];
+    }else{
+        loverInfoConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgvLover]-6-[_lbLoverInfo]-10-[_imgvLoverSex(18)]-10-[_lbOtherInfo]->=18-|" options:0 metrics:nil views:views];
+        [_OrderInfoView addConstraints:loverInfoConstraints];
+    }
     
     [headerView setNeedsLayout];
     [headerView layoutIfNeeded];
@@ -790,7 +803,7 @@
     NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
     NSRange range = [UnitPrice rangeOfString:subString];
-    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
+    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:range];
     //    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
     return attString;
 }

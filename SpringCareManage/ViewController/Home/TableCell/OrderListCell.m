@@ -64,7 +64,7 @@
     
     _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
-    _lbTotalValue = [self createLabel:_FONT(15) txtColor:_COLOR(0x66, 0x66, 0x66)];
+    _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x66, 0x66, 0x66)];
     
     _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
@@ -405,7 +405,7 @@
     NSString *UnitPrice = string;//@"单价：¥300.00（24h） x 1天";
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:UnitPrice];
     NSRange range = [UnitPrice rangeOfString:subString];
-    [attString addAttribute:NSForegroundColorAttributeName value:_COLOR(0xf1, 0x15, 0x39) range:range];
+    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:range];
 //    [attString addAttribute:NSFontAttributeName value:_FONT(22) range:range];
     return attString;
 }
