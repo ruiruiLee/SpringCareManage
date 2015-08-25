@@ -49,6 +49,7 @@
 		8655237A1ADA9AFC00E803FD /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8655236E1ADA9AFC00E803FD /* whiteArrow@2x.png */; };
 		8655238B1ADAA4A700E803FD /* EvaluateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8655238A1ADAA4A700E803FD /* EvaluateListCell.m */; };
 		8655238E1ADAA4C600E803FD /* MyEvaluateListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */; };
+		8687FCE51B8719BA0072ADBB /* CouponLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8687FCE41B8719BA0072ADBB /* CouponLogoView.m */; };
 		86B3004F1B07302F00ECA78B /* MPNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3004C1B07302F00ECA78B /* MPNotificationView.m */; };
 		86B300501B07302F00ECA78B /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3004E1B07302F00ECA78B /* OBGradientView.m */; };
 		86B3EE841AFB4BB8005E29B1 /* EditUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B3EE831AFB4BB8005E29B1 /* EditUserInfoVC.m */; };
@@ -446,6 +447,8 @@
 		8655238A1ADAA4A700E803FD /* EvaluateListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateListCell.m; sourceTree = "<group>"; };
 		8655238C1ADAA4C600E803FD /* MyEvaluateListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEvaluateListVC.h; sourceTree = "<group>"; };
 		8655238D1ADAA4C600E803FD /* MyEvaluateListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEvaluateListVC.m; sourceTree = "<group>"; };
+		8687FCE31B8719BA0072ADBB /* CouponLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponLogoView.h; sourceTree = "<group>"; };
+		8687FCE41B8719BA0072ADBB /* CouponLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponLogoView.m; sourceTree = "<group>"; };
 		86B3004B1B07302F00ECA78B /* MPNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNotificationView.h; sourceTree = "<group>"; };
 		86B3004C1B07302F00ECA78B /* MPNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNotificationView.m; sourceTree = "<group>"; };
 		86B3004D1B07302F00ECA78B /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
@@ -1215,6 +1218,8 @@
 		86B8E6151ADA36FC00A5139E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8687FCE31B8719BA0072ADBB /* CouponLogoView.h */,
+				8687FCE41B8719BA0072ADBB /* CouponLogoView.m */,
 				86B461AB1AF5CB5D00B1B66D /* UIView+MGBadgeView.h */,
 				86B461AC1AF5CB5D00B1B66D /* UIView+MGBadgeView.m */,
 				86B74A6A1AEC8262000BA6DB /* FaceBoardView.h */,
@@ -2192,6 +2197,7 @@
 				CFBC52131ADD3602004FB8F3 /* PickImgScrollView.m in Sources */,
 				861C181F1AECFDBE00BC5091 /* DefaultLoverSelectVC.m in Sources */,
 				86B8E6501ADA381C00A5139E /* NSStrUtil.m in Sources */,
+				8687FCE51B8719BA0072ADBB /* CouponLogoView.m in Sources */,
 				86B3EE841AFB4BB8005E29B1 /* EditUserInfoVC.m in Sources */,
 				8652F0CB1AFCB209002C6215 /* WebContentVC.m in Sources */,
 				863AC14B1B11AF3900C06D96 /* LaunchCameraButton.m in Sources */,
@@ -2439,7 +2445,7 @@
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "春风陪护师";
-				PROVISIONING_PROFILE = "e12567fc-8198-4e1e-9bc2-5e73fdaef459";
+				PROVISIONING_PROFILE = "16b07a17-67c6-4d50-bde8-c160dfbf5aa1";
 			};
 			name = Debug;
 		};
@@ -2458,7 +2464,7 @@
 					"$(PROJECT_DIR)/SpringCareManage/Vendor/VoiceConvert/lib",
 				);
 				PRODUCT_NAME = "春风陪护师";
-				PROVISIONING_PROFILE = "e12567fc-8198-4e1e-9bc2-5e73fdaef459";
+				PROVISIONING_PROFILE = "16b07a17-67c6-4d50-bde8-c160dfbf5aa1";
 			};
 			name = Release;
 		};

@@ -327,19 +327,20 @@
     
     if(datetype == EnumTypeHalfDay){
         [result appendString:[NSString stringWithFormat:@"("]];
-        [result appendString:[NSString stringWithFormat:@"%02ld", beginHour]];
-        [result appendString:[NSString stringWithFormat:@".%02ld", beginMinute]];
-        [result appendString:[NSString stringWithFormat:@"－"]];
-        ServiceTimeType timeType = [Util GetServiceTimeType:begin];
-        if(timeType == EnumServiceTimeNight)
-            [result appendString:[NSString stringWithFormat:@"次日"]];
-        [result appendString:[NSString stringWithFormat:@"%02ld", endHour]];
-        [result appendString:[NSString stringWithFormat:@".%02ld", endMinute]];
+        [result appendString:@"08:00-20:00"];
+//        [result appendString:[NSString stringWithFormat:@"%02ld", beginHour]];
+//        [result appendString:[NSString stringWithFormat:@".%02ld", beginMinute]];
+//        [result appendString:[NSString stringWithFormat:@"－"]];
+//        ServiceTimeType timeType = [Util GetServiceTimeType:begin];
+//        if(timeType == EnumServiceTimeNight)
+//            [result appendString:[NSString stringWithFormat:@"次日"]];
+//        [result appendString:[NSString stringWithFormat:@"%02ld", endHour]];
+//        [result appendString:[NSString stringWithFormat:@".%02ld", endMinute]];
         [result appendString:[NSString stringWithFormat:@")"]];
     }else{
         [result appendString:[NSString stringWithFormat:@"("]];
         [result appendString:[NSString stringWithFormat:@"%02ld", beginHour]];
-        [result appendString:[NSString stringWithFormat:@".%02ld", beginMinute]];
+        [result appendString:[NSString stringWithFormat:@":%02ld", beginMinute]];
         [result appendString:[NSString stringWithFormat:@")"]];
     }
     

@@ -8,17 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderInfoModel.h"
+#import "CouponLogoView.h"
 
 @interface OrderListCell : UITableViewCell
 {
     UILabel *_lbOrderNum;//订单号
-    UILabel *_lbPublishTime;//下单时间
     UIButton *_btnOrderStatus;//状态
     UILabel *_line1;
     UILabel *_lbServiceContent;//服务内容
     UILabel *_lbTotalValue;//总价值
     
-    UILabel *_lbCouponValue;
     UILabel *_lbRealValue;//
     
     UIImageView *_imgvDay;//白天
@@ -30,20 +29,16 @@
     //服务对象
     UIImageView *_photoImg;//头像
     UILabel *_lbName;
-//    UILabel *_lbRelationship;
     UIImageView *_sexLogo;
     UILabel *_lbAge;
     UILabel *_lbHeight;
-    UIButton *_btnMobile;
-    UIImageView *_imgvMobile;
     UILabel *_btnAddress;
-    UIImageView *_imgvAddress;
     UIImageView *_statusImgv;//完成标志
+    CouponLogoView *_couponInfoView;
     
     UIView *intervalV1;
     UIView *intervalV2;
     UIView *intervalV3;
-    UIView *intervalV4;
     UIView *intervalV5;
     UIView *intervalV6;
     UIView *intervalV7;
@@ -52,10 +47,12 @@
     
     NSArray *constraintsArray;
     NSArray *constraintsAcctionArray;
-    NSArray *constraintsLoverArray;
     NSArray *orderPriceConstraints;
+    NSArray *couponConstraints;
     
     OrderInfoModel *_orderModel;
+    
+    UIView *_OrderInfoBg;
 }
 
 - (void) SetContentWithModel:(OrderInfoModel *)model;

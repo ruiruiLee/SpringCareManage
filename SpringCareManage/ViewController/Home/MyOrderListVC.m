@@ -147,16 +147,19 @@
 #pragma UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
     
-    CGSize size = [data.loverinfo.addr sizeWithFont:_FONT(15) constrainedToSize:CGSizeMake(ScreenWidth - 121, INT_MAX)];
+    return 280;
     
-    if(data.couponsAmount > 0){
-        return 263.5 + size.height - 17.5 ;
-    }
-    else{
-        return 238 + size.height - 17.5;
-    }
+//    OrderInfoModel *data = [DataList objectAtIndex:indexPath.row];
+//    
+//    CGSize size = [data.loverinfo.addr sizeWithFont:_FONT(15) constrainedToSize:CGSizeMake(ScreenWidth - 121, INT_MAX)];
+//    
+//    if(data.couponsAmount > 0){
+//        return 263.5 + size.height - 17.5 ;
+//    }
+//    else{
+//        return 238 + size.height - 17.5;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

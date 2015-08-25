@@ -51,6 +51,7 @@
     BOOL isHasDefaultLover;
     
     UIButton *_btnLoverSelect;
+    CGFloat _offset;
 }
 
 @property (nonatomic, strong) PullTableView *tableView;
