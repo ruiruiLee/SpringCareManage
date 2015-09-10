@@ -52,6 +52,7 @@
     UIView *_orderTitleView;
     
     UIButton *_btnOrderOnDoing;
+    UIImageView *_imgVOrderOnDoing;
     UILabel *_line2;
     UILabel *_lbCareType;
     UIImageView *_imgDay;

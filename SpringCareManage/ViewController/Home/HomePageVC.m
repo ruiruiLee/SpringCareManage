@@ -235,9 +235,14 @@
     [_btnOrderOnDoing setTitleColor:_COLOR(0xec, 0x5a, 0x4d) forState:UIControlStateNormal];
     _btnOrderOnDoing.titleLabel.font = _FONT(15);
     [_btnOrderOnDoing setTitle:@"服务中的订单" forState:UIControlStateNormal];
-    [_btnOrderOnDoing setImage:[UIImage imageNamed:@"placeordered"] forState:UIControlStateNormal];
+//    [_btnOrderOnDoing setImage:[UIImage imageNamed:@"placeordered"] forState:UIControlStateNormal];
     _btnOrderOnDoing.userInteractionEnabled = NO;
     _btnOrderOnDoing.backgroundColor = [UIColor whiteColor];
+    
+    _imgVOrderOnDoing = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [_OrderInfoView addSubview:_imgVOrderOnDoing];
+    _imgVOrderOnDoing.translatesAutoresizingMaskIntoConstraints = NO;
+    _imgVOrderOnDoing.image = ThemeImage(@"placeordered");
     
     _line2 = [self createLabel:_FONT(13) txtColor:SeparatorLineColor rootView:_OrderInfoView];
     _line2.backgroundColor = SeparatorLineColor;
@@ -327,7 +332,7 @@
 
 - (void) createAutoLayoutConstraintsForHeader:(UIView*)rootview
 {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _btnOrderOnDoing, _line2, _lbCareType, _imgDay, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbRealValue, _imgvLover, _couponInfoView, _lbTotalValue);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_bgView, _photoImage, _lbName, _btnCert, _lbMobile, _btnInfo, _detailInfo, _btnNew, _lbNew, _btnSubscribe, _lbSubscribe, _btnTreatPay, _lbTreatPay, _btnEvaluate, _lbEvaluate, _btnOrderOnDoing, _imgVOrderOnDoing, _line2, _lbCareType, _imgDay, _lbDetailText, _btnCustomerMobile, _btnAddress, _line3, intervalV1, intervalV2, intervalV3, _SepLine, _OrderInfoView, _imgvAddress, _lbLoverInfo, _imgvLoverSex, btnRing, _workStatus, _orderTitleView, _lbOtherInfo, _lbRealValue, _imgvLover, _couponInfoView, _lbTotalValue);
     //H
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_orderTitleView]-0-|" options:0 metrics:nil views:views]];
     
@@ -337,7 +342,7 @@
     [_bgView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_photoImage]-10-[_workStatus(120)]->=32-|" options:0 metrics:nil views:views]];
     
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-26-[_btnNew]-0-[intervalV1]-0-[_btnSubscribe]-0-[intervalV2]-0-[_btnTreatPay]-0-[intervalV3]-0-[_btnEvaluate]-26-|" options:0 metrics:nil views:views]];
-    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_btnOrderOnDoing]->=0-|" options:0 metrics:nil views:views]];
+    [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_imgVOrderOnDoing]-4-[_btnOrderOnDoing]->=0-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line2]-18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_lbCareType]->=0-[_lbRealValue]-18-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbCareType attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
@@ -356,6 +361,7 @@
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_imgvLover attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLoverInfo attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_couponInfoView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnOrderOnDoing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [_OrderInfoView addConstraint:[NSLayoutConstraint constraintWithItem:_imgVOrderOnDoing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_btnOrderOnDoing attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [rootview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_OrderInfoView]-0-|" options:0 metrics:nil views:views]];
     [_OrderInfoView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-18-[_line3]-18-|" options:0 metrics:nil views:views]];
