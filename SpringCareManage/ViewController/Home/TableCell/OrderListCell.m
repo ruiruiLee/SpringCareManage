@@ -51,7 +51,7 @@
     _btnOrderStatus = [[UIButton alloc] initWithFrame:CGRectZero];
     _btnOrderStatus.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_btnOrderStatus];
-    _btnOrderStatus.titleLabel.font = _FONT(14);
+    _btnOrderStatus.titleLabel.font = _FONT(15);
     [_btnOrderStatus setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _btnOrderStatus.userInteractionEnabled = NO;
     _btnOrderStatus.clipsToBounds = YES;
@@ -62,11 +62,11 @@
     _line1 = [self createLabel:_FONT(15) txtColor:_COLOR(0x10, 0x9d, 0x59)];
     _line1.backgroundColor = SeparatorLineColor;
     
-    _lbServiceContent = [self createLabel:_FONT(15) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
+    _lbServiceContent = [self createLabel:_FONT(16) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
     _lbTotalValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
-    _lbRealValue = [self createLabel:_FONT_B(20) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
+    _lbRealValue = [self createLabel:_FONT_B(17) txtColor:_COLOR(0x3d, 0x3d, 0x3d)];
     
     _imgvDay = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self.contentView addSubview:_imgvDay];
@@ -188,7 +188,7 @@
     UIView *root = self.contentView;
     NSDictionary *views = NSDictionaryOfVariableBindings(_lbOrderNum, _btnOrderStatus, _line1, _lbServiceContent, _lbTotalValue, _imgvDay, _imgvNight, _lbDetailServiceTime, _lbLinkman, _btnRing, _line2, _photoImg, _lbName, _sexLogo, _lbAge, _btnAddress, _statusImgv, intervalV1, intervalV2, intervalV3, intervalV5, FootView, intervalV6, intervalV7, _lbHeight, _lbRealValue, _OrderInfoBg, _couponInfoView);
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(74)]-20-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbOrderNum]->=4-[_btnOrderStatus(68)]-20-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_line1]-22-|" options:0 metrics:nil views:views]];
     [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-22-[_lbServiceContent]->=10-[_lbRealValue]-19-|" options:0 metrics:nil views:views]];
     couponConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|->=22-[_lbTotalValue]-4-[_couponInfoView]-19-|" options:0 metrics:nil views:views];
@@ -216,7 +216,7 @@
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_lbRealValue attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbServiceContent attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:_btnRing attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lbLinkman attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
-    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(32)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
+    [root addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[intervalV6]-0-[_btnOrderStatus(28)]-0-[intervalV7]-0-[_line1]->=0-|" options:0 metrics:nil views:views]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV7 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV6 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     [root addConstraint:[NSLayoutConstraint constraintWithItem:intervalV3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:intervalV1 attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
