@@ -1,1 +1,1 @@
-../../../AVOSCloud/iOS/release-v3.1.1.1/AVOSCloud.framework/Headers/AVSubclassing.h
+../../../AVOSCloud/AVSubclassing.h

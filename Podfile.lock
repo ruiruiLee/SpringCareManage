@@ -20,25 +20,25 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AVOSCloud (3.1.1.1)
-  - AVOSCloudSNS (3.1.1.1):
+  - AVOSCloud (3.3.4)
+  - AVOSCloudSNS (3.1.2.9):
     - AVOSCloud
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.0)
+  - AFNetworking
   - AVOSCloud
   - AVOSCloudSNS
   - FMDB
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  AVOSCloud: 0c0b91ffd91f83b448312027e5f8b243f261c42a
-  AVOSCloudSNS: fa177d50fe83b630d684dd27d790358531b365cc
-  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  AVOSCloud: d501e7f43719884b748214d3cb5a3da18a20fb46
+  AVOSCloudSNS: 4f9f1df8663fc7bfa76b9b38578ac535d275ee8f
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
 
-COCOAPODS: 0.36.0
+PODFILE CHECKSUM: 7e9c39c004b6096e11a3f36895c2162a97089986
+
+COCOAPODS: 1.0.1

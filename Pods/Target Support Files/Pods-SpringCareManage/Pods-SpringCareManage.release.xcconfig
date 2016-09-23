@@ -1,7 +1,8 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AVOSCloud" "${PODS_ROOT}/Headers/Public/AVOSCloudSNS" "${PODS_ROOT}/Headers/Public/FMDB"
-LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/AVOSCloud" "$(PODS_ROOT)/AVOSCloudSNS"
+LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/AFNetworking" "$PODS_CONFIGURATION_BUILD_DIR/AVOSCloudSNS" "$PODS_CONFIGURATION_BUILD_DIR/FMDB" $(inherited) "${PODS_ROOT}/AVOSCloud" $(inherited) "${PODS_ROOT}/AVOSCloudSNS"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/AVOSCloud" -isystem "${PODS_ROOT}/Headers/Public/AVOSCloudSNS" -isystem "${PODS_ROOT}/Headers/Public/FMDB"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"AVOSCloud" -l"AVOSCloudSNS" -l"Pods-SpringCareManage-AFNetworking" -l"Pods-SpringCareManage-AVOSCloud" -l"Pods-SpringCareManage-AVOSCloudSNS" -l"Pods-SpringCareManage-FMDB" -l"icucore" -l"sqlite3" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+OTHER_LDFLAGS = $(inherited) -ObjC -undefined dynamic_lookup -l"AFNetworking" -l"AVOSCloud" -l"AVOSCloudSNS" -l"AVOSCloudSNSLib" -l"FMDB" -l"icucore" -l"sqlite3" -l"z" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}/Pods

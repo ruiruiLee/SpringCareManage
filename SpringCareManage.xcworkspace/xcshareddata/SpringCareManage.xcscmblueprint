@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E7A11F49ABBC3D4A090CEA9A96FFDAA42F290425",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "eccd39b4-39d4-47ab-bb89-e81f4763b8b8++3220" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "eccd39b4-39d4-47ab-bb89-e81f4763b8b8++3220" : 0,
+    "E7A11F49ABBC3D4A090CEA9A96FFDAA42F290425" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9AEA54A0-8A65-48C5-B09B-D6DE9CFF5502",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "eccd39b4-39d4-47ab-bb89-e81f4763b8b8++3220" : "%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%E5%A4%B9%204\/SpringCareManage\/Vendor\/VoiceConvert\/",
+    "E7A11F49ABBC3D4A090CEA9A96FFDAA42F290425" : "SpringCareManage"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SpringCareManage",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SpringCareManage.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ruiruiLee\/SpringCareManage.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E7A11F49ABBC3D4A090CEA9A96FFDAA42F290425"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.0.240\/repository",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "eccd39b4-39d4-47ab-bb89-e81f4763b8b8++3220"
+    }
+  ]
+}

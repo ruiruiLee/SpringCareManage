@@ -1,1 +1,1 @@
-../../../AVOSCloud/iOS/release-v3.1.1.1/AVOSCloud.framework/Headers/AVRole.h
+../../../AVOSCloud/AVRole.h

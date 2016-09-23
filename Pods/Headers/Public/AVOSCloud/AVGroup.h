@@ -1,1 +1,1 @@
-../../../AVOSCloud/iOS/release-v3.1.1.1/AVOSCloud.framework/Headers/AVGroup.h
+../../../AVOSCloud/AVGroup.h

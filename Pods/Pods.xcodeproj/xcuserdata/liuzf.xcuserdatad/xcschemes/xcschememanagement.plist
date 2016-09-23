@@ -4,22 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-SpringCareManage-AFNetworking.xcscheme</key>
+		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-SpringCareManage-AVOSCloud.xcscheme</key>
+		<key>AVOSCloudSNS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-SpringCareManage-AVOSCloudSNS.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SpringCareManage-FMDB.xcscheme</key>
+		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2CFC013D3D304B98A6A396E6</key>
+		<key>0CACC445A2F599945833A4A292C0EF78</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6EE5EA05B510D430AA1D6C87</key>
+		<key>2602F3D0DAC534568B6AD7EEA0DD1959</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7ACB6C92656E28B59E0B752F</key>
+		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A0E0FBDD66F6D325CA350D1C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CDB7187D89E1DDF3F9C54EA0</key>
+		<key>AD6BA40DC1CC28BF161E13AA1C791EF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
